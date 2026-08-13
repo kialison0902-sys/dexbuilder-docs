@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - dexbuilder-mintlify-import.zip
+      - dexbuilder-mintlify-import.b64
 
 permissions:
   contents: write
@@ -19,9 +19,10 @@ jobs:
 
       - name: Replace starter content
         run: |
+          base64 --decode dexbuilder-mintlify-import.b64 > /tmp/dexbuilder-mintlify-import.zip
           git rm -r --ignore-unmatch .mintignore AGENTS.md LICENSE README.md docs.json favicon.svg index.mdx logo quickstart.mdx
-          unzip -o dexbuilder-mintlify-import.zip -d .
-          git rm -f dexbuilder-mintlify-import.zip
+          git rm -f dexbuilder-mintlify-import.b64
+          unzip -o /tmp/dexbuilder-mintlify-import.zip -d .
           git rm -f .github/workflows/import-dexbuilder-docs.yml
 
       - name: Publish documentation
