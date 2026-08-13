@@ -1,0 +1,28 @@
+---
+title: "Order lifecycle"
+description: "Track an order safely from submission through a terminal state."
+---
+
+An HTTP success response means the request was accepted for processing. It does not necessarily mean the order filled.
+
+```text
+SUBMITTED → ACCEPTED → OPEN ───────────────→ FILLED
+                   ├──────────────────────→ CANCELLED
+                   ├──────────────────────→ EXPIRED
+                   └→ PARTIALLY_FILLED ───→ FILLED or CANCELLED
+SUBMITTED ────────────────────────────────→ REJECTED
+```
+
+## Client requirements
+
+- Assign a unique client order ID when supported.
+- Persist the returned server order ID.
+- Consume private execution events.
+- Backfill from REST after reconnecting.
+- Treat duplicate delivery as normal and deduplicate by event or execution ID.
+- Reconcile order quantity against the sum of fills.
+- Handle fills that arrive while a cancellation request is in flight.
+
+## Terminal states
+
+`FILLED`, `CANCELLED`, `EXPIRED`, and `REJECTED` are terminal. A client must not retry the original order after an ambiguous timeout until it checks whether the first request succeeded.

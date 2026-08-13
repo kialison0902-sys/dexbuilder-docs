@@ -1,0 +1,27 @@
+# DexBuilder Developer Docs
+
+> DexBuilder provides perpetual trading and Builder infrastructure for traders, applications, wallets, brokers, exchanges, and branded DEX projects.
+
+## Start here
+
+- Overview: /index
+- Choose an integration path: /getting-started/choose-a-path
+- Trader quickstart: /getting-started/trader-quickstart
+- Builder quickstart: /getting-started/builder-quickstart
+- Integration checklist: /getting-started/integration-checklist
+
+## Core flows
+
+- Authentication: /authentication/overview
+- Place an order: /trading/place-first-order
+- Funds overview: /funds/overview
+- Transaction Builder: /funds/transaction-builder
+- Configure Builder fees: /builders/configure-fees
+- Revenue and payouts: /builders/revenue-and-payouts
+
+## API specifications
+
+- Confirmed Aden-compatible Trading API: /openapi/trading-v1.yaml
+- Proposed Builder API: /openapi/builder-preview.yaml
+
+Builder and Funds endpoints marked Preview must not be represented as production-available until DexBuilder publishes a base URL and release note.

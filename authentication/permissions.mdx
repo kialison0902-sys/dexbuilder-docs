@@ -1,0 +1,33 @@
+---
+title: "Permissions and scopes"
+description: "Apply least privilege to Trading Keys and Builder Admin credentials."
+tag: "Preview"
+---
+
+## Trading Key scopes
+
+- `account:read`
+- `orders:read`
+- `orders:write`
+- `positions:read`
+- `positions:write`
+- `funds:read`
+
+Asset withdrawal and settlement submission should still require the applicable wallet-authorized payload.
+
+## Builder Admin scopes
+
+- `builder:read`
+- `builder:write`
+- `users:read`
+- `fees:read`
+- `fees:write`
+- `revenue:read`
+- `analytics:read`
+- `webhooks:write`
+- `markets:read`
+- `markets:write`
+
+<Note>
+  The final production scope names are subject to change while the Builder API remains Preview.
+</Note>

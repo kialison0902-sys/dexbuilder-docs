@@ -1,0 +1,27 @@
+---
+title: "Accounts and Builder tenancy"
+description: "Understand wallet, account, Builder, and credential relationships."
+---
+
+## Recommended account model
+
+A wallet may interact with more than one Builder. Each registration must retain the Builder attribution used for fee, revenue, analytics, and access-control decisions.
+
+| Object | Owned by | Contains |
+|---|---|---|
+| Wallet | User | The signing authority for registration and asset movements |
+| Account | User within a Builder context | Balances, orders, positions, fills, and Trading Keys |
+| Project | Builder | Environment, product, brand, domain, and deployment settings |
+| Admin credential | Builder | Scoped access to project-level data and configuration |
+
+## Isolation requirements
+
+- A Builder can access only its own project and Builder-scoped user data.
+- User assets remain controlled by the applicable wallet and settlement contracts.
+- Builder Admin access must not grant the ability to forge a user wallet signature.
+- Sandbox and production accounts and keys must remain separate.
+- Every revenue and analytics record must carry stable Builder attribution.
+
+<Warning>
+  Do not infer the Builder solely from a frontend domain or mutable request header. Attribution must be validated against the registered account or signed action.
+</Warning>

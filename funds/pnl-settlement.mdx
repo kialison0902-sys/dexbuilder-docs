@@ -1,0 +1,20 @@
+---
+title: "PnL settlement"
+description: "Settle account PnL into the applicable balance."
+tag: "Preview"
+---
+
+PnL settlement is separate from closing a position. Closing creates realized PnL; settlement applies the platform's ledger and on-chain settlement model to the account balance.
+
+## Proposed flow
+
+1. Request the settlement nonce.
+2. Request a settlement quote showing the affected PnL and resulting balance.
+3. Build a wallet-signable message containing the Builder, account, chain, nonce, and expiration.
+4. Submit the signed request with an idempotency key.
+5. Track the settlement until terminal status.
+6. Reconcile the settlement record against the account ledger.
+
+<Warning>
+  Whether unrealized PnL is eligible, whether another party can trigger settlement, and when settled PnL becomes withdrawable are protocol facts that must be confirmed before this flow leaves Preview.
+</Warning>

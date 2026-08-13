@@ -1,0 +1,34 @@
+---
+title: "Platform overview"
+description: "How DexBuilder, operators, Builders, and traders fit together."
+---
+
+DexBuilder is the underlying trading and Builder infrastructure. An operator such as Aden is one possible trading application built on top of that infrastructure.
+
+```text
+Trader wallet or API client
+          │
+          ▼
+Builder / operator application
+          │
+          ├── Trading API and WebSocket
+          ├── Funds and Settlement API
+          └── Builder Admin API
+          │
+          ▼
+DexBuilder trading, risk, ledger, and on-chain settlement infrastructure
+```
+
+## Roles
+
+| Role | Responsibilities |
+|---|---|
+| Trader | Authorizes their account and assets, places orders, and manages positions |
+| Application developer | Builds market, order, account, and wallet experiences |
+| Builder | Onboards users, configures product fees, operates the DEX, and receives Builder revenue |
+| Builder Admin | Performs privileged project, fee, user, webhook, and reconciliation operations |
+| DexBuilder | Provides shared trading, risk, ledger, settlement, and liquidity infrastructure |
+
+<Note>
+  An operator's API may expose only its user-facing trading functions. Project-level capabilities belong in the DexBuilder Builder API.
+</Note>

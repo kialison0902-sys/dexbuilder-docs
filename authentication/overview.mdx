@@ -1,0 +1,20 @@
+---
+title: "Authentication overview"
+description: "Choose the right authorization method for public, user, wallet, and Builder operations."
+---
+
+| Context | Authorization | Typical operations |
+|---|---|---|
+| Public | None | Contracts, tickers, order book, trades, Klines, system status |
+| Trading Key | Signed API requests | Private account data, orders, positions, leverage, and margin |
+| Wallet signature | EIP-712 or chain-native message | Registration, withdrawal, settlement, and other user-authorized actions |
+| Builder Admin | Server-side scoped credential | Projects, users, fees, revenue, analytics, and webhooks |
+
+## Security rules
+
+- Never expose a secret or Builder Admin credential in client-side code.
+- Give each key the minimum scopes and shortest practical expiration.
+- Rotate and revoke keys without changing the user's wallet.
+- Verify timestamps and nonces to prevent replay.
+- Use an allowlisted production origin and IP restrictions where available.
+- Log `request_id`, not raw secrets or full wallet signatures.

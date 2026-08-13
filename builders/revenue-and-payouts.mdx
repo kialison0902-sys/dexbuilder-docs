@@ -1,0 +1,30 @@
+---
+title: "Revenue and payouts"
+description: "Reconcile Builder earnings from fills through payout."
+tag: "Preview"
+---
+
+## Revenue formula
+
+The exact production formula depends on the commercial plan. A revenue record should nevertheless expose all components:
+
+```text
+gross user trading fee
+− protocol base fee
+− user maker rebate
+− referral and campaign allocations
+± adjustments
+= net Builder revenue
+```
+
+## Required records
+
+- summary by day, market, and asset;
+- fill-level revenue ledger;
+- referral and campaign deductions;
+- payable, paid, and adjusted balances;
+- payout destination, transaction, and status.
+
+<Warning>
+  Do not calculate production payouts from analytics aggregates. Use the final revenue and payout ledgers.
+</Warning>

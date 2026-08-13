@@ -1,0 +1,59 @@
+---
+title: "Builder quickstart"
+description: "Integrate the complete project lifecycle from Builder setup to revenue reconciliation."
+tag: "Preview"
+---
+
+This guide is for a project that is launching a trading frontend and onboarding its own users.
+
+<Warning>
+  The Builder API is **Preview**. The resource model and examples are ready for integration review, but the public production base URL and final endpoint availability must be confirmed by DexBuilder.
+</Warning>
+
+## The minimum production flow
+
+<Steps>
+  <Step title="Create a Builder project">
+    Connect the administrator wallet in the Builder Console, create a project, and record the returned `builder_id` and `project_id`.
+  </Step>
+  <Step title="Create a server-side Admin Key">
+    Grant only the scopes your backend needs. Never ship this key in a frontend.
+  </Step>
+  <Step title="Register a user under your Builder">
+    Build a wallet registration message, request the user's wallet signature, and submit the signed message. The resulting account must be attributed to your `builder_id`.
+  </Step>
+  <Step title="Fund the account">
+    Discover supported chains and contracts, construct a deposit transaction, let the user sign it, and wait for confirmation.
+  </Step>
+  <Step title="Create a Trading Key">
+    Give the user's application a scoped, expiring key for private data and order actions.
+  </Step>
+  <Step title="Trade and settle">
+    Subscribe to public and private streams, place an order, reconcile fills and fees, then settle PnL when required by the account model.
+  </Step>
+  <Step title="Reconcile Builder revenue">
+    Compare trade fees, referral deductions, Builder revenue entries, and payout status using stable ledger identifiers.
+  </Step>
+</Steps>
+
+## Required identifiers
+
+| Identifier | Scope | Purpose |
+|---|---|---|
+| `builder_id` | Organization | Attributes users, orders, fees, revenue, and analytics to a Builder |
+| `project_id` | Deployment | Stores environment, brand, feature, and deployment configuration |
+| `account_id` | User account | Identifies one trading account within the Builder tenancy model |
+| `key_id` | Credential | Identifies a revocable Admin or Trading Key without exposing its secret |
+| `request_id` | Request | Supports tracing and support investigation |
+
+## Production completion criteria
+
+A Builder integration is not complete until the same test user can successfully complete:
+
+`register → deposit → trade → settle → withdraw`
+
+and the Builder can reconcile:
+
+`user → fill → user fee → protocol fee → Builder revenue → payout`
+
+Continue with the [Integration checklist](/getting-started/integration-checklist).

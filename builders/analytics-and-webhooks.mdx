@@ -1,0 +1,28 @@
+---
+title: "Analytics and webhooks"
+description: "Use Builder-scoped data and signed events to operate your product."
+tag: "Preview"
+---
+
+## Builder analytics
+
+The Builder API should expose users, active users, volume, maker/taker mix, fees, revenue, open interest, liquidation, and market-level performance for the authenticated Builder only.
+
+## Initial webhook events
+
+- `account.registered`
+- `deposit.confirmed`
+- `withdrawal.updated`
+- `settlement.updated`
+- `order.updated`
+- `trade.executed`
+- `position.liquidated`
+- `builder.revenue.accrued`
+- `builder.payout.completed`
+- `system.maintenance.updated`
+
+## Verify every event
+
+Use the delivery timestamp, event ID, and HMAC signature to verify the raw request body. Reject expired deliveries, deduplicate by event ID, and return a successful HTTP response only after durably accepting the event.
+
+Webhook delivery logs should remain queryable and support explicit retry.

@@ -1,0 +1,31 @@
+---
+title: "Place an order"
+description: "Validate, submit, and track perpetual orders."
+---
+
+## Before submission
+
+- Read the contract metadata.
+- Round price and size to valid increments.
+- Check minimum order size and notional.
+- Check the account's margin, leverage, position mode, and risk tier.
+- Decide whether the order must be reduce-only.
+- Assign a unique client order ID when supported.
+
+## Supported actions
+
+The current Trading API documents:
+
+- single and batch placement;
+- BBO-level placement;
+- single and batch modification;
+- single, batch, and cancel-all operations;
+- countdown cancel for disconnect protection.
+
+## Confirm execution
+
+After submission, track the server order ID through the private stream. Reconcile every fill using its execution ID, price, quantity, maker/taker role, and fee.
+
+<Note>
+  A cancellation and a fill can race. The final position and fill records are authoritative, not the cancellation request response alone.
+</Note>

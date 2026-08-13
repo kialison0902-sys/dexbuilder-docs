@@ -1,0 +1,29 @@
+---
+title: "Configure fees"
+description: "Set Builder fees and disclose the effective rate to users."
+tag: "Preview"
+---
+
+## Configuration levels
+
+| Level | Priority | Example use |
+|---|---:|---|
+| Protocol base | Lowest | DexBuilder infrastructure charge |
+| Builder default | Default | Standard project fee policy |
+| User override | Higher | VIP or volume tier |
+| Order-level fee | Highest | Explicit per-order Builder fee when enabled and authorized |
+
+The API should reject a taker fee below the applicable protocol base fee unless a documented subsidy mechanism covers the difference.
+
+## Update flow
+
+1. Read the protocol base and current Builder default.
+2. Calculate the desired effective user rates.
+3. Validate precision and allowed range.
+4. Update the Builder default or a batch of users.
+5. Read back the applied configuration.
+6. Show the effective fee before the next trade.
+
+<Note>
+  For an order-level Builder fee, require an explicit user-approved maximum and make that approval queryable and revocable.
+</Note>

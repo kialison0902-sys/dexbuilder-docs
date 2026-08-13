@@ -1,0 +1,1100 @@
+openapi: 3.1.0
+info:
+  title: DexBuilder Trading API
+  version: 1.0.0
+  description: |
+    Aden-compatible perpetual market, account, position, and order endpoints.
+
+    These operations are confirmed from the public Aden API v1.0.0 documentation.
+    Aden is an operator built on DexBuilder. Confirm the production DexBuilder gateway
+    and branding policy before publishing a new operator integration.
+  contact:
+    email: contact@dexbuilder.com
+servers:
+  - url: https://api.aden.io/api/v1
+    description: Confirmed Aden production gateway
+tags:
+  - name: Markets
+    description: Public perpetual market data.
+  - name: Account
+    description: Private account and account-ledger data.
+  - name: Positions
+    description: Position, leverage, margin-mode, and risk configuration.
+  - name: Orders
+    description: Order placement, query, amendment, and cancellation.
+  - name: History
+    description: User fills, position closes, liquidations, and ADL history.
+security: []
+paths:
+  /dex_futures/{settle}/contracts:
+    get:
+      tags: [Markets]
+      operationId: listPerpetualContracts
+      summary: List perpetual contracts
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+      responses:
+        '200':
+          description: Perpetual contracts.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contract'
+  /dex_futures/{settle}/contracts/{contract}:
+    get:
+      tags: [Markets]
+      operationId: getPerpetualContract
+      summary: Get a perpetual contract
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/ContractPath'
+      responses:
+        '200':
+          description: Contract metadata.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contract'
+  /dex_futures/{settle}/order_book:
+    get:
+      tags: [Markets]
+      operationId: getOrderBook
+      summary: Get order book
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/ContractQuery'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Order-book snapshot.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderBook'
+  /dex_futures/{settle}/trades:
+    get:
+      tags: [Markets]
+      operationId: listMarketTrades
+      summary: List recent market trades
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/ContractQuery'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/From'
+        - $ref: '#/components/parameters/To'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /dex_futures/{settle}/candlesticks:
+    get:
+      tags: [Markets]
+      operationId: listCandlesticks
+      summary: List candlesticks
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/ContractQuery'
+        - name: interval
+          in: query
+          required: true
+          schema: { type: string }
+        - $ref: '#/components/parameters/From'
+        - $ref: '#/components/parameters/To'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /dex_futures/{settle}/premium_index:
+    get:
+      tags: [Markets]
+      operationId: listPremiumIndexCandlesticks
+      summary: List premium-index candlesticks
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/ContractQuery'
+        - name: interval
+          in: query
+          required: true
+          schema: { type: string }
+        - $ref: '#/components/parameters/From'
+        - $ref: '#/components/parameters/To'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /dex_futures/{settle}/tickers:
+    get:
+      tags: [Markets]
+      operationId: listPerpetualTickers
+      summary: List perpetual tickers
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - name: contract
+          in: query
+          required: false
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /dex_futures/{settle}/funding_rate:
+    get:
+      tags: [Markets]
+      operationId: listHistoricalFundingRates
+      summary: List historical market funding rates
+      description: Returns market rates, not account-specific funding payments.
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/ContractQuery'
+        - $ref: '#/components/parameters/From'
+        - $ref: '#/components/parameters/To'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /dex_futures/{settle}/insurance:
+    get:
+      tags: [Markets]
+      operationId: listInsuranceFundHistory
+      summary: List insurance fund history
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/From'
+        - $ref: '#/components/parameters/To'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /dex_futures/{settle}/contract_stats:
+    get:
+      tags: [Markets]
+      operationId: getPerpetualStatistics
+      summary: Get perpetual statistics
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - name: contract
+          in: query
+          required: false
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/index_constituents/{index}:
+    get:
+      tags: [Markets]
+      operationId: getIndexConstituents
+      summary: Get index constituents
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - name: index
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /dex_futures/{settle}/liq_orders:
+    get:
+      tags: [Markets]
+      operationId: listMarketLiquidationOrders
+      summary: List market liquidation orders
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - name: contract
+          in: query
+          required: false
+          schema: { type: string }
+        - $ref: '#/components/parameters/From'
+        - $ref: '#/components/parameters/To'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /dex_futures/{settle}/risk_limit_tiers:
+    get:
+      tags: [Markets]
+      operationId: listRiskLimitTiers
+      summary: List risk-limit tiers
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - name: contract
+          in: query
+          required: false
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /dex_futures/{settle}/risk_limit_table:
+    get:
+      tags: [Markets]
+      operationId: getRiskLimitTable
+      summary: Get a risk-limit table
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - name: table_id
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/accounts:
+    get:
+      tags: [Account]
+      operationId: getPerpetualAccount
+      summary: Get perpetual account
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+      responses:
+        '200':
+          description: Account state.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+  /dex_futures/{settle}/account_book:
+    get:
+      tags: [Account]
+      operationId: listAccountChanges
+      summary: List account changes
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/From'
+        - $ref: '#/components/parameters/To'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /dex_futures/{settle}/fee:
+    get:
+      tags: [Account]
+      operationId: getEffectiveTradingFee
+      summary: Get the user's perpetual trading fee rate
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/positions:
+    get:
+      tags: [Positions]
+      operationId: listPositions
+      summary: List positions
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+      responses:
+        '200':
+          description: User positions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Position'
+  /dex_futures/{settle}/positions/{contract}:
+    get:
+      tags: [Positions]
+      operationId: getPosition
+      summary: Get a position
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/ContractPath'
+      responses:
+        '200':
+          description: Position.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Position'
+  /dex_futures/{settle}/positions/{contract}/margin:
+    post:
+      tags: [Positions]
+      operationId: updatePositionMargin
+      summary: Add or reduce position margin
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/ContractPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [change]
+              properties:
+                change:
+                  type: string
+                  description: Signed margin change in settlement asset units.
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/positions/{contract}/leverage:
+    post:
+      tags: [Positions]
+      operationId: updatePositionLeverage
+      summary: Update position leverage
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/ContractPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [leverage]
+              properties:
+                leverage: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/positions/{contract}/risk_limit:
+    post:
+      tags: [Positions]
+      operationId: updatePositionRiskLimit
+      summary: Update position risk limit
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/ContractPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [risk_limit]
+              properties:
+                risk_limit: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/positions/cross_mode:
+    post:
+      tags: [Positions]
+      operationId: updatePositionMarginMode
+      summary: Switch cross or isolated margin mode
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/dual_mode:
+    post:
+      tags: [Positions]
+      operationId: setPositionMode
+      summary: Set one-way or hedge position mode
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/dual_comp/positions/{contract}:
+    get:
+      tags: [Positions]
+      operationId: getHedgeModePosition
+      summary: Get hedge-mode position
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/ContractPath'
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/dual_comp/positions/{contract}/margin:
+    post:
+      tags: [Positions]
+      operationId: updateHedgeModePositionMargin
+      summary: Update hedge-mode position margin
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/ContractPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/dual_comp/positions/{contract}/leverage:
+    post:
+      tags: [Positions]
+      operationId: updateHedgeModePositionLeverage
+      summary: Update hedge-mode position leverage
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/ContractPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/dual_comp/positions/{contract}/risk_limit:
+    post:
+      tags: [Positions]
+      operationId: updateHedgeModePositionRiskLimit
+      summary: Update hedge-mode position risk limit
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/ContractPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/dual_comp/positions/cross_mode:
+    post:
+      tags: [Positions]
+      operationId: updateHedgeModeMarginMode
+      summary: Switch hedge-mode cross or isolated margin
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/orders:
+    get:
+      tags: [Orders]
+      operationId: listOrders
+      summary: List orders
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - name: contract
+          in: query
+          required: false
+          schema: { type: string }
+        - name: status
+          in: query
+          required: false
+          schema: { type: string }
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+      responses:
+        '200':
+          description: Orders.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+    post:
+      tags: [Orders]
+      operationId: createOrder
+      summary: Place a perpetual order
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrderRequest'
+            examples:
+              limit:
+                value:
+                  contract: BTC_USDT
+                  size: 0.001
+                  price: '60000'
+                  tif: gtc
+                  reduce_only: false
+      responses:
+        '201':
+          description: Accepted order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+    delete:
+      tags: [Orders]
+      operationId: cancelOpenOrders
+      summary: Cancel open orders
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - name: contract
+          in: query
+          required: false
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/orders/{order_id}:
+    get:
+      tags: [Orders]
+      operationId: getOrder
+      summary: Get an order
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/OrderId'
+      responses:
+        '200':
+          description: Order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+    put:
+      tags: [Orders]
+      operationId: amendOrder
+      summary: Amend an order
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/OrderId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Amended order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+    delete:
+      tags: [Orders]
+      operationId: cancelOrder
+      summary: Cancel an order
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/OrderId'
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/orders_timerange:
+    get:
+      tags: [Orders]
+      operationId: listOrdersByTimeRange
+      summary: List orders by time range
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/From'
+        - $ref: '#/components/parameters/To'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /dex_futures/{settle}/batch_orders:
+    post:
+      tags: [Orders]
+      operationId: createBatchOrders
+      summary: Place batch perpetual orders
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CreateOrderRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /dex_futures/{settle}/bbo_orders:
+    post:
+      tags: [Orders]
+      operationId: createBboOrder
+      summary: Place a level-based BBO order
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/batch_amend_orders:
+    post:
+      tags: [Orders]
+      operationId: amendBatchOrders
+      summary: Amend orders in a batch
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /dex_futures/{settle}/batch_cancel_orders:
+    post:
+      tags: [Orders]
+      operationId: cancelBatchOrders
+      summary: Cancel orders by ID
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [order_ids]
+              properties:
+                order_ids:
+                  type: array
+                  items: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/countdown_cancel_all:
+    post:
+      tags: [Orders]
+      operationId: setCountdownCancel
+      summary: Configure countdown cancel-all
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/my_trades:
+    get:
+      tags: [History]
+      operationId: listUserTrades
+      summary: List user fills
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - name: contract
+          in: query
+          required: false
+          schema: { type: string }
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /dex_futures/{settle}/my_trades_timerange:
+    get:
+      tags: [History]
+      operationId: listUserTradesByTimeRange
+      summary: List user fills by time range
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/From'
+        - $ref: '#/components/parameters/To'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /dex_futures/{settle}/position_close:
+    get:
+      tags: [History]
+      operationId: listPositionCloseHistory
+      summary: List position-close history
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/From'
+        - $ref: '#/components/parameters/To'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /dex_futures/{settle}/liquidates:
+    get:
+      tags: [History]
+      operationId: listUserLiquidations
+      summary: List user liquidation history
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/From'
+        - $ref: '#/components/parameters/To'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /dex_futures/{settle}/auto_deleverages:
+    get:
+      tags: [History]
+      operationId: listAutoDeleveragingHistory
+      summary: List ADL history
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/From'
+        - $ref: '#/components/parameters/To'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+components:
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      in: header
+      name: KEY
+      description: Perpetual API key.
+    Timestamp:
+      type: apiKey
+      in: header
+      name: Timestamp
+      description: Unix timestamp in seconds. The documented allowed clock difference is 60 seconds.
+    Signature:
+      type: apiKey
+      in: header
+      name: SIGN
+      description: Hex-encoded HMAC-SHA512 signature of the canonical request.
+  parameters:
+    Settle:
+      name: settle
+      in: path
+      required: true
+      schema:
+        type: string
+        enum: [usdt]
+    ContractPath:
+      name: contract
+      in: path
+      required: true
+      schema: { type: string, example: BTC_USDT }
+    ContractQuery:
+      name: contract
+      in: query
+      required: true
+      schema: { type: string, example: BTC_USDT }
+    OrderId:
+      name: order_id
+      in: path
+      required: true
+      schema: { type: string }
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema: { type: integer, minimum: 1 }
+    Offset:
+      name: offset
+      in: query
+      required: false
+      schema: { type: integer, minimum: 0, default: 0 }
+    From:
+      name: from
+      in: query
+      required: false
+      schema: { type: integer, format: int64, description: Unix time in seconds. }
+    To:
+      name: to
+      in: query
+      required: false
+      schema: { type: integer, format: int64, description: Unix time in seconds. }
+  responses:
+    ObjectResponse:
+      description: Successful response. The exact fields depend on the operation.
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    ListResponse:
+      description: Successful list response. Pagination may also be returned in headers.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              additionalProperties: true
+    ErrorResponse:
+      description: Request failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Decimal:
+      type: string
+      description: Decimal value serialized as a string to preserve precision.
+    Contract:
+      type: object
+      required: [name]
+      properties:
+        name: { type: string, example: BTC_USDT }
+        type: { type: string }
+        quanto_multiplier: { $ref: '#/components/schemas/Decimal' }
+        order_price_round: { $ref: '#/components/schemas/Decimal' }
+        mark_price_round: { $ref: '#/components/schemas/Decimal' }
+        order_size_min: { $ref: '#/components/schemas/Decimal' }
+        order_size_max: { $ref: '#/components/schemas/Decimal' }
+        order_size_round: { $ref: '#/components/schemas/Decimal' }
+        leverage_min: { $ref: '#/components/schemas/Decimal' }
+        leverage_max: { $ref: '#/components/schemas/Decimal' }
+        maintenance_rate: { $ref: '#/components/schemas/Decimal' }
+        mark_type: { type: string }
+        status: { type: string }
+      additionalProperties: true
+    OrderBookLevel:
+      type: object
+      properties:
+        p: { $ref: '#/components/schemas/Decimal' }
+        s: { $ref: '#/components/schemas/Decimal' }
+      additionalProperties: true
+    OrderBook:
+      type: object
+      properties:
+        id: { type: integer, format: int64 }
+        current: { type: number }
+        update: { type: number }
+        asks:
+          type: array
+          items: { $ref: '#/components/schemas/OrderBookLevel' }
+        bids:
+          type: array
+          items: { $ref: '#/components/schemas/OrderBookLevel' }
+      additionalProperties: true
+    Account:
+      type: object
+      properties:
+        total: { $ref: '#/components/schemas/Decimal' }
+        available: { $ref: '#/components/schemas/Decimal' }
+        position_margin: { $ref: '#/components/schemas/Decimal' }
+        order_margin: { $ref: '#/components/schemas/Decimal' }
+        unrealised_pnl: { $ref: '#/components/schemas/Decimal' }
+        currency: { type: string, example: USDT }
+      additionalProperties: true
+    Position:
+      type: object
+      properties:
+        contract: { type: string, example: BTC_USDT }
+        size: { $ref: '#/components/schemas/Decimal' }
+        leverage: { $ref: '#/components/schemas/Decimal' }
+        entry_price: { $ref: '#/components/schemas/Decimal' }
+        mark_price: { $ref: '#/components/schemas/Decimal' }
+        liquidation_price: { $ref: '#/components/schemas/Decimal' }
+        unrealised_pnl: { $ref: '#/components/schemas/Decimal' }
+        margin: { $ref: '#/components/schemas/Decimal' }
+        mode: { type: string }
+      additionalProperties: true
+    CreateOrderRequest:
+      type: object
+      required: [contract, size]
+      properties:
+        contract: { type: string, example: BTC_USDT }
+        size:
+          type: number
+          example: 0.001
+          description: Signed order size. Positive buys and negative sells in the documented Aden-compatible API.
+        price: { $ref: '#/components/schemas/Decimal' }
+        tif:
+          type: string
+          description: Time in force.
+        reduce_only: { type: boolean, default: false }
+        text:
+          type: string
+          description: Optional client-defined order text or ID when supported.
+        close: { type: boolean }
+        auto_size: { type: string }
+        iceberg: { type: number }
+      additionalProperties: true
+    Order:
+      type: object
+      properties:
+        id: { type: integer, format: int64 }
+        contract: { type: string }
+        size: { type: number }
+        left: { type: number }
+        price: { $ref: '#/components/schemas/Decimal' }
+        fill_price: { $ref: '#/components/schemas/Decimal' }
+        status: { type: string }
+        finish_as: { type: string }
+        tif: { type: string }
+        is_reduce_only: { type: boolean }
+        create_time: { type: number }
+        update_time: { type: number }
+      additionalProperties: true
+    Error:
+      type: object
+      properties:
+        label: { type: string }
+        message: { type: string }
+        detail: { type: string }
+      additionalProperties: true

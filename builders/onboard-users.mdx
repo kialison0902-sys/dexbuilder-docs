@@ -1,0 +1,23 @@
+---
+title: "Onboard users"
+description: "Register wallets and preserve correct Builder attribution."
+tag: "Preview"
+---
+
+## Registration sequence
+
+1. Query whether the wallet already has an account for the Builder.
+2. Request a registration nonce.
+3. Build a wallet message containing `builder_id`, `chain_id`, nonce, timestamp, and expiration.
+4. Ask the wallet owner to sign.
+5. Submit the signed message.
+6. Persist the returned `account_id`.
+7. Create an expiring Trading Key with minimum scopes.
+
+## Privacy boundary
+
+A Builder can query only data allowed for users attributed to that Builder. A Builder Admin endpoint must not become a general system-wide user data export.
+
+<Warning>
+  A referral code, frontend domain, or request header alone must not override a wallet's established account-to-Builder relationship.
+</Warning>

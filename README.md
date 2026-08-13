@@ -1,55 +1,30 @@
-# Mintlify Starter Kit
+# DexBuilder Developer Docs
 
-Use the starter kit to get your docs deployed and ready to customize.
+This directory is a deployable Mintlify documentation project for DexBuilder's public developer documentation.
 
-Click the green **Use this template** button at the top of this repo to copy the Mintlify starter kit. The starter kit contains examples with
+## Audiences
 
-- Guide pages
-- Navigation
-- Customizations
-- API reference pages
-- Use of popular components
+- Trading users and application developers integrating market data, orders, positions, and account data.
+- Builder project teams onboarding users, managing funds and settlement, configuring fees, and reconciling revenue.
 
-**[Follow the full quickstart guide](https://starter.mintlify.com/quickstart)**
+## Content status
 
-## AI-assisted writing
+- `openapi/trading-v1.yaml` documents the currently confirmed Aden-compatible perpetual REST surface.
+- `openapi/builder-preview.yaml` is a proposed public Builder contract and is clearly marked Preview.
+- All production URLs, signing fields, schemas, limits, and state machines must be checked against the implementation before removing a Preview label.
 
-Set up your AI coding tool to work with Mintlify:
+## Preview locally
 
-```bash
-npx skills add https://mintlify.com/docs
-```
+Install the Mintlify CLI with `npm i -g mint`, run `mint dev` from this directory, and open the local URL shown by the CLI. Mintlify currently requires Node.js 20.17 or later.
 
-This command installs Mintlify's documentation skill for your configured AI tools like Claude Code, Cursor, Windsurf, and others. The skill includes component reference, writing standards, and workflow guidance.
+## Publish
 
-See the [AI tools guides](/ai-tools) for tool-specific setup.
+1. Create a Mintlify project and connect the repository directory.
+2. Use a test subdomain for review.
+3. Configure `docs.dexbuilder.com` after content and API review.
+4. Add a **Developers** link to the main DexBuilder navigation.
+5. Validate both OpenAPI files and every navigation path in CI before publishing.
 
-## Development
+## GitBook option
 
-Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview your documentation changes locally. To install, use the following command:
-
-```
-npm i -g mint
-```
-
-Run the following command at the root of your documentation, where your `docs.json` is located:
-
-```
-mint dev
-```
-
-View your local preview at `http://localhost:3000`.
-
-## Publishing changes
-
-Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.
-
-## Need help?
-
-### Troubleshooting
-
-- If your dev environment isn't running: Run `mint update` to ensure you have the most recent version of the CLI.
-- If a page loads as a 404: Make sure you are running in a folder with a valid `docs.json`.
-
-### Resources
-- [Mintlify documentation](https://mintlify.com/docs)
+The Markdown/MDX content can be migrated to GitBook through Git Sync. GitBook can import the OpenAPI files to generate interactive endpoint pages. Mintlify is the default here because Orderly currently uses Mintlify and this structure mirrors that documentation experience.

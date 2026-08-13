@@ -1,0 +1,26 @@
+---
+title: "Positions and margin"
+description: "Read positions and manage leverage, margin, and position mode."
+---
+
+The current perpetual interface supports:
+
+- position list and individual position queries;
+- leverage updates;
+- position-margin updates;
+- cross and isolated margin modes;
+- one-way and hedge position modes;
+- position risk-limit updates;
+- liquidation and ADL history.
+
+## Safe update sequence
+
+1. Read the latest account, position, and contract risk tier.
+2. Check whether open orders or hedge-side positions block the change.
+3. Submit the requested configuration update.
+4. Read the position again and confirm the applied mode or leverage.
+5. Recalculate displayed liquidation and margin values from the returned authoritative state.
+
+<Warning>
+  Reducing isolated margin or increasing leverage may materially increase liquidation risk. Show the new liquidation estimate and require explicit user confirmation.
+</Warning>

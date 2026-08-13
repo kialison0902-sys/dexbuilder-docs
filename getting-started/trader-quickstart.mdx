@@ -1,0 +1,68 @@
+---
+title: "Trader API quickstart"
+description: "Read a market and place your first perpetual order."
+---
+
+This quickstart uses the currently documented Aden-compatible perpetual endpoints. Confirm the DexBuilder production gateway before moving an integration to production.
+
+## Prerequisites
+
+- A Perp API key with read-write permission
+- The corresponding secret key
+- A synchronized system clock
+- A test account with collateral
+
+## 1. Read available markets
+
+```bash
+curl "https://api.aden.io/api/v1/dex_futures/usdt/contracts" \
+  -H "Accept: application/json"
+```
+
+Public market endpoints do not require authentication.
+
+## 2. Create a signed request
+
+Private requests require the API key, timestamp, and a signature derived from the request method, path, query, payload hash, and timestamp.
+
+Read [Request signing](/authentication/request-signing) before sending a private request. Never expose the secret key in a browser or mobile bundle.
+
+## 3. Place a limit order
+
+```bash
+curl -X POST "https://api.aden.io/api/v1/dex_futures/usdt/orders" \
+  -H "Accept: application/json" \
+  -H "Content-Type: application/json" \
+  -H "KEY: ${DEXBUILDER_API_KEY}" \
+  -H "Timestamp: ${DEXBUILDER_TIMESTAMP}" \
+  -H "SIGN: ${DEXBUILDER_SIGNATURE}" \
+  --data '{
+    "contract": "BTC_USDT",
+    "size": 0.001,
+    "price": "60000",
+    "tif": "gtc",
+    "reduce_only": false
+  }'
+```
+
+<Warning>
+  The sample values are illustrative, and the documented Aden-compatible schema uses signed size (`size > 0` for buy and `size < 0` for sell). Use contract metadata to validate tick size, quantity step, minimum quantity, leverage, and risk limit before placing an order.
+</Warning>
+
+## 4. Confirm the result
+
+Do not treat an accepted order as a fill. Query the order or consume the private execution stream until it reaches a terminal state.
+
+```bash
+curl "https://api.aden.io/api/v1/dex_futures/usdt/orders/${ORDER_ID}" \
+  -H "KEY: ${DEXBUILDER_API_KEY}" \
+  -H "Timestamp: ${DEXBUILDER_TIMESTAMP}" \
+  -H "SIGN: ${DEXBUILDER_SIGNATURE}"
+```
+
+## Next steps
+
+- [Understand the order lifecycle](/concepts/order-lifecycle)
+- [Manage positions and margin](/trading/positions-and-margin)
+- [Connect WebSocket streams](/trading/websocket)
+- [Review idempotency and retries](/authentication/idempotency)

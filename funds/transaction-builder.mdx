@@ -1,0 +1,42 @@
+---
+title: "Transaction Builder"
+description: "Construct wallet-ready transactions without handling user private keys."
+tag: "Preview"
+---
+
+The Transaction Builder returns the exact EVM typed data, calldata, or Solana message required for a user-authorized action.
+
+It does not sign for the user and never receives a private key.
+
+## Response contract
+
+```json
+{
+  "request_id": "req_01J...",
+  "chain_type": "EVM",
+  "chain_id": 42161,
+  "from": "0xUSER",
+  "to": "0xVERIFIER_OR_VAULT",
+  "typed_data": {},
+  "calldata": "0x...",
+  "value": "0",
+  "gas_estimate": "145000",
+  "fee_quote": {
+    "asset": "ETH",
+    "amount": "0.00021"
+  },
+  "human_readable_summary": "Withdraw 100 USDC to 0xUSER on Arbitrum",
+  "expires_at": 1786596000000,
+  "request_hash": "0x..."
+}
+```
+
+## Supported builders
+
+- account registration;
+- deposit;
+- withdrawal;
+- PnL settlement;
+- internal transfer.
+
+On submission, the backend must verify the signed payload matches the original `request_hash` and is not expired.

@@ -1,0 +1,34 @@
+---
+title: "Ledger and reconciliation"
+description: "Reconcile balances, trades, funding, asset movements, and Builder revenue."
+tag: "Preview"
+---
+
+Every balance-changing event should produce immutable ledger entries.
+
+## Minimum entry fields
+
+| Field | Description |
+|---|---|
+| `entry_id` | Stable deduplication and reconciliation identifier |
+| `account_id` | Affected user account |
+| `builder_id` | Builder attribution |
+| `asset` | Ledger asset |
+| `amount` | Signed decimal amount |
+| `entry_type` | Trade fee, funding, PnL, deposit, withdrawal, adjustment, or other type |
+| `reference_type` | Fill, settlement, transaction, payout, or adjustment |
+| `reference_id` | Identifier of the related source object |
+| `status` | Pending, final, reversed, or failed |
+| `occurred_at` | Event time |
+
+## Daily reconciliation
+
+Reconcile independently:
+
+1. fills against order executed quantity;
+2. position change against fills;
+3. account balance against user ledger entries;
+4. deposits and withdrawals against chain evidence;
+5. effective user fees against fill fee entries;
+6. Builder revenue against protocol fee and referral deductions;
+7. payable Builder revenue against payout records.

@@ -1,0 +1,26 @@
+---
+title: "WebSocket integration"
+description: "Consume real-time market and private account events reliably."
+---
+
+## Public streams
+
+Public topics should cover order book, trades, tickers, Klines, mark/index price, and funding updates.
+
+## Private streams
+
+Private topics should cover order updates, fills, balances, positions, margin events, liquidations, withdrawals, and settlements.
+
+## Reliability requirements
+
+- Authenticate private connections with an expiring signed payload.
+- Implement ping/pong and server idle timeouts.
+- Persist the last sequence or event cursor.
+- Deduplicate events by stable event ID.
+- Detect sequence gaps.
+- Backfill missing account and order state from REST.
+- Reconnect with exponential backoff and jitter.
+
+<Warning>
+  The final DexBuilder WebSocket base URL, topics, and recovery contract must be published before production use. Do not infer them from the Aden REST base URL.
+</Warning>

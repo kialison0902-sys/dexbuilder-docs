@@ -1,0 +1,33 @@
+---
+title: "Fees and Builder revenue"
+description: "Understand user fees, protocol fees, Builder fees, and non-trading charges."
+tag: "Preview"
+---
+
+## Fee components
+
+| Component | Paid or received by | Description |
+|---|---|---|
+| Protocol base fee | DexBuilder | Base infrastructure trading fee |
+| Builder fee | Builder | Builder-defined margin or maker rebate |
+| Effective user fee | User | Final maker or taker rate shown to the user |
+| Referral share | Referrer/referee | Portion of Builder economics allocated to referral participants |
+| Funding payment | Long or short account | Periodic transfer between market sides; not a trading fee |
+| Liquidation fee | Liquidated account | Risk and liquidation charge |
+| Network/withdrawal fee | Withdrawing user | Chain messaging, gas, and processing charges |
+
+## Rate representation
+
+DexBuilder API schemas should use decimal rates consistently:
+
+`0.0005 = 0.05% = 5 bps`
+
+Clients must not assume a field uses bps unless its schema explicitly says so.
+
+## User disclosure
+
+Before a fee-bearing action, the user should be able to retrieve a quote containing the effective rate, estimated amount, asset, and fee components.
+
+<Note>
+  The existing perpetual fee endpoint answers the user's current trading rate. Builder default fees, user overrides, revenue, and payouts are separate Builder resources.
+</Note>

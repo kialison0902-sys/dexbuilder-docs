@@ -1,0 +1,42 @@
+---
+title: "Choose an integration path"
+description: "Select the right DexBuilder integration for your product."
+---
+
+DexBuilder serves two primary developer audiences. Choose one before creating credentials.
+
+## I want to trade or add trading to an app
+
+Use the **Trading API** when you are:
+
+- building a trading terminal or automated trading system;
+- adding perpetual markets to a wallet or existing application;
+- accessing the account of a user who already trades through an operator;
+- integrating orders, positions, account history, or real-time market data.
+
+Start with the [Trader Quickstart](/getting-started/trader-quickstart).
+
+## I want to launch a DEX for my users
+
+Use the **Builder integration** when you need:
+
+- your own Builder and project identity;
+- user registration and attribution to your project;
+- default or user-specific fee configuration;
+- deposits, withdrawals, and settlement flows;
+- project-level user, volume, fee, and revenue data;
+- signed webhooks and production operations support.
+
+Start with the [Builder Quickstart](/getting-started/builder-quickstart).
+
+## Integration levels
+
+| Path | Time to market | Product control | Recommended for |
+|---|---:|---:|---|
+| White-label / no-code | Fastest | Standard | Teams launching a branded DEX with minimal development |
+| UI SDK | Fast | High | Teams building a custom frontend from reusable trading components |
+| Direct API | Most work | Full | Wallets, exchanges, brokers, terminals, and deeply customized products |
+
+<Note>
+  A trading API key does not grant Builder administration rights. Builder Admin credentials must only be used from secured backend systems.
+</Note>

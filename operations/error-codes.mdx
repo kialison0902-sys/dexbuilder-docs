@@ -1,0 +1,40 @@
+---
+title: "Errors"
+description: "Handle HTTP status, machine-readable error codes, and retry guidance."
+---
+
+## Error envelope
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": "INSUFFICIENT_MARGIN",
+    "message": "Available margin is insufficient for this order.",
+    "details": {
+      "required": "125.50",
+      "available": "100.00",
+      "asset": "USDT"
+    },
+    "retryable": false
+  },
+  "request_id": "req_01J...",
+  "timestamp": 1786596000000
+}
+```
+
+## HTTP categories
+
+| Status | Meaning |
+|---:|---|
+| 400 | Invalid request or business validation failure |
+| 401 | Missing or invalid authentication |
+| 403 | Authenticated but not permitted |
+| 404 | Resource not found within the caller's scope |
+| 409 | Conflict, duplicate, stale nonce, or idempotency mismatch |
+| 422 | Valid schema but action cannot be applied to current state |
+| 429 | Rate limited |
+| 500 | Internal failure |
+| 503 | Temporarily unavailable or under maintenance |
+
+Always log `request_id` when contacting support. Never send secret keys.

@@ -1,0 +1,29 @@
+---
+title: "Project setup"
+description: "Create a Builder identity, environments, credentials, and deployment configuration."
+tag: "Preview"
+---
+
+## Setup flow
+
+<Steps>
+  <Step title="Connect the Admin wallet">
+    Use a dedicated organization-controlled wallet. Complete ownership verification in the Builder Console.
+  </Step>
+  <Step title="Create the project">
+    Define the project name, products, regions, chains, settlement assets, and integration path.
+  </Step>
+  <Step title="Create Sandbox">
+    Generate a Sandbox environment and a scoped Admin Key.
+  </Step>
+  <Step title="Configure the product">
+    Set brand, domain, markets, fee policy, webhooks, and operational contacts.
+  </Step>
+  <Step title="Request production activation">
+    Complete the go-live review and create new production-only credentials.
+  </Step>
+</Steps>
+
+## Credential storage
+
+Store Admin secrets in a managed secret store. Record the `key_id`, scopes, creator, creation time, last-used time, and expiration. The API must never return the secret again after creation.

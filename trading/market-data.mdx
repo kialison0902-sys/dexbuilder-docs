@@ -1,0 +1,35 @@
+---
+title: "Market data"
+description: "Integrate perpetual contracts, order books, trades, Klines, index prices, and funding."
+---
+
+Public market data does not require authentication.
+
+## Available data
+
+| Resource | Use |
+|---|---|
+| Contracts | Symbol, precision, leverage, risk, and trading status |
+| Order book | Current bids and asks |
+| Trades | Recent market executions |
+| Klines | OHLCV history |
+| Premium index Klines | Premium and mark-price analysis |
+| Tickers and statistics | Last price, volume, open interest, and market summary |
+| Funding history | Historical market funding rates |
+| Index constituents | Sources used by the index |
+| Risk tiers | Position and leverage constraints |
+
+## Snapshot and stream
+
+Use REST for initial state and recovery. Use WebSocket for live changes.
+
+For an order book integration:
+
+1. Connect to the public stream and buffer updates.
+2. Fetch a REST snapshot.
+3. Apply updates newer than the snapshot sequence.
+4. Detect gaps and recover from a new snapshot.
+
+<Warning>
+  Do not calculate liquidation, risk, or unrealized PnL from the last trade price when the contract specification requires index or mark price.
+</Warning>

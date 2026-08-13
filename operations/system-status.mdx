@@ -1,0 +1,28 @@
+---
+title: "System status and maintenance"
+description: "Protect users and orders during degraded service and maintenance."
+---
+
+The status response should report each surface independently:
+
+- public market data;
+- private account data;
+- order entry and cancellation;
+- deposits;
+- withdrawals;
+- settlement;
+- chain and bridge connectivity;
+- webhooks.
+
+## During maintenance
+
+- Display a clear maintenance state.
+- Disable actions that the backend cannot safely accept.
+- Keep cancellation available whenever the platform supports it.
+- Do not assume existing open orders are automatically cancelled.
+- Warn users that positions remain exposed to market and liquidation risk.
+- Refresh all account, position, order, and market state before re-enabling trading.
+
+<Warning>
+  Private data may be temporarily unavailable during maintenance. Do not replace unknown balances or positions with zero.
+</Warning>

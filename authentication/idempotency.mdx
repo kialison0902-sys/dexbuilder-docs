@@ -1,0 +1,25 @@
+---
+title: "Idempotency and retries"
+description: "Retry network failures without duplicating orders, withdrawals, or settlements."
+---
+
+## Required behavior
+
+For every supported write endpoint, send a unique `Idempotency-Key`. Reusing the same key with the same payload must return the original result. Reusing it with a different payload must fail.
+
+## After an ambiguous timeout
+
+1. Do not immediately create a new action.
+2. Query by client order ID, idempotency key, or request ID.
+3. If the original action exists, continue tracking it.
+4. Retry only when the API confirms it was not created or marks the failure retryable.
+
+## Retry classes
+
+| Failure | Retry? |
+|---|---|
+| Validation, permission, insufficient margin | No; correct the request or account state |
+| Rate limit | Yes; honor `Retry-After` and add jitter |
+| Temporary service failure | Yes; exponential backoff with a cap |
+| Unknown after timeout | Query first; never blind retry |
+| Final chain rejection | No; build and sign a new transaction after correcting the cause |

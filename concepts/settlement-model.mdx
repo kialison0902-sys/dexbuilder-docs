@@ -1,0 +1,25 @@
+---
+title: "Settlement model"
+description: "The five settlement concepts that integrations must keep separate."
+tag: "Preview"
+---
+
+DexBuilder documentation uses **settlement** as a family of processes, not as one generic operation.
+
+| Process | What changes | Expected evidence |
+|---|---|---|
+| Trade clearing | Position, margin, realized PnL, and trade fee | Fill and ledger entries |
+| Funding settlement | Funding payment between long and short accounts | Funding payment entry |
+| PnL settlement | PnL becomes part of the settled account balance | Settlement record and ledger entries |
+| Asset settlement | Deposit or withdrawal reaches finality | Internal status and chain transaction |
+| Builder revenue settlement | Builder revenue becomes payable or paid | Revenue ledger and payout record |
+
+## Integration rule
+
+Never use the market's historical funding rate as evidence that a specific user paid or received funding. Use the user's funding payment ledger.
+
+Similarly, never use a trade's total fee alone to calculate Builder revenue. Protocol fees, Builder fees, rebates, referrals, and adjustments must be individually reconcilable.
+
+<Warning>
+  The exact DexBuilder PnL settlement trigger and balance model must be confirmed before the Preview settlement endpoints are enabled in production.
+</Warning>

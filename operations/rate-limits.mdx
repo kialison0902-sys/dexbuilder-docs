@@ -1,0 +1,20 @@
+---
+title: "Rate limits"
+description: "Design clients that remain stable under API and WebSocket limits."
+---
+
+The existing Aden-compatible documentation permits up to 100 requests per second across bulk, single, amend, and cancellation order operations, and limits connections per IP. Production DexBuilder limits must be published per environment and endpoint group.
+
+## Client behavior
+
+- Read rate-limit response headers.
+- Honor `Retry-After`.
+- Queue writes instead of retrying them concurrently.
+- Cache stable public metadata.
+- Prefer WebSocket for live data instead of polling.
+- Use one multiplexed stream where practical.
+- Add jitter to reconnect and retry backoff.
+
+<Warning>
+  A documented maximum is not a latency or capacity guarantee. Request a dedicated commercial limit review before generating institutional order traffic.
+</Warning>

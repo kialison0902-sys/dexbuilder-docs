@@ -1,0 +1,29 @@
+---
+title: "Deposits"
+description: "Construct, submit, and track a collateral deposit."
+tag: "Preview"
+---
+
+<Steps>
+  <Step title="Discover support">
+    Query the supported chain, collateral asset, token address, vault address, minimum amount, and deposit status.
+  </Step>
+  <Step title="Request a quote">
+    Validate the amount and receive expected network fees and confirmation requirements.
+  </Step>
+  <Step title="Build the transaction">
+    Use the Transaction Builder to construct approval and deposit calls for the registered account and Builder.
+  </Step>
+  <Step title="Request wallet signature">
+    Display chain, asset, amount, destination contract, and risk summary before signing.
+  </Step>
+  <Step title="Submit and confirm">
+    Track both chain finality and internal account credit. A successful chain transaction alone does not prove the trading balance was credited.
+  </Step>
+</Steps>
+
+## Suggested states
+
+`CREATED → AWAITING_SIGNATURE → SUBMITTED → PROCESSING → CONFIRMED`
+
+Failures should distinguish `REJECTED`, `FAILED_RETRYABLE`, and `FAILED_FINAL`.

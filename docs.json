@@ -1,72 +1,144 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
-  "name": "Mintlify Starter Kit",
-  "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
-  },
-  "favicon": "/favicon.svg",
-  "navigation": {
-    "pages": [
-      {
-        "group": "Getting Started",
-        "pages": [
-          "index",
-          "quickstart"
-        ]
-      }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
-  },
+  "theme": "maple",
+  "name": "DexBuilder Developer Docs",
+  "description": "Build perpetual trading applications and branded DEXs on DexBuilder.",
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/images/logo-light.svg",
+    "dark": "/images/logo-dark.svg",
+    "href": "https://www.dexbuilder.com/"
+  },
+  "favicon": "/images/favicon.svg",
+  "colors": {
+    "primary": "#00A833",
+    "light": "#16D96A",
+    "dark": "#007A29"
+  },
+  "api": {
+    "playground": {
+      "display": "simple"
+    },
+    "examples": {
+      "languages": ["curl", "javascript", "python"]
+    }
   },
   "navbar": {
     "links": [
       {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "label": "DexBuilder",
+        "href": "https://www.dexbuilder.com/"
+      },
+      {
+        "label": "Trading Demo",
+        "href": "https://demo.dexbuilder.com/en/perps"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://app.mintlify.com"
+      "label": "Open Builder",
+      "href": "https://www.dexbuilder.com/en/builder"
     }
   },
   "contextual": {
-    "options": [
-      "copy",
-      "view",
-      "chatgpt",
-      "claude",
-      "perplexity",
-      "mcp",
-      "cursor",
-      "vscode"
+    "options": ["copy", "view", "chatgpt"]
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get started",
+            "pages": [
+              "index",
+              "getting-started/choose-a-path",
+              "getting-started/trader-quickstart",
+              "getting-started/builder-quickstart",
+              "getting-started/integration-checklist"
+            ]
+          },
+          {
+            "group": "Core concepts",
+            "pages": [
+              "concepts/platform-overview",
+              "concepts/accounts-and-tenancy",
+              "concepts/order-lifecycle",
+              "concepts/settlement-model",
+              "concepts/fee-model"
+            ]
+          },
+          {
+            "group": "Accounts and security",
+            "pages": [
+              "authentication/overview",
+              "authentication/request-signing",
+              "authentication/permissions",
+              "authentication/idempotency"
+            ]
+          },
+          {
+            "group": "Trading integration",
+            "pages": [
+              "trading/market-data",
+              "trading/place-first-order",
+              "trading/positions-and-margin",
+              "trading/websocket"
+            ]
+          },
+          {
+            "group": "Funds and settlement",
+            "pages": [
+              "funds/overview",
+              "funds/deposits",
+              "funds/withdrawals",
+              "funds/pnl-settlement",
+              "funds/transaction-builder",
+              "funds/ledger-and-reconciliation"
+            ]
+          },
+          {
+            "group": "Build a DEX",
+            "pages": [
+              "builders/overview",
+              "builders/project-setup",
+              "builders/onboard-users",
+              "builders/configure-fees",
+              "builders/revenue-and-payouts",
+              "builders/analytics-and-webhooks"
+            ]
+          },
+          {
+            "group": "Operations",
+            "pages": [
+              "operations/system-status",
+              "operations/error-codes",
+              "operations/rate-limits",
+              "operations/go-live"
+            ]
+          },
+          {
+            "group": "Resources",
+            "pages": [
+              "resources/environments",
+              "resources/sdk-and-tools",
+              "resources/changelog"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Trading Reference",
+        "openapi": "openapi/trading-v1.yaml"
+      },
+      {
+        "tab": "Builder Reference",
+        "openapi": "openapi/builder-preview.yaml"
+      }
     ]
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "website": "https://www.dexbuilder.com/"
     }
   }
 }

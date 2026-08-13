@@ -1,0 +1,28 @@
+---
+title: "Go-live guide"
+description: "Move a tested Sandbox integration into production safely."
+---
+
+## Production activation
+
+1. Complete security and architecture review.
+2. Confirm production chains, assets, contract addresses, and signing domains.
+3. Create new production credentials with least privilege.
+4. Configure production webhook endpoints and verify signatures.
+5. Confirm fee policy, user disclosure, revenue recipient, and payout schedule.
+6. Execute the full flow with a controlled small amount.
+7. Enable monitoring and on-call escalation before opening access.
+
+## Required monitoring
+
+- API availability, latency, and error rate;
+- WebSocket connection, sequence gaps, and event lag;
+- order rejection and reconciliation breaks;
+- margin and liquidation anomalies;
+- deposit, withdrawal, and settlement duration;
+- webhook delivery failure;
+- Builder revenue and payout discrepancies.
+
+## Launch evidence
+
+Retain the identifiers and screenshots or logs for the first production registration, deposit, fill, fee, settlement, withdrawal, revenue entry, and payout. Remove secrets and full signatures from retained evidence.
