@@ -24,4 +24,14 @@
 - Confirmed Aden-compatible Trading API: /openapi/trading-v1.yaml
 - Proposed Builder API: /openapi/builder-preview.yaml
 
+## 中文文档
+
+- 文档首页：/zh/index
+- 选择接入路径：/zh/getting-started/choose-a-path
+- 交易 API 快速开始：/zh/getting-started/trader-quickstart
+- Builder 快速开始：/zh/getting-started/builder-quickstart
+- API 覆盖范围与发布状态：/zh/resources/api-coverage
+- 中文交易 API：/openapi/zh/trading-v1.yaml
+- 中文 Builder API：/openapi/zh/builder-preview.yaml
+
 Builder and Funds endpoints marked Preview must not be represented as production-available until DexBuilder publishes a base URL and release note.

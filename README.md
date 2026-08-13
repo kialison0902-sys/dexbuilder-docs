@@ -1,6 +1,8 @@
 # DexBuilder Developer Docs
 
-This directory is a deployable Mintlify documentation project for DexBuilder's public developer documentation.
+This directory is a deployable bilingual Mintlify documentation project for DexBuilder's public developer documentation.
+
+English is the default language. Simplified Chinese pages live under `zh/` with one-to-one navigation parity. Localized OpenAPI references live under `openapi/zh/`.
 
 ## Audiences
 
@@ -9,8 +11,8 @@ This directory is a deployable Mintlify documentation project for DexBuilder's p
 
 ## Content status
 
-- `openapi/trading-v1.yaml` documents the currently confirmed Aden-compatible perpetual REST surface.
-- `openapi/builder-preview.yaml` is a proposed public Builder contract and is clearly marked Preview.
+- `openapi/trading-v1.yaml` and `openapi/zh/trading-v1.yaml` document the currently confirmed Aden-compatible perpetual REST surface.
+- `openapi/builder-preview.yaml` and `openapi/zh/builder-preview.yaml` are the English and Chinese versions of a proposed public Builder contract and are clearly marked Preview.
 - All production URLs, signing fields, schemas, limits, and state machines must be checked against the implementation before removing a Preview label.
 
 ## Preview locally

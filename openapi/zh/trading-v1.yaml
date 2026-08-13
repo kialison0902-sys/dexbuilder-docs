@@ -1,0 +1,1100 @@
+openapi: 3.1.0
+info:
+  title: DexBuilder 交易 API
+  version: 1.0.0
+  description: |
+    与 Aden 兼容的永续合约市场、账户、仓位与订单接口。
+
+    这些操作已根据 Aden 公共 API v1.0.0 文档确认。Aden 是构建在
+    DexBuilder 上的运营商。发布新的运营商接入前，请确认 DexBuilder
+    生产网关与品牌政策。
+  contact:
+    email: contact@dexbuilder.com
+servers:
+  - url: https://api.aden.io/api/v1
+    description: 已确认的 Aden 生产网关
+tags:
+  - name: 市场
+    description: 公共永续合约市场数据。
+  - name: 账户
+    description: 私有账户与账户账本数据。
+  - name: 仓位
+    description: 仓位、杠杆、保证金模式与风险配置。
+  - name: 订单
+    description: 下单、查询、改单与撤单。
+  - name: 历史
+    description: 用户成交、平仓、强平与 ADL 历史。
+security: []
+paths:
+  /dex_futures/{settle}/contracts:
+    get:
+      tags: [市场]
+      operationId: listPerpetualContracts
+      summary: 查询永续合约列表
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+      responses:
+        '200':
+          description: 永续合约列表。
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contract'
+  /dex_futures/{settle}/contracts/{contract}:
+    get:
+      tags: [市场]
+      operationId: getPerpetualContract
+      summary: 查询单个永续合约
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/ContractPath'
+      responses:
+        '200':
+          description: 合约元数据。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contract'
+  /dex_futures/{settle}/order_book:
+    get:
+      tags: [市场]
+      operationId: getOrderBook
+      summary: 查询订单簿
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/ContractQuery'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: 订单簿快照。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderBook'
+  /dex_futures/{settle}/trades:
+    get:
+      tags: [市场]
+      operationId: listMarketTrades
+      summary: 查询最近市场成交
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/ContractQuery'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/From'
+        - $ref: '#/components/parameters/To'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /dex_futures/{settle}/candlesticks:
+    get:
+      tags: [市场]
+      operationId: listCandlesticks
+      summary: 查询 K 线
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/ContractQuery'
+        - name: interval
+          in: query
+          required: true
+          schema: { type: string }
+        - $ref: '#/components/parameters/From'
+        - $ref: '#/components/parameters/To'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /dex_futures/{settle}/premium_index:
+    get:
+      tags: [市场]
+      operationId: listPremiumIndexCandlesticks
+      summary: 查询溢价指数 K 线
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/ContractQuery'
+        - name: interval
+          in: query
+          required: true
+          schema: { type: string }
+        - $ref: '#/components/parameters/From'
+        - $ref: '#/components/parameters/To'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /dex_futures/{settle}/tickers:
+    get:
+      tags: [市场]
+      operationId: listPerpetualTickers
+      summary: 查询永续合约行情
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - name: contract
+          in: query
+          required: false
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /dex_futures/{settle}/funding_rate:
+    get:
+      tags: [市场]
+      operationId: listHistoricalFundingRates
+      summary: 查询历史市场资金费率
+      description: Returns market rates, not account-specific funding payments.
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/ContractQuery'
+        - $ref: '#/components/parameters/From'
+        - $ref: '#/components/parameters/To'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /dex_futures/{settle}/insurance:
+    get:
+      tags: [市场]
+      operationId: listInsuranceFundHistory
+      summary: 查询保险基金历史
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/From'
+        - $ref: '#/components/parameters/To'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /dex_futures/{settle}/contract_stats:
+    get:
+      tags: [市场]
+      operationId: getPerpetualStatistics
+      summary: 查询永续合约统计
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - name: contract
+          in: query
+          required: false
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/index_constituents/{index}:
+    get:
+      tags: [市场]
+      operationId: getIndexConstituents
+      summary: 查询指数成分
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - name: index
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /dex_futures/{settle}/liq_orders:
+    get:
+      tags: [市场]
+      operationId: listMarketLiquidationOrders
+      summary: 查询市场强平订单
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - name: contract
+          in: query
+          required: false
+          schema: { type: string }
+        - $ref: '#/components/parameters/From'
+        - $ref: '#/components/parameters/To'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /dex_futures/{settle}/risk_limit_tiers:
+    get:
+      tags: [市场]
+      operationId: listRiskLimitTiers
+      summary: 查询风险限额档位
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - name: contract
+          in: query
+          required: false
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /dex_futures/{settle}/risk_limit_table:
+    get:
+      tags: [市场]
+      operationId: getRiskLimitTable
+      summary: 查询风险限额表
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - name: table_id
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/accounts:
+    get:
+      tags: [账户]
+      operationId: getPerpetualAccount
+      summary: 查询永续合约账户
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+      responses:
+        '200':
+          description: 账户状态。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+  /dex_futures/{settle}/account_book:
+    get:
+      tags: [账户]
+      operationId: listAccountChanges
+      summary: 查询账户变动
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/From'
+        - $ref: '#/components/parameters/To'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /dex_futures/{settle}/fee:
+    get:
+      tags: [账户]
+      operationId: getEffectiveTradingFee
+      summary: 查询用户永续合约实际费率
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/positions:
+    get:
+      tags: [仓位]
+      operationId: listPositions
+      summary: 查询仓位列表
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+      responses:
+        '200':
+          description: User positions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Position'
+  /dex_futures/{settle}/positions/{contract}:
+    get:
+      tags: [仓位]
+      operationId: getPosition
+      summary: 查询单个仓位
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/ContractPath'
+      responses:
+        '200':
+          description: Position.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Position'
+  /dex_futures/{settle}/positions/{contract}/margin:
+    post:
+      tags: [仓位]
+      operationId: updatePositionMargin
+      summary: 增加或减少仓位保证金
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/ContractPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [change]
+              properties:
+                change:
+                  type: string
+                  description: Signed margin change in settlement asset units.
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/positions/{contract}/leverage:
+    post:
+      tags: [仓位]
+      operationId: updatePositionLeverage
+      summary: 更新仓位杠杆
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/ContractPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [leverage]
+              properties:
+                leverage: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/positions/{contract}/risk_limit:
+    post:
+      tags: [仓位]
+      operationId: updatePositionRiskLimit
+      summary: 更新仓位风险限额
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/ContractPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [risk_limit]
+              properties:
+                risk_limit: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/positions/cross_mode:
+    post:
+      tags: [仓位]
+      operationId: updatePositionMarginMode
+      summary: 切换全仓或逐仓模式
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/dual_mode:
+    post:
+      tags: [仓位]
+      operationId: setPositionMode
+      summary: 设置单向或双向持仓模式
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/dual_comp/positions/{contract}:
+    get:
+      tags: [仓位]
+      operationId: getHedgeModePosition
+      summary: 查询双向持仓仓位
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/ContractPath'
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/dual_comp/positions/{contract}/margin:
+    post:
+      tags: [仓位]
+      operationId: updateHedgeModePositionMargin
+      summary: 更新双向持仓保证金
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/ContractPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/dual_comp/positions/{contract}/leverage:
+    post:
+      tags: [仓位]
+      operationId: updateHedgeModePositionLeverage
+      summary: 更新双向持仓杠杆
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/ContractPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/dual_comp/positions/{contract}/risk_limit:
+    post:
+      tags: [仓位]
+      operationId: updateHedgeModePositionRiskLimit
+      summary: 更新双向持仓风险限额
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/ContractPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/dual_comp/positions/cross_mode:
+    post:
+      tags: [仓位]
+      operationId: updateHedgeModeMarginMode
+      summary: 切换双向持仓全仓或逐仓模式
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/orders:
+    get:
+      tags: [订单]
+      operationId: listOrders
+      summary: 查询订单列表
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - name: contract
+          in: query
+          required: false
+          schema: { type: string }
+        - name: status
+          in: query
+          required: false
+          schema: { type: string }
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+      responses:
+        '200':
+          description: Orders.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+    post:
+      tags: [订单]
+      operationId: createOrder
+      summary: 提交永续合约订单
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrderRequest'
+            examples:
+              limit:
+                value:
+                  contract: BTC_USDT
+                  size: 0.001
+                  price: '60000'
+                  tif: gtc
+                  reduce_only: false
+      responses:
+        '201':
+          description: Accepted order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+    delete:
+      tags: [订单]
+      operationId: cancelOpenOrders
+      summary: 撤销挂单
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - name: contract
+          in: query
+          required: false
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/orders/{order_id}:
+    get:
+      tags: [订单]
+      operationId: getOrder
+      summary: 查询订单
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/OrderId'
+      responses:
+        '200':
+          description: Order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+    put:
+      tags: [订单]
+      operationId: amendOrder
+      summary: 修改订单
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/OrderId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Amended order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+    delete:
+      tags: [订单]
+      operationId: cancelOrder
+      summary: 撤销订单
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/OrderId'
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/orders_timerange:
+    get:
+      tags: [订单]
+      operationId: listOrdersByTimeRange
+      summary: 按时间范围查询订单
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/From'
+        - $ref: '#/components/parameters/To'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /dex_futures/{settle}/batch_orders:
+    post:
+      tags: [订单]
+      operationId: createBatchOrders
+      summary: 批量提交永续合约订单
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CreateOrderRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /dex_futures/{settle}/bbo_orders:
+    post:
+      tags: [订单]
+      operationId: createBboOrder
+      summary: 按 BBO 档位下单
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/batch_amend_orders:
+    post:
+      tags: [订单]
+      operationId: amendBatchOrders
+      summary: 批量修改订单
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /dex_futures/{settle}/batch_cancel_orders:
+    post:
+      tags: [订单]
+      operationId: cancelBatchOrders
+      summary: 按 ID 批量撤单
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [order_ids]
+              properties:
+                order_ids:
+                  type: array
+                  items: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/countdown_cancel_all:
+    post:
+      tags: [订单]
+      operationId: setCountdownCancel
+      summary: 配置倒计时全撤
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /dex_futures/{settle}/my_trades:
+    get:
+      tags: [历史]
+      operationId: listUserTrades
+      summary: 查询用户成交
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - name: contract
+          in: query
+          required: false
+          schema: { type: string }
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /dex_futures/{settle}/my_trades_timerange:
+    get:
+      tags: [历史]
+      operationId: listUserTradesByTimeRange
+      summary: 按时间范围查询用户成交
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/From'
+        - $ref: '#/components/parameters/To'
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /dex_futures/{settle}/position_close:
+    get:
+      tags: [历史]
+      operationId: listPositionCloseHistory
+      summary: 查询平仓历史
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/From'
+        - $ref: '#/components/parameters/To'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /dex_futures/{settle}/liquidates:
+    get:
+      tags: [历史]
+      operationId: listUserLiquidations
+      summary: 查询用户强平历史
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/From'
+        - $ref: '#/components/parameters/To'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /dex_futures/{settle}/auto_deleverages:
+    get:
+      tags: [历史]
+      operationId: listAutoDeleveragingHistory
+      summary: 查询 ADL 历史
+      security:
+        - ApiKey: []
+          Timestamp: []
+          Signature: []
+      parameters:
+        - $ref: '#/components/parameters/Settle'
+        - $ref: '#/components/parameters/From'
+        - $ref: '#/components/parameters/To'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+components:
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      in: header
+      name: KEY
+      description: Perpetual API key.
+    Timestamp:
+      type: apiKey
+      in: header
+      name: Timestamp
+      description: Unix timestamp in seconds. The documented allowed clock difference is 60 seconds.
+    Signature:
+      type: apiKey
+      in: header
+      name: SIGN
+      description: Hex-encoded HMAC-SHA512 signature of the canonical request.
+  parameters:
+    Settle:
+      name: settle
+      in: path
+      required: true
+      schema:
+        type: string
+        enum: [usdt]
+    ContractPath:
+      name: contract
+      in: path
+      required: true
+      schema: { type: string, example: BTC_USDT }
+    ContractQuery:
+      name: contract
+      in: query
+      required: true
+      schema: { type: string, example: BTC_USDT }
+    OrderId:
+      name: order_id
+      in: path
+      required: true
+      schema: { type: string }
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema: { type: integer, minimum: 1 }
+    Offset:
+      name: offset
+      in: query
+      required: false
+      schema: { type: integer, minimum: 0, default: 0 }
+    From:
+      name: from
+      in: query
+      required: false
+      schema: { type: integer, format: int64, description: Unix time in seconds. }
+    To:
+      name: to
+      in: query
+      required: false
+      schema: { type: integer, format: int64, description: Unix time in seconds. }
+  responses:
+    ObjectResponse:
+      description: Successful response. The exact fields depend on the operation.
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    ListResponse:
+      description: Successful list response. Pagination may also be returned in headers.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              additionalProperties: true
+    ErrorResponse:
+      description: 请求失败。
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Decimal:
+      type: string
+      description: Decimal value serialized as a string to preserve precision.
+    Contract:
+      type: object
+      required: [name]
+      properties:
+        name: { type: string, example: BTC_USDT }
+        type: { type: string }
+        quanto_multiplier: { $ref: '#/components/schemas/Decimal' }
+        order_price_round: { $ref: '#/components/schemas/Decimal' }
+        mark_price_round: { $ref: '#/components/schemas/Decimal' }
+        order_size_min: { $ref: '#/components/schemas/Decimal' }
+        order_size_max: { $ref: '#/components/schemas/Decimal' }
+        order_size_round: { $ref: '#/components/schemas/Decimal' }
+        leverage_min: { $ref: '#/components/schemas/Decimal' }
+        leverage_max: { $ref: '#/components/schemas/Decimal' }
+        maintenance_rate: { $ref: '#/components/schemas/Decimal' }
+        mark_type: { type: string }
+        status: { type: string }
+      additionalProperties: true
+    OrderBookLevel:
+      type: object
+      properties:
+        p: { $ref: '#/components/schemas/Decimal' }
+        s: { $ref: '#/components/schemas/Decimal' }
+      additionalProperties: true
+    OrderBook:
+      type: object
+      properties:
+        id: { type: integer, format: int64 }
+        current: { type: number }
+        update: { type: number }
+        asks:
+          type: array
+          items: { $ref: '#/components/schemas/OrderBookLevel' }
+        bids:
+          type: array
+          items: { $ref: '#/components/schemas/OrderBookLevel' }
+      additionalProperties: true
+    Account:
+      type: object
+      properties:
+        total: { $ref: '#/components/schemas/Decimal' }
+        available: { $ref: '#/components/schemas/Decimal' }
+        position_margin: { $ref: '#/components/schemas/Decimal' }
+        order_margin: { $ref: '#/components/schemas/Decimal' }
+        unrealised_pnl: { $ref: '#/components/schemas/Decimal' }
+        currency: { type: string, example: USDT }
+      additionalProperties: true
+    Position:
+      type: object
+      properties:
+        contract: { type: string, example: BTC_USDT }
+        size: { $ref: '#/components/schemas/Decimal' }
+        leverage: { $ref: '#/components/schemas/Decimal' }
+        entry_price: { $ref: '#/components/schemas/Decimal' }
+        mark_price: { $ref: '#/components/schemas/Decimal' }
+        liquidation_price: { $ref: '#/components/schemas/Decimal' }
+        unrealised_pnl: { $ref: '#/components/schemas/Decimal' }
+        margin: { $ref: '#/components/schemas/Decimal' }
+        mode: { type: string }
+      additionalProperties: true
+    CreateOrderRequest:
+      type: object
+      required: [contract, size]
+      properties:
+        contract: { type: string, example: BTC_USDT }
+        size:
+          type: number
+          example: 0.001
+          description: Signed order size. Positive buys and negative sells in the documented Aden-compatible API.
+        price: { $ref: '#/components/schemas/Decimal' }
+        tif:
+          type: string
+          description: Time in force.
+        reduce_only: { type: boolean, default: false }
+        text:
+          type: string
+          description: Optional client-defined order text or ID when supported.
+        close: { type: boolean }
+        auto_size: { type: string }
+        iceberg: { type: number }
+      additionalProperties: true
+    Order:
+      type: object
+      properties:
+        id: { type: integer, format: int64 }
+        contract: { type: string }
+        size: { type: number }
+        left: { type: number }
+        price: { $ref: '#/components/schemas/Decimal' }
+        fill_price: { $ref: '#/components/schemas/Decimal' }
+        status: { type: string }
+        finish_as: { type: string }
+        tif: { type: string }
+        is_reduce_only: { type: boolean }
+        create_time: { type: number }
+        update_time: { type: number }
+      additionalProperties: true
+    Error:
+      type: object
+      properties:
+        label: { type: string }
+        message: { type: string }
+        detail: { type: string }
+      additionalProperties: true

@@ -1,0 +1,68 @@
+---
+title: "交易 API 快速开始"
+description: "读取市场并提交第一笔永续合约订单。"
+---
+
+本指南使用当前已文档化的 Aden 兼容永续合约接口。生产接入前，请确认 DexBuilder 正式网关。
+
+## 准备条件
+
+- 具有读写权限的 Perp API Key
+- 对应的 Secret Key
+- 已同步的系统时钟
+- 有抵押资产的测试账户
+
+## 1. 读取可交易市场
+
+```bash
+curl "https://api.aden.io/api/v1/dex_futures/usdt/contracts" \
+  -H "Accept: application/json"
+```
+
+公共行情接口无需认证。
+
+## 2. 构造签名请求
+
+私有请求需要 API Key、时间戳，以及根据请求方法、路径、查询参数、请求体哈希和时间戳生成的签名。
+
+发送私有请求前先阅读[请求签名](/zh/authentication/request-signing)。不要在浏览器或移动端安装包中暴露 Secret Key。
+
+## 3. 提交限价单
+
+```bash
+curl -X POST "https://api.aden.io/api/v1/dex_futures/usdt/orders" \
+  -H "Accept: application/json" \
+  -H "Content-Type: application/json" \
+  -H "KEY: ${DEXBUILDER_API_KEY}" \
+  -H "Timestamp: ${DEXBUILDER_TIMESTAMP}" \
+  -H "SIGN: ${DEXBUILDER_SIGNATURE}" \
+  --data '{
+    "contract": "BTC_USDT",
+    "size": 0.001,
+    "price": "60000",
+    "tif": "gtc",
+    "reduce_only": false
+  }'
+```
+
+<Warning>
+  示例数值仅用于说明。Aden 兼容结构使用带符号的 `size`（`size > 0` 为买入，`size < 0` 为卖出）。下单前必须使用合约元数据验证价格精度、数量步长、最小数量、杠杆与风险限额。
+</Warning>
+
+## 4. 确认结果
+
+订单被接受不等于已经成交。查询订单或消费私有执行流，直到订单进入终态。
+
+```bash
+curl "https://api.aden.io/api/v1/dex_futures/usdt/orders/${ORDER_ID}" \
+  -H "KEY: ${DEXBUILDER_API_KEY}" \
+  -H "Timestamp: ${DEXBUILDER_TIMESTAMP}" \
+  -H "SIGN: ${DEXBUILDER_SIGNATURE}"
+```
+
+## 后续步骤
+
+- [理解订单生命周期](/zh/concepts/order-lifecycle)
+- [管理仓位与保证金](/zh/trading/positions-and-margin)
+- [连接 WebSocket](/zh/trading/websocket)
+- [检查幂等与重试](/zh/authentication/idempotency)

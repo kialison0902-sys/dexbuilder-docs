@@ -1,0 +1,29 @@
+---
+title: "充值"
+description: "构造、提交并追踪抵押资产充值。"
+tag: "预览"
+---
+
+<Steps>
+  <Step title="查询支持信息">
+    查询支持的链、抵押资产、Token 地址、Vault 地址、最小金额和充值状态。
+  </Step>
+  <Step title="请求报价">
+    验证金额并获取预计网络费和确认要求。
+  </Step>
+  <Step title="构造交易">
+    通过 Transaction Builder 为已注册账户和 Builder 构造授权与充值调用。
+  </Step>
+  <Step title="请求钱包签名">
+    签名前展示链、资产、金额、目标合约与风险摘要。
+  </Step>
+  <Step title="提交并确认">
+    同时追踪链上最终性和内部账户入账。链上交易成功并不能单独证明交易余额已入账。
+  </Step>
+</Steps>
+
+## 建议状态
+
+`CREATED → AWAITING_SIGNATURE → SUBMITTED → PROCESSING → CONFIRMED`
+
+失败状态应区分 `REJECTED`、`FAILED_RETRYABLE` 与 `FAILED_FINAL`。

@@ -1,0 +1,27 @@
+---
+title: "提现"
+description: "对提现进行报价、授权、提交和追踪。"
+tag: "预览"
+---
+
+## 提现流程
+
+1. 读取可提现余额。
+2. 确认目标链与资产可用。
+3. 请求提现 Nonce 与报价。
+4. 构造域隔离的钱包消息。
+5. 要求用户确认接收方、资产、金额、费用与目标链。
+6. 使用 `Idempotency-Key` 提交签名请求。
+7. 追踪内部审核、源端结算、跨链消息与目标链执行。
+
+## 状态不是二元值
+
+跨链提现可能经历：
+
+`PENDING_RISK → APPROVED → SOURCE_PROCESSING → MESSAGE_IN_FLIGHT → DESTINATION_PROCESSING → CONFIRMED`
+
+提现延迟、拒绝或失败时必须返回机器可读的 `reason_code`。
+
+<Warning>
+  不要签署缺少 `builder_id`、`chain_id`、接收方、资产、金额、Nonce 或过期时间的提现载荷。
+</Warning>

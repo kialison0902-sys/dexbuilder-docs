@@ -1,0 +1,28 @@
+---
+title: "分析与 Webhook"
+description: "使用 Builder 范围内的数据与签名事件运营产品。"
+tag: "预览"
+---
+
+## Builder 分析
+
+Builder API 应只向已认证 Builder 返回其用户、活跃用户、交易量、Maker/Taker 构成、手续费、收入、持仓量、强平和市场表现。
+
+## 首批 Webhook 事件
+
+- `account.registered`
+- `deposit.confirmed`
+- `withdrawal.updated`
+- `settlement.updated`
+- `order.updated`
+- `trade.executed`
+- `position.liquidated`
+- `builder.revenue.accrued`
+- `builder.payout.completed`
+- `system.maintenance.updated`
+
+## 验证每个事件
+
+使用投递时间戳、事件 ID 和 HMAC 签名验证原始请求体。拒绝过期投递，按事件 ID 去重，并仅在持久化接收事件后返回成功响应。
+
+Webhook 投递日志应可查询，并支持显式重试。

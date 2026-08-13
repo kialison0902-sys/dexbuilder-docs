@@ -1,0 +1,28 @@
+---
+title: "Perpetuals, funding, and risk"
+description: "Understand margin, funding, liquidation, insurance, and ADL before integrating perpetuals."
+---
+
+Perpetual contracts do not expire. Their risk state changes continuously with price, leverage, collateral, funding, and open orders.
+
+## Prices have different jobs
+
+| Price | Primary use |
+|---|---|
+| Last price | Most recent trade and market display |
+| Index price | External reference price |
+| Mark price | Unrealized PnL, margin, and liquidation calculations |
+
+Always use the authoritative fields returned by the API. Do not substitute last price for mark or index price.
+
+## Funding
+
+The market funding rate is a market-level value. The user's funding payment is an account-ledger event calculated from the applicable position and settlement interval. Reconcile the two separately.
+
+## Liquidation and ADL
+
+When maintenance margin is no longer satisfied, some or all of a position may be liquidated. If the liquidation engine and insurance fund cannot absorb the loss, auto-deleveraging may reduce profitable opposing positions according to protocol rules.
+
+<Warning>
+  Show margin mode, leverage, liquidation estimate, mark price, and risk warnings before any position-risk change. API clients must treat returned position and ledger state as authoritative.
+</Warning>

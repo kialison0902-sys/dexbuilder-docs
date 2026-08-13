@@ -1,0 +1,33 @@
+---
+title: "权限与 Scope"
+description: "对 Trading Key 与 Builder Admin 凭证执行最小权限原则。"
+tag: "预览"
+---
+
+## Trading Key Scope
+
+- `account:read`
+- `orders:read`
+- `orders:write`
+- `positions:read`
+- `positions:write`
+- `funds:read`
+
+资产提现和结算提交仍应要求对应的钱包授权载荷。
+
+## Builder Admin Scope
+
+- `builder:read`
+- `builder:write`
+- `users:read`
+- `fees:read`
+- `fees:write`
+- `revenue:read`
+- `analytics:read`
+- `webhooks:write`
+- `markets:read`
+- `markets:write`
+
+<Note>
+  Builder API 处于预览阶段，最终生产 Scope 名称可能调整。
+</Note>

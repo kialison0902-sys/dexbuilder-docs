@@ -22,117 +22,243 @@
       "languages": ["curl", "javascript", "python"]
     }
   },
-  "navbar": {
-    "links": [
-      {
-        "label": "DexBuilder",
-        "href": "https://www.dexbuilder.com/"
-      },
-      {
-        "label": "Trading Demo",
-        "href": "https://demo.dexbuilder.com/en/perps"
-      }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Open Builder",
-      "href": "https://www.dexbuilder.com/en/builder"
-    }
-  },
   "contextual": {
     "options": ["copy", "view", "chatgpt"]
   },
   "navigation": {
-    "tabs": [
+    "languages": [
       {
-        "tab": "Documentation",
-        "groups": [
+        "language": "en",
+        "default": true,
+        "navbar": {
+          "links": [
+            {
+              "label": "DexBuilder",
+              "href": "https://www.dexbuilder.com/"
+            },
+            {
+              "label": "Trading Demo",
+              "href": "https://demo.dexbuilder.com/en/perps"
+            }
+          ],
+          "primary": {
+            "type": "button",
+            "label": "Open Builder",
+            "href": "https://www.dexbuilder.com/en/builder"
+          }
+        },
+        "tabs": [
           {
-            "group": "Get started",
-            "pages": [
-              "index",
-              "getting-started/choose-a-path",
-              "getting-started/trader-quickstart",
-              "getting-started/builder-quickstart",
-              "getting-started/integration-checklist"
+            "tab": "Documentation",
+            "groups": [
+              {
+                "group": "Get started",
+                "pages": [
+                  "index",
+                  "getting-started/choose-a-path",
+                  "getting-started/trader-quickstart",
+                  "getting-started/builder-quickstart",
+                  "getting-started/integration-checklist"
+                ]
+              },
+              {
+                "group": "Core concepts",
+                "pages": [
+                  "concepts/platform-overview",
+                  "concepts/accounts-and-tenancy",
+                  "concepts/order-lifecycle",
+                  "concepts/perpetuals-and-risk",
+                  "concepts/settlement-model",
+                  "concepts/fee-model"
+                ]
+              },
+              {
+                "group": "Accounts and security",
+                "pages": [
+                  "authentication/overview",
+                  "authentication/request-signing",
+                  "authentication/permissions",
+                  "authentication/idempotency"
+                ]
+              },
+              {
+                "group": "Trading integration",
+                "pages": [
+                  "trading/market-data",
+                  "trading/place-first-order",
+                  "trading/positions-and-margin",
+                  "trading/websocket"
+                ]
+              },
+              {
+                "group": "Funds and settlement",
+                "pages": [
+                  "funds/overview",
+                  "funds/deposits",
+                  "funds/withdrawals",
+                  "funds/internal-transfers",
+                  "funds/pnl-settlement",
+                  "funds/transaction-builder",
+                  "funds/ledger-and-reconciliation"
+                ]
+              },
+              {
+                "group": "Build a DEX",
+                "pages": [
+                  "builders/overview",
+                  "builders/project-setup",
+                  "builders/onboard-users",
+                  "builders/configure-fees",
+                  "builders/revenue-and-payouts",
+                  "builders/analytics-and-webhooks"
+                ]
+              },
+              {
+                "group": "Operations",
+                "pages": [
+                  "operations/system-status",
+                  "operations/error-codes",
+                  "operations/rate-limits",
+                  "operations/go-live"
+                ]
+              },
+              {
+                "group": "Resources",
+                "pages": [
+                  "resources/api-coverage",
+                  "resources/environments",
+                  "resources/sdk-and-tools",
+                  "resources/integration-faq",
+                  "resources/changelog"
+                ]
+              }
             ]
           },
           {
-            "group": "Core concepts",
-            "pages": [
-              "concepts/platform-overview",
-              "concepts/accounts-and-tenancy",
-              "concepts/order-lifecycle",
-              "concepts/settlement-model",
-              "concepts/fee-model"
-            ]
+            "tab": "Trading Reference",
+            "openapi": "openapi/trading-v1.yaml"
           },
           {
-            "group": "Accounts and security",
-            "pages": [
-              "authentication/overview",
-              "authentication/request-signing",
-              "authentication/permissions",
-              "authentication/idempotency"
-            ]
-          },
-          {
-            "group": "Trading integration",
-            "pages": [
-              "trading/market-data",
-              "trading/place-first-order",
-              "trading/positions-and-margin",
-              "trading/websocket"
-            ]
-          },
-          {
-            "group": "Funds and settlement",
-            "pages": [
-              "funds/overview",
-              "funds/deposits",
-              "funds/withdrawals",
-              "funds/pnl-settlement",
-              "funds/transaction-builder",
-              "funds/ledger-and-reconciliation"
-            ]
-          },
-          {
-            "group": "Build a DEX",
-            "pages": [
-              "builders/overview",
-              "builders/project-setup",
-              "builders/onboard-users",
-              "builders/configure-fees",
-              "builders/revenue-and-payouts",
-              "builders/analytics-and-webhooks"
-            ]
-          },
-          {
-            "group": "Operations",
-            "pages": [
-              "operations/system-status",
-              "operations/error-codes",
-              "operations/rate-limits",
-              "operations/go-live"
-            ]
-          },
-          {
-            "group": "Resources",
-            "pages": [
-              "resources/environments",
-              "resources/sdk-and-tools",
-              "resources/changelog"
-            ]
+            "tab": "Builder Reference",
+            "openapi": "openapi/builder-preview.yaml"
           }
         ]
       },
       {
-        "tab": "Trading Reference",
-        "openapi": "openapi/trading-v1.yaml"
-      },
-      {
-        "tab": "Builder Reference",
-        "openapi": "openapi/builder-preview.yaml"
+        "language": "zh",
+        "navbar": {
+          "links": [
+            {
+              "label": "DexBuilder 官网",
+              "href": "https://www.dexbuilder.com/"
+            },
+            {
+              "label": "交易演示",
+              "href": "https://demo.dexbuilder.com/en/perps"
+            }
+          ],
+          "primary": {
+            "type": "button",
+            "label": "打开 Builder",
+            "href": "https://www.dexbuilder.com/en/builder"
+          }
+        },
+        "tabs": [
+          {
+            "tab": "开发文档",
+            "groups": [
+              {
+                "group": "快速开始",
+                "pages": [
+                  "zh/index",
+                  "zh/getting-started/choose-a-path",
+                  "zh/getting-started/trader-quickstart",
+                  "zh/getting-started/builder-quickstart",
+                  "zh/getting-started/integration-checklist"
+                ]
+              },
+              {
+                "group": "核心概念",
+                "pages": [
+                  "zh/concepts/platform-overview",
+                  "zh/concepts/accounts-and-tenancy",
+                  "zh/concepts/order-lifecycle",
+                  "zh/concepts/perpetuals-and-risk",
+                  "zh/concepts/settlement-model",
+                  "zh/concepts/fee-model"
+                ]
+              },
+              {
+                "group": "账户与安全",
+                "pages": [
+                  "zh/authentication/overview",
+                  "zh/authentication/request-signing",
+                  "zh/authentication/permissions",
+                  "zh/authentication/idempotency"
+                ]
+              },
+              {
+                "group": "交易接入",
+                "pages": [
+                  "zh/trading/market-data",
+                  "zh/trading/place-first-order",
+                  "zh/trading/positions-and-margin",
+                  "zh/trading/websocket"
+                ]
+              },
+              {
+                "group": "资金与结算",
+                "pages": [
+                  "zh/funds/overview",
+                  "zh/funds/deposits",
+                  "zh/funds/withdrawals",
+                  "zh/funds/internal-transfers",
+                  "zh/funds/pnl-settlement",
+                  "zh/funds/transaction-builder",
+                  "zh/funds/ledger-and-reconciliation"
+                ]
+              },
+              {
+                "group": "构建 DEX",
+                "pages": [
+                  "zh/builders/overview",
+                  "zh/builders/project-setup",
+                  "zh/builders/onboard-users",
+                  "zh/builders/configure-fees",
+                  "zh/builders/revenue-and-payouts",
+                  "zh/builders/analytics-and-webhooks"
+                ]
+              },
+              {
+                "group": "运行与上线",
+                "pages": [
+                  "zh/operations/system-status",
+                  "zh/operations/error-codes",
+                  "zh/operations/rate-limits",
+                  "zh/operations/go-live"
+                ]
+              },
+              {
+                "group": "资源",
+                "pages": [
+                  "zh/resources/api-coverage",
+                  "zh/resources/environments",
+                  "zh/resources/sdk-and-tools",
+                  "zh/resources/integration-faq",
+                  "zh/resources/changelog"
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "交易 API",
+            "openapi": "openapi/zh/trading-v1.yaml"
+          },
+          {
+            "tab": "Builder API",
+            "openapi": "openapi/zh/builder-preview.yaml"
+          }
+        ]
       }
     ]
   },

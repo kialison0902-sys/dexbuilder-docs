@@ -1,0 +1,28 @@
+---
+title: "Integration FAQ"
+description: "Answers to common technical and release-status questions from Builder teams."
+---
+
+## Is Aden the DexBuilder API?
+
+Aden is an operator built on DexBuilder. Its confirmed perpetual REST interface is the current compatibility reference for trading. Project-level onboarding, funds, settlement, fees, revenue, and operations belong to the DexBuilder Builder interface.
+
+## Can we call the Builder endpoints now?
+
+Not yet. Endpoints marked **Preview** define the target public contract. Wait for a production or Sandbox base URL and a release note before sending requests.
+
+## Which fee endpoint should we use?
+
+Use the Trading API to read the authenticated user's current perpetual trading rate. Use Builder fee resources for protocol base fees, Builder defaults, user overrides, action quotes, revenue, and payouts.
+
+## Does closing a position settle PnL?
+
+Closing realizes PnL. PnL settlement is a separate process in the proposed account model. Follow the settlement record and ledger rather than inferring settlement from position state.
+
+## May a frontend hold an Admin Key?
+
+No. Builder Admin credentials are server-side secrets. Frontends may use public data, wallet signatures, and narrowly scoped expiring Trading Keys.
+
+## How do we obtain production access?
+
+Complete the [Integration checklist](/getting-started/integration-checklist), test the end-to-end flow in Sandbox when available, and complete the [Go-live guide](/operations/go-live).

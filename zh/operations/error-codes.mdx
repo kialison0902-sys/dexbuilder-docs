@@ -1,0 +1,40 @@
+---
+title: "错误处理"
+description: "处理 HTTP 状态、机器可读错误码与重试指引。"
+---
+
+## 错误结构
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": "INSUFFICIENT_MARGIN",
+    "message": "Available margin is insufficient for this order.",
+    "details": {
+      "required": "125.50",
+      "available": "100.00",
+      "asset": "USDT"
+    },
+    "retryable": false
+  },
+  "request_id": "req_01J...",
+  "timestamp": 1786596000000
+}
+```
+
+## HTTP 分类
+
+| 状态码 | 含义 |
+|---:|---|
+| 400 | 无效请求或业务校验失败 |
+| 401 | 缺少认证或认证无效 |
+| 403 | 已认证但无权限 |
+| 404 | 调用方权限范围内未找到资源 |
+| 409 | 冲突、重复、Nonce 过期或幂等不一致 |
+| 422 | 结构合法但无法应用到当前状态 |
+| 429 | 触发限流 |
+| 500 | 内部故障 |
+| 503 | 暂时不可用或维护中 |
+
+联系支持时应记录 `request_id`，不要发送 Secret Key。

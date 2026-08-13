@@ -1,0 +1,42 @@
+---
+title: "Transaction Builder"
+description: "在不接触用户私钥的情况下构造钱包可签名交易。"
+tag: "预览"
+---
+
+Transaction Builder 返回用户授权操作所需的准确 EVM Typed Data、Calldata 或 Solana Message。
+
+它不会替用户签名，也永远不接收私钥。
+
+## 响应约定
+
+```json
+{
+  "request_id": "req_01J...",
+  "chain_type": "EVM",
+  "chain_id": 42161,
+  "from": "0xUSER",
+  "to": "0xVERIFIER_OR_VAULT",
+  "typed_data": {},
+  "calldata": "0x...",
+  "value": "0",
+  "gas_estimate": "145000",
+  "fee_quote": {
+    "asset": "ETH",
+    "amount": "0.00021"
+  },
+  "human_readable_summary": "在 Arbitrum 提现 100 USDC 到 0xUSER",
+  "expires_at": 1786596000000,
+  "request_hash": "0x..."
+}
+```
+
+## 支持的构造类型
+
+- 账户注册；
+- 充值；
+- 提现；
+- PnL 结算；
+- 内部划转。
+
+提交时，后端必须验证已签名载荷与原始 `request_hash` 一致且尚未过期。

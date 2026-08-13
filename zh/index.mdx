@@ -1,0 +1,52 @@
+---
+title: "DexBuilder 开发者文档"
+description: "面向交易用户、应用开发者与品牌 DEX 项目方的 API 和接入指南。"
+icon: "blocks"
+---
+
+DexBuilder 为交易应用、钱包、经纪商、交易所及品牌 DEX 提供永续合约交易基础设施。
+
+你可以使用本套文档接入行情与交易、注册用户、管理资金、结算账户、配置手续费并运营自己的 DEX。
+
+<Warning>
+  标记为 **预览** 的 Builder、资金和结算接口描述的是目标公共接口。在 DexBuilder 公布生产环境地址并移除“预览”标记之前，请勿用于生产环境。
+</Warning>
+
+<Columns cols={2}>
+  <Card title="通过 API 进行交易" icon="chart-candlestick" href="/zh/getting-started/trader-quickstart">
+    接入行情、订单、仓位和账户历史，服务个人用户或交易应用。
+  </Card>
+  <Card title="构建自己的 DEX" icon="blocks" href="/zh/getting-started/builder-quickstart">
+    创建品牌交易产品，注册用户，配置手续费并核对项目收入。
+  </Card>
+</Columns>
+
+## 平台接口面
+
+| 接口面 | 适用对象 | 能力 |
+|---|---|---|
+| 交易 API | 交易用户与应用开发者 | 市场、订单、仓位、保证金、成交及私有账户数据 |
+| 资金与结算 API | 钱包与后端开发者 | 充值、提现、PnL 结算、交易构造及账本历史 |
+| Builder API | 项目方 | 项目、用户归属、手续费配置、收入、分析及 Webhook |
+| WebSocket API | 前端与交易系统 | 公共行情流和私有执行事件 |
+
+## 从这里开始
+
+<Steps>
+  <Step title="选择接入路径">
+    确认是通过现有运营商进行交易，还是为自己的用户构建 DEX。
+  </Step>
+  <Step title="在 Sandbox 开发">
+    使用测试凭证和测试资产，并严格隔离 Sandbox 与生产环境凭证。
+  </Step>
+  <Step title="完成端到端流程">
+    验证注册、入金、交易、结算、提现、错误处理和账务核对。
+  </Step>
+  <Step title="通过上线检查">
+    确认安全、维护处理、监控、支持流程和生产限流。
+  </Step>
+</Steps>
+
+<Card title="选择接入方式" icon="route" href="/zh/getting-started/choose-a-path">
+  根据产品形态与技术栈选择最短接入路径。
+</Card>

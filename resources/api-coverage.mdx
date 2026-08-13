@@ -1,0 +1,30 @@
+---
+title: "API coverage and release status"
+description: "See what is confirmed, in Preview, or still planned for an Orderly-grade Builder integration."
+---
+
+DexBuilder separates confirmed operator-compatible trading endpoints from the proposed project-level Builder contract.
+
+| Capability | Documentation status | Production status |
+|---|---|---|
+| Markets, orders, positions, account changes, fills, effective trading fee | Trading Reference | Confirmed on the Aden production gateway |
+| Registration, chain discovery, deposits, withdrawals, PnL settlement, transaction construction | Builder Reference | Preview; production URL and contracts pending |
+| Builder projects, users, default/user fees, revenue, payouts, analytics, webhooks | Builder Reference | Preview; production activation pending |
+| Public and private WebSocket protocol | Integration guide | Planned; final URL, topics, and recovery contract pending |
+| Internal transfers, subaccounts, delegated signers, algorithmic orders | Architecture plan | Planned; endpoint contract pending |
+| Referrals, campaigns, points, custom market/oracle administration | Product roadmap | Planned; commercial and technical contract pending |
+| TypeScript SDK, Python connector, UI components, conformance vectors | SDK plan | Planned |
+
+## Production rule
+
+An interface becomes production-supported only when all of the following are published:
+
+- an environment and base URL;
+- final authentication and signing rules;
+- request and response schemas;
+- limits, error codes, and state machines;
+- a dated release note removing the Preview or Planned label.
+
+<Note>
+  Preview pages are an integration contract for review and implementation planning. They are not evidence that an endpoint is active.
+</Note>

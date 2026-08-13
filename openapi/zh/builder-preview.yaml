@@ -1,0 +1,1197 @@
+openapi: 3.1.0
+info:
+  title: DexBuilder Builder API（预览）
+  version: 0.1.0-preview
+  description: |
+    面向在 DexBuilder 上构建 DEX 项目的 API 预览契约。
+
+    本规范定义 Builder 项目、用户注册、资金、结算、手续费、收入、分析与
+    Webhook 的目标公共接口，不表示这些接口已经在生产环境开放。
+
+    不要向占位服务器发送请求。生产可用性必须有发布说明、最终签名规范和
+    已公布的环境地址。
+  contact:
+    email: contact@dexbuilder.com
+servers:
+  - url: https://sandbox-api.dexbuilder.example
+    description: 仅为占位地址 — 不应发送任何请求
+tags:
+  - name: 服务发现
+    description: 公共链、资产、合约与系统状态。
+  - name: 账户
+    description: 钱包注册与账户查询。
+  - name: 交易构造
+    description: 构造钱包可签名交易或类型化消息。
+  - name: 充值
+    description: 充值报价、提交与状态。
+  - name: 提现
+    description: 提现 Nonce、报价、提交与状态。
+  - name: 结算
+    description: PnL 结算与账户账本。
+  - name: 项目
+    description: Builder 项目与凭证管理。
+  - name: Builder 用户
+    description: Builder 范围内的用户数据。
+  - name: 手续费
+    description: 协议、实际与 Builder 配置手续费。
+  - name: 收入
+    description: Builder 收入账本与打款。
+  - name: 分析
+    description: Builder 范围内的产品分析。
+  - name: Webhook
+    description: 签名 Webhook 地址与投递历史。
+security: []
+paths:
+  /v1/public/chains:
+    get:
+      tags: [服务发现]
+      operationId: listSupportedChains
+      summary: 查询支持的链
+      responses:
+        '200':
+          description: 支持的链与服务状态。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChainListResponse'
+  /v1/public/assets:
+    get:
+      tags: [服务发现]
+      operationId: listSupportedAssets
+      summary: 查询支持的抵押资产
+      parameters:
+        - name: chain_id
+          in: query
+          required: false
+          schema: { type: integer, format: int64 }
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /v1/public/contracts:
+    get:
+      tags: [服务发现]
+      operationId: listContractAddresses
+      summary: 查询官方合约地址
+      parameters:
+        - name: chain_id
+          in: query
+          required: false
+          schema: { type: integer, format: int64 }
+        - name: contract_type
+          in: query
+          required: false
+          schema: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /v1/public/system/status:
+    get:
+      tags: [服务发现]
+      operationId: getSystemStatus
+      summary: 按服务查询系统状态
+      responses:
+        '200':
+          description: 系统状态。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemStatusResponse'
+  /v1/accounts/registration-nonce:
+    get:
+      tags: [账户]
+      operationId: getRegistrationNonce
+      summary: 获取账户注册 Nonce
+      parameters:
+        - name: builder_id
+          in: query
+          required: true
+          schema: { type: string }
+        - name: wallet_address
+          in: query
+          required: true
+          schema: { type: string }
+        - name: chain_id
+          in: query
+          required: true
+          schema: { type: integer, format: int64 }
+      responses:
+        '200':
+          description: 注册 Nonce。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NonceResponse'
+  /v1/accounts:
+    post:
+      tags: [账户]
+      operationId: registerAccount
+      summary: 在 Builder 下注册钱包账户
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignedWalletAction'
+      responses:
+        '201':
+          description: 已注册账户。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountResponse'
+        '409':
+          $ref: '#/components/responses/ErrorResponse'
+  /v1/accounts/by-wallet/{wallet_address}:
+    get:
+      tags: [账户]
+      operationId: getAccountByWallet
+      summary: 查询 Builder 下的钱包账户
+      parameters:
+        - name: wallet_address
+          in: path
+          required: true
+          schema: { type: string }
+        - name: builder_id
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: 账户。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountResponse'
+  /v1/transactions/build/account-registration:
+    post:
+      tags: [交易构造]
+      operationId: buildAccountRegistration
+      summary: 构造账户注册消息
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [builder_id, wallet_address, chain_id, nonce]
+              properties:
+                builder_id: { type: string }
+                wallet_address: { type: string }
+                chain_id: { type: integer, format: int64 }
+                nonce: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/TransactionBuildResponse'
+  /v1/transactions/build/deposit:
+    post:
+      tags: [交易构造]
+      operationId: buildDeposit
+      summary: 构造充值交易
+      security:
+        - TradingKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssetActionRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/TransactionBuildResponse'
+  /v1/transactions/build/withdrawal:
+    post:
+      tags: [交易构造]
+      operationId: buildWithdrawal
+      summary: 构造提现消息
+      security:
+        - TradingKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/AssetActionRequest'
+                - type: object
+                  required: [receiver, nonce]
+                  properties:
+                    receiver: { type: string }
+                    nonce: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/TransactionBuildResponse'
+  /v1/transactions/build/pnl-settlement:
+    post:
+      tags: [交易构造]
+      operationId: buildPnlSettlement
+      summary: 构造 PnL 结算消息
+      security:
+        - TradingKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [account_id, builder_id, chain_id, nonce]
+              properties:
+                account_id: { type: string }
+                builder_id: { type: string }
+                chain_id: { type: integer, format: int64 }
+                nonce: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/TransactionBuildResponse'
+  /v1/deposits/quote:
+    post:
+      tags: [充值]
+      operationId: quoteDeposit
+      summary: 获取充值报价
+      security:
+        - TradingKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssetActionRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/FeeQuoteResponse'
+  /v1/deposits:
+    get:
+      tags: [充值]
+      operationId: listDeposits
+      summary: 查询充值列表
+      security:
+        - TradingKey: []
+      parameters:
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+    post:
+      tags: [充值]
+      operationId: submitDeposit
+      summary: 提交充值交易
+      security:
+        - TradingKey: []
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmittedWalletAction'
+      responses:
+        '202':
+          description: 充值请求已进入处理。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionStatusResponse'
+  /v1/deposits/{deposit_id}:
+    get:
+      tags: [充值]
+      operationId: getDeposit
+      summary: 查询充值状态
+      security:
+        - TradingKey: []
+      parameters:
+        - name: deposit_id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: 充值状态。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionStatusResponse'
+  /v1/withdrawals/nonce:
+    get:
+      tags: [提现]
+      operationId: getWithdrawalNonce
+      summary: 获取提现 Nonce
+      security:
+        - TradingKey: []
+      responses:
+        '200':
+          description: 提现 Nonce。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NonceResponse'
+  /v1/withdrawals/quote:
+    post:
+      tags: [提现]
+      operationId: quoteWithdrawal
+      summary: 获取提现报价
+      security:
+        - TradingKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/AssetActionRequest'
+                - type: object
+                  required: [receiver]
+                  properties:
+                    receiver: { type: string }
+      responses:
+        '200':
+          $ref: '#/components/responses/FeeQuoteResponse'
+  /v1/withdrawals:
+    get:
+      tags: [提现]
+      operationId: listWithdrawals
+      summary: 查询提现列表
+      security:
+        - TradingKey: []
+      parameters:
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+    post:
+      tags: [提现]
+      operationId: submitWithdrawal
+      summary: 提交已签名提现
+      security:
+        - TradingKey: []
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignedWalletAction'
+      responses:
+        '202':
+          description: 提现请求已进入处理。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionStatusResponse'
+  /v1/withdrawals/{withdrawal_id}:
+    get:
+      tags: [提现]
+      operationId: getWithdrawal
+      summary: 查询提现状态
+      security:
+        - TradingKey: []
+      parameters:
+        - name: withdrawal_id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: 提现状态。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionStatusResponse'
+  /v1/settlements/pnl/nonce:
+    get:
+      tags: [结算]
+      operationId: getPnlSettlementNonce
+      summary: 获取 PnL 结算 Nonce
+      security:
+        - TradingKey: []
+      responses:
+        '200':
+          description: 结算 Nonce。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NonceResponse'
+  /v1/settlements/pnl/quote:
+    post:
+      tags: [结算]
+      operationId: quotePnlSettlement
+      summary: 获取 PnL 结算报价
+      security:
+        - TradingKey: []
+      responses:
+        '200':
+          $ref: '#/components/responses/FeeQuoteResponse'
+  /v1/settlements/pnl:
+    post:
+      tags: [结算]
+      operationId: submitPnlSettlement
+      summary: 提交已签名 PnL 结算
+      security:
+        - TradingKey: []
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignedWalletAction'
+      responses:
+        '202':
+          description: 结算请求已进入处理。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionStatusResponse'
+  /v1/settlements/{settlement_id}:
+    get:
+      tags: [结算]
+      operationId: getSettlement
+      summary: 查询结算状态
+      security:
+        - TradingKey: []
+      parameters:
+        - name: settlement_id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: 结算状态。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActionStatusResponse'
+  /v1/ledger/entries:
+    get:
+      tags: [结算]
+      operationId: listAccountLedgerEntries
+      summary: 查询账户账本条目
+      security:
+        - TradingKey: []
+      parameters:
+        - name: entry_type
+          in: query
+          required: false
+          schema: { type: string }
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /v1/funding/payments:
+    get:
+      tags: [结算]
+      operationId: listFundingPayments
+      summary: 查询账户实际资金费支付
+      security:
+        - TradingKey: []
+      parameters:
+        - name: contract
+          in: query
+          required: false
+          schema: { type: string }
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /builder/v1/projects:
+    get:
+      tags: [项目]
+      operationId: listBuilderProjects
+      summary: 查询 Builder 项目
+      security:
+        - BuilderAdmin: []
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+    post:
+      tags: [项目]
+      operationId: createBuilderProject
+      summary: 创建 Builder 项目
+      security:
+        - BuilderAdmin: []
+      parameters:
+        - $ref: '#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, products]
+              properties:
+                name: { type: string }
+                products:
+                  type: array
+                  items: { type: string, enum: [perpetuals, spot, event_contracts, prediction_markets] }
+                launch_path: { type: string, enum: [white_label, ui_sdk, direct_api] }
+      responses:
+        '201':
+          description: Created project.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectResponse'
+  /builder/v1/projects/{project_id}:
+    get:
+      tags: [项目]
+      operationId: getBuilderProject
+      summary: 查询 Builder 项目
+      security:
+        - BuilderAdmin: []
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+      responses:
+        '200':
+          description: Builder project.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectResponse'
+    patch:
+      tags: [项目]
+      operationId: updateBuilderProject
+      summary: 更新 Builder 项目
+      security:
+        - BuilderAdmin: []
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: Updated project.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectResponse'
+  /builder/v1/api-keys:
+    post:
+      tags: [项目]
+      operationId: createBuilderAdminKey
+      summary: 创建 Builder Admin Key
+      description: The secret is returned only once and must remain server-side.
+      security:
+        - BuilderAdmin: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, scopes, expires_at]
+              properties:
+                name: { type: string }
+                scopes:
+                  type: array
+                  items: { type: string }
+                expires_at: { type: integer, format: int64 }
+                ip_allowlist:
+                  type: array
+                  items: { type: string }
+      responses:
+        '201':
+          description: New Admin key. Secret is returned only in this response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  key_id: { type: string }
+                  secret: { type: string, writeOnly: true }
+                  scopes:
+                    type: array
+                    items: { type: string }
+                  expires_at: { type: integer, format: int64 }
+  /builder/v1/users:
+    get:
+      tags: [Builder 用户]
+      operationId: listBuilderUsers
+      summary: 查询归属于当前 Builder 的用户
+      security:
+        - BuilderAdmin: []
+      parameters:
+        - name: wallet_address
+          in: query
+          required: false
+          schema: { type: string }
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /v1/public/fees/base:
+    get:
+      tags: [手续费]
+      operationId: getProtocolBaseFees
+      summary: 查询协议基础费
+      responses:
+        '200':
+          description: Protocol base fees.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeeConfigurationResponse'
+  /v1/fees/effective:
+    get:
+      tags: [手续费]
+      operationId: getEffectiveUserFees
+      summary: 查询当前用户实际费率
+      security:
+        - TradingKey: []
+      responses:
+        '200':
+          description: Effective user fees.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeeConfigurationResponse'
+  /v1/fees/quote:
+    post:
+      tags: [手续费]
+      operationId: quoteActionFees
+      summary: 查询操作费用报价
+      security:
+        - TradingKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [action]
+              properties:
+                action: { type: string, enum: [trade, withdrawal, settlement] }
+                contract: { type: string }
+                notional: { $ref: '#/components/schemas/Decimal' }
+                asset: { type: string }
+                amount: { $ref: '#/components/schemas/Decimal' }
+      responses:
+        '200':
+          $ref: '#/components/responses/FeeQuoteResponse'
+  /builder/v1/fees/default:
+    get:
+      tags: [手续费]
+      operationId: getBuilderDefaultFees
+      summary: 查询 Builder 默认费率
+      security:
+        - BuilderAdmin: []
+      responses:
+        '200':
+          description: Builder default fees.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeeConfigurationResponse'
+    put:
+      tags: [手续费]
+      operationId: updateBuilderDefaultFees
+      summary: 更新 Builder 默认费率
+      security:
+        - BuilderAdmin: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FeeConfiguration'
+      responses:
+        '200':
+          description: Applied Builder default fees.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeeConfigurationResponse'
+  /builder/v1/fees/users:
+    put:
+      tags: [手续费]
+      operationId: updateBuilderUserFees
+      summary: 批量更新用户级费率
+      security:
+        - BuilderAdmin: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [account_ids, fees]
+              properties:
+                account_ids:
+                  type: array
+                  maxItems: 500
+                  items: { type: string }
+                fees:
+                  $ref: '#/components/schemas/FeeConfiguration'
+      responses:
+        '200':
+          $ref: '#/components/responses/SuccessResponse'
+  /builder/v1/revenue/summary:
+    get:
+      tags: [收入]
+      operationId: getBuilderRevenueSummary
+      summary: 查询 Builder 收入汇总
+      security:
+        - BuilderAdmin: []
+      parameters:
+        - $ref: '#/components/parameters/FromTime'
+        - $ref: '#/components/parameters/ToTime'
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /builder/v1/revenue/ledger:
+    get:
+      tags: [收入]
+      operationId: listBuilderRevenueLedger
+      summary: 查询成交级 Builder 收入
+      security:
+        - BuilderAdmin: []
+      parameters:
+        - $ref: '#/components/parameters/FromTime'
+        - $ref: '#/components/parameters/ToTime'
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /builder/v1/payouts:
+    get:
+      tags: [收入]
+      operationId: listBuilderPayouts
+      summary: 查询 Builder 打款
+      security:
+        - BuilderAdmin: []
+      parameters:
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+  /builder/v1/analytics/summary:
+    get:
+      tags: [分析]
+      operationId: getBuilderAnalyticsSummary
+      summary: 查询 Builder 分析汇总
+      security:
+        - BuilderAdmin: []
+      parameters:
+        - $ref: '#/components/parameters/FromTime'
+        - $ref: '#/components/parameters/ToTime'
+        - name: interval
+          in: query
+          required: false
+          schema: { type: string, enum: [hour, day, week, month], default: day }
+      responses:
+        '200':
+          $ref: '#/components/responses/ObjectResponse'
+  /builder/v1/webhooks:
+    get:
+      tags: [Webhook]
+      operationId: listWebhooks
+      summary: 查询 Webhook 地址
+      security:
+        - BuilderAdmin: []
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+    post:
+      tags: [Webhook]
+      operationId: createWebhook
+      summary: 创建签名 Webhook 地址
+      security:
+        - BuilderAdmin: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [url, events]
+              properties:
+                url: { type: string, format: uri }
+                events:
+                  type: array
+                  items: { type: string }
+      responses:
+        '201':
+          description: Webhook endpoint. Signing secret is returned only once.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  webhook_id: { type: string }
+                  signing_secret: { type: string, writeOnly: true }
+                  url: { type: string, format: uri }
+                  events:
+                    type: array
+                    items: { type: string }
+  /builder/v1/webhook-deliveries:
+    get:
+      tags: [Webhook]
+      operationId: listWebhookDeliveries
+      summary: 查询 Webhook 投递
+      security:
+        - BuilderAdmin: []
+      parameters:
+        - name: webhook_id
+          in: query
+          required: false
+          schema: { type: string }
+        - name: status
+          in: query
+          required: false
+          schema: { type: string }
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/ListResponse'
+components:
+  securitySchemes:
+    TradingKey:
+      type: http
+      scheme: bearer
+      bearerFormat: signed-trading-key
+      description: 具有有限权限的用户 Trading Key 预览表示。
+    BuilderAdmin:
+      type: http
+      scheme: bearer
+      bearerFormat: builder-admin-key
+      description: 服务端 Builder Admin 凭证，绝不能暴露在前端。
+  parameters:
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: true
+      schema: { type: string, minLength: 8, maxLength: 128 }
+    ProjectId:
+      name: project_id
+      in: path
+      required: true
+      schema: { type: string }
+    Cursor:
+      name: cursor
+      in: query
+      required: false
+      schema: { type: string }
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema: { type: integer, minimum: 1, maximum: 200, default: 50 }
+    FromTime:
+      name: from
+      in: query
+      required: true
+      schema: { type: integer, format: int64, description: Unix 毫秒时间戳。 }
+    ToTime:
+      name: to
+      in: query
+      required: true
+      schema: { type: integer, format: int64, description: Unix 毫秒时间戳。 }
+  responses:
+    SuccessResponse:
+      description: 成功。
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SuccessResponse'
+    ObjectResponse:
+      description: 成功。
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+    ListResponse:
+      description: 分页列表。
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ListResponse'
+    ErrorResponse:
+      description: 请求失败。
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    TransactionBuildResponse:
+      description: 钱包可签名的未签名交易或消息。
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TransactionBuildResponse'
+    FeeQuoteResponse:
+      description: 费用与操作报价。
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FeeQuoteResponse'
+  schemas:
+    Decimal:
+      type: string
+      pattern: '^-?[0-9]+(\.[0-9]+)?$'
+      example: '100.00'
+    SuccessResponse:
+      type: object
+      required: [success, request_id, timestamp]
+      properties:
+        success: { type: boolean, const: true }
+        request_id: { type: string }
+        timestamp: { type: integer, format: int64 }
+    ErrorResponse:
+      type: object
+      required: [success, error, request_id, timestamp]
+      properties:
+        success: { type: boolean, const: false }
+        error:
+          type: object
+          required: [code, message, retryable]
+          properties:
+            code: { type: string }
+            message: { type: string }
+            retryable: { type: boolean }
+            details:
+              type: object
+              additionalProperties: true
+        request_id: { type: string }
+        timestamp: { type: integer, format: int64 }
+    ListResponse:
+      type: object
+      required: [success, data, request_id, timestamp]
+      properties:
+        success: { type: boolean, const: true }
+        data:
+          type: object
+          required: [items]
+          properties:
+            items:
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+            next_cursor: { type: [string, 'null'] }
+        request_id: { type: string }
+        timestamp: { type: integer, format: int64 }
+    NonceResponse:
+      type: object
+      required: [success, data, request_id, timestamp]
+      properties:
+        success: { type: boolean, const: true }
+        data:
+          type: object
+          required: [nonce, expires_at]
+          properties:
+            nonce: { type: string }
+            expires_at: { type: integer, format: int64 }
+        request_id: { type: string }
+        timestamp: { type: integer, format: int64 }
+    ChainListResponse:
+      type: object
+      required: [success, data, request_id, timestamp]
+      properties:
+        success: { type: boolean, const: true }
+        data:
+          type: array
+          items:
+            type: object
+            required: [chain_id, chain_type, name, status]
+            properties:
+              chain_id: { type: integer, format: int64 }
+              chain_type: { type: string, enum: [EVM, SOLANA] }
+              name: { type: string }
+              status: { type: string, enum: [AVAILABLE, DEGRADED, MAINTENANCE, DISABLED] }
+              deposits_enabled: { type: boolean }
+              withdrawals_enabled: { type: boolean }
+              confirmation_count: { type: integer }
+        request_id: { type: string }
+        timestamp: { type: integer, format: int64 }
+    SystemStatusResponse:
+      type: object
+      required: [success, data, request_id, timestamp]
+      properties:
+        success: { type: boolean, const: true }
+        data:
+          type: object
+          additionalProperties:
+            type: object
+            required: [status]
+            properties:
+              status: { type: string, enum: [AVAILABLE, DEGRADED, MAINTENANCE, DISABLED] }
+              message: { type: string }
+              expected_recovery_at: { type: [integer, 'null'], format: int64 }
+        request_id: { type: string }
+        timestamp: { type: integer, format: int64 }
+    SignedWalletAction:
+      type: object
+      required: [request_hash, wallet_address, signature, message]
+      properties:
+        request_hash: { type: string }
+        wallet_address: { type: string }
+        signature: { type: string }
+        message:
+          type: object
+          additionalProperties: true
+    SubmittedWalletAction:
+      type: object
+      required: [request_hash, transaction_hash]
+      properties:
+        request_hash: { type: string }
+        transaction_hash: { type: string }
+    AssetActionRequest:
+      type: object
+      required: [account_id, builder_id, chain_id, asset, amount]
+      properties:
+        account_id: { type: string }
+        builder_id: { type: string }
+        chain_id: { type: integer, format: int64 }
+        asset: { type: string, example: USDC }
+        amount: { $ref: '#/components/schemas/Decimal' }
+    TransactionBuildResponse:
+      type: object
+      required: [success, data, request_id, timestamp]
+      properties:
+        success: { type: boolean, const: true }
+        data:
+          type: object
+          required: [request_hash, chain_type, chain_id, expires_at, human_readable_summary]
+          properties:
+            request_hash: { type: string }
+            chain_type: { type: string, enum: [EVM, SOLANA] }
+            chain_id: { type: integer, format: int64 }
+            from: { type: string }
+            to: { type: string }
+            typed_data:
+              type: object
+              additionalProperties: true
+            calldata: { type: string }
+            serialized_message: { type: string }
+            value: { $ref: '#/components/schemas/Decimal' }
+            gas_estimate: { type: string }
+            fee_quote:
+              $ref: '#/components/schemas/FeeQuote'
+            human_readable_summary: { type: string }
+            risk_warnings:
+              type: array
+              items: { type: string }
+            expires_at: { type: integer, format: int64 }
+        request_id: { type: string }
+        timestamp: { type: integer, format: int64 }
+    FeeQuote:
+      type: object
+      properties:
+        asset: { type: string }
+        total_amount: { $ref: '#/components/schemas/Decimal' }
+        components:
+          type: array
+          items:
+            type: object
+            required: [type, amount, asset]
+            properties:
+              type: { type: string }
+              amount: { $ref: '#/components/schemas/Decimal' }
+              asset: { type: string }
+              rate: { $ref: '#/components/schemas/Decimal' }
+    FeeQuoteResponse:
+      type: object
+      required: [success, data, request_id, timestamp]
+      properties:
+        success: { type: boolean, const: true }
+        data:
+          type: object
+          required: [quote_id, fee_quote, expires_at]
+          properties:
+            quote_id: { type: string }
+            fee_quote: { $ref: '#/components/schemas/FeeQuote' }
+            expires_at: { type: integer, format: int64 }
+        request_id: { type: string }
+        timestamp: { type: integer, format: int64 }
+    ActionStatusResponse:
+      type: object
+      required: [success, data, request_id, timestamp]
+      properties:
+        success: { type: boolean, const: true }
+        data:
+          type: object
+          required: [id, status, created_at, updated_at]
+          properties:
+            id: { type: string }
+            status:
+              type: string
+              enum: [CREATED, AWAITING_SIGNATURE, SUBMITTED, PROCESSING, CONFIRMED, REJECTED, FAILED_RETRYABLE, FAILED_FINAL]
+            reason_code: { type: string }
+            transaction_hash: { type: string }
+            created_at: { type: integer, format: int64 }
+            updated_at: { type: integer, format: int64 }
+        request_id: { type: string }
+        timestamp: { type: integer, format: int64 }
+    AccountResponse:
+      type: object
+      required: [success, data, request_id, timestamp]
+      properties:
+        success: { type: boolean, const: true }
+        data:
+          type: object
+          required: [account_id, builder_id, wallet_address, status, created_at]
+          properties:
+            account_id: { type: string }
+            builder_id: { type: string }
+            wallet_address: { type: string }
+            chain_type: { type: string }
+            status: { type: string, enum: [ACTIVE, RESTRICTED, CLOSED] }
+            created_at: { type: integer, format: int64 }
+        request_id: { type: string }
+        timestamp: { type: integer, format: int64 }
+    ProjectResponse:
+      type: object
+      required: [success, data, request_id, timestamp]
+      properties:
+        success: { type: boolean, const: true }
+        data:
+          type: object
+          required: [project_id, builder_id, name, status, environment, created_at]
+          properties:
+            project_id: { type: string }
+            builder_id: { type: string }
+            name: { type: string }
+            status: { type: string, enum: [DRAFT, SANDBOX_ACTIVE, REVIEW, PRODUCTION_ACTIVE, SUSPENDED] }
+            environment: { type: string, enum: [sandbox, production] }
+            products:
+              type: array
+              items: { type: string }
+            created_at: { type: integer, format: int64 }
+        request_id: { type: string }
+        timestamp: { type: integer, format: int64 }
+    FeeConfiguration:
+      type: object
+      required: [maker_fee_rate, taker_fee_rate]
+      properties:
+        maker_fee_rate:
+          $ref: '#/components/schemas/Decimal'
+        taker_fee_rate:
+          $ref: '#/components/schemas/Decimal'
+        rwa_maker_fee_rate:
+          $ref: '#/components/schemas/Decimal'
+        rwa_taker_fee_rate:
+          $ref: '#/components/schemas/Decimal'
+    FeeConfigurationResponse:
+      type: object
+      required: [success, data, request_id, timestamp]
+      properties:
+        success: { type: boolean, const: true }
+        data:
+          $ref: '#/components/schemas/FeeConfiguration'
+        request_id: { type: string }
+        timestamp: { type: integer, format: int64 }

@@ -1,0 +1,59 @@
+---
+title: "Builder 快速开始"
+description: "从 Builder 配置到收入核对，完成项目全生命周期接入。"
+tag: "预览"
+---
+
+本指南面向上线交易前端并注册自己用户的项目方。
+
+<Warning>
+  Builder API 处于**预览**阶段。资源模型和示例可用于接入评审，但公共生产地址和最终接口可用性必须以 DexBuilder 正式发布为准。
+</Warning>
+
+## 最小生产流程
+
+<Steps>
+  <Step title="创建 Builder 项目">
+    在 Builder Console 连接管理员钱包，创建项目并保存返回的 `builder_id` 与 `project_id`。
+  </Step>
+  <Step title="创建服务端 Admin Key">
+    仅授予后端需要的权限，绝不能把此 Key 放入前端。
+  </Step>
+  <Step title="将用户注册到 Builder">
+    构造钱包注册消息，请用户签名并提交。返回账户必须归属你的 `builder_id`。
+  </Step>
+  <Step title="为账户入金">
+    查询支持的链与合约，构造充值交易，让用户签名并等待确认。
+  </Step>
+  <Step title="创建 Trading Key">
+    为用户应用创建有范围、有过期时间的 Key，用于私有数据和订单操作。
+  </Step>
+  <Step title="交易与结算">
+    订阅公共及私有数据流，下单，核对成交与费用，并在账户模型要求时结算 PnL。
+  </Step>
+  <Step title="核对 Builder 收入">
+    使用稳定账本标识核对交易费、推荐分成、Builder 收入和打款状态。
+  </Step>
+</Steps>
+
+## 必要标识
+
+| 标识 | 范围 | 用途 |
+|---|---|---|
+| `builder_id` | 组织 | 将用户、订单、手续费、收入和分析归属到 Builder |
+| `project_id` | 部署 | 保存环境、品牌、功能和部署配置 |
+| `account_id` | 用户账户 | 标识 Builder 租户中的一个交易账户 |
+| `key_id` | 凭证 | 标识可撤销的 Admin 或 Trading Key，不暴露 Secret |
+| `request_id` | 请求 | 用于链路追踪和支持排查 |
+
+## 生产完成标准
+
+同一个测试用户必须完成：
+
+`注册 → 充值 → 交易 → 结算 → 提现`
+
+Builder 同时能够核对：
+
+`用户 → 成交 → 用户手续费 → 协议费 → Builder 收入 → 打款`
+
+继续查看[接入检查清单](/zh/getting-started/integration-checklist)。

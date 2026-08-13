@@ -1,0 +1,28 @@
+---
+title: "接入常见问题"
+description: "项目方常见的技术与发布状态问题。"
+---
+
+## Aden 就是 DexBuilder API 吗？
+
+Aden 是构建在 DexBuilder 上的运营商。其已确认永续合约 REST 接口是当前交易兼容性参考。项目级用户注册、资金、结算、手续费、收入与运营能力属于 DexBuilder Builder 接口。
+
+## Builder 接口现在可以调用吗？
+
+暂时不可以。标记为**预览**的接口定义目标公共契约。正式发布生产或 Sandbox Base URL 与发布说明后再发送请求。
+
+## 应使用哪个手续费接口？
+
+使用交易 API 查询已认证用户当前的永续合约交易费率。协议基础费、Builder 默认费率、用户覆盖、操作报价、收入和打款使用 Builder 手续费资源。
+
+## 平仓会自动结算 PnL 吗？
+
+平仓产生已实现 PnL。PnL 结算是目标账户模型中的独立流程，应追踪结算记录与账本，不能根据仓位状态推断。
+
+## 前端可以保存 Admin Key 吗？
+
+不可以。Builder Admin 是服务端 Secret。前端只能使用公共数据、钱包签名与权限有限且会过期的 Trading Key。
+
+## 如何申请生产权限？
+
+完成[接入检查清单](/zh/getting-started/integration-checklist)，在 Sandbox 可用后验证端到端流程，并完成[上线指南](/zh/operations/go-live)。
