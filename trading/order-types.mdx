@@ -1,0 +1,32 @@
+---
+title: "Order types"
+description: "Choose the correct order type, time-in-force, and execution controls."
+---
+
+DexBuilder supports the order controls required by perpetual trading interfaces. Always read contract metadata and the order rules returned for the selected market before submission.
+
+## Core order types
+
+| Order type | Behavior | Typical use |
+|---|---|---|
+| Market | Executes immediately against available liquidity | Enter or exit when execution is more important than exact price |
+| Limit | Executes only at the limit price or better | Control the worst acceptable execution price |
+| BBO | Places relative to a selected best-bid or best-ask level | Join or cross the current book without calculating a price locally |
+| Trigger order | Activates when the configured trigger condition is met | Stop loss, take profit, or conditional entry when enabled |
+
+## Time in force
+
+- `GTC` — remains open until filled or cancelled.
+- `IOC` — fills immediately as much as possible and cancels the remainder.
+- `FOK` — fills the full quantity immediately or cancels the entire order.
+- Post-only — may add liquidity but must not execute immediately as a taker.
+
+## Position controls
+
+- **Reduce-only** prevents an order from increasing or reversing the applicable position.
+- In hedge mode, specify the position side required by the endpoint.
+- For a close action, calculate size from current authoritative position data and handle fills that occur while the request is in flight.
+
+<Warning>
+  A market order controls urgency, not price. Display estimated slippage and available depth before submitting a large order.
+</Warning>

@@ -1,0 +1,33 @@
+---
+title: "Mark price and funding"
+description: "Use the correct reference price and reconcile periodic funding payments."
+---
+
+## Mark price
+
+The mark price is designed to reduce the effect of short-lived price dislocations on unrealized PnL and liquidation. It is distinct from the last traded price and the external index price.
+
+Use the mark price returned by DexBuilder for margin and liquidation displays. Do not recreate it from incomplete market data.
+
+## Funding rate
+
+Funding is a periodic transfer between long and short accounts that helps keep the perpetual market close to its index. A positive or negative market rate indicates the direction of the transfer for the applicable interval.
+
+```text
+funding payment = position notional × applicable funding rate
+```
+
+The exact sign, reference price, cap, floor, and settlement interval must come from the market and account fields returned by the API.
+
+## Reconciliation
+
+Keep these records separate:
+
+- predicted or current market funding rate;
+- historical market funding rate;
+- account-specific funding payment;
+- funding-related ledger entry.
+
+<Note>
+  A historical market rate does not prove that a particular account paid or received that amount. Use the account funding-payment record for user statements and reconciliation.
+</Note>

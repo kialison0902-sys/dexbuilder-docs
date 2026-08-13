@@ -5,19 +5,9 @@ description: "理解 DexBuilder、运营商、Builder 与交易用户之间的�
 
 DexBuilder 是底层交易与 Builder 基础设施。Aden 这类运营商，是构建在该基础设施之上的一种交易应用。
 
-```text
-交易钱包或 API 客户端
-          │
-          ▼
-Builder / 运营商应用
-          │
-          ├── 交易 API 与 WebSocket
-          ├── 资金与结算 API
-          └── Builder Admin API
-          │
-          ▼
-DexBuilder 交易、风控、账本与链上结算基础设施
-```
+<Frame caption="DexBuilder 平台架构">
+  <img src="/images/platform-architecture-zh.svg" alt="用户钱包与 Builder DEX 连接到 DexBuilder 交易、风控、账本与结算基础设施" />
+</Frame>
 
 ## 角色
 

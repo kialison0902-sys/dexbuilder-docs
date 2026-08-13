@@ -12,10 +12,10 @@ English is the default language. Simplified Chinese pages live under `zh/` with 
 ## Content status
 
 - `openapi/trading-v1.yaml` and `openapi/zh/trading-v1.yaml` document the currently confirmed Aden-compatible perpetual REST surface.
-- `openapi/builder-preview.yaml` and `openapi/zh/builder-preview.yaml` are the English and Chinese versions of a proposed public Builder contract and are clearly marked Preview.
-- All production URLs, signing fields, schemas, limits, and state machines must be checked against the implementation before removing a Preview label.
+- `openapi/builder-v1.yaml` and `openapi/zh/builder-v1.yaml` are the English and Chinese Builder API contracts covering projects, funds, settlement, fees, revenue, analytics, and webhooks.
+- Production URLs, signing fields, schemas, limits, and state machines must match the environment assigned to the integrating project.
 
-## Preview locally
+## Run locally
 
 Install the Mintlify CLI with `npm i -g mint`, run `mint dev` from this directory, and open the local URL shown by the CLI. Mintlify currently requires Node.js 20.17 or later.
 

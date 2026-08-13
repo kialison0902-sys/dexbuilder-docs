@@ -1,30 +1,30 @@
 ---
-title: "API 覆盖范围与发布状态"
-description: "查看达到 Orderly 同类 Builder 接入成熟度所需的已确认、预览与规划能力。"
+title: "API 能力"
+description: "查找每项交易、结算与 Builder 流程对应的 DexBuilder 接口。"
 ---
 
-DexBuilder 将已确认的运营商兼容交易接口与项目级 Builder 目标接口明确分开。
+DexBuilder 分别提供面向用户交易和项目级 DEX 运营的接口。
 
-| 能力 | 文档状态 | 生产状态 |
+| 能力 | 接口 | 主要指南 |
 |---|---|---|
-| 市场、订单、仓位、账户变动、成交、实际交易费率 | 交易 API | 已在 Aden 生产网关确认 |
-| 注册、链查询、充值、提现、PnL 结算、交易构造 | Builder API | 预览；待生产地址与合约 |
-| Builder 项目、用户、默认/用户费率、收入、打款、分析、Webhook | Builder API | 预览；待生产激活 |
-| 公共与私有 WebSocket 协议 | 接入指南 | 规划中；待最终地址、主题与恢复协议 |
-| 内部划转、子账户、委托签名人、算法订单 | 架构规划 | 规划中；待接口契约 |
-| 推荐、活动、积分、自定义市场/预言机管理 | 产品路线图 | 规划中；待商业与技术契约 |
-| TypeScript SDK、Python Connector、UI 组件、一致性测试向量 | SDK 计划 | 规划中 |
+| 市场、订单、仓位、账户变动、成交与交易费率 | 交易 API | [交易接入](/zh/trading/market-data) |
+| 实时行情与私有账户事件 | WebSocket API | [WebSocket 接入](/zh/trading/websocket) |
+| 注册、链、资产、充值、提现与 PnL 结算 | Builder API | [资金与结算](/zh/funds/overview) |
+| 构造钱包可签名交易和类型化消息 | Transaction Builder | [Transaction Builder](/zh/funds/transaction-builder) |
+| 项目、用户归属、默认与用户级手续费 | Builder Admin API | [构建 DEX](/zh/builders/overview) |
+| Builder 收入、打款、分析与 Webhook | Builder Admin API | [收入与打款](/zh/builders/revenue-and-payouts) |
+| TypeScript、Python、React、Postman 与签名工具 | SDK 与工具 | [SDK 与工具](/zh/resources/sdk-and-tools) |
 
-## 生产规则
+## 环境契约
 
-只有同时发布以下内容，接口才进入生产支持：
+每个接入都必须读取或获取当前环境配置：
 
 - 环境与 Base URL；
-- 最终认证与签名规则；
+- 认证与签名规则；
 - 请求与响应结构；
 - 限流、错误码与状态机；
-- 移除“预览”或“规划中”标记的带日期发布说明。
+- 支持的链、资产与合约地址。
 
 <Note>
-  预览页面用于接口评审与实施规划，不代表接口已经开放。
+  不同项目开通的产品与权限可能不同。请以当前环境返回的能力为准，不要从其他运营商域名推断接口支持。
 </Note>

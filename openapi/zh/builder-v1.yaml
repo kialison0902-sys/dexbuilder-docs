@@ -1,20 +1,16 @@
 openapi: 3.1.0
 info:
-  title: DexBuilder Builder API（预览）
-  version: 0.1.0-preview
+  title: DexBuilder Builder API
+  version: 1.0.0
   description: |
-    面向在 DexBuilder 上构建 DEX 项目的 API 预览契约。
+    面向在 DexBuilder 上构建 DEX 项目的 API 契约。
 
     本规范定义 Builder 项目、用户注册、资金、结算、手续费、收入、分析与
-    Webhook 的目标公共接口，不表示这些接口已经在生产环境开放。
+    Webhook 接口。
 
-    不要向占位服务器发送请求。生产可用性必须有发布说明、最终签名规范和
-    已公布的环境地址。
+    请使用为 DexBuilder 项目分配的 Base URL、签名规范、凭证、链与合约地址。
   contact:
     email: contact@dexbuilder.com
-servers:
-  - url: https://sandbox-api.dexbuilder.example
-    description: 仅为占位地址 — 不应发送任何请求
 tags:
   - name: 服务发现
     description: 公共链、资产、合约与系统状态。
@@ -864,7 +860,7 @@ components:
       type: http
       scheme: bearer
       bearerFormat: signed-trading-key
-      description: 具有有限权限的用户 Trading Key 预览表示。
+      description: 具有有限权限的用户 Trading Key。
     BuilderAdmin:
       type: http
       scheme: bearer

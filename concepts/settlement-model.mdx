@@ -1,7 +1,6 @@
 ---
 title: "Settlement model"
 description: "The five settlement concepts that integrations must keep separate."
-tag: "Preview"
 ---
 
 DexBuilder documentation uses **settlement** as a family of processes, not as one generic operation.
@@ -21,5 +20,5 @@ Never use the market's historical funding rate as evidence that a specific user 
 Similarly, never use a trade's total fee alone to calculate Builder revenue. Protocol fees, Builder fees, rebates, referrals, and adjustments must be individually reconcilable.
 
 <Warning>
-  The exact DexBuilder PnL settlement trigger and balance model must be confirmed before the Preview settlement endpoints are enabled in production.
+  Read the settlement eligibility, resulting balance, and withdrawable balance returned by the API before requesting a wallet signature.
 </Warning>

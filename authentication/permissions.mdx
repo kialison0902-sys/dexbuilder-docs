@@ -1,7 +1,6 @@
 ---
 title: "Permissions and scopes"
 description: "Apply least privilege to Trading Keys and Builder Admin credentials."
-tag: "Preview"
 ---
 
 ## Trading Key scopes
@@ -29,5 +28,5 @@ Asset withdrawal and settlement submission should still require the applicable w
 - `markets:write`
 
 <Note>
-  The final production scope names are subject to change while the Builder API remains Preview.
+  Use the scope names returned by the credential service for your environment. Reject unknown scopes and request only the permissions the integration needs.
 </Note>

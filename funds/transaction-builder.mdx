@@ -1,12 +1,15 @@
 ---
 title: "Transaction Builder"
 description: "Construct wallet-ready transactions without handling user private keys."
-tag: "Preview"
 ---
 
 The Transaction Builder returns the exact EVM typed data, calldata, or Solana message required for a user-authorized action.
 
 It does not sign for the user and never receives a private key.
+
+<Frame caption="Wallet-authorized action flow">
+  <img src="/images/wallet-action-flow.svg" alt="Backend requests a payload, wallet reviews and signs locally, and DexBuilder verifies and tracks the action" />
+</Frame>
 
 ## Response contract
 

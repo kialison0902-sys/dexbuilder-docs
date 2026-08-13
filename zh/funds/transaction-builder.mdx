@@ -1,12 +1,15 @@
 ---
 title: "Transaction Builder"
 description: "在不接触用户私钥的情况下构造钱包可签名交易。"
-tag: "预览"
 ---
 
 Transaction Builder 返回用户授权操作所需的准确 EVM Typed Data、Calldata 或 Solana Message。
 
 它不会替用户签名，也永远不接收私钥。
+
+<Frame caption="钱包授权操作流程">
+  <img src="/images/wallet-action-flow-zh.svg" alt="后端请求载荷，钱包在本地检查并签名，DexBuilder 验证并追踪操作" />
+</Frame>
 
 ## 响应约定
 

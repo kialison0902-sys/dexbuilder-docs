@@ -1,0 +1,28 @@
+---
+title: "Liquidation, insurance fund, and ADL"
+description: "Handle risk states and user messaging when margin becomes insufficient."
+---
+
+## Liquidation
+
+When an account or isolated position no longer satisfies its maintenance-margin requirement, the risk engine may cancel orders and liquidate part or all of the position.
+
+Clients should display returned values for:
+
+- maintenance margin and margin ratio;
+- mark price and estimated liquidation price;
+- liquidation status and quantity;
+- liquidation fee and resulting balance;
+- any remaining position after partial liquidation.
+
+## Insurance fund
+
+The insurance fund helps absorb eligible losses that cannot be covered by the liquidated account. Market-level insurance-fund history is operational information; it is not a substitute for the user's liquidation and ledger records.
+
+## Auto-deleveraging
+
+If liquidation and insurance mechanisms cannot fully absorb a deficit, auto-deleveraging may reduce opposing profitable positions according to the platform ranking rules. Consume the ADL history endpoint and show the executed price, quantity, time, and affected position.
+
+<Warning>
+  Never calculate a guaranteed liquidation price in the client. Orders, funding, fees, collateral value, market movement, and risk-tier changes can move the actual trigger.
+</Warning>

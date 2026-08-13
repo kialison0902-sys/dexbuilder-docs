@@ -1,21 +1,17 @@
 openapi: 3.1.0
 info:
   title: DexBuilder Builder API
-  version: 0.1.0-preview
+  version: 1.0.0
   description: |
-    Preview API contract for projects building a DEX on DexBuilder.
+    API contract for projects building a DEX on DexBuilder.
 
-    This specification defines the target public interface for Builder projects,
+    This specification defines the interface for Builder projects,
     user onboarding, funds, settlement, fees, revenue, analytics, and webhooks.
-    It is not a statement that these endpoints are production-available.
 
-    Do not integrate against placeholder servers. Production availability requires
-    a release note, final signing specification, and published environment URL.
+    Use the base URL, signing specification, credentials, chains, and contracts
+    assigned to your DexBuilder environment.
   contact:
     email: contact@dexbuilder.com
-servers:
-  - url: https://sandbox-api.dexbuilder.example
-    description: Placeholder only — no requests should be sent
 tags:
   - name: Discovery
     description: Public chains, assets, contracts, and system status.
@@ -865,7 +861,7 @@ components:
       type: http
       scheme: bearer
       bearerFormat: signed-trading-key
-      description: Preview representation of a scoped user Trading Key.
+      description: Scoped user Trading Key.
     BuilderAdmin:
       type: http
       scheme: bearer
