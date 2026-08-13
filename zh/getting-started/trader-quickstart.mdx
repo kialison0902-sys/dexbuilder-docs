@@ -3,7 +3,7 @@ title: "交易 API 快速开始"
 description: "读取市场并提交第一笔永续合约订单。"
 ---
 
-本指南使用当前已文档化的 Aden 兼容永续合约接口。生产接入前，请确认 DexBuilder 正式网关。
+本指南使用 DexBuilder 永续合约交易 API。生产凭证必须保存在可信后端，并在上线前完成全流程测试。
 
 ## 准备条件
 
@@ -15,7 +15,7 @@ description: "读取市场并提交第一笔永续合约订单。"
 ## 1. 读取可交易市场
 
 ```bash
-curl "https://api.aden.io/api/v1/dex_futures/usdt/contracts" \
+curl "https://api.dexbuilder.com/api/v1/dex_futures/usdt/contracts" \
   -H "Accept: application/json"
 ```
 
@@ -30,7 +30,7 @@ curl "https://api.aden.io/api/v1/dex_futures/usdt/contracts" \
 ## 3. 提交限价单
 
 ```bash
-curl -X POST "https://api.aden.io/api/v1/dex_futures/usdt/orders" \
+curl -X POST "https://api.dexbuilder.com/api/v1/dex_futures/usdt/orders" \
   -H "Accept: application/json" \
   -H "Content-Type: application/json" \
   -H "KEY: ${DEXBUILDER_API_KEY}" \
@@ -46,7 +46,7 @@ curl -X POST "https://api.aden.io/api/v1/dex_futures/usdt/orders" \
 ```
 
 <Warning>
-  示例数值仅用于说明。Aden 兼容结构使用带符号的 `size`（`size > 0` 为买入，`size < 0` 为卖出）。下单前必须使用合约元数据验证价格精度、数量步长、最小数量、杠杆与风险限额。
+  示例数值仅用于说明。DexBuilder 交易 API 使用带符号的 `size`（`size > 0` 为买入，`size < 0` 为卖出）。下单前必须使用合约元数据验证价格精度、数量步长、最小数量、杠杆与风险限额。
 </Warning>
 
 ## 4. 确认结果
@@ -54,7 +54,7 @@ curl -X POST "https://api.aden.io/api/v1/dex_futures/usdt/orders" \
 订单被接受不等于已经成交。查询订单或消费私有执行流，直到订单进入终态。
 
 ```bash
-curl "https://api.aden.io/api/v1/dex_futures/usdt/orders/${ORDER_ID}" \
+curl "https://api.dexbuilder.com/api/v1/dex_futures/usdt/orders/${ORDER_ID}" \
   -H "KEY: ${DEXBUILDER_API_KEY}" \
   -H "Timestamp: ${DEXBUILDER_TIMESTAMP}" \
   -H "SIGN: ${DEXBUILDER_SIGNATURE}"

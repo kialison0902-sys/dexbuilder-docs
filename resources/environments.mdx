@@ -3,25 +3,24 @@ title: "Environments"
 description: "Keep Sandbox and production configuration isolated."
 ---
 
-## Current confirmed trading URL
+## Production Trading API
 
-The currently documented Aden trading base URL is:
+Use the following base URL for the DexBuilder production Trading API:
 
 ```text
-https://api.aden.io/api/v1/
+https://api.dexbuilder.com/api/v1/
 ```
 
-## Pending DexBuilder endpoints
+## Project-specific endpoints
 
-The following must be published before direct DexBuilder production integration:
+Obtain the following configuration from the DexBuilder team before integration:
 
 - Sandbox REST base URL;
-- Production REST base URL;
 - public and private WebSocket URLs;
-- Builder API base URL;
+- Builder API permissions and project identifier;
 - supported chains and production contract addresses;
 - faucet or test-asset process.
 
 <Warning>
-  Do not construct undocumented URLs by replacing hostnames or environment names. An endpoint is available only after it appears in the environment table and API specification.
+  Do not construct undocumented URLs by replacing hostnames or environment names. An endpoint is available only after it appears in the environment table, API specification, or configuration assigned to your project.
 </Warning>

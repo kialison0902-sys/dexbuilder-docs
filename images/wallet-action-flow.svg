@@ -4,7 +4,7 @@
   <rect width="1200" height="540" rx="28" fill="#07100B"/>
   <text x="64" y="62" class="t k">WALLET-AUTHORIZED ACTION</text><text x="64" y="102" class="t h">Construct safely. Sign locally. Verify exactly.</text>
   <text x="64" y="132" class="m s">DexBuilder returns the payload to sign and never receives the user's private key.</text>
-  <line x1="170" y1="170" x2="170" y2="475" stroke="#29382E"/><text x="56" y="225" class="t lane">BACKEND</text><text x="72" y="320" class="t lane">WALLET</text><text x="47" y="415" class="t lane">DEXBUILDER</text>
+  <line x1="170" y1="170" x2="170" y2="475" stroke="#29382E"/><text x="56" y="225" class="t lane">BACKEND</text><text x="72" y="320" class="t lane">WALLET</text><text x="47" y="415" class="t lane">DexBuilder</text>
   <line x1="170" y1="270" x2="1140" y2="270" stroke="#17231B"/><line x1="170" y1="365" x2="1140" y2="365" stroke="#17231B"/>
   <g transform="translate(220 188)"><rect width="185" height="68" rx="16" fill="#0E1912" stroke="#2A3930"/><text x="20" y="30" class="t n">1. Request build</text><text x="20" y="52" class="m s">action + account</text></g>
   <path d="M405 222H505" stroke="#19D969" stroke-width="3" marker-end="url(#a)"/>

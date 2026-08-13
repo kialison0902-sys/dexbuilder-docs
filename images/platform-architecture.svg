@@ -7,7 +7,7 @@
   </defs>
   <rect width="1200" height="560" rx="28" fill="#07100B"/>
   <path d="M262 266H360M574 266H650M910 266H995" fill="none" stroke="#19D969" stroke-width="3" marker-end="url(#arrow)"/>
-  <text x="64" y="62" class="t k">DEXBUILDER SYSTEM MAP</text>
+  <text x="64" y="62" class="t k">DexBuilder SYSTEM MAP</text>
   <text x="64" y="102" class="t h">One integration. Complete perpetual infrastructure.</text>
   <text x="64" y="132" class="m s">A Builder owns the product experience; DexBuilder supplies the shared execution and settlement layer.</text>
 

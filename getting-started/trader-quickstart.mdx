@@ -3,7 +3,7 @@ title: "Trader API quickstart"
 description: "Read a market and place your first perpetual order."
 ---
 
-This quickstart uses the currently documented Aden-compatible perpetual endpoints. Confirm the DexBuilder production gateway before moving an integration to production.
+This quickstart uses the DexBuilder perpetual Trading API. Keep production credentials on a trusted backend and test the complete flow before going live.
 
 ## Prerequisites
 
@@ -15,7 +15,7 @@ This quickstart uses the currently documented Aden-compatible perpetual endpoint
 ## 1. Read available markets
 
 ```bash
-curl "https://api.aden.io/api/v1/dex_futures/usdt/contracts" \
+curl "https://api.dexbuilder.com/api/v1/dex_futures/usdt/contracts" \
   -H "Accept: application/json"
 ```
 
@@ -30,7 +30,7 @@ Read [Request signing](/authentication/request-signing) before sending a private
 ## 3. Place a limit order
 
 ```bash
-curl -X POST "https://api.aden.io/api/v1/dex_futures/usdt/orders" \
+curl -X POST "https://api.dexbuilder.com/api/v1/dex_futures/usdt/orders" \
   -H "Accept: application/json" \
   -H "Content-Type: application/json" \
   -H "KEY: ${DEXBUILDER_API_KEY}" \
@@ -46,7 +46,7 @@ curl -X POST "https://api.aden.io/api/v1/dex_futures/usdt/orders" \
 ```
 
 <Warning>
-  The sample values are illustrative, and the documented Aden-compatible schema uses signed size (`size > 0` for buy and `size < 0` for sell). Use contract metadata to validate tick size, quantity step, minimum quantity, leverage, and risk limit before placing an order.
+  The sample values are illustrative. The DexBuilder Trading API uses signed size (`size > 0` for buy and `size < 0` for sell). Use contract metadata to validate tick size, quantity step, minimum quantity, leverage, and risk limit before placing an order.
 </Warning>
 
 ## 4. Confirm the result
@@ -54,7 +54,7 @@ curl -X POST "https://api.aden.io/api/v1/dex_futures/usdt/orders" \
 Do not treat an accepted order as a fill. Query the order or consume the private execution stream until it reaches a terminal state.
 
 ```bash
-curl "https://api.aden.io/api/v1/dex_futures/usdt/orders/${ORDER_ID}" \
+curl "https://api.dexbuilder.com/api/v1/dex_futures/usdt/orders/${ORDER_ID}" \
   -H "KEY: ${DEXBUILDER_API_KEY}" \
   -H "Timestamp: ${DEXBUILDER_TIMESTAMP}" \
   -H "SIGN: ${DEXBUILDER_SIGNATURE}"

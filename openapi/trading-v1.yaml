@@ -3,16 +3,15 @@ info:
   title: DexBuilder Trading API
   version: 1.0.0
   description: |
-    Aden-compatible perpetual market, account, position, and order endpoints.
+    DexBuilder perpetual market, account, position, and order endpoints.
 
-    These operations are confirmed from the public Aden API v1.0.0 documentation.
-    Aden is an operator built on DexBuilder. Confirm the production DexBuilder gateway
-    and branding policy before publishing a new operator integration.
+    Use the credentials, permissions, and environment configuration assigned to your
+    DexBuilder integration. Keep Sandbox and production credentials separate.
   contact:
     email: contact@dexbuilder.com
 servers:
-  - url: https://api.aden.io/api/v1
-    description: Confirmed Aden production gateway
+  - url: https://api.dexbuilder.com/api/v1
+    description: DexBuilder production Trading API
 tags:
   - name: Markets
     description: Public perpetual market data.
@@ -1062,7 +1061,7 @@ components:
         size:
           type: number
           example: 0.001
-          description: Signed order size. Positive buys and negative sells in the documented Aden-compatible API.
+          description: Signed order size. Positive values buy and negative values sell.
         price: { $ref: '#/components/schemas/Decimal' }
         tif:
           type: string

@@ -8,9 +8,12 @@ info:
     本规范定义 Builder 项目、用户注册、资金、结算、手续费、收入、分析与
     Webhook 接口。
 
-    请使用为 DexBuilder 项目分配的 Base URL、签名规范、凭证、链与合约地址。
+    请使用为 DexBuilder 项目分配的签名规范、凭证、链与合约地址。
   contact:
     email: contact@dexbuilder.com
+servers:
+  - url: https://api.dexbuilder.com
+    description: DexBuilder 生产 API 网关
 tags:
   - name: 服务发现
     description: 公共链、资产、合约与系统状态。

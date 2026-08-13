@@ -21,7 +21,7 @@
 
 ## API specifications
 
-- Confirmed Aden-compatible Trading API: /openapi/trading-v1.yaml
+- DexBuilder Trading API: /openapi/trading-v1.yaml
 - Builder API: /openapi/builder-v1.yaml
 
 ## 中文文档

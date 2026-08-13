@@ -8,10 +8,13 @@ info:
     This specification defines the interface for Builder projects,
     user onboarding, funds, settlement, fees, revenue, analytics, and webhooks.
 
-    Use the base URL, signing specification, credentials, chains, and contracts
-    assigned to your DexBuilder environment.
+    Use the signing specification, credentials, chains, and contracts assigned
+    to your DexBuilder environment.
   contact:
     email: contact@dexbuilder.com
+servers:
+  - url: https://api.dexbuilder.com
+    description: DexBuilder production API gateway
 tags:
   - name: Discovery
     description: Public chains, assets, contracts, and system status.

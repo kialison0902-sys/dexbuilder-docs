@@ -3,16 +3,15 @@ info:
   title: DexBuilder 交易 API
   version: 1.0.0
   description: |
-    与 Aden 兼容的永续合约市场、账户、仓位与订单接口。
+    DexBuilder 永续合约市场、账户、仓位与订单接口。
 
-    这些操作已根据 Aden 公共 API v1.0.0 文档确认。Aden 是构建在
-    DexBuilder 上的运营商。发布新的运营商接入前，请确认 DexBuilder
-    生产网关与品牌政策。
+    请使用为 DexBuilder 接入分配的凭证、权限与环境配置，并严格隔离
+    Sandbox 与生产环境凭证。
   contact:
     email: contact@dexbuilder.com
 servers:
-  - url: https://api.aden.io/api/v1
-    description: 已确认的 Aden 生产网关
+  - url: https://api.dexbuilder.com/api/v1
+    description: DexBuilder 生产交易 API
 tags:
   - name: 市场
     description: 公共永续合约市场数据。
@@ -1062,7 +1061,7 @@ components:
         size:
           type: number
           example: 0.001
-          description: Signed order size. Positive buys and negative sells in the documented Aden-compatible API.
+          description: 带符号的订单数量。正数买入，负数卖出。
         price: { $ref: '#/components/schemas/Decimal' }
         tif:
           type: string

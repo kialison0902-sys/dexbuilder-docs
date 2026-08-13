@@ -11,7 +11,7 @@ English is the default language. Simplified Chinese pages live under `zh/` with 
 
 ## Content status
 
-- `openapi/trading-v1.yaml` and `openapi/zh/trading-v1.yaml` document the currently confirmed Aden-compatible perpetual REST surface.
+- `openapi/trading-v1.yaml` and `openapi/zh/trading-v1.yaml` document the DexBuilder perpetual REST surface.
 - `openapi/builder-v1.yaml` and `openapi/zh/builder-v1.yaml` are the English and Chinese Builder API contracts covering projects, funds, settlement, fees, revenue, analytics, and webhooks.
 - Production URLs, signing fields, schemas, limits, and state machines must match the environment assigned to the integrating project.
 

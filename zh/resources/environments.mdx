@@ -3,25 +3,24 @@ title: "环境"
 description: "严格隔离 Sandbox 与生产环境配置。"
 ---
 
-## 当前已确认交易地址
+## 生产交易 API
 
-当前文档化的 Aden 交易 Base URL：
+DexBuilder 生产交易 API 使用以下 Base URL：
 
 ```text
-https://api.aden.io/api/v1/
+https://api.dexbuilder.com/api/v1/
 ```
 
-## 待发布的 DexBuilder 地址
+## 项目专属地址
 
-直接接入 DexBuilder 生产环境前必须发布：
+接入前请向 DexBuilder 团队获取以下配置：
 
 - Sandbox REST Base URL；
-- 生产 REST Base URL；
 - 公共与私有 WebSocket 地址；
-- Builder API Base URL；
+- Builder API 权限与项目标识；
 - 支持的链与生产合约地址；
 - Faucet 或测试资产获取流程。
 
 <Warning>
-  不要通过替换域名或环境名构造未文档化地址。只有环境表和 API 规范中出现的接口才视为可用。
+  不要通过替换域名或环境名构造未文档化地址。只有环境表、API 规范或项目获配配置中出现的接口才视为可用。
 </Warning>

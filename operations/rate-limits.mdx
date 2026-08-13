@@ -3,7 +3,7 @@ title: "Rate limits"
 description: "Design clients that remain stable under API and WebSocket limits."
 ---
 
-The existing Aden-compatible documentation permits up to 100 requests per second across bulk, single, amend, and cancellation order operations, and limits connections per IP. Production DexBuilder limits must be published per environment and endpoint group.
+The default DexBuilder Trading API quota permits up to 100 requests per second across bulk, single, amend, and cancellation order operations, and limits connections per IP. The quota assigned to your environment and endpoint group takes precedence.
 
 ## Client behavior
 
