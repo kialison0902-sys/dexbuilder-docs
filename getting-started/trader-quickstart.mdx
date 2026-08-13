@@ -46,7 +46,7 @@ curl -X POST "https://api.dexbuilder.com/api/v1/dex_futures/usdt/orders" \
 ```
 
 <Warning>
-  The sample values are illustrative. The DexBuilder Trading API uses signed size (`size > 0` for buy and `size < 0` for sell). Use contract metadata to validate tick size, quantity step, minimum quantity, leverage, and risk limit before placing an order.
+  The sample values are illustrative. The DexBuilder Trading API uses signed size (`size > 0` for buy and `size < 0` for sell). Use contract metadata to validate tick size, quantity step, minimum quantity, leverage, and the position exposure limit (`risk_limit`) before placing an order.
 </Warning>
 
 ## 4. Confirm the result

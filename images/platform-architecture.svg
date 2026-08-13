@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
   <title id="title">DexBuilder platform architecture</title>
-  <desc id="desc">User wallets connect to a Builder DEX, which uses DexBuilder trading, risk, ledger, and settlement infrastructure.</desc>
+  <desc id="desc">User wallets connect to a Builder DEX, which uses DexBuilder execution, margin, ledger, and settlement infrastructure.</desc>
   <defs>
     <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#19D969"/></marker>
     <style>.t{font-family:Inter,Arial,sans-serif;fill:#F3F7F4}.m{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;fill:#96A59B}.h{font-size:28px;font-weight:700}.k{font-size:13px;font-weight:700;letter-spacing:2px;fill:#19D969}.n{font-size:20px;font-weight:650}.s{font-size:14px}.chip{font-size:13px;font-weight:600;fill:#C7D2CA}</style>
@@ -32,7 +32,7 @@
     <path d="M30 34c12-18 30-18 42 0s30 18 42 0" fill="none" stroke="#19D969" stroke-width="5" stroke-linecap="round"/>
     <text x="30" y="82" class="t n">DexBuilder Core</text>
     <g transform="translate(30 106)"><rect width="88" height="30" rx="9" fill="#13291A"/><text x="14" y="20" class="t chip">Matching</text></g>
-    <g transform="translate(128 106)"><rect width="98" height="30" rx="9" fill="#13291A"/><text x="17" y="20" class="t chip">Risk engine</text></g>
+    <g transform="translate(128 106)"><rect width="98" height="30" rx="9" fill="#13291A"/><text x="15" y="20" class="t chip">Margin rules</text></g>
     <g transform="translate(30 146)"><rect width="88" height="30" rx="9" fill="#13291A"/><text x="22" y="20" class="t chip">Ledger</text></g>
     <g transform="translate(128 146)"><rect width="98" height="30" rx="9" fill="#13291A"/><text x="17" y="20" class="t chip">Market data</text></g>
   </g>

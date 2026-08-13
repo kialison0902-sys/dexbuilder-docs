@@ -46,7 +46,7 @@ curl -X POST "https://api.dexbuilder.com/api/v1/dex_futures/usdt/orders" \
 ```
 
 <Warning>
-  示例数值仅用于说明。DexBuilder 交易 API 使用带符号的 `size`（`size > 0` 为买入，`size < 0` 为卖出）。下单前必须使用合约元数据验证价格精度、数量步长、最小数量、杠杆与风险限额。
+  示例数值仅用于说明。DexBuilder 交易 API 使用带符号的 `size`（`size > 0` 为买入，`size < 0` 为卖出）。下单前必须使用合约元数据验证价格精度、数量步长、最小数量、杠杆与仓位敞口限额（`risk_limit`）。
 </Warning>
 
 ## 4. 确认结果

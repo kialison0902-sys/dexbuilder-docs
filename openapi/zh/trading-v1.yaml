@@ -18,7 +18,7 @@ tags:
   - name: 账户
     description: 私有账户与账户账本数据。
   - name: 仓位
-    description: 仓位、杠杆、保证金模式与风险配置。
+    description: 仓位、杠杆、保证金模式与敞口限额配置。
   - name: 订单
     description: 下单、查询、改单与撤单。
   - name: 历史
@@ -216,7 +216,7 @@ paths:
     get:
       tags: [市场]
       operationId: listRiskLimitTiers
-      summary: 查询风险限额档位
+      summary: 查询仓位敞口限额档位
       parameters:
         - $ref: '#/components/parameters/Settle'
         - name: contract
@@ -230,7 +230,7 @@ paths:
     get:
       tags: [市场]
       operationId: getRiskLimitTable
-      summary: 查询风险限额表
+      summary: 查询仓位敞口限额表
       parameters:
         - $ref: '#/components/parameters/Settle'
         - name: table_id
@@ -385,7 +385,7 @@ paths:
     post:
       tags: [仓位]
       operationId: updatePositionRiskLimit
-      summary: 更新仓位风险限额
+      summary: 更新仓位敞口限额
       security:
         - ApiKey: []
           Timestamp: []
@@ -510,7 +510,7 @@ paths:
     post:
       tags: [仓位]
       operationId: updateHedgeModePositionRiskLimit
-      summary: 更新双向持仓风险限额
+      summary: 更新双向持仓敞口限额
       security:
         - ApiKey: []
           Timestamp: []

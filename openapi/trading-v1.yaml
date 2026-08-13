@@ -18,7 +18,7 @@ tags:
   - name: Account
     description: Private account and account-ledger data.
   - name: Positions
-    description: Position, leverage, margin-mode, and risk configuration.
+    description: Position, leverage, margin-mode, and exposure-limit configuration.
   - name: Orders
     description: Order placement, query, amendment, and cancellation.
   - name: History
@@ -385,7 +385,7 @@ paths:
     post:
       tags: [Positions]
       operationId: updatePositionRiskLimit
-      summary: Update position risk limit
+      summary: Update position exposure limit
       security:
         - ApiKey: []
           Timestamp: []
@@ -510,7 +510,7 @@ paths:
     post:
       tags: [Positions]
       operationId: updateHedgeModePositionRiskLimit
-      summary: Update hedge-mode position risk limit
+      summary: Update hedge-mode position exposure limit
       security:
         - ApiKey: []
           Timestamp: []
