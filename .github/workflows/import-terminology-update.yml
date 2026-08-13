@@ -1,0 +1,32 @@
+name: Import DexBuilder terminology update
+
+on:
+  push:
+    paths:
+      - "dexbuilder-terminology-update.b64"
+
+permissions:
+  contents: write
+
+jobs:
+  import-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Replace documentation from archive
+        shell: bash
+        run: |
+          work_dir="$(mktemp -d)"
+          base64 --decode dexbuilder-terminology-update.b64 > "$work_dir/docs.zip"
+          unzip -q "$work_dir/docs.zip" -d "$work_dir/docs"
+          find . -mindepth 1 -maxdepth 1             ! -name .git             ! -name .github             ! -name dexbuilder-terminology-update.b64             -exec rm -rf {} +
+          cp -a "$work_dir/docs/." .
+          rm -f dexbuilder-terminology-update.b64 .github/workflows/import-terminology-update.yml
+      - name: Commit documentation
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Clarify DexBuilder margin and liquidation terminology" || exit 0
+          git push
