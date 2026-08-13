@@ -1,0 +1,33 @@
+name: Import DexBuilder documentation
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - dexbuilder-mintlify-import.zip
+
+permissions:
+  contents: write
+
+jobs:
+  import-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Replace starter content
+        run: |
+          git rm -r --ignore-unmatch .mintignore AGENTS.md LICENSE README.md docs.json favicon.svg index.mdx logo quickstart.mdx
+          unzip -o dexbuilder-mintlify-import.zip -d .
+          git rm -f dexbuilder-mintlify-import.zip
+          git rm -f .github/workflows/import-dexbuilder-docs.yml
+
+      - name: Publish documentation
+        run: |
+          git config user.name "DexBuilder Docs"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git commit -m "Publish DexBuilder developer documentation"
+          git push
