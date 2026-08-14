@@ -1,20 +1,45 @@
 ---
-title: "What is DexBuilder?"
-description: "Understand the platform, who builds on it, and how the integration layers fit together."
+title: "Platform architecture"
+description: "Understand the layers that connect trading applications, accounts, execution, ledger updates, and settlement."
 ---
 
-DexBuilder is perpetual DEX infrastructure for teams building trading applications and branded DEX frontends. It combines trading, account, asset-settlement, and Builder operations in one integration platform.
+DexBuilder separates the user experience from the shared trading and operational services beneath it. This allows a project to build its own interface and brand while integrating a consistent set of market, account, trading, asset, and Builder capabilities.
 
 <Frame caption="DexBuilder platform architecture">
-  <img src="/images/platform-architecture.svg" alt="User wallet and Builder DEX connected to DexBuilder execution, margin, ledger, and settlement infrastructure" />
+  <img src="/images/platform-architecture.svg" alt="User wallets and trading applications connect to DexBuilder trading, account, ledger, and settlement infrastructure" />
 </Frame>
 
-## Roles
+## Architecture layers
 
-| Role | Responsibilities |
+| Layer | Purpose |
 |---|---|
-| Trader | Authorizes their account and assets, places orders, and manages positions |
-| Application developer | Builds market, order, account, and wallet experiences |
-| Builder | Launches a trading frontend, onboards users, configures fees, and receives Builder fee revenue |
-| Admin account | Manages Builder settings and authenticates authorized Builder API operations |
-| DexBuilder | Provides shared execution, margin rules, ledger, settlement, and liquidity infrastructure |
+| Trading experience | The project-owned web or mobile interface used for markets, orders, positions, balances, and wallet actions |
+| Integration | REST, WebSocket, request signing, idempotency, permissions, and generated API clients |
+| Trading services | Market data, order lifecycle, matching, fills, positions, margin modes, funding, and liquidation flows |
+| Account and ledger | Account state, balances, account-book entries, trading history, fees, and reconciliation data |
+| Asset and settlement | Deposits, withdrawals, internal transfers, wallet authorization, PnL settlement, and Builder revenue settlement |
+| Builder operations | Project onboarding, user registration, configuration, campaigns, referrals, fee settings, and administrative data access |
+
+## Participants
+
+| Participant | Responsibility |
+|---|---|
+| Trader | Connects a wallet, authorizes account and asset actions, places orders, and manages positions |
+| Project team | Builds the product experience and integrates market, trading, account, and asset workflows |
+| Builder operator | Configures the project, onboards users, manages product operations, and reviews Builder-level data |
+| Admin account | Authenticates authorized Builder operations and manages project-level configuration within its permissions |
+| DexBuilder | Provides the underlying trading, account, ledger, settlement, and Builder services |
+
+## Request flow
+
+1. The application reads public market and contract information.
+2. The user connects a wallet and completes the required account authorization.
+3. Authenticated requests are signed with the integration credentials assigned to the project or account.
+4. Orders and position updates are processed by the trading services.
+5. Fills, balances, positions, fees, and settlement events are reflected in account and ledger records.
+6. The application reconciles API responses, account state, and asset movements before presenting the final status to the user.
+
+<Note>
+  A successful HTTP response confirms that the API request was accepted or completed as described by that endpoint. Asset movement and settlement workflows should always be reconciled against their final account and ledger state.
+</Note>
+

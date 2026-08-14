@@ -49,22 +49,14 @@
         },
         "tabs": [
           {
-            "tab": "Home",
-            "groups": [
-              {
-                "group": "Home",
-                "pages": [
-                  "index"
-                ]
-              }
-            ]
-          },
-          {
             "tab": "Introduction",
             "groups": [
               {
-                "group": "Overview",
+                "group": "DexBuilder",
                 "pages": [
+                  "index",
+                  "concepts/product-suite",
+                  "concepts/core-capabilities",
                   "concepts/platform-overview",
                   "concepts/accounts"
                 ]
@@ -158,6 +150,7 @@
                 "group": "Developer resources",
                 "pages": [
                   "resources/environments",
+                  "resources/api-conventions",
                   "resources/sdk-and-tools"
                 ]
               }
@@ -185,7 +178,10 @@
               {
                 "group": "Release notes",
                 "pages": [
-                  "resources/changelog"
+                  "resources/changelog",
+                  "release-notes/perpetual-dex",
+                  "release-notes/prediction-markets",
+                  "release-notes/event-contracts"
                 ]
               }
             ]
@@ -213,22 +209,14 @@
         },
         "tabs": [
           {
-            "tab": "首页",
-            "groups": [
-              {
-                "group": "首页",
-                "pages": [
-                  "zh/index"
-                ]
-              }
-            ]
-          },
-          {
             "tab": "简介",
             "groups": [
               {
-                "group": "概览",
+                "group": "DexBuilder",
                 "pages": [
+                  "zh/index",
+                  "zh/concepts/product-suite",
+                  "zh/concepts/core-capabilities",
                   "zh/concepts/platform-overview",
                   "zh/concepts/accounts"
                 ]
@@ -322,6 +310,7 @@
                 "group": "开发者资源",
                 "pages": [
                   "zh/resources/environments",
+                  "zh/resources/api-conventions",
                   "zh/resources/sdk-and-tools"
                 ]
               }
@@ -349,7 +338,10 @@
               {
                 "group": "更新日志",
                 "pages": [
-                  "zh/resources/changelog"
+                  "zh/resources/changelog",
+                  "zh/release-notes/perpetual-dex",
+                  "zh/release-notes/prediction-markets",
+                  "zh/release-notes/event-contracts"
                 ]
               }
             ]

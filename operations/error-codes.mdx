@@ -1,40 +1,55 @@
 ---
-title: "Errors"
-description: "Handle HTTP status, machine-readable error codes, and retry guidance."
+title: "Error handling"
+description: "Handle HTTP status codes and machine-readable API error labels."
 ---
 
-## Error envelope
+The API returns a non-`2xx` HTTP status for unsuccessful requests and includes a JSON response body that describes the error.
 
-`json
+## Error response
+
+```json
 {
-  "success": false,
-  "error": {
-    "code": "INSUFFICIENT_MARGIN",
-    "message": "Available margin is insufficient for this order.",
-    "details": {
-      "required": "125.50",
-      "available": "100.00",
-      "asset": "USDT"
-    },
-    "retryable": false
-  },
-  "request_id": "req_01J...",
-  "timestamp": 1786596000000
+  "label": "INVALID_PARAM_VALUE",
+  "message": "Invalid parameter `text` with value: abc"
 }
-`
+```
+
+| Field | Description |
+|---|---|
+| `label` | Stable, machine-readable error category selected from the documented label set |
+| `message` or `detail` | Human-readable explanation of why the error occurred or how to correct the request |
+
+Applications should branch on `label`. Do not parse `message` or `detail` to identify an error because their wording can change.
 
 ## HTTP categories
 
 | Status | Meaning |
 |---:|---|
-| 400 | Invalid request or business validation failure |
-| 401 | Missing or invalid authentication |
-| 403 | Authenticated but not permitted |
-| 404 | Resource not found within the caller's scope |
-| 409 | Conflict, duplicate, stale nonce, or idempotency mismatch |
-| 422 | Valid schema but action cannot be applied to current state |
-| 429 | Rate limited |
-| 500 | Internal failure |
-| 503 | Temporarily unavailable or under maintenance |
+| 200 / 201 | Request completed successfully |
+| 202 | Request accepted and still processing |
+| 204 | Request completed without a response body |
+| 400 | Invalid request |
+| 401 | Authentication failed |
+| 404 | Resource not found |
+| 429 | Request rate exceeded |
+| 5xx | Server-side failure |
 
-Always log `request_id` when contacting support. Never send secret keys.
+## Example
+
+```python
+import json
+import requests
+
+try:
+    response = requests.get(
+        "https://api.dexbuilder.com/api/v1/dex_futures/usdt/contracts/BTC_USDT"
+    )
+    response.raise_for_status()
+except requests.exceptions.HTTPError as error:
+    detail = json.loads(error.response.text)
+    if detail.get("label") == "INVALID_PARAM_VALUE":
+        print(f"Parameter error: {detail.get('message')}")
+```
+
+Record `X-Trace-ID` with the method, path, request time, and status code when contacting support. Never send an API Secret or private key.
+

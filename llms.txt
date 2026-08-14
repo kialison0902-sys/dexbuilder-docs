@@ -2,10 +2,20 @@
 
 > APIs and integration guides for perpetual trading applications and Builders launching their own trading frontend.
 
-## Start here
+## Introduction
 
-- Home: /index
-- What is DexBuilder?: /concepts/platform-overview
+- What is DexBuilder?: /index
+- Product suite: /concepts/product-suite
+- Core capabilities: /concepts/core-capabilities
+- Platform architecture: /concepts/platform-overview
+- Accounts: /concepts/accounts
+- Order lifecycle: /concepts/order-lifecycle
+- Perpetual trading: /concepts/perpetuals-and-risk
+- Settlement model: /concepts/settlement-model
+- Fee model: /concepts/fee-model
+
+## Build on DexBuilder
+
 - Choose an integration path: /getting-started/choose-a-path
 - Trader quickstart: /getting-started/trader-quickstart
 - Builder overview: /builder-api/overview
@@ -14,7 +24,6 @@
 
 ## Core integration flows
 
-- Accounts: /concepts/accounts
 - Account registration: /builder-api/account-registration
 - Wallet authorization: /funds/wallet-authorization
 - Deposits: /builder-api/deposits
@@ -40,18 +49,26 @@
 ## Developer operations
 
 - Environments: /resources/environments
+- API conventions: /resources/api-conventions
 - Developer tools: /resources/sdk-and-tools
 - Troubleshooting: /troubleshooting/overview
 - Error codes: /operations/error-codes
 - Release notes: /resources/changelog
+- Perpetual DEX release: /release-notes/perpetual-dex
+- Prediction markets release: /release-notes/prediction-markets
+- Event contracts release: /release-notes/event-contracts
 
 ## 中文文档
 
-- 首页：/zh/index
-- 什么是 DexBuilder：/zh/concepts/platform-overview
+- 什么是 DexBuilder：/zh/index
+- 产品体系：/zh/concepts/product-suite
+- 核心能力：/zh/concepts/core-capabilities
+- 平台架构：/zh/concepts/platform-overview
 - 选择接入方式：/zh/getting-started/choose-a-path
 - Builder 概览：/zh/builder-api/overview
 - Builder Onboarding：/zh/builder-api/onboarding
 - 账户：/zh/concepts/accounts
 - 账户注册：/zh/builder-api/account-registration
 - 故障排查：/zh/troubleshooting/overview
+- API 通用规则：/zh/resources/api-conventions
+- 更新日志：/zh/resources/changelog

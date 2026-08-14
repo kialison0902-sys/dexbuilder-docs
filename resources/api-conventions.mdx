@@ -1,0 +1,79 @@
+---
+title: "API conventions"
+description: "HTTP methods, timestamps, pagination, response headers, rate-limit metadata, and request tracing."
+---
+
+## Base URL
+
+All Trading API paths in the API Reference are relative to:
+
+```text
+https://api.dexbuilder.com/api/v1
+```
+
+## HTTP methods
+
+- Read operations use `GET`, accept request parameters, and do not read a request body.
+- `DELETE` removes a resource such as an order and does not read a request body. Complex cancellation operations use `POST` with a JSON request body.
+- Updates use `POST`, `PUT`, or `PATCH`. The endpoint page specifies whether inputs are sent as query parameters or JSON.
+- Successful operations return a `2xx` status. `401` indicates an authentication failure, other `4xx` statuses indicate an invalid request, and `5xx` statuses indicate a server-side failure.
+
+## Time fields
+
+Unless an endpoint states otherwise, time fields are Unix timestamps in seconds. The representation can be an integer, decimal number, or string:
+
+```text
+1596531048
+"1596531048"
+1596531048.285
+"1596531048.285"
+```
+
+Parse time fields as decimal-capable numbers when sub-second precision is required. Otherwise, they can be converted to integers after parsing.
+
+## Gateway timing
+
+API responses include gateway timing headers:
+
+| Header | Description |
+|---|---|
+| `X-In-Time` | Unix timestamp in microseconds when the API gateway received the request |
+| `X-Out-Time` | Unix timestamp in microseconds when the API gateway returned the response |
+
+Use the difference between these headers to separate gateway processing time from client-side network time.
+
+## Pagination
+
+List endpoints use either `page` with `limit`, or `offset` with `limit`. Unless an endpoint states otherwise, `limit` defaults to `100` and has a maximum value of `1000`.
+
+- `page` starts at `1`. Increment it until the response contains fewer records than `limit`.
+- `offset` starts at `0`. Increment it by `limit` until the response contains fewer records than `limit`.
+
+Some list endpoints also return:
+
+| Header | Description |
+|---|---|
+| `X-Pagination-Limit` | The request limit |
+| `X-Pagination-Offset` | The request offset |
+| `X-Pagination-Total` | Total number of records matching the request |
+
+## Rate-limit metadata
+
+The applicable rate limit is returned in response headers and can differ by endpoint.
+
+| Header | Description |
+|---|---|
+| `X-RateLimit-Requests-Remain` | Requests remaining for the current endpoint and window |
+| `X-RateLimit-Limit` | Current request limit for the endpoint |
+| `X-RateLimit-Reset-Timestamp` | Unix timestamp when requests can resume after the limit is exceeded; otherwise the current server timestamp |
+
+Clients should implement backoff and retry behavior from these response values instead of assuming one global request rate.
+
+## Request tracing
+
+Responses include `X-Trace-ID`. Record this value with the method, path, request time, status code, and sanitized request context when investigating an API issue.
+
+<Card title="Request signing" icon="key" href="/authentication/request-signing">
+  Learn how to construct the canonical request and generate the `SIGN` header for authenticated operations.
+</Card>
+

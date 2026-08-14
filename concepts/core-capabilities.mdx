@@ -1,0 +1,46 @@
+---
+title: "Core capabilities"
+description: "The trading, asset, operational, and developer capabilities available to teams building on DexBuilder."
+---
+
+DexBuilder is designed to reduce the number of independent systems a project must assemble and maintain. The platform organizes the core capabilities of a decentralized trading product into four connected areas.
+
+## Trading experience
+
+- order-book market data and real-time market streams;
+- professional order types and batch order management;
+- one-way and hedge position modes;
+- cross and isolated margin modes;
+- mark price, funding, liquidation, insurance-fund, and ADL information;
+- account, fill, position-close, and trading-fee history.
+
+## Accounts, assets, and settlement
+
+- wallet-based user authorization;
+- account registration and account-state retrieval;
+- deposits, withdrawals, and internal transfers;
+- account-book records and reconciliation workflows;
+- PnL and Builder revenue settlement.
+
+## Builder operations
+
+- project onboarding and Builder information;
+- user registration and authorized user data;
+- fee settings and order attribution;
+- campaigns and referral programs;
+- administrative data access scoped to the project.
+
+## Developer platform
+
+- public and authenticated REST operations;
+- WebSocket integration guidance;
+- HMAC-SHA512 request signing and credential permissions;
+- idempotent operation patterns;
+- complete English and Chinese documentation;
+- OpenAPI definitions for client generation and validation;
+- troubleshooting and production-readiness guidance.
+
+## Integration boundaries
+
+Each API page defines the authoritative method, path, parameter location, request body, response schema, and authentication requirement for that operation. Applications should not infer state changes from a submitted request alone; they should confirm orders, balances, positions, ledger entries, and settlement state through the corresponding query interfaces.
+

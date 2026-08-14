@@ -1,42 +1,62 @@
 ---
-title: "DexBuilder Documentation"
-description: "Build, integrate, and operate perpetual trading applications and branded DEXs."
+title: "What is DexBuilder?"
+description: "Infrastructure for launching decentralized trading products with professional market, account, settlement, and Builder capabilities."
 icon: "blocks"
 ---
 
-Everything you need to understand the platform, build a perpetual trading experience, integrate the APIs, and operate a branded DEX.
+DexBuilder is infrastructure for teams building decentralized trading products. It brings together market access, order execution, accounts, asset flows, settlement, and Builder operations so a team can launch a branded trading experience without assembling each layer independently.
 
-<img src="/images/dexbuilder-cover.svg" alt="DexBuilder" />
+<Frame caption="Build decentralized markets with DexBuilder">
+  <img src="/images/dexbuilder-cover.svg" alt="DexBuilder decentralized trading infrastructure" />
+</Frame>
 
-## Start here
+## One platform, multiple market experiences
+
+DexBuilder supports three product families: perpetual DEXs, prediction markets, and event contracts. Each product can be presented through a custom frontend and connected to the platform through documented APIs and integration workflows.
 
 <Columns cols={3}>
-  <Card title="Introduction" icon="circle-info" href="/concepts/platform-overview">
-    Understand the platform, account model, trading lifecycle, settlement, and fees.
+  <Card title="Perpetual DEX" icon="chart-candlestick" href="/concepts/product-suite#perpetual-dex">
+    Build order-book perpetual markets with professional order, position, margin, funding, and settlement workflows.
   </Card>
-  <Card title="Build on DexBuilder" icon="blocks" href="/getting-started/choose-a-path">
-    Follow the complete path from integration choice and onboarding to production launch.
+  <Card title="Prediction markets" icon="chart-line" href="/concepts/product-suite#prediction-markets">
+    Launch markets whose outcomes are determined by clearly defined real-world events.
   </Card>
-  <Card title="API Reference" icon="brackets-curly" href="/api-reference/markets/list-perpetual-contracts">
-    Explore market, account, position, and order endpoints with request and response schemas.
-  </Card>
-  <Card title="Developer tools" icon="screwdriver-wrench" href="/resources/sdk-and-tools">
-    Use the OpenAPI specifications, environments, and implementation resources.
-  </Card>
-  <Card title="Troubleshooting" icon="life-ring" href="/troubleshooting/overview">
-    Diagnose authentication, API, account-state, asset-flow, and trading issues.
-  </Card>
-  <Card title="Release notes" icon="clock-rotate-left" href="/resources/changelog">
-    Review documentation and API changes that affect integrations.
+  <Card title="Event contracts" icon="calendar-check" href="/concepts/product-suite#event-contracts">
+    Offer event-based contracts with explicit terms, lifecycle states, and settlement outcomes.
   </Card>
 </Columns>
 
-## Documentation paths
+## Built for professional trading products
 
-| Path | Use it when you need to |
-|---|---|
-| Introduction | Understand the product model and core trading concepts |
-| Build on DexBuilder | Implement onboarding, authentication, trading, asset, and Builder workflows |
-| API Reference | Integrate REST endpoints and generate typed clients from OpenAPI |
-| Developer tools | Configure environments and maintain integration tooling |
-| Troubleshooting | Diagnose errors and prepare a production-ready integration |
+DexBuilder combines a familiar order-book experience with the account, asset, and operational capabilities required to run a production trading application.
+
+- **Trading infrastructure:** market data, order management, positions, margin modes, funding, liquidation, and trade history.
+- **Verifiable account records:** balances, orders, fills, positions, and account-ledger changes are exposed through consistent account interfaces.
+- **Flexible product design:** teams control their brand, user experience, market presentation, and integration path.
+- **Builder operations:** user onboarding, fee configuration, campaigns, referrals, user data, and revenue settlement are organized as product workflows.
+- **Developer-first integration:** bilingual guides, OpenAPI definitions, request signing, examples, WebSocket guidance, and production checklists are maintained in one documentation set.
+
+## How the platform fits together
+
+<Frame caption="DexBuilder platform architecture">
+  <img src="/images/platform-architecture.svg" alt="Trading applications connect wallets and users to DexBuilder market, account, ledger, and settlement services" />
+</Frame>
+
+A user interacts with a trading application and authorizes account or asset actions. The application consumes public market data and authenticated account APIs, while DexBuilder coordinates execution, position accounting, ledger updates, and settlement. Builder operations provide the project-level controls needed to run the resulting product.
+
+## Choose your path
+
+<Columns cols={2}>
+  <Card title="Understand the product" icon="circle-info" href="/concepts/product-suite">
+    Review the product suite, platform capabilities, architecture, accounts, trading lifecycle, settlement, and fees.
+  </Card>
+  <Card title="Build on DexBuilder" icon="code" href="/getting-started/choose-a-path">
+    Follow the integration journey from onboarding and authentication to trading, assets, testing, and launch.
+  </Card>
+  <Card title="Integrate the Trading API" icon="brackets-curly" href="/api-reference/query-all-perp-contracts">
+    Use the complete perpetual-market API for market data, accounts, positions, orders, and history.
+  </Card>
+  <Card title="Operate in production" icon="rocket" href="/operations/go-live">
+    Validate credentials, permissions, asset flows, recovery behavior, monitoring, and launch readiness.
+  </Card>
+</Columns>

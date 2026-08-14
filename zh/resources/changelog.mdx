@@ -1,18 +1,24 @@
 ---
 title: "更新日志"
-description: "公开文档与 API 更新。"
+description: "DexBuilder 平台的产品能力发布记录。"
 ---
 
-## 2026-08-14
+更新日志记录 DexBuilder 发布的产品能力，重点说明支持的市场产品与 Builder 能力变化。
 
-- 将一级文档导航重组为首页、简介、在 DexBuilder 上构建、API Reference、开发工具、故障排查与更新日志；
-- 增加适用于 API、账户、资产流程与交易问题的标准排查流程；
-- 增加完整的中英文 Builder 导航；
-- 增加 Builder Onboarding、账户、账户注册、资产流程、手续费设置、Builder 用户数据、Campaign、推荐计划与收入结算指南；
-- 统一使用 Builder、Builder 资料、Broker ID、钱包用户、账户与管理员账户等术语；
-- 将 Builder API 纳入完整的“在 DexBuilder 上构建”接入路径；
-- 保持交易 API Base URL `https://api.dexbuilder.com/api/v1` 不变。
+## 产品发布
 
-## 2026-08-13
+<CardGroup cols={3}>
+  <Card title="永续合约 DEX" icon="chart-candlestick" href="/zh/release-notes/perpetual-dex">
+    订单簿永续合约交易、账户、仓位、结算与 Builder 接入能力。
+  </Card>
+  <Card title="预测市场" icon="chart-line" href="/zh/release-notes/prediction-markets">
+    支持 Builder 推出结果型预测市场体验。
+  </Card>
+  <Card title="事件合约" icon="calendar-check" href="/zh/release-notes/event-contracts">
+    支持 Builder 推出生命周期与结算结果明确的事件型合约。
+  </Card>
+</CardGroup>
 
-- 增加初始中英文开发者文档与交易 API Reference。
+## 记录范围
+
+每个发布页面说明产品范围、面向用户的能力与接入影响。具体合约定义与接口结构，仍以相应产品文档和 API Reference 为准。

@@ -6,10 +6,12 @@ English is the default language. Simplified Chinese pages live under `zh/`. Loca
 
 ## Information architecture
 
-- Home and Introduction explain the platform and core trading model.
+- Introduction combines the product landing page, product suite, core capabilities, platform architecture, accounts, and core trading concepts.
 - Build on DexBuilder covers onboarding, authentication, trading, asset settlement, and Builder operations as one integration journey.
 - API Reference contains the interactive Trading OpenAPI specification.
-- Developer tools, Troubleshooting, and Release notes support implementation and production operations.
+- Developer tools covers environments, API conventions, and integration tooling.
+- Troubleshooting supports implementation and production operations.
+- Release notes records product capabilities for perpetual DEX, prediction market, and event contract products.
 
 ## Run locally
 

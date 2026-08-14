@@ -1,0 +1,43 @@
+---
+title: "Product suite"
+description: "Explore perpetual DEX, prediction market, and event contract products on DexBuilder."
+---
+
+DexBuilder provides a common foundation for multiple decentralized market products. A project can select the product model that fits its users while retaining a consistent integration approach for accounts, assets, data, and operations.
+
+## Perpetual DEX
+
+The perpetual DEX product is designed for continuous order-book trading without a fixed expiry. It supports the workflows expected by active and professional traders:
+
+- contract metadata, order books, trades, candlesticks, tickers, and funding-rate history;
+- limit, market, reduce-only, post-only, fill-or-kill, batch, and level-based BBO order workflows;
+- one-way and hedge position modes;
+- cross and isolated margin modes;
+- leverage, position margin, exposure tiers, mark price, funding, liquidation, and ADL records;
+- account state, account-book history, trading fees, fills, and position-close history.
+
+<Card title="Perpetual Trading API" icon="brackets-curly" href="/api-reference/query-all-perp-contracts">
+  Review all 46 public and authenticated perpetual trading operations.
+</Card>
+
+## Prediction markets
+
+Prediction markets organize trading around a clearly defined question and a set of possible outcomes. A complete market experience presents the market rules, trading state, outcome instruments, key dates, and resolution result in a form users can verify before trading.
+
+Project teams use DexBuilder to bring prediction-market products into their own brand and user experience, alongside the account, asset, and operational workflows used across the platform.
+
+## Event contracts
+
+Event contracts are outcome-based contracts linked to a defined event. Each contract is presented with explicit terms, lifecycle states, trading availability, and settlement conditions so users can understand what determines the final result.
+
+Event contracts extend the range of markets a Builder can offer while using the same product principles: clear specifications, consistent user state, traceable account records, and deterministic settlement outcomes.
+
+## Shared product principles
+
+| Principle | What users should expect |
+|---|---|
+| Clear market specification | Product terms, market state, supported actions, and settlement conditions are visible before an action is submitted |
+| Consistent account state | Orders, positions or outcome exposure, balances, fees, and history are presented through a coherent account experience |
+| Explicit authorization | Authenticated and asset-moving actions follow documented credential and wallet-authorization rules |
+| Traceable lifecycle | Applications can track an action from submission through execution, ledger updates, and final settlement |
+| Builder control | Project teams own the frontend, branding, user journey, and permitted product configuration |
