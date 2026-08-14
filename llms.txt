@@ -4,7 +4,9 @@
 
 ## Start here
 
-- Overview: /index
+- Home: /index
+- What is DexBuilder?: /concepts/platform-overview
+- Choose an integration path: /getting-started/choose-a-path
 - Trader quickstart: /getting-started/trader-quickstart
 - Builder overview: /builder-api/overview
 - Builder onboarding: /builder-api/onboarding
@@ -15,10 +17,10 @@
 - Accounts: /concepts/accounts
 - Account registration: /builder-api/account-registration
 - Wallet authorization: /funds/wallet-authorization
-- Deposits: /funds/deposits
-- Withdrawals: /funds/withdrawals
-- PnL settlement: /funds/pnl-settlement
-- Internal transfers: /funds/internal-transfers
+- Deposits: /builder-api/deposits
+- Withdrawals: /builder-api/withdrawals
+- PnL settlement: /builder-api/pnl-settlement
+- Internal transfers: /builder-api/internal-transfers
 
 ## Builder API
 
@@ -35,10 +37,21 @@
 - DexBuilder Trading API: /openapi/trading-v1.yaml
 - Chinese Trading API: /openapi/zh/trading-v1.yaml
 
+## Developer operations
+
+- Environments: /resources/environments
+- Developer tools: /resources/sdk-and-tools
+- Troubleshooting: /troubleshooting/overview
+- Error codes: /operations/error-codes
+- Release notes: /resources/changelog
+
 ## 中文文档
 
 - 首页：/zh/index
+- 什么是 DexBuilder：/zh/concepts/platform-overview
+- 选择接入方式：/zh/getting-started/choose-a-path
 - Builder 概览：/zh/builder-api/overview
 - Builder Onboarding：/zh/builder-api/onboarding
 - 账户：/zh/concepts/accounts
 - 账户注册：/zh/builder-api/account-registration
+- 故障排查：/zh/troubleshooting/overview

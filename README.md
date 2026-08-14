@@ -4,11 +4,12 @@ This directory contains the bilingual Mintlify site for DexBuilder's public deve
 
 English is the default language. Simplified Chinese pages live under `zh/`. Localized Trading OpenAPI specifications live under `openapi/zh/`.
 
-## Documentation areas
+## Information architecture
 
-- Trading API for market data, accounts, positions, orders, and history.
-- Core integration flows for accounts, wallet authorization, deposits, withdrawals, PnL settlement, and internal transfers.
-- Builder API guides for user data, fee settings, revenue settlement, order tags, campaigns, and referrals.
+- Home and Introduction explain the platform and core trading model.
+- Build on DexBuilder covers onboarding, authentication, trading, asset settlement, and Builder operations as one integration journey.
+- API Reference contains the interactive Trading OpenAPI specification.
+- Developer tools, Troubleshooting, and Release notes support implementation and production operations.
 
 ## Run locally
 

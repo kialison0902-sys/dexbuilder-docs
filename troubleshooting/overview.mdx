@@ -1,0 +1,56 @@
+---
+title: "Troubleshooting overview"
+description: "Diagnose API, account, asset-flow, and trading issues with a consistent workflow."
+icon: "life-ring"
+---
+
+Use this section when an integration request fails, an account state looks inconsistent, or an asset or order workflow does not reach the expected result.
+
+## Diagnostic workflow
+
+<Steps>
+  <Step title="Confirm the environment">
+    Verify the API host, network, contract addresses, signing domain, account ID, and Broker ID used by the request.
+  </Step>
+  <Step title="Capture the request">
+    Record the UTC timestamp, HTTP method, path, request ID, response status, error code, and a redacted request body.
+  </Step>
+  <Step title="Identify the affected layer">
+    Separate client validation, signature verification, API processing, account state, and on-chain settlement before retrying.
+  </Step>
+  <Step title="Read the authoritative state">
+    Re-query the relevant order, position, account, asset-history, transfer-history, or settlement-history endpoint.
+  </Step>
+  <Step title="Retry safely">
+    Respect idempotency, nonce, timestamp, and rate-limit rules. Do not create a second financial action while the first result is unknown.
+  </Step>
+</Steps>
+
+## Diagnostic record
+
+| Field | Include |
+|---|---|
+| Request | UTC timestamp, method, path, request ID, and redacted parameters |
+| Environment | API host, network, wallet address, account ID, and Broker ID |
+| Response | HTTP status, error code, message, and relevant headers |
+| Account state | Order ID, position symbol, transfer ID, settlement ID, or asset-history record |
+| On-chain state | Transaction hash, chain, block confirmation, token, amount, and receiver |
+
+Never include private keys, seed phrases, API secrets, or unredacted signatures in diagnostic records.
+
+## Related guides
+
+<Columns cols={2}>
+  <Card title="Error codes" icon="triangle-exclamation" href="/operations/error-codes">
+    Interpret HTTP responses and API error categories.
+  </Card>
+  <Card title="Service status and recovery" icon="signal" href="/operations/system-status">
+    Handle degraded service, maintenance, and state recovery.
+  </Card>
+  <Card title="Rate limits" icon="gauge-high" href="/operations/rate-limits">
+    Apply throttling, backoff, and retry controls.
+  </Card>
+  <Card title="Integration FAQ" icon="circle-question" href="/resources/integration-faq">
+    Review common account, Builder, and asset-flow questions.
+  </Card>
+</Columns>

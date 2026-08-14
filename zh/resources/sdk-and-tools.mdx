@@ -1,13 +1,22 @@
 ---
-title: "SDK 与开发工具"
-description: "DexBuilder 接入所需的 OpenAPI 规范与实施要求。"
+title: "开发工具"
+description: "DexBuilder 接入所需的 OpenAPI 规范与实施资源。"
 ---
 
-| 产物 | 用途 |
+## 接入资源
+
+| 资源 | 用途 |
 |---|---|
-| 英文交易 OpenAPI | 交互式 API Reference 与客户端生成 |
-| 中文交易 OpenAPI | 本地化交互式 API Reference |
-| Builder API 文档 | 账户注册、资产流程、用户数据、手续费、Campaign、推荐与管理 |
+| [交易 OpenAPI](/openapi/trading-v1.yaml) | 交互式 API Reference、结构校验与客户端生成 |
+| [中文交易 OpenAPI](/openapi/zh/trading-v1.yaml) | 本地化字段说明与操作摘要 |
+| [在 DexBuilder 上构建](/zh/getting-started/choose-a-path) | 账户注册、资产流程、交易、手续费、Campaign、推荐与管理 |
+
+## OpenAPI 工作流
+
+1. 固定当前发布版本使用的 OpenAPI 文件；
+2. 在构建流水线中生成或更新类型化客户端；
+3. 检查认证、十进制精度、枚举与错误模型变化；
+4. 部署前在当前环境完成契约测试。
 
 ## 安全要求
 

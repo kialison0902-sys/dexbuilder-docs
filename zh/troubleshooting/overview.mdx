@@ -1,0 +1,56 @@
+---
+title: "故障排查概览"
+description: "使用一致流程定位 API、账户、资产流程与交易问题。"
+icon: "life-ring"
+---
+
+当接入请求失败、账户状态不一致，或资产和订单流程未达到预期结果时，请从本节开始排查。
+
+## 排查流程
+
+<Steps>
+  <Step title="确认环境">
+    核对请求使用的 API Host、网络、合约地址、签名 Domain、Account ID 与 Broker ID。
+  </Step>
+  <Step title="记录请求">
+    保存 UTC 时间、HTTP Method、路径、Request ID、响应状态、错误码及脱敏后的请求体。
+  </Step>
+  <Step title="定位问题层级">
+    在重试前区分客户端校验、签名验证、API 处理、账户状态与链上结算问题。
+  </Step>
+  <Step title="读取权威状态">
+    重新查询对应的订单、仓位、账户、资产历史、划转历史或结算历史接口。
+  </Step>
+  <Step title="安全重试">
+    遵守幂等、Nonce、时间戳与限流规则。在首次金融操作结果未知时，不要创建第二笔操作。
+  </Step>
+</Steps>
+
+## 排查记录
+
+| 字段 | 应包含内容 |
+|---|---|
+| 请求 | UTC 时间、Method、路径、Request ID 与脱敏参数 |
+| 环境 | API Host、网络、钱包地址、Account ID 与 Broker ID |
+| 响应 | HTTP 状态、错误码、错误信息与相关响应头 |
+| 账户状态 | Order ID、仓位 Symbol、Transfer ID、Settlement ID 或资产历史记录 |
+| 链上状态 | 交易哈希、网络、区块确认、Token、数量与接收地址 |
+
+排查记录中不得包含私钥、助记词、API Secret 或未脱敏签名。
+
+## 相关指南
+
+<Columns cols={2}>
+  <Card title="错误码" icon="triangle-exclamation" href="/zh/operations/error-codes">
+    理解 HTTP 响应与 API 错误分类。
+  </Card>
+  <Card title="服务状态与恢复" icon="signal" href="/zh/operations/system-status">
+    处理服务降级、维护与状态恢复。
+  </Card>
+  <Card title="限流" icon="gauge-high" href="/zh/operations/rate-limits">
+    实现节流、退避与重试控制。
+  </Card>
+  <Card title="接入常见问题" icon="circle-question" href="/zh/resources/integration-faq">
+    查看账户、Builder 与资产流程中的常见问题。
+  </Card>
+</Columns>

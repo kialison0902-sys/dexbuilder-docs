@@ -1,13 +1,22 @@
 ---
-title: "SDKs and developer tools"
-description: "OpenAPI specifications and implementation requirements for DexBuilder integrations."
+title: "Developer tools"
+description: "OpenAPI specifications and implementation resources for DexBuilder integrations."
 ---
 
-| Artifact | Purpose |
+## Integration resources
+
+| Resource | Purpose |
 |---|---|
-| English Trading OpenAPI | Interactive API reference and client generation |
-| Chinese Trading OpenAPI | Localized interactive API reference |
-| Builder API documentation | Account registration, asset flows, user data, fees, campaigns, referrals, and administration |
+| [Trading OpenAPI](/openapi/trading-v1.yaml) | Interactive reference, schema validation, and client generation |
+| [Chinese Trading OpenAPI](/openapi/zh/trading-v1.yaml) | Localized field descriptions and operation summaries |
+| [Build on DexBuilder](/getting-started/choose-a-path) | Account registration, asset flows, trading, fees, campaigns, referrals, and administration |
+
+## OpenAPI workflow
+
+1. pin the OpenAPI file used by your release;
+2. generate or update the typed client in your build pipeline;
+3. review authentication, decimal precision, enum, and error-model changes;
+4. run contract tests against the configured environment before deployment.
 
 ## Security requirements
 

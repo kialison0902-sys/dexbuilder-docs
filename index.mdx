@@ -1,29 +1,42 @@
 ---
-title: "DexBuilder Developer Docs"
-description: "APIs and integration guides for perpetual trading applications and branded DEXs."
+title: "DexBuilder Documentation"
+description: "Build, integrate, and operate perpetual trading applications and branded DEXs."
 icon: "blocks"
 ---
 
-DexBuilder provides perpetual trading infrastructure for traders, application developers, and Builders launching their own trading frontend.
-
-Use the Trading API for market data, orders, positions, and account data. Use the Builder guides for account registration, wallet authentication, asset flows, fee settings, and Builder administration.
+Everything you need to understand the platform, build a perpetual trading experience, integrate the APIs, and operate a branded DEX.
 
 <img src="/images/dexbuilder-cover.svg" alt="DexBuilder" />
 
-<Columns cols={2}>
-  <Card title="Trade through the API" icon="chart-candlestick" href="/getting-started/trader-quickstart">
-    Integrate markets, orders, positions, fills, and authenticated account data.
+## Start here
+
+<Columns cols={3}>
+  <Card title="Introduction" icon="circle-info" href="/concepts/platform-overview">
+    Understand the platform, account model, trading lifecycle, settlement, and fees.
   </Card>
-  <Card title="Build your own DEX" icon="blocks" href="/builder-api/overview">
-    Create a Builder profile, register user accounts, configure fees, and operate a branded trading frontend.
+  <Card title="Build on DexBuilder" icon="blocks" href="/getting-started/choose-a-path">
+    Follow the complete path from integration choice and onboarding to production launch.
+  </Card>
+  <Card title="API Reference" icon="brackets-curly" href="/api-reference/markets/list-perpetual-contracts">
+    Explore market, account, position, and order endpoints with request and response schemas.
+  </Card>
+  <Card title="Developer tools" icon="screwdriver-wrench" href="/resources/sdk-and-tools">
+    Use the OpenAPI specifications, environments, and implementation resources.
+  </Card>
+  <Card title="Troubleshooting" icon="life-ring" href="/troubleshooting/overview">
+    Diagnose authentication, API, account-state, asset-flow, and trading issues.
+  </Card>
+  <Card title="Release notes" icon="clock-rotate-left" href="/resources/changelog">
+    Review documentation and API changes that affect integrations.
   </Card>
 </Columns>
 
-## Documentation areas
+## Documentation paths
 
-| Area | Audience | Coverage |
-|---|---|---|
-| Trading API | Traders and application developers | Markets, orders, positions, margin, fills, and account data |
-| Core integration flows | Wallet and frontend developers | Accounts, authentication, deposits, withdrawals, PnL settlement, and internal transfers |
-| Builder API | Builders and backend developers | User data, fee settings, revenue settlement, order tags, referrals, and campaigns |
-| WebSocket API | Frontend and trading-system developers | Public market data and private account events |
+| Path | Use it when you need to |
+|---|---|
+| Introduction | Understand the product model and core trading concepts |
+| Build on DexBuilder | Implement onboarding, authentication, trading, asset, and Builder workflows |
+| API Reference | Integrate REST endpoints and generate typed clients from OpenAPI |
+| Developer tools | Configure environments and maintain integration tooling |
+| Troubleshooting | Diagnose errors and prepare a production-ready integration |

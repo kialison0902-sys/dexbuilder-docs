@@ -1,29 +1,42 @@
 ---
-title: "DexBuilder 开发者文档"
-description: "面向永续合约交易应用与品牌 DEX 的 API 和接入指南。"
+title: "DexBuilder 文档"
+description: "构建、接入并运营永续合约交易应用与品牌 DEX。"
 icon: "blocks"
 ---
 
-DexBuilder 为交易用户、应用开发者及上线自有交易前端的 Builder 提供永续合约交易基础设施。
-
-交易 API 用于接入行情、订单、仓位与账户数据；Builder 文档用于接入账户注册、钱包认证、资产流程、手续费设置和 Builder 管理能力。
+从理解平台、构建永续合约交易体验到接入 API 和运营品牌 DEX，本指南覆盖完整开发路径。
 
 <img src="/images/dexbuilder-cover.svg" alt="DexBuilder" />
 
-<Columns cols={2}>
-  <Card title="通过 API 进行交易" icon="chart-candlestick" href="/zh/getting-started/trader-quickstart">
-    接入市场、订单、仓位、成交与认证账户数据。
+## 从这里开始
+
+<Columns cols={3}>
+  <Card title="简介" icon="circle-info" href="/zh/concepts/platform-overview">
+    理解平台、账户模型、交易生命周期、结算与手续费。
   </Card>
-  <Card title="构建自己的 DEX" icon="blocks" href="/zh/builder-api/overview">
-    创建 Builder 资料、注册用户账户、配置手续费并运营品牌交易前端。
+  <Card title="在 DexBuilder 上构建" icon="blocks" href="/zh/getting-started/choose-a-path">
+    按照完整路径完成接入方式选择、Builder Onboarding 与生产上线。
+  </Card>
+  <Card title="API Reference" icon="brackets-curly" href="/zh/api-reference/markets/list-perpetual-contracts">
+    查询市场、账户、仓位与订单接口的请求参数和响应结构。
+  </Card>
+  <Card title="开发工具" icon="screwdriver-wrench" href="/zh/resources/sdk-and-tools">
+    使用 OpenAPI 规范、环境配置与实施资源。
+  </Card>
+  <Card title="故障排查" icon="life-ring" href="/zh/troubleshooting/overview">
+    排查认证、API、账户状态、资产流程与交易问题。
+  </Card>
+  <Card title="更新日志" icon="clock-rotate-left" href="/zh/resources/changelog">
+    查看影响接入方的文档与 API 更新。
   </Card>
 </Columns>
 
-## 文档范围
+## 文档路径
 
-| 范围 | 适用对象 | 内容 |
-|---|---|---|
-| 交易 API | 交易用户与应用开发者 | 市场、订单、仓位、保证金、成交与账户数据 |
-| 核心接入流程 | 钱包与前端开发者 | 账户、认证、充值、提现、PnL 结算与内部划转 |
-| Builder API | Builder 与后端开发者 | 用户数据、手续费设置、收入结算、订单标签、推荐与 Campaign |
-| WebSocket API | 前端与交易系统开发者 | 公共市场数据与私有账户事件 |
+| 路径 | 适用场景 |
+|---|---|
+| 简介 | 理解产品模型和核心交易概念 |
+| 在 DexBuilder 上构建 | 实现 Onboarding、认证、交易、资产与 Builder 工作流 |
+| API Reference | 接入 REST API，并通过 OpenAPI 生成类型化客户端 |
+| 开发工具 | 配置环境并维护开发与测试工具 |
+| 故障排查 | 定位问题并完成生产上线准备 |
