@@ -1,0 +1,25 @@
+---
+title: "User data"
+description: "Read daily volume and leaderboard data for accounts registered through a Builder."
+icon: "chart-column"
+---
+
+User data endpoints return aggregated activity for accounts registered through the Builder's Broker ID.
+
+<Note>`◇` identifies an operation that is not currently available on DexBuilder.</Note>
+
+## Volume
+
+| Status | Method and path | Description |
+|---|---|---|
+| ◇ | `GET /v1/volume/broker/daily` | Get the Builder's users' daily trading volume |
+
+## Leaderboard
+
+| Status | Method and path | Description |
+|---|---|---|
+| ◇ | `GET /v1/broker/leaderboard/daily` | Get the Builder's daily user leaderboard |
+
+## Data scope
+
+The response must include only accounts registered through the authenticated Builder's Broker ID. Use the admin account for authorization and apply the published date-range, pagination, and rate-limit rules.

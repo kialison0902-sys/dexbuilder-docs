@@ -1,0 +1,31 @@
+---
+title: "Referral program"
+description: "Validate, bind, create, and administer referral codes and multilevel referrals."
+icon: "user-group"
+---
+
+Referral endpoints connect an account to a referral code and let an authorized Builder administer its referral program.
+
+<Note>`◇` identifies an operation that is not currently available on DexBuilder.</Note>
+
+## Referral codes
+
+| Status | Method and path | Description |
+|---|---|---|
+| ◇ | `GET /v1/public/referral/check_ref_code` | Check whether a referral code exists |
+| ◇ | `GET /v1/public/referral/verify_ref_code` | Verify a referral code |
+| ◇ | `POST /v1/referral/bind` | Bind a referral code to an account |
+| ◇ | `POST /v1/referral/create` | Create a referral code |
+
+## Referral administration
+
+| Status | Method and path | Description |
+|---|---|---|
+| ◇ | `GET /v1/referral/admin_info` | Get referral-code information |
+| ◇ | `POST /v1/referral/update` | Update a referral code |
+| ◇ | `POST /v1/referral/multi_level/admin` | Enable or configure multilevel referrals |
+| ◇ | `GET /v1/referral/multi_level/admin` | Get the multilevel-referral configuration |
+
+## Binding rules
+
+Referral binding must be deterministic and auditable. The API contract must define whether binding is permanent, when updates are permitted, and how rebate rates become effective.

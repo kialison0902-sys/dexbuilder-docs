@@ -1,0 +1,30 @@
+---
+title: "订单标签管理"
+description: "创建、查询、更新、归档和恢复 Builder 订单标签。"
+icon: "tags"
+---
+
+订单标签用于 Builder 按接入方式、策略或渠道区分订单流，并分析对应表现。
+
+<Note>`◇` 表示该操作当前尚未在 DexBuilder 开放。</Note>
+
+## 创建与查询列表
+
+| 状态 | 方法与路径 | 说明 |
+|---|---|---|
+| ◇ | `POST /v1/broker/order_enum` | 创建订单标签 |
+| ◇ | `GET /v1/broker/order_enums` | 查询 Builder 的全部订单标签 |
+
+## 查询与更新
+
+| 状态 | 方法与路径 | 说明 |
+|---|---|---|
+| ◇ | `GET /v1/broker/order_enum/{enum_id}` | 查询订单标签及其统计 |
+| ◇ | `PUT /v1/broker/order_enum/{enum_id}` | 更新订单标签 |
+
+## 归档与恢复
+
+| 状态 | 方法与路径 | 说明 |
+|---|---|---|
+| ◇ | `POST /v1/broker/order_enum/archive` | 归档订单标签 |
+| ◇ | `POST /v1/broker/order_enum/unarchive` | 恢复已归档的订单标签 |

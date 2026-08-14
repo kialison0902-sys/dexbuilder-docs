@@ -1,0 +1,27 @@
+---
+title: "PnL settlement"
+description: "Settle realized PnL with a nonce and wallet signature."
+icon: "scale-balanced"
+---
+
+Closing a position realizes PnL. PnL settlement is a separate account operation.
+
+<Note>`◇` identifies an operation that is not currently available on DexBuilder.</Note>
+
+## PnL settlement API
+
+| Status | Method and path | Description |
+|---|---|---|
+| ◇ | `GET /v1/settle_nonce` | Get the PnL settlement nonce |
+| ◇ | `POST /v1/settle_pnl` | Submit signed PnL settlement |
+| ◇ | `GET /v1/pnl_settlement/history` | Get PnL settlement history |
+
+## Settlement flow
+
+1. read the account's settlement eligibility and realized PnL;
+2. obtain the settlement nonce;
+3. construct and sign the EIP-712 settlement message;
+4. submit the settlement request;
+5. confirm the settlement record and resulting account balance.
+
+Do not infer settlement completion from position state. Use the PnL settlement history returned for the account.

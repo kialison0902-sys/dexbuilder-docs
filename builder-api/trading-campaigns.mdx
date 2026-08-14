@@ -1,0 +1,30 @@
+---
+title: "Trading campaigns"
+description: "List campaigns, read rankings and statistics, check eligibility, and enroll accounts."
+icon: "trophy"
+---
+
+Trading campaign endpoints support campaign discovery, performance reporting, eligibility checks, and account enrollment.
+
+<Note>`◇` identifies an operation that is not currently available on DexBuilder.</Note>
+
+## Public campaign data
+
+| Status | Method and path | Description |
+|---|---|---|
+| ◇ | `GET /v1/public/campaigns` | List campaigns |
+| ◇ | `GET /v1/public/campaign/ranking` | Get campaign ranking |
+| ◇ | `GET /v1/public/campaign/stats` | Get campaign statistics |
+| ◇ | `GET /v1/public/campaign/stats/details` | Get detailed campaign statistics |
+| ◇ | `GET /v1/public/campaign/user` | Get an account's campaign information |
+| ◇ | `GET /v1/public/campaign/check` | Check campaign eligibility |
+
+## Enrollment
+
+| Status | Method and path | Description |
+|---|---|---|
+| ◇ | `POST /v1/client/campaign/sign_up` | Enroll an authenticated account in a campaign |
+
+## Campaign rules
+
+Publish the campaign window, eligible products, volume calculation, ranking rules, reward terms, and account restrictions before enrollment opens.

@@ -1,0 +1,27 @@
+---
+title: "Builder 信息"
+description: "查询 Builder 手续费等级与每日手续费收入。"
+icon: "chart-line"
+---
+
+Builder 信息与手续费收入接口用于配置核对与每日对账。
+
+<Note>`◇` 表示该操作当前尚未在 DexBuilder 开放。</Note>
+
+## Builder 信息
+
+| 状态 | 方法与路径 | 说明 |
+|---|---|---|
+| ◇ | `GET /v1/broker/broker_info` | 查询 Builder 手续费等级信息 |
+
+响应应包含 Broker ID、当前手续费等级、基础 Maker/Taker 费率与手续费收入配置。
+
+## 每日手续费收入
+
+| 状态 | 方法与路径 | 说明 |
+|---|---|---|
+| ◇ | `GET /v1/broker/daily_fee_revenue` | 查询 Builder 每日手续费收入历史 |
+
+## 对账
+
+使用 Builder 交易量与账户费率核对每日手续费收入。Builder 收入以每日手续费收入响应为准。

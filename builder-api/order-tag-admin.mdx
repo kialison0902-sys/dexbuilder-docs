@@ -1,0 +1,30 @@
+---
+title: "Order tag admin"
+description: "Create, list, update, archive, and restore Builder order tags."
+icon: "tags"
+---
+
+Order tags let a Builder classify order flow and review performance by integration, strategy, or distribution channel.
+
+<Note>`◇` identifies an operation that is not currently available on DexBuilder.</Note>
+
+## Create and list tags
+
+| Status | Method and path | Description |
+|---|---|---|
+| ◇ | `POST /v1/broker/order_enum` | Create an order tag |
+| ◇ | `GET /v1/broker/order_enums` | List all order tags for the Builder |
+
+## Read and update a tag
+
+| Status | Method and path | Description |
+|---|---|---|
+| ◇ | `GET /v1/broker/order_enum/{enum_id}` | Get an order tag and its statistics |
+| ◇ | `PUT /v1/broker/order_enum/{enum_id}` | Update an order tag |
+
+## Archive and restore
+
+| Status | Method and path | Description |
+|---|---|---|
+| ◇ | `POST /v1/broker/order_enum/archive` | Archive an order tag |
+| ◇ | `POST /v1/broker/order_enum/unarchive` | Restore an archived order tag |

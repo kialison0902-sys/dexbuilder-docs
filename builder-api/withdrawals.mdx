@@ -1,0 +1,29 @@
+---
+title: "Withdrawals"
+description: "Authorize and submit a collateral withdrawal with an EIP-712 signature."
+icon: "arrow-up-from-line"
+---
+
+<Note>`◇` identifies an operation that is not currently available on DexBuilder.</Note>
+
+## Withdrawal API
+
+| Status | Method and path | Description |
+|---|---|---|
+| ◇ | `GET /v1/withdraw_nonce` | Get the withdrawal nonce |
+| ◇ | `POST /v1/withdraw_request` | Submit a signed withdrawal request |
+| ◇ | `GET /v1/asset/history` | Query withdrawal history |
+
+## Withdrawal flow
+
+1. read the withdrawable balance and supported destination network;
+2. obtain the withdrawal nonce;
+3. construct the EIP-712 message defined by the withdrawal schema;
+4. display the asset, amount, fee, network, and receiver;
+5. obtain the wallet owner's signature;
+6. submit the withdrawal request;
+7. track the asset-history record and destination transaction.
+
+## Signing requirements
+
+The API contract must define the EIP-712 domain, field order, nonce lifetime, timestamp unit, amount precision, fee behavior, status values, and retry rules. Clients must sign the exact message required by the active environment.

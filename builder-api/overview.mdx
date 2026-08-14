@@ -1,0 +1,37 @@
+---
+title: "Build on DexBuilder"
+description: "Launch a trading frontend, onboard users, and operate as a Builder."
+---
+
+A **Builder** is a team that launches its own trading frontend on DexBuilder and onboards its own users. API traders using an existing integration do not need Builder onboarding.
+
+## Builder lifecycle
+
+<Steps>
+  <Step title="Create a Builder profile">
+    Provide the Builder name and choose a low-code or custom SDK/API launch path.
+  </Step>
+  <Step title="Obtain a Broker ID">
+    Complete Builder activation and record the unique Broker ID used by account registration and Builder APIs.
+  </Step>
+  <Step title="Register an admin account">
+    Link the wallet that manages Builder settings, fee configuration, and Builder API access.
+  </Step>
+  <Step title="Implement core user flows">
+    Register accounts, create API credentials, fund accounts, trade, settle PnL, and support withdrawals.
+  </Step>
+  <Step title="Prepare for launch">
+    Validate fees, account isolation, signing, reconciliation, monitoring, and production configuration.
+  </Step>
+</Steps>
+
+## Builder API areas
+
+| Area | Purpose |
+|---|---|
+| User data | Query accounts, holdings, orders, positions, trades, funding, volume, and liquidations |
+| Trading campaigns | Publish campaigns, rankings, statistics, eligibility, and enrollment |
+| Referral program | Manage referral codes, rebate rates, affiliates, and multilevel referrals |
+| Builder admin | Manage Builder information, fee settings, fee revenue, and order tags |
+
+<Note>`◇` identifies a Builder operation that is not currently available on DexBuilder. The symbol appears in the relevant API tables, not in navigation titles.</Note>

@@ -6,26 +6,31 @@
 
 - Overview: /index
 - Trader quickstart: /getting-started/trader-quickstart
-- Builder overview: /builders/overview
-- Builder onboarding: /builders/onboarding
+- Builder overview: /builder-api/overview
+- Builder onboarding: /builder-api/onboarding
 - Builder quickstart: /getting-started/builder-quickstart
 - API availability: /resources/api-coverage
 
 ## Core integration flows
 
 - Accounts: /concepts/accounts
-- Account registration: /builders/account-registration
+- Account registration: /builder-api/account-registration
 - Wallet authorization: /funds/wallet-authorization
 - Deposits: /funds/deposits
 - Withdrawals: /funds/withdrawals
 - PnL settlement: /funds/pnl-settlement
 - Internal transfers: /funds/internal-transfers
 
-## Builder operations
+## Builder API
 
-- Fee settings and order tags: /builders/configure-fees
-- Builder information and revenue: /builders/revenue
-- User data, campaigns, and referrals: /builders/user-data
+- User data: /builder-api/user-data
+- Admin user data: /builder-api/admin-user-data
+- Trading campaigns: /builder-api/trading-campaigns
+- Referral program: /builder-api/referral-program
+- Builder info: /builder-api/builder-info
+- Fee settings: /builder-api/fee-settings
+- Order tag admin: /builder-api/order-tag-admin
+- API availability: /builder-api/api-availability
 
 ## API specifications
 
@@ -35,10 +40,10 @@
 ## 中文文档
 
 - 首页：/zh/index
-- Builder 概览：/zh/builders/overview
-- Builder Onboarding：/zh/builders/onboarding
+- Builder 概览：/zh/builder-api/overview
+- Builder Onboarding：/zh/builder-api/onboarding
 - 账户：/zh/concepts/accounts
-- 账户注册：/zh/builders/account-registration
-- API 可用性：/zh/resources/api-coverage
+- 账户注册：/zh/builder-api/account-registration
+- API 可用性：/zh/builder-api/api-availability
 
 `◇` identifies a Builder interface that is not currently available on DexBuilder.

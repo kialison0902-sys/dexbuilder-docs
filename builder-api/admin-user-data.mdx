@@ -1,0 +1,42 @@
+---
+title: "Admin user data"
+description: "Query account, asset, order, position, funding, volume, liquidation, and trade data."
+icon: "users"
+---
+
+Admin user-data endpoints let an authorized Builder query accounts registered through its Broker ID.
+
+<Note>`◇` identifies an operation that is not currently available on DexBuilder.</Note>
+
+## Account and asset data
+
+| Status | Method and path | Description |
+|---|---|---|
+| ◇ | `GET /v1/admin/client/info` | Get account information |
+| ◇ | `GET /v1/admin/client/holding` | Get current holdings |
+| ◇ | `GET /v1/admin/internal_transfer_history` | Get internal-transfer history |
+| ◇ | `GET /v1/admin/asset/history` | Get deposit and withdrawal history |
+| ◇ | `GET /v1/admin/asset/convert_history` | Get asset-conversion history |
+| ◇ | `GET /v1/admin/client/leverage` | Get leverage settings |
+
+## Orders and positions
+
+| Status | Method and path | Description |
+|---|---|---|
+| ◇ | `GET /v1/admin/orders` | Get orders |
+| ◇ | `GET /v1/admin/algo/orders` | Get algo orders |
+| ◇ | `GET /v1/admin/position/{symbol}` | Get one position |
+| ◇ | `GET /v1/admin/positions` | Get all positions |
+
+## Funding, volume, and trades
+
+| Status | Method and path | Description |
+|---|---|---|
+| ◇ | `GET /v1/admin/funding_fee/history` | Get funding-fee history |
+| ◇ | `GET /v1/admin/volume/user/stats` | Get account volume statistics |
+| ◇ | `GET /v1/admin/liquidations` | Get liquidated positions |
+| ◇ | `GET /v1/admin/trades` | Get trades |
+
+## Authorization
+
+Every request must authenticate the Builder's admin account and enforce Broker ID ownership. An admin account cannot sign wallet-authorized asset operations for the account owner.

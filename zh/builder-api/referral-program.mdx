@@ -1,0 +1,31 @@
+---
+title: "推荐计划"
+description: "校验、绑定、创建和管理推荐码与多级推荐。"
+icon: "user-group"
+---
+
+推荐接口用于将账户与推荐码建立关联，并允许已授权 Builder 管理推荐计划。
+
+<Note>`◇` 表示该操作当前尚未在 DexBuilder 开放。</Note>
+
+## 推荐码
+
+| 状态 | 方法与路径 | 说明 |
+|---|---|---|
+| ◇ | `GET /v1/public/referral/check_ref_code` | 检查推荐码是否存在 |
+| ◇ | `GET /v1/public/referral/verify_ref_code` | 验证推荐码 |
+| ◇ | `POST /v1/referral/bind` | 将推荐码绑定到账户 |
+| ◇ | `POST /v1/referral/create` | 创建推荐码 |
+
+## 推荐管理
+
+| 状态 | 方法与路径 | 说明 |
+|---|---|---|
+| ◇ | `GET /v1/referral/admin_info` | 查询推荐码信息 |
+| ◇ | `POST /v1/referral/update` | 更新推荐码 |
+| ◇ | `POST /v1/referral/multi_level/admin` | 启用或配置多级推荐 |
+| ◇ | `GET /v1/referral/multi_level/admin` | 查询多级推荐配置 |
+
+## 绑定规则
+
+推荐关系必须可确定且可审计。接口契约必须明确绑定是否永久、何时可修改，以及返佣比例的生效时间。

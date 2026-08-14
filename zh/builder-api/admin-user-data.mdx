@@ -1,0 +1,42 @@
+---
+title: "管理员用户数据"
+description: "查询账户、资产、订单、仓位、资金费、交易量、强平与成交数据。"
+icon: "users"
+---
+
+管理员用户数据接口允许已授权 Builder 查询通过自身 Broker ID 注册的账户。
+
+<Note>`◇` 表示该操作当前尚未在 DexBuilder 开放。</Note>
+
+## 账户与资产数据
+
+| 状态 | 方法与路径 | 说明 |
+|---|---|---|
+| ◇ | `GET /v1/admin/client/info` | 查询账户信息 |
+| ◇ | `GET /v1/admin/client/holding` | 查询当前持仓 |
+| ◇ | `GET /v1/admin/internal_transfer_history` | 查询内部划转历史 |
+| ◇ | `GET /v1/admin/asset/history` | 查询充值与提现历史 |
+| ◇ | `GET /v1/admin/asset/convert_history` | 查询资产兑换历史 |
+| ◇ | `GET /v1/admin/client/leverage` | 查询杠杆设置 |
+
+## 订单与仓位
+
+| 状态 | 方法与路径 | 说明 |
+|---|---|---|
+| ◇ | `GET /v1/admin/orders` | 查询订单 |
+| ◇ | `GET /v1/admin/algo/orders` | 查询策略订单 |
+| ◇ | `GET /v1/admin/position/{symbol}` | 查询单一仓位 |
+| ◇ | `GET /v1/admin/positions` | 查询全部仓位 |
+
+## 资金费、交易量与成交
+
+| 状态 | 方法与路径 | 说明 |
+|---|---|---|
+| ◇ | `GET /v1/admin/funding_fee/history` | 查询资金费历史 |
+| ◇ | `GET /v1/admin/volume/user/stats` | 查询账户交易量统计 |
+| ◇ | `GET /v1/admin/liquidations` | 查询强平仓位 |
+| ◇ | `GET /v1/admin/trades` | 查询成交 |
+
+## 授权
+
+每个请求都必须鉴权 Builder 管理员账户并校验 Broker ID 所有权。管理员账户不能代替账户所有者签署钱包授权的资产操作。

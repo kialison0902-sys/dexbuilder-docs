@@ -147,29 +147,36 @@
               {
                 "group": "Getting started",
                 "pages": [
-                  "builders/overview",
-                  "builders/onboarding",
-                  "getting-started/builder-quickstart"
+                  "builder-api/overview",
+                  "builder-api/onboarding",
+                  "builder-api/account-registration"
                 ]
               },
               {
-                "group": "Core integration flows",
+                "group": "Asset flows",
                 "pages": [
-                  "concepts/accounts",
-                  "builders/account-registration",
-                  "funds/deposits",
-                  "funds/withdrawals",
-                  "funds/pnl-settlement",
-                  "funds/internal-transfers"
+                  "builder-api/deposits",
+                  "builder-api/withdrawals",
+                  "builder-api/pnl-settlement",
+                  "builder-api/internal-transfers"
                 ]
               },
               {
-                "group": "Builder operations",
+                "group": "Builder API",
                 "pages": [
-                  "builders/configure-fees",
-                  "builders/revenue",
-                  "builders/user-data",
-                  "resources/api-coverage"
+                  "builder-api/user-data",
+                  "builder-api/trading-campaigns",
+                  "builder-api/referral-program"
+                ]
+              },
+              {
+                "group": "Builder admin",
+                "pages": [
+                  "builder-api/builder-info",
+                  "builder-api/admin-user-data",
+                  "builder-api/fee-settings",
+                  "builder-api/order-tag-admin",
+                  "builder-api/api-availability"
                 ]
               }
             ]
@@ -295,29 +302,36 @@
               {
                 "group": "快速开始",
                 "pages": [
-                  "zh/builders/overview",
-                  "zh/builders/onboarding",
-                  "zh/getting-started/builder-quickstart"
+                  "zh/builder-api/overview",
+                  "zh/builder-api/onboarding",
+                  "zh/builder-api/account-registration"
                 ]
               },
               {
-                "group": "核心接入流程",
+                "group": "资产流程",
                 "pages": [
-                  "zh/concepts/accounts",
-                  "zh/builders/account-registration",
-                  "zh/funds/deposits",
-                  "zh/funds/withdrawals",
-                  "zh/funds/pnl-settlement",
-                  "zh/funds/internal-transfers"
+                  "zh/builder-api/deposits",
+                  "zh/builder-api/withdrawals",
+                  "zh/builder-api/pnl-settlement",
+                  "zh/builder-api/internal-transfers"
+                ]
+              },
+              {
+                "group": "Builder API",
+                "pages": [
+                  "zh/builder-api/user-data",
+                  "zh/builder-api/trading-campaigns",
+                  "zh/builder-api/referral-program"
                 ]
               },
               {
                 "group": "Builder 管理",
                 "pages": [
-                  "zh/builders/configure-fees",
-                  "zh/builders/revenue",
-                  "zh/builders/user-data",
-                  "zh/resources/api-coverage"
+                  "zh/builder-api/builder-info",
+                  "zh/builder-api/admin-user-data",
+                  "zh/builder-api/fee-settings",
+                  "zh/builder-api/order-tag-admin",
+                  "zh/builder-api/api-availability"
                 ]
               }
             ]
