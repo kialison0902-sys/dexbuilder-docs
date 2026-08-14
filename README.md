@@ -19,6 +19,8 @@ Install the Mintlify CLI with `npm i -g mint`, run `mint dev` from this director
 
 ## Publish
 
+The production documentation is deployed from the repository's `main` branch.
+
 1. Validate `docs.json`, internal links, and both Trading OpenAPI files.
 2. Commit changes to the connected GitHub repository.
 3. Confirm the Mintlify deployment in English and Chinese.
