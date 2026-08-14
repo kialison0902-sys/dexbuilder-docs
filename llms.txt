@@ -15,14 +15,14 @@
 - Authentication: /authentication/overview
 - Place an order: /trading/place-first-order
 - Funds overview: /funds/overview
-- Transaction Builder: /funds/transaction-builder
+- Wallet action construction (◇ requires development): /funds/transaction-builder
 - Configure Builder fees: /builders/configure-fees
-- Revenue and payouts: /builders/revenue-and-payouts
+- Builder revenue settlement (◇ requires development): /builders/revenue-and-payouts
 
 ## API specifications
 
 - DexBuilder Trading API: /openapi/trading-v1.yaml
-- Builder API: /openapi/builder-v1.yaml
+- Builder API alignment (◇ requires development): /resources/builder-api-alignment
 
 ## 中文文档
 
@@ -32,6 +32,6 @@
 - Builder 快速开始：/zh/getting-started/builder-quickstart
 - API 覆盖范围与发布状态：/zh/resources/api-coverage
 - 中文交易 API：/openapi/zh/trading-v1.yaml
-- 中文 Builder API：/openapi/zh/builder-v1.yaml
+- 中文 Builder API 对齐清单（◇ 表示待开发）：/zh/resources/builder-api-alignment
 
-Use the base URL, credentials, chains, and contract addresses assigned to the integrating DexBuilder project.
+Use `https://api.dexbuilder.com/api/v1/` only for the published Trading API. Builder URLs, signing contracts, chains, and contract addresses remain unavailable until DexBuilder publishes them.

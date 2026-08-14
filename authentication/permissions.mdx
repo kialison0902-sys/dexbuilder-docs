@@ -14,19 +14,10 @@ description: "Apply least privilege to Trading Keys and Builder Admin credential
 
 Asset withdrawal and settlement submission should still require the applicable wallet-authorized payload.
 
-## Builder Admin scopes
+## ◇ Builder administrator permissions
 
-- `builder:read`
-- `builder:write`
-- `users:read`
-- `fees:read`
-- `fees:write`
-- `revenue:read`
-- `analytics:read`
-- `webhooks:write`
-- `markets:read`
-- `markets:write`
+DexBuilder has not published Builder permission names. The final model must separately authorize user-data reads, fee administration, revenue reads, order-tag management, referrals, campaigns, and Builder-filtered streams. Do not implement the scope names from an earlier draft.
 
 <Note>
-  Use the scope names returned by the credential service for your environment. Reject unknown scopes and request only the permissions the integration needs.
+  Use only the permission names returned by a published DexBuilder credential service. Reject unknown permissions and request the minimum required access.
 </Note>

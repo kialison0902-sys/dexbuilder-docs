@@ -1,28 +1,17 @@
 ---
-title: "项目配置"
-description: "创建 Builder 身份、环境、凭证与部署配置。"
+title: "◇ Builder 配置"
+description: "建立 Builder 身份与管理权限，不假设未经确认的 Project API。"
 ---
 
-## 配置流程
+<Warning>这是 Onboarding 要求，不是已发布的 DexBuilder API 流程。</Warning>
 
-<Steps>
-  <Step title="连接 Admin 钱包">
-    使用由组织控制的专用钱包，在 Builder Console 完成所有权验证。
-  </Step>
-  <Step title="创建项目">
-    定义项目名称、产品、地区、链、结算资产与接入路径。
-  </Step>
-  <Step title="创建 Sandbox">
-    生成 Sandbox 环境与有限权限 Admin Key。
-  </Step>
-  <Step title="配置产品">
-    设置品牌、域名、市场、手续费政策、Webhook 与运营联系人。
-  </Step>
-  <Step title="申请生产激活">
-    完成上线评审，并创建仅用于生产环境的新凭证。
-  </Step>
-</Steps>
+## 目标配置流程
 
-## 凭证存储
+1. 连接由组织控制的管理员钱包；
+2. 完成 Builder 所有权及联系人验证；
+3. 取得 Builder 标识和已批准的管理权限；
+4. 配置支持的网络、抵押资产、市场及费率政策；
+5. 在环境可用后分别创建 Sandbox 和生产凭证；
+6. 通过 DexBuilder 对应的 `GET /v1/broker/broker_info` 能力验证 Builder 信息。
 
-将 Admin Secret 存储在托管 Secret Store 中。记录 `key_id`、Scope、创建人、创建时间、最后使用时间和过期时间。API 创建后不得再次返回 Secret。
+DexBuilder 尚未确认 Orderly 风格的 Project CRUD，因此本文档不定义 `project_id`、项目创建、部署或 Webhook 配置接口。

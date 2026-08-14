@@ -11,16 +11,16 @@ A wallet may interact with more than one Builder. Each registration must retain 
 |---|---|---|
 | Wallet | User | The signing authority for registration and asset movements |
 | Account | User within a Builder context | Balances, orders, positions, fills, and Trading Keys |
-| Project | Builder | Environment, product, brand, domain, and deployment settings |
-| Admin credential | Builder | Scoped access to project-level data and configuration |
+| Builder profile | Builder | Identity, approved configuration, and settlement information |
+| ◇ Administrator authorization | Builder | Scoped access to published Builder data and configuration |
 
 ## Isolation requirements
 
-- A Builder can access only its own project and Builder-scoped user data.
+- A Builder must access only its own Builder-scoped user data.
 - User assets remain controlled by the applicable wallet and settlement contracts.
-- Builder Admin access must not grant the ability to forge a user wallet signature.
+- Builder administrator access must not grant the ability to forge a user wallet signature.
 - Sandbox and production accounts and keys must remain separate.
-- Every revenue and analytics record must carry stable Builder attribution.
+- Every volume and fee-revenue record must carry stable Builder attribution.
 
 <Warning>
   Do not infer the Builder solely from a frontend domain or mutable request header. Attribution must be validated against the registered account or signed action.

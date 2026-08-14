@@ -1,0 +1,124 @@
+---
+title: "◇ Builder API alignment"
+description: "Orderly-aligned Builder capabilities that still require DexBuilder engineering and contract publication."
+icon: "diamond"
+---
+
+<Warning>
+  `◇` means Orderly documents this capability, but DexBuilder has not published it as a callable API. Every path on this page is an Orderly reference path—not a DexBuilder endpoint. Engineering must confirm the DexBuilder route, wire fields, authentication, signing, schemas, errors, and environment before the symbol is removed.
+</Warning>
+
+The published **Trading Reference** tab remains the Aden-compatible DexBuilder trading contract. This page is the separate Builder development backlog.
+
+## Builder identity and public discovery
+
+| Status | Orderly reference | Purpose |
+|---|---|---|
+| ◇ | `GET /v1/public/broker/name` | Resolve a Builder name |
+| ◇ | `GET /v1/public/broker/stats` | Read public Builder statistics |
+| ◇ | `GET /v1/public/volume/stats` | Read public volume statistics |
+| ◇ | `GET /v1/public/chain_info` | Discover supported chains and contracts |
+| ◇ | `GET /v1/public/futures_market` | Read public perpetual-market configuration |
+| ◇ | `GET /v1/public/balance/stats` | Read public balance statistics |
+
+## User registration and trading credentials
+
+| Status | Orderly reference | Purpose |
+|---|---|---|
+| ◇ | `GET /v1/public/account` | Check whether an address is registered |
+| ◇ | `GET /v1/get_account` | Read the authenticated account identity |
+| ◇ | `GET /v1/get_broker` | Read the account's Builder attribution |
+| ◇ | `GET /v1/registration_nonce` | Get the nonce for account registration |
+| ◇ | `POST /v1/register_account` | Register a wallet under a Builder |
+| ◇ | `GET /v1/get_orderly_key` | List trading credentials |
+| ◇ | `POST /v1/orderly_key` | Add a trading credential |
+| ◇ | `POST /v1/client/remove_orderly_key` | Remove a trading credential |
+
+Orderly uses `broker_id` in legacy wire fields. DexBuilder product terminology is `builder_id`; engineering must choose and document the final DexBuilder wire name before publication.
+
+## Funds, settlement, and transfers
+
+| Status | Orderly reference | Purpose |
+|---|---|---|
+| ◇ | Vault contract `approve` → `getDepositFee` → `deposit` | Standard collateral deposit |
+| ◇ | `GET /v1/withdraw_nonce` | Get the withdrawal signing nonce |
+| ◇ | `POST /v1/withdraw_request` | Submit a signed withdrawal request |
+| ◇ | `GET /v1/settle_nonce` | Get the PnL-settlement signing nonce |
+| ◇ | `POST /v1/settle_pnl` | Submit signed PnL settlement |
+| ◇ | `GET /v1/pnl_settlement/history` | Read PnL-settlement history |
+| ◇ | `GET /v1/transfer_nonce` | Get the internal-transfer signing nonce |
+| ◇ | `POST /v1/internal_transfer` | Submit an internal transfer |
+| ◇ | `POST /v2/internal_transfer` | Submit the current internal-transfer version |
+| ◇ | `GET /v1/internal_transfer_history` | Read internal-transfer history |
+
+Standard Orderly deposits are Vault contract calls or SDK operations. Orderly does not define a generic REST resource that creates a deposit or a server-side Transaction Builder that returns arbitrary wallet payloads.
+
+## Builder data and administration
+
+| Status | Orderly reference | Purpose |
+|---|---|---|
+| ◇ | `GET /v1/volume/broker/daily` | Read daily Builder volume |
+| ◇ | `GET /v1/broker/leaderboard/daily` | Read the daily Builder leaderboard |
+| ◇ | `GET /v1/broker/broker_info` | Read Builder information and settlement configuration |
+| ◇ | `GET /v1/broker/daily_fee_revenue` | Read daily Builder fee revenue |
+| ◇ | `/v1/admin/client/*` | Query attributed-user account, holding, order, trade, transfer, funding, volume, and liquidation data |
+
+The `/v1/admin/client/*` family must be documented endpoint by endpoint when DexBuilder finalizes its authorization and response schemas. It must never be published as a wildcard callable route.
+
+## Fees and order attribution
+
+| Status | Orderly reference | Purpose |
+|---|---|---|
+| ◇ | `GET /v1/broker/fee_rate/default` | Read default Builder fee rates |
+| ◇ | `POST /v1/broker/fee_rate/default` | Create default Builder fee rates |
+| ◇ | `POST /v1/broker/fee_rate/set` | Set user-specific fee rates |
+| ◇ | `POST /v1/broker/fee_rate/set_default` | Update default Builder fee rates |
+| ◇ | `GET /v1/broker/user_info` | Read Builder-attributed user and fee information |
+| ◇ | `POST /v1/broker/order_enum` | Create an order attribution tag |
+| ◇ | `GET /v1/broker/order_enums` | List order attribution tags |
+| ◇ | `GET /v1/broker/order_enum/{enum_id}` | Read an order attribution tag |
+| ◇ | `PUT /v1/broker/order_enum/{enum_id}` | Update an order attribution tag |
+| ◇ | `POST /v1/broker/order_enum/archive` | Archive a tag |
+| ◇ | `POST /v1/broker/order_enum/unarchive` | Restore a tag |
+
+## Additional Orderly Builder surfaces
+
+| Status | Surface | DexBuilder documentation requirement |
+|---|---|---|
+| ◇ | Multilevel referrals | Publish roles, referral relationships, fee sharing, permissions, and settlement rules |
+| ◇ | Campaigns | Publish creation, eligibility, metrics, rewards, and lifecycle contracts |
+| ◇ | Builder-filtered WebSocket topics | Publish topic names, subscription filters, payloads, replay behavior, and limits |
+
+These surfaces stay at the capability level until DexBuilder has a verified endpoint contract. No guessed path is shown.
+
+## Removed from the earlier draft
+
+The following concepts were removed from the public API reference because they are not part of the Orderly Builder REST baseline and DexBuilder has not confirmed them:
+
+- `/builder/v1/projects` project CRUD;
+- `/v1/transactions/build/*` generic Transaction Builder routes;
+- `/v1/deposits` and `/v1/deposits/quote` REST deposit creation;
+- `/builder/v1/webhooks` and webhook-delivery management;
+- `/builder/v1/payouts` payout creation;
+- generic `/builder/v1/analytics/summary` and invented ledger resources.
+
+## Publication gate
+
+Remove `◇` only after all of the following are true:
+
+1. the DexBuilder route and HTTP method are implemented;
+2. authentication and wallet-signing behavior are fixed;
+3. request, response, error, precision, and timestamp schemas are reviewed;
+4. Sandbox and production configuration are available;
+5. the end-to-end flow passes integration tests;
+6. the operation is added to a reviewed DexBuilder OpenAPI specification.
+
+## Orderly sources used for alignment
+
+- [Builder onboarding](https://orderly.network/docs/introduction/getting-started/builder-onboarding)
+- [Accounts flow](https://orderly.network/docs/build-on-omnichain/user-flows/accounts)
+- [Deposits and withdrawals](https://orderly.network/docs/build-on-omnichain/user-flows/withdrawal-deposit)
+- [Settle PnL](https://orderly.network/docs/build-on-omnichain/user-flows/settle-pnl)
+- [Internal transfers](https://orderly.network/docs/build-on-omnichain/user-flows/internal-transfer)
+- [Custom fees](https://orderly.network/docs/build-on-omnichain/user-flows/custom-fees)
+- [Orderly documentation index](https://orderly.network/docs/llms-full.txt)

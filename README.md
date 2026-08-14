@@ -2,18 +2,18 @@
 
 This directory is a deployable bilingual Mintlify documentation project for DexBuilder's public developer documentation.
 
-English is the default language. Simplified Chinese pages live under `zh/` with one-to-one navigation parity. Localized OpenAPI references live under `openapi/zh/`.
+English is the default language. Simplified Chinese pages live under `zh/` with one-to-one navigation parity. The localized Trading OpenAPI reference lives under `openapi/zh/`.
 
 ## Audiences
 
 - Trading users and application developers integrating market data, orders, positions, and account data.
-- Builder project teams onboarding users, managing funds and settlement, configuring fees, and reconciling revenue.
+- Builder teams planning user onboarding, funds, settlement, fees, and revenue integrations.
 
 ## Content status
 
-- `openapi/trading-v1.yaml` and `openapi/zh/trading-v1.yaml` document the DexBuilder perpetual REST surface.
-- `openapi/builder-v1.yaml` and `openapi/zh/builder-v1.yaml` are the English and Chinese Builder API contracts covering projects, funds, settlement, fees, revenue, analytics, and webhooks.
-- Production URLs, signing fields, schemas, limits, and state machines must match the environment assigned to the integrating project.
+- `openapi/trading-v1.yaml` and `openapi/zh/trading-v1.yaml` document the published DexBuilder perpetual REST surface based on the Aden operator API.
+- `resources/builder-api-alignment.mdx` and its Chinese counterpart map the Builder capabilities documented by Orderly. A `◇` means DexBuilder still requires engineering work and has not published that operation.
+- A Builder operation becomes callable documentation only after its DexBuilder route, authentication, signing, schemas, errors, environment, and end-to-end behavior are confirmed.
 
 ## Run locally
 
@@ -25,8 +25,8 @@ Install the Mintlify CLI with `npm i -g mint`, run `mint dev` from this director
 2. Use a test subdomain for review.
 3. Configure `docs.dexbuilder.com` after content and API review.
 4. Add a **Developers** link to the main DexBuilder navigation.
-5. Validate both OpenAPI files and every navigation path in CI before publishing.
+5. Validate both localized Trading OpenAPI files and every navigation path in CI before publishing.
 
 ## GitBook option
 
-The Markdown/MDX content can be migrated to GitBook through Git Sync. GitBook can import the OpenAPI files to generate interactive endpoint pages. Mintlify is the default here because Orderly currently uses Mintlify and this structure mirrors that documentation experience.
+The Markdown/MDX content can be migrated to GitBook through Git Sync. Mintlify is the default because it supports the documentation and interactive Trading API experience used here.

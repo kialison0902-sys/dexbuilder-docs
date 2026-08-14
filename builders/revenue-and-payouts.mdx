@@ -1,29 +1,17 @@
 ---
-title: "Revenue and payouts"
-description: "Reconcile Builder earnings from fills through payout."
+title: "◇ Builder revenue settlement"
+description: "Read Orderly-aligned Builder information, daily volume, and daily fee revenue."
 ---
 
-## Revenue formula
+<Warning>DexBuilder has not published these Builder operations. Orderly reference paths are shown for development alignment.</Warning>
 
-The exact production formula depends on the commercial plan. A revenue record should nevertheless expose all components:
+## Target sources
 
-```text
-gross user trading fee
-− protocol base fee
-− user maker rebate
-− referral and campaign allocations
-± adjustments
-= net Builder revenue
-```
+| Orderly reference | Use |
+|---|---|
+| `GET /v1/broker/broker_info` | Builder information and settlement configuration |
+| `GET /v1/broker/daily_fee_revenue` | Daily Builder fee revenue |
+| `GET /v1/volume/broker/daily` | Daily Builder volume |
+| `GET /v1/public/volume/stats` | Public volume statistics |
 
-## Required records
-
-- summary by day, market, and asset;
-- fill-level revenue ledger;
-- referral and campaign deductions;
-- payable, paid, and adjusted balances;
-- payout destination, transaction, and status.
-
-<Warning>
-  Do not calculate production payouts from analytics aggregates. Use the final revenue and payout ledgers.
-</Warning>
+Revenue reporting must use the final settlement fields returned by the platform. DexBuilder has not confirmed a public payout-creation API, fill-level revenue ledger, payout state machine, or generic payout resource, so none is documented here.

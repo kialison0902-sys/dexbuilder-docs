@@ -1,45 +1,20 @@
 ---
-title: "Transaction Builder"
-description: "在不接触用户私钥的情况下构造钱包可签名交易。"
+title: "◇ 钱包操作构造"
+description: "依据正式契约构造 Vault 调用与 EIP-712 消息，不虚构通用 REST 服务。"
 ---
 
-Transaction Builder 返回用户授权操作所需的准确 EVM Typed Data、Calldata 或 Solana Message。
+<Warning>DexBuilder 尚未发布通用 Transaction Builder REST API；Orderly 的核心 Builder 模式也不要求这类接口。</Warning>
 
-它不会替用户签名，也永远不接收私钥。
+对齐后的实现按操作区分：
 
-<Frame caption="钱包授权操作流程">
-  <img src="/images/wallet-action-flow-zh.svg" alt="后端请求载荷，钱包在本地检查并签名，DexBuilder 验证并追踪操作" />
-</Frame>
+| 操作 | 构造方式 |
+|---|---|
+| 账户注册 | 获取注册 Nonce，并构造文档规定的注册消息 |
+| 充值 | 构造 Token 授权与 Vault `deposit` 调用 |
+| 提现 | 获取提现 Nonce，并构造文档规定的 EIP-712 消息 |
+| PnL 结算 | 获取结算 Nonce，并构造文档规定的 EIP-712 消息 |
+| 内部划转 | 获取划转 Nonce，并构造文档规定的签名请求 |
 
-## 响应约定
+连接的钱包在本地签名；DexBuilder 与 SDK 都不得接收用户私钥。
 
-```json
-{
-  "request_id": "req_01J...",
-  "chain_type": "EVM",
-  "chain_id": 42161,
-  "from": "0xUSER",
-  "to": "0xVERIFIER_OR_VAULT",
-  "typed_data": {},
-  "calldata": "0x...",
-  "value": "0",
-  "gas_estimate": "145000",
-  "fee_quote": {
-    "asset": "ETH",
-    "amount": "0.00021"
-  },
-  "human_readable_summary": "在 Arbitrum 提现 100 USDC 到 0xUSER",
-  "expires_at": 1786596000000,
-  "request_hash": "0x..."
-}
-```
-
-## 支持的构造类型
-
-- 账户注册；
-- 充值；
-- 提现；
-- PnL 结算；
-- 内部划转。
-
-提交时，后端必须验证已签名载荷与原始 `request_hash` 一致且尚未过期。
+如果未来要提供服务端 Payload Builder，需要单独评审接口契约，并在实现前保留 `◇`。目前不定义 `/v1/transactions/build/*`。

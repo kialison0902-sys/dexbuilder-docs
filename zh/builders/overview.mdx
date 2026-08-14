@@ -1,20 +1,24 @@
 ---
-title: "在 DexBuilder 上构建 DEX"
-description: "面向注册并商业化自己用户的项目级接入。"
+title: "◇ 在 DexBuilder 上构建 DEX"
+description: "面向自有用户项目方、对齐 Orderly 的 Builder 能力边界。"
 ---
 
-Builder 是在 DexBuilder 基础设施上发行交易体验的项目。它拥有该项目的用户关系、产品体验、手续费政策与运营流程。
+<Warning>`◇` 表示 DexBuilder 仍需开发，当前不是可调用的 DexBuilder API。</Warning>
 
-## Builder 能力
+Builder 运营品牌永续 DEX，并将用户与业务活动归属到自己的 Builder 身份。
 
-- 创建项目与环境；
-- 注册用户并建立归属；
-- 配置默认与用户级手续费；
-- 查询 Builder 范围内的用户、交易量、手续费和收入；
-- 在功能开放后配置推荐、活动与积分；
-- 通过 Webhook 接收签名事件；
-- 通过 Builder Console 运营品牌域名与部署。
+## 对齐 Orderly 的范围
 
-## 责任边界
+- 用户注册与 Builder 归属；
+- 用户级交易凭证；
+- Builder 范围内的用户、账户、订单、成交、仓位、资金费、划转与强平数据；
+- 默认及用户级手续费；
+- 公开及认证交易量统计；
+- 每日手续费收入结算数据；
+- 订单归属标签、推荐、Campaign 与 Builder 过滤的数据流。
 
-DexBuilder 提供交易执行、保证金规则、账本与结算基础设施。除非商业协议另有约定，Builder 仍需负责前端、用户披露、地区访问政策、运营监控与支持流程。
+Project CRUD、通用交易构造、Webhook 管理及 Payout 创建不属于本次对齐基线。
+
+<Card title="Builder API 对齐清单" icon="diamond" href="/zh/resources/builder-api-alignment">
+  查看 Orderly 参考操作和 DexBuilder 开发门槛。
+</Card>

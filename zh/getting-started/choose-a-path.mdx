@@ -18,14 +18,14 @@ DexBuilder 主要服务两类开发者。创建凭证之前，请先选择对应
 
 ## 我想为自己的用户发行一个 DEX
 
-以下需求应使用 **Builder 接入**：
+以下需求应规划 **`◇` Builder 接入**：
 
-- 独立的 Builder 与项目身份；
-- 用户注册以及用户归属到项目；
+- Builder 身份；
+- 用户注册以及用户归属到该 Builder；
 - 默认或用户级手续费配置；
 - 充值、提现与结算流程；
-- 项目级用户、交易量、手续费与收入数据；
-- 签名 Webhook 与生产运营支持。
+- Builder 范围的用户、交易量、手续费与每日收入数据；
+- 订单标签、推荐、Campaign 或 Builder 过滤的数据流。
 
 从[Builder 快速开始](/zh/getting-started/builder-quickstart)继续。
 
@@ -38,5 +38,5 @@ DexBuilder 主要服务两类开发者。创建凭证之前，请先选择对应
 | 直接 API | 工作量最大 | 完整 | 钱包、交易所、经纪商、终端及深度定制产品 |
 
 <Note>
-  交易 API Key 不具备 Builder 管理权限。Builder Admin 凭证只能由受保护的后端系统使用。
+  Builder 能力当前不可调用。未来的 Builder 管理凭证只能由受保护的后端系统使用，且不能替代用户钱包签名。
 </Note>

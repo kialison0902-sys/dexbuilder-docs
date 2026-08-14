@@ -14,19 +14,10 @@ description: "对 Trading Key 与 Builder Admin 凭证执行最小权限原则�
 
 资产提现和结算提交仍应要求对应的钱包授权载荷。
 
-## Builder Admin Scope
+## ◇ Builder 管理权限
 
-- `builder:read`
-- `builder:write`
-- `users:read`
-- `fees:read`
-- `fees:write`
-- `revenue:read`
-- `analytics:read`
-- `webhooks:write`
-- `markets:read`
-- `markets:write`
+DexBuilder 尚未发布 Builder 权限名称。最终模型必须分别授权用户数据读取、费率管理、收入读取、订单标签、推荐、Campaign 与 Builder 过滤的数据流。不要实现旧草稿中的 Scope 名称。
 
 <Note>
-  请使用当前环境凭证服务返回的 Scope 名称，拒绝未知 Scope，并仅申请接入所需的最小权限。
+  只使用已发布 DexBuilder 凭证服务返回的权限名称，拒绝未知权限，并只申请最小必要访问范围。
 </Note>

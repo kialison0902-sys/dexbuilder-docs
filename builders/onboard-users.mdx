@@ -1,22 +1,18 @@
 ---
-title: "Onboard users"
-description: "Register wallets and preserve correct Builder attribution."
+title: "◇ Onboard users"
+description: "Register wallets and retain verifiable Builder attribution."
 ---
 
-## Registration sequence
+<Warning>The operations below are Orderly reference paths and are not callable DexBuilder endpoints yet.</Warning>
 
-1. Query whether the wallet already has an account for the Builder.
-2. Request a registration nonce.
-3. Build a wallet message containing `builder_id`, `chain_id`, nonce, timestamp, and expiration.
-4. Ask the wallet owner to sign.
-5. Submit the signed message.
-6. Persist the returned `account_id`.
-7. Create an expiring Trading Key with minimum scopes.
+## Target registration sequence
 
-## Privacy boundary
+1. check registration with `GET /v1/public/account`;
+2. read the registration nonce from `GET /v1/registration_nonce`;
+3. construct the exact domain-separated registration message defined by the final contract;
+4. obtain the wallet owner's signature;
+5. submit `POST /v1/register_account` with Builder attribution;
+6. confirm the account with `GET /v1/get_account` and the attribution with `GET /v1/get_broker`;
+7. create a revocable trading credential with the equivalent of `POST /v1/orderly_key`.
 
-A Builder can query only data allowed for users attributed to that Builder. A Builder Admin endpoint must not become a general system-wide user data export.
-
-<Warning>
-  A referral code, frontend domain, or request header alone must not override a wallet's established account-to-Builder relationship.
-</Warning>
+Orderly uses `broker_id` in legacy wire fields. DexBuilder calls the product role Builder, but engineering must decide whether the public field is `broker_id` or `builder_id` before release.

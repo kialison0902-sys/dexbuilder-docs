@@ -1,33 +1,18 @@
 ---
-title: "账本与对账"
-description: "核对余额、交易、资金费、资产移动和 Builder 收入。"
+title: "◇ 对账"
+description: "使用对齐 Orderly 的平台历史、交易数据与链上凭证完成核对。"
 ---
 
-每个改变余额的事件都应生成不可变账本条目。
+<Warning>DexBuilder 尚未发布通用 Ledger Entry API。只能使用最终契约明确包含的历史资源。</Warning>
 
-## 最小字段
+## 目标凭证
 
-| 字段 | 说明 |
+| 流程 | 核对凭证 |
 |---|---|
-| `entry_id` | 稳定的去重与对账标识 |
-| `account_id` | 受影响用户账户 |
-| `builder_id` | Builder 归属 |
-| `asset` | 账本资产 |
-| `amount` | 带符号十进制金额 |
-| `entry_type` | 交易费、资金费、PnL、充值、提现、调整或其他类型 |
-| `reference_type` | 成交、结算、交易、打款或调整 |
-| `reference_id` | 对应来源对象 ID |
-| `status` | 待处理、最终、已冲正或失败 |
-| `occurred_at` | 事件时间 |
+| 交易 | 当前交易 API 的订单、成交、仓位、资金费与余额 |
+| 充值与提现 | 资产历史及对应链上交易 |
+| PnL 结算 | 对应 `GET /v1/pnl_settlement/history` 的能力及账户余额 |
+| 内部划转 | 两个相关账户中对应 `GET /v1/internal_transfer_history` 的记录 |
+| Builder 手续费 | 用户实际费率、Builder 每日交易量及对应 `GET /v1/broker/daily_fee_revenue` 的记录 |
 
-## 每日对账
-
-分别核对：
-
-1. 成交与订单累计成交数量；
-2. 仓位变化与成交；
-3. 账户余额与用户账本；
-4. 充值提现与链上证据；
-5. 用户实际费率与成交手续费条目；
-6. Builder 收入与协议费、推荐分成扣减；
-7. 应付 Builder 收入与打款记录。
+DexBuilder 必须为每个数据源记录稳定标识、分页、状态、时间字段含义、修正机制与保留周期。通用账本结构及 Payout 账本不属于 Orderly 对齐基线。

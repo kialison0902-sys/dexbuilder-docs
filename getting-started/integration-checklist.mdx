@@ -7,26 +7,25 @@ description: "The implementation and launch checklist for DexBuilder projects."
 
 - [ ] Choose white-label, UI SDK, or direct API integration.
 - [ ] Confirm products, chains, collateral assets, regions, and custody model.
-- [ ] Obtain a Sandbox `builder_id` and server-side credentials.
+- [ ] ◇ Obtain a Sandbox Builder identifier and server-side authorization after DexBuilder publishes them.
 - [ ] Document your fee model and what the end user will see.
 - [ ] Assign owners for wallet, backend, frontend, reconciliation, security, and support.
 
 ## Core development
 
-- [ ] Register a wallet under the correct Builder.
-- [ ] Create, rotate, expire, and revoke Trading Keys.
+- [ ] ◇ Register a wallet under the correct Builder.
+- [ ] ◇ Create, rotate, expire, and revoke per-user trading credentials.
 - [ ] Display contracts, order book, trades, Klines, index, mark price, and funding.
 - [ ] Implement order placement, modification, cancellation, and terminal-state tracking.
 - [ ] Implement balances, positions, margin, leverage, liquidation, and ADL states.
-- [ ] Implement deposit, withdrawal, PnL settlement, and their complete status machines.
-- [ ] Reconcile trading fees, funding, liquidation fees, network fees, and Builder revenue separately.
+- [ ] ◇ Implement Vault deposit, signed withdrawal, PnL settlement, and internal transfer from published contracts.
+- [ ] ◇ Reconcile daily Builder volume and fee revenue from published history resources.
 - [ ] Verify WebSocket reconnect, sequence recovery, and REST backfill.
 - [ ] Verify idempotency and retry behavior for every write operation.
-- [ ] Configure and verify signed webhooks.
 
 ## Security and operations
 
-- [ ] Keep Builder Admin credentials in a secret manager and backend only.
+- [ ] ◇ Keep future Builder administrator credentials in a secret manager and backend only.
 - [ ] Require wallet signatures for user-authorized asset movements.
 - [ ] Configure IP restrictions, scopes, expiration, and key rotation.
 - [ ] Handle maintenance and allow users to cancel eligible open orders.
@@ -39,5 +38,5 @@ description: "The implementation and launch checklist for DexBuilder projects."
 - [ ] Verify production contract addresses independently.
 - [ ] Confirm actual rate limits and expected traffic.
 - [ ] Verify user-facing fee disclosure.
-- [ ] Confirm Builder revenue recipient and payout process.
+- [ ] ◇ Confirm Builder revenue settlement configuration and daily fee-revenue records.
 - [ ] Subscribe to system and maintenance announcements.

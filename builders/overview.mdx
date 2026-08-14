@@ -1,20 +1,24 @@
 ---
-title: "Build a DEX on DexBuilder"
-description: "The project-level integration for teams onboarding and monetizing their own users."
+title: "◇ Build a DEX on DexBuilder"
+description: "The Orderly-aligned Builder capability boundary for teams serving their own users."
 ---
 
-A Builder is a project that launches a trading experience on DexBuilder infrastructure and owns the user relationship, product experience, fee policy, and operating workflow for that project.
+<Warning>`◇` means DexBuilder development is required. These capabilities are not yet published as callable DexBuilder APIs.</Warning>
 
-## Builder capabilities
+A Builder operates a branded perpetual DEX experience while attributing users and activity to its Builder identity.
 
-- create projects and environments;
-- register and attribute users;
-- configure default and user-specific fees;
-- query Builder-scoped users, volume, fees, and revenue;
-- configure referrals, campaigns, and points as they become available;
-- receive signed events through webhooks;
-- operate branded domains and deployments through the Builder Console.
+## Orderly-aligned scope
 
-## Responsibility boundary
+- user registration and Builder attribution;
+- per-user trading credentials;
+- Builder-scoped user, account, order, trade, position, funding, transfer, and liquidation data;
+- default and user-specific fee rates;
+- public and authenticated volume statistics;
+- daily fee-revenue settlement data;
+- order attribution tags, referrals, campaigns, and Builder-filtered data streams.
 
-DexBuilder provides trading execution, margin rules, ledger, and settlement infrastructure. The Builder remains responsible for its frontend, user disclosures, regional access policy, operational monitoring, and support processes unless a separate commercial agreement says otherwise.
+Project CRUD, generic transaction construction, webhook management, and payout creation are not included in this parity baseline.
+
+<Card title="Builder API alignment" icon="diamond" href="/resources/builder-api-alignment">
+  Review the exact Orderly reference operations and DexBuilder development gate.
+</Card>

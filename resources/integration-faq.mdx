@@ -1,28 +1,28 @@
 ---
 title: "Integration FAQ"
-description: "Answers to common technical and release-status questions from Builder teams."
+description: "Release status and technical boundaries for Trading and Builder integrations."
 ---
 
 ## Is Aden the DexBuilder API?
 
-No. Aden is one operator built on DexBuilder. The public documentation here describes DexBuilder interfaces, and Trading API examples use the DexBuilder production gateway. Project-level onboarding, funds, settlement, fees, revenue, and operations belong to the DexBuilder Builder interface.
+Aden is an operator built on the platform. The DexBuilder Trading Reference intentionally follows Aden's public market and trading API, using the DexBuilder production hostname.
 
-## Can we call the Builder endpoints now?
+## Can we call Builder endpoints now?
 
-Use the Sandbox or production base URL and credentials issued to your project. If an operation is not enabled for that environment, contact DexBuilder support instead of constructing an undocumented URL.
+No. Any Builder capability marked `◇` is an Orderly-aligned development requirement, not a published DexBuilder endpoint. Do not append Orderly paths to `api.dexbuilder.com`.
 
 ## Which fee endpoint should we use?
 
-Use the Trading API to read the authenticated user's current perpetual trading rate. Use Builder fee resources for protocol base fees, Builder defaults, user overrides, action quotes, revenue, and payouts.
+Use the current Trading API to read the authenticated user's perpetual trading rate. Builder default fees, user overrides, and daily fee revenue remain `◇` until DexBuilder publishes their contracts.
 
 ## Does closing a position settle PnL?
 
-Closing realizes PnL. PnL settlement is a separate account process. Follow the settlement record and ledger rather than inferring settlement from position state.
+No. Closing realizes PnL. Orderly models PnL settlement as a separate nonce plus signed request, and DexBuilder still needs to implement and publish that flow.
 
-## May a frontend hold an Admin Key?
+## Is there a generic Transaction Builder or webhook API?
 
-No. Builder Admin credentials are server-side secrets. Frontends may use public data, wallet signatures, and narrowly scoped expiring Trading Keys.
+No published DexBuilder contract exists for either. They are not part of the core Orderly Builder REST parity baseline and are not presented as callable APIs.
 
-## How do we obtain production access?
+## What should developers implement today?
 
-Complete the [Integration checklist](/getting-started/integration-checklist), test the end-to-end flow in Sandbox when available, and complete the [Go-live guide](/operations/go-live).
+Use the published Trading Reference. Use the `◇` pages to plan, estimate, and implement the Builder backlog only after the corresponding DexBuilder contracts become available.

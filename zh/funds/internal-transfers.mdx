@@ -1,19 +1,17 @@
 ---
-title: "内部划转"
-description: "使用明确授权和账本证据规划账户间抵押资产划转。"
+title: "◇ 内部划转"
+description: "使用对齐 Orderly 的授权，在符合条件的账户间划转保证金。"
 ---
 
-内部划转在符合条件的账户之间移动抵押资产，不产生区块链提现。它不同于充值、提现和 PnL 结算。
+<Warning>下列操作是 Orderly 参考，并非已发布的 DexBuilder 接口。</Warning>
 
-## 目标流程
+## 目标操作
 
-1. 验证来源账户、目标账户、资产、金额及划转资格。
-2. 请求 Nonce 与费用报价。
-3. 构造域隔离的钱包授权，包含两个账户 ID、`builder_id`、资产、金额、Nonce 与过期时间。
-4. 使用 `Idempotency-Key` 提交签名划转。
-5. 追踪至终态。
-6. 通过同一个 `transfer_id` 核对金额相反的两条账本记录。
+| Orderly 参考路径 | 用途 |
+|---|---|
+| `GET /v1/transfer_nonce` | 获取划转签名 Nonce |
+| `POST /v1/internal_transfer` | 提交已签名内部划转 |
+| `POST /v2/internal_transfer` | 提交当前版本内部划转 |
+| `GET /v1/internal_transfer_history` | 查询内部划转历史 |
 
-<Warning>
-  请使用当前环境已文档化的内部划转操作，不要组合提现与充值接口模拟内部划转。
-</Warning>
+发布前，DexBuilder 必须选择支持的版本并记录账户资格、方向、资产规则、签名负载、精度、状态与历史结构。不要用“提现后再充值”模拟内部划转。

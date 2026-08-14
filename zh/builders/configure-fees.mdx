@@ -1,28 +1,20 @@
 ---
-title: "配置手续费"
-description: "设置 Builder 手续费并向用户披露实际费率。"
+title: "◇ 配置 Builder 手续费"
+description: "将默认与用户级手续费控制对齐 Orderly。"
 ---
 
-## 配置层级
+<Warning>本页路径是 Orderly 参考，需要 DexBuilder 开发。</Warning>
 
-| 层级 | 优先级 | 示例 |
-|---|---:|---|
-| 协议基础费 | 最低 | DexBuilder 基础设施收费 |
-| Builder 默认费率 | 默认 | 项目标准手续费政策 |
-| 用户覆盖 | 较高 | VIP 或交易量等级 |
-| 订单级费率 | 最高 | 在已启用并授权时明确指定每笔 Builder 费 |
+## 目标操作
 
-除非有已文档化的补贴机制覆盖差额，否则 API 应拒绝低于协议基础费的 Taker 费率。
+| Orderly 参考路径 | 用途 |
+|---|---|
+| `GET /v1/broker/fee_rate/default` | 查询默认 Maker 与 Taker 费率 |
+| `POST /v1/broker/fee_rate/default` | 创建默认费率 |
+| `POST /v1/broker/fee_rate/set_default` | 更新默认费率 |
+| `POST /v1/broker/fee_rate/set` | 设置用户级费率 |
+| `GET /v1/broker/user_info` | 查询归属用户及费率信息 |
 
-## 更新流程
+当前交易 API 的费率接口继续用于查询已认证用户的实际永续交易费率；Builder 费率管理是单独的 `◇` 能力。
 
-1. 读取协议基础费和当前 Builder 默认费率。
-2. 计算希望应用的用户实际费率。
-3. 验证精度与允许范围。
-4. 更新 Builder 默认值或批量更新用户。
-5. 重新读取并确认已生效配置。
-6. 在下一笔交易前展示实际手续费。
-
-<Note>
-  如支持订单级 Builder 费，应要求用户明确批准最高费率，并允许查询和撤销该授权。
-</Note>
+发布前，DexBuilder 必须明确费率单位、精度、下限、权限、批量行为、生效时间及写后读取行为。

@@ -142,8 +142,13 @@
             "openapi": "openapi/trading-v1.yaml"
           },
           {
-            "tab": "Builder Reference",
-            "openapi": "openapi/builder-v1.yaml"
+            "tab": "◇ Builder Alignment",
+            "groups": [
+              {
+                "group": "Builder API",
+                "pages": ["resources/builder-api-alignment"]
+              }
+            ]
           }
         ]
       },
@@ -261,8 +266,13 @@
             "openapi": "openapi/zh/trading-v1.yaml"
           },
           {
-            "tab": "Builder API",
-            "openapi": "openapi/zh/builder-v1.yaml"
+            "tab": "◇ Builder 对齐",
+            "groups": [
+              {
+                "group": "Builder API",
+                "pages": ["zh/resources/builder-api-alignment"]
+              }
+            ]
           }
         ]
       }

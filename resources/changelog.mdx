@@ -3,28 +3,18 @@ title: "Changelog"
 description: "Track public documentation and API contract changes."
 ---
 
-## 2026-08-14
+## 2026-08-14 — Builder parity correction
 
-- Standardized the product name as **DexBuilder** across developer-facing content and diagrams.
-- Published `https://api.dexbuilder.com/api/v1` as the Trading API base URL in examples and specifications.
-- Added a DexBuilder brand cover to the English and Chinese documentation homepages.
+- Kept the Aden-compatible Trading API unchanged.
+- Removed the unverified Builder OpenAPI and its callable endpoint pages.
+- Rebuilt Builder documentation from Orderly's documented registration, funds, fees, Builder data, order-tag, referral, campaign, and revenue surfaces.
+- Added `◇` as the single marker for Orderly-supported capabilities that still require DexBuilder development.
+- Removed invented Project CRUD, generic Transaction Builder, REST deposit creation, webhook management, payout creation, and generic analytics contracts.
+- Standardized the product name as **DexBuilder** and the Trading API base URL as `https://api.dexbuilder.com/api/v1`.
 
-## 2026-08-13
+## 2026-08-13 — Initial documentation structure
 
-### Chinese and English documentation
+- Added bilingual navigation and the DexBuilder Trading API reference.
+- Added initial integration, security, operations, and go-live guides.
 
-- Added complete Chinese navigation and translated integration guides.
-- Added localized Trading and Builder API references.
-- Added perpetual-risk concepts, API coverage status, internal-transfer planning, and integration FAQ pages.
-- Aligned the developer journey with mature perpetual infrastructure documentation while retaining DexBuilder branding and environment-specific configuration.
-
-### Developer Docs
-
-- Added public documentation structure for traders and Builder projects.
-- Added DexBuilder Trading API reference.
-- Added Builder, funds, settlement, fee, revenue, analytics, and webhook reference.
-- Added integration, security, operations, and go-live guides.
-
-<Note>
-  Integrations must use the environment configuration and permissions assigned to their project.
-</Note>
+<Note>A Builder item becomes callable documentation only after it enters a reviewed DexBuilder OpenAPI contract.</Note>

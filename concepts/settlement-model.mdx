@@ -7,17 +7,17 @@ DexBuilder documentation uses **settlement** as a family of processes, not as on
 
 | Process | What changes | Expected evidence |
 |---|---|---|
-| Trade clearing | Position, margin, realized PnL, and trade fee | Fill and ledger entries |
-| Funding settlement | Funding payment between long and short accounts | Funding payment entry |
-| PnL settlement | PnL becomes part of the settled account balance | Settlement record and ledger entries |
-| Asset settlement | Deposit or withdrawal reaches finality | Internal status and chain transaction |
-| Builder revenue settlement | Builder revenue becomes payable or paid | Revenue ledger and payout record |
+| Trade clearing | Position, margin, realized PnL, and trade fee | Current Trading API data |
+| Funding settlement | Funding payment between long and short accounts | Current account funding history |
+| ◇ PnL settlement | PnL becomes part of the settled account balance | PnL-settlement history and resulting balance |
+| ◇ Asset settlement | Deposit or withdrawal reaches finality | Asset history and chain transaction |
+| ◇ Builder revenue settlement | Daily Builder fee revenue is reported | Daily fee-revenue response |
 
 ## Integration rule
 
 Never use the market's historical funding rate as evidence that a specific user paid or received funding. Use the user's funding payment ledger.
 
-Similarly, never use a trade's total fee alone to calculate Builder revenue. Protocol fees, Builder fees, rebates, referrals, and adjustments must be individually reconcilable.
+Similarly, do not invent a Builder-revenue formula from a trade's total fee. Use the final daily fee-revenue contract once DexBuilder publishes it.
 
 <Warning>
   Read the settlement eligibility, resulting balance, and withdrawable balance returned by the API before requesting a wallet signature.

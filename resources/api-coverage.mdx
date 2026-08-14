@@ -1,30 +1,23 @@
 ---
-title: "API capabilities"
-description: "Find the DexBuilder interface for each trading, settlement, and Builder workflow."
+title: "API coverage"
+description: "Distinguish the published Aden-compatible Trading API from Orderly-aligned Builder development work."
 ---
 
-DexBuilder exposes dedicated interfaces for user trading and project-level DEX operations.
+<Note>**Status legend:** Published means documented for DexBuilder. `◇` means supported by Orderly but still requires DexBuilder development and is not callable.</Note>
 
-| Capability | Interface | Primary guide |
+| Status | Capability | Documentation |
 |---|---|---|
-| Markets, orders, positions, account changes, fills, trading fee | Trading API | [Trading integration](/trading/market-data) |
-| Real-time market and private account events | WebSocket API | [WebSocket integration](/trading/websocket) |
-| Registration, chains, assets, deposits, withdrawals, PnL settlement | Builder API | [Funds and settlement](/funds/overview) |
-| Wallet-ready transaction and typed-message construction | Transaction Builder | [Transaction Builder](/funds/transaction-builder) |
-| Projects, user attribution, default and user fees | Builder Admin API | [Build a DEX](/builders/overview) |
-| Builder revenue, payouts, analytics, and webhooks | Builder Admin API | [Revenue and payouts](/builders/revenue-and-payouts) |
-| TypeScript, Python, React, Postman, and signing tools | SDK and tools | [SDKs and tools](/resources/sdk-and-tools) |
+| Published | Markets, orders, positions, account data, fills, trading fees | Trading Reference |
+| ◇ | Account registration and trading-credential management | [Onboard users](/builders/onboard-users) |
+| ◇ | Chain and Vault discovery, deposits, withdrawals | [Funds and settlement](/funds/overview) |
+| ◇ | PnL settlement and internal transfers | [PnL settlement](/funds/pnl-settlement) |
+| ◇ | Builder users, accounts, orders, positions, trades, funding, and liquidation data | [Builder data](/builders/analytics-and-webhooks) |
+| ◇ | Default and user-specific Builder fees | [Configure fees](/builders/configure-fees) |
+| ◇ | Builder daily volume and fee revenue | [Revenue settlement](/builders/revenue-and-payouts) |
+| ◇ | Order tags, referrals, campaigns, and Builder-filtered streams | [Builder data](/builders/analytics-and-webhooks) |
 
-## Environment contract
+Project CRUD, generic REST Transaction Builder, webhook management, payout creation, and generic analytics endpoints are not in the Orderly REST parity baseline.
 
-Every integration must load or receive the configuration for its active environment:
-
-- an environment and base URL;
-- authentication and signing rules;
-- request and response schemas;
-- limits, error codes, and state machines;
-- supported chains, assets, and contract addresses.
-
-<Note>
-  Products and permissions can vary by project. Use the capabilities returned by your environment and never infer support from another operator's hostname.
-</Note>
+<Card title="Detailed Builder alignment" icon="diamond" href="/resources/builder-api-alignment">
+  Review every Orderly reference operation and the release requirements.
+</Card>

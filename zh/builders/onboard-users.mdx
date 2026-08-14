@@ -1,22 +1,18 @@
 ---
-title: "用户注册"
-description: "注册钱包并保留正确的 Builder 归属。"
+title: "◇ 注册用户"
+description: "注册钱包并保留可验证的 Builder 归属。"
 ---
 
-## 注册顺序
+<Warning>下列操作是 Orderly 参考路径，目前不是 DexBuilder 可调用接口。</Warning>
 
-1. 查询钱包是否已在该 Builder 下拥有账户。
-2. 请求注册 Nonce。
-3. 构造包含 `builder_id`、`chain_id`、Nonce、时间戳和过期时间的钱包消息。
-4. 请求钱包所有者签名。
-5. 提交签名消息。
-6. 保存返回的 `account_id`。
-7. 创建具有最小权限和过期时间的 Trading Key。
+## 目标注册流程
 
-## 隐私边界
+1. 通过 `GET /v1/public/account` 检查是否已注册；
+2. 通过 `GET /v1/registration_nonce` 获取注册 Nonce；
+3. 按最终契约构造域隔离注册消息；
+4. 获取钱包所有者签名；
+5. 通过 `POST /v1/register_account` 提交并记录 Builder 归属；
+6. 使用 `GET /v1/get_account` 确认账户，使用 `GET /v1/get_broker` 确认归属；
+7. 通过对应 `POST /v1/orderly_key` 的能力创建可撤销交易凭证。
 
-Builder 只能查询允许访问且归属于该 Builder 的用户数据。Builder Admin 接口不能变成全平台用户数据导出能力。
-
-<Warning>
-  推荐码、前端域名或请求头不能单独覆盖钱包已经建立的账户与 Builder 关系。
-</Warning>
+Orderly 历史字段使用 `broker_id`。DexBuilder 产品角色叫 Builder，但发布前开发必须决定线上字段使用 `broker_id` 还是 `builder_id`。

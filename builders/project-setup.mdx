@@ -1,28 +1,17 @@
 ---
-title: "Project setup"
-description: "Create a Builder identity, environments, credentials, and deployment configuration."
+title: "◇ Builder setup"
+description: "Establish a Builder identity and administrative access without assuming an unverified Project API."
 ---
 
-## Setup flow
+<Warning>This is an onboarding requirement, not a published DexBuilder API flow.</Warning>
 
-<Steps>
-  <Step title="Connect the Admin wallet">
-    Use a dedicated organization-controlled wallet. Complete ownership verification in the Builder Console.
-  </Step>
-  <Step title="Create the project">
-    Define the project name, products, regions, chains, settlement assets, and integration path.
-  </Step>
-  <Step title="Create Sandbox">
-    Generate a Sandbox environment and a scoped Admin Key.
-  </Step>
-  <Step title="Configure the product">
-    Set brand, domain, markets, fee policy, webhooks, and operational contacts.
-  </Step>
-  <Step title="Request production activation">
-    Complete the go-live review and create new production-only credentials.
-  </Step>
-</Steps>
+## Target setup
 
-## Credential storage
+1. connect an organization-controlled administrator wallet;
+2. complete Builder ownership and contact verification;
+3. obtain the Builder identifier and approved administrative access;
+4. configure the supported networks, collateral, markets, and fee policy;
+5. create separate Sandbox and production credentials when those environments are available;
+6. verify the Builder record through the DexBuilder equivalent of `GET /v1/broker/broker_info`.
 
-Store Admin secrets in a managed secret store. Record the `key_id`, scopes, creator, creation time, last-used time, and expiration. The API must never return the secret again after creation.
+DexBuilder has not confirmed Orderly-style Project CRUD. The documentation therefore does not define `project_id`, project creation endpoints, deployment APIs, or webhook configuration.

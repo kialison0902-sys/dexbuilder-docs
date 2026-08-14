@@ -1,54 +1,37 @@
 ---
 title: "DexBuilder Developer Docs"
-description: "APIs and integration guides for traders, application developers, and teams building a branded DEX."
+description: "Trading API documentation and the Orderly-aligned Builder development roadmap."
 icon: "blocks"
 ---
 
-DexBuilder provides perpetual trading infrastructure for trading applications, wallets, brokers, exchanges, and branded DEXs.
+DexBuilder is perpetual DEX infrastructure for trading applications and teams building branded trading products.
 
-Use these docs to integrate market data and trading, onboard users, move funds, settle accounts, configure fees, and operate a DEX.
+The Trading Reference documents the current Aden-compatible market and trading API. Builder guides follow the Orderly capability model and clearly mark work that DexBuilder has not released.
 
 <img src="/images/dexbuilder-cover.svg" alt="DexBuilder" />
 
 <Note>
-  Use the base URL, credentials, chain configuration, and contracts issued for your DexBuilder project. Sandbox and production configuration must remain separate.
+  **Status legend:** no symbol means published documentation. `◇` means the capability is supported by Orderly but still requires DexBuilder development; it is not callable until a DexBuilder contract is published.
 </Note>
 
 <Columns cols={2}>
   <Card title="Trade through the API" icon="chart-candlestick" href="/getting-started/trader-quickstart">
-    Connect market data, orders, positions, and account history for a user or trading application.
+    Integrate markets, orders, positions, fills, and authenticated account data with the current Trading API.
   </Card>
-  <Card title="Build your own DEX" icon="blocks" href="/getting-started/builder-quickstart">
-    Create a branded trading product, onboard users, configure fees, and reconcile revenue.
+  <Card title="◇ Build your own DEX" icon="blocks" href="/getting-started/builder-quickstart">
+    Review the Orderly-aligned registration, funds, fees, data, and revenue capabilities that DexBuilder needs to implement.
   </Card>
 </Columns>
 
 ## Platform surfaces
 
-| Surface | Audience | What it provides |
+| Status | Surface | What it provides |
 |---|---|---|
-| Trading API | Traders and application developers | Markets, orders, positions, margin, fills, and private account data |
-| Funds & Settlement API | Wallet and backend developers | Deposits, withdrawals, PnL settlement, transaction construction, and ledger history |
-| Builder API | Project teams | Projects, user attribution, fee configuration, revenue, analytics, and webhooks |
-| WebSocket API | Frontends and trading systems | Public market streams and private execution updates |
+| Published | Trading API | Aden-compatible markets, orders, positions, margin, fills, and account data |
+| ◇ | Wallet and settlement | Registration, Vault deposits, signed withdrawals, PnL settlement, and internal transfers |
+| ◇ | Builder API | User attribution, Builder data, fee configuration, revenue settlement, referrals, and order tags |
+| ◇ | Builder WebSocket | Builder-filtered operational and user data streams |
 
-## Start here
-
-<Steps>
-  <Step title="Choose your integration path">
-    Decide whether you are trading through an existing operator or building a DEX for your own users.
-  </Step>
-  <Step title="Develop in Sandbox">
-    Use test credentials and test assets. Sandbox and production credentials must remain separate.
-  </Step>
-  <Step title="Complete the end-to-end flow">
-    Validate registration, funding, trading, settlement, withdrawal, error handling, and reconciliation.
-  </Step>
-  <Step title="Pass the go-live checklist">
-    Confirm security, maintenance behavior, monitoring, support, and production limits.
-  </Step>
-</Steps>
-
-<Card title="Choose a path" icon="route" href="/getting-started/choose-a-path">
-  Find the shortest route for your product and technical stack.
+<Card title="Review the Builder API alignment" icon="diamond" href="/resources/builder-api-alignment">
+  See the exact Orderly reference paths and the DexBuilder publication gate.
 </Card>

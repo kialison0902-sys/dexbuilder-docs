@@ -1,28 +1,20 @@
 ---
-title: "Configure fees"
-description: "Set Builder fees and disclose the effective rate to users."
+title: "◇ Configure Builder fees"
+description: "Align default and user-specific fee controls with Orderly."
 ---
 
-## Configuration levels
+<Warning>The paths on this page are Orderly references and require a DexBuilder implementation.</Warning>
 
-| Level | Priority | Example use |
-|---|---:|---|
-| Protocol base | Lowest | DexBuilder infrastructure charge |
-| Builder default | Default | Standard project fee policy |
-| User override | Higher | VIP or volume tier |
-| Order-level fee | Highest | Explicit per-order Builder fee when enabled and authorized |
+## Target operations
 
-The API should reject a taker fee below the applicable protocol base fee unless a documented subsidy mechanism covers the difference.
+| Orderly reference | Purpose |
+|---|---|
+| `GET /v1/broker/fee_rate/default` | Read default maker and taker fee rates |
+| `POST /v1/broker/fee_rate/default` | Create default fee rates |
+| `POST /v1/broker/fee_rate/set_default` | Update default fee rates |
+| `POST /v1/broker/fee_rate/set` | Set user-specific fee rates |
+| `GET /v1/broker/user_info` | Read attributed-user and fee information |
 
-## Update flow
+The current Trading API fee endpoint remains the source for an authenticated user's effective perpetual trading rate. Builder fee administration is a separate `◇` surface.
 
-1. Read the protocol base and current Builder default.
-2. Calculate the desired effective user rates.
-3. Validate precision and allowed range.
-4. Update the Builder default or a batch of users.
-5. Read back the applied configuration.
-6. Show the effective fee before the next trade.
-
-<Note>
-  For an order-level Builder fee, require an explicit user-approved maximum and make that approval queryable and revocable.
-</Note>
+DexBuilder must document rate units, precision, minimums, authorization, batch behavior, effective time, and read-after-write behavior before publication.

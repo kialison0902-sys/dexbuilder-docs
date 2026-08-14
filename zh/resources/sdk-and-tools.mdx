@@ -1,21 +1,17 @@
 ---
 title: "SDK 与工具"
-description: "DexBuilder 接入建议提供的开发者产物。"
+description: "已发布产物，以及对齐 Orderly 仍需开发的 Builder 工具。"
 ---
 
-## 开发者产物
+| 状态 | 产物 | 用途 |
+|---|---|---|
+| 已发布 | 英文交易 OpenAPI | 当前 Aden 兼容的交互式 Reference |
+| 已发布 | 中文交易 OpenAPI | 本地化现有交易接口 |
+| ◇ | Builder OpenAPI | 实现并评审后的可调用 Builder 契约 |
+| ◇ | TypeScript SDK | 注册、签名、Vault、交易凭证与 WebSocket Helper |
+| ◇ | 签名测试向量 | 跨语言验证规范化签名与 EIP-712 |
+| ◇ | Postman Collection | 端点实现后的 Builder API 手工验证 |
+| ◇ | React 接入包 | 钱包、市场、账户与资金流程 |
+| ◇ | Python Connector | 后端与量化接入 |
 
-| 产物 | 用途 | 接入优先级 |
-|---|---|---:|
-| OpenAPI 3.1 规范 | 生成类型化客户端与交互式接口文档 | P0 |
-| TypeScript SDK | 请求签名、交易 API、Transaction Builder 与 WebSocket | P0 |
-| Postman Collection | 手工调试与接入支持 | P0 |
-| 请求签名一致性测试向量 | 在任意语言中验证规范化 | P0 |
-| React Hooks 与 UI 组件 | 钱包、市场、订单、账户与资金流程 | P1 |
-| Python Connector | 量化与后端接入 | P1 |
-
-请联系 DexBuilder 获取项目已开通的软件包与版本。
-
-## SDK 安全约定
-
-官方 SDK 可以构造并提交请求，但不得收集、传输或存储用户原始私钥。钱包授权操作必须使用用户连接的钱包完成。
+目前没有已发布的通用 Transaction Builder SDK 契约。钱包操作应按具体操作的 API 与合约定义构造。

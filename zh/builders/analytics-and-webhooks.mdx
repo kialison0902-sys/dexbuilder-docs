@@ -1,27 +1,20 @@
 ---
-title: "分析与 Webhook"
-description: "使用 Builder 范围内的数据与签名事件运营产品。"
+title: "◇ Builder 数据与运营"
+description: "按 Orderly 已记录的能力规划 Builder 数据、订单标签、推荐、Campaign 与数据流。"
 ---
 
-## Builder 分析
+<Warning>本页是开发目标，不定义可调用的 DexBuilder 分析或 Webhook API。</Warning>
 
-Builder API 应只向已认证 Builder 返回其用户、活跃用户、交易量、Maker/Taker 构成、手续费、收入、持仓量、强平和市场表现。
+## Builder 数据
 
-## 首批 Webhook 事件
+Orderly 提供每日交易量、排行榜及认证的 `/v1/admin/client/*` 资源，用于查询归属用户的账户、持仓、资产、订单、仓位、资金费、交易量、强平、Algo Order 与成交数据。DexBuilder 必须逐个发布端点与结构。
 
-- `account.registered`
-- `deposit.confirmed`
-- `withdrawal.updated`
-- `settlement.updated`
-- `order.updated`
-- `trade.executed`
-- `position.liquidated`
-- `builder.revenue.accrued`
-- `builder.payout.completed`
-- `system.maintenance.updated`
+## 订单归属
 
-## 验证每个事件
+Orderly 提供 `POST /v1/broker/order_enum`、`GET /v1/broker/order_enums`、单项查询与更新，以及归档/恢复操作。这是 DexBuilder 订单标签的参考模型。
 
-使用投递时间戳、事件 ID 和 HMAC 签名验证原始请求体。拒绝过期投递，按事件 ID 去重，并仅在持久化接收事件后返回成功响应。
+## 推荐、Campaign 与数据流
 
-Webhook 投递日志应可查询，并支持显式重试。
+Orderly 还记录了多级推荐、Campaign 与 Builder 过滤的 WebSocket Topic。DexBuilder 只能在权限模型和事件契约实现后发布。
+
+Webhook 配置及投递 API 不属于 Orderly Builder REST 对齐基线，已从本文档删除。

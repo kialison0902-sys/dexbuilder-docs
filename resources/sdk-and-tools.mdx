@@ -1,21 +1,17 @@
 ---
 title: "SDKs and tools"
-description: "Recommended developer artifacts for DexBuilder integrations."
+description: "Published artifacts and the Builder tooling still required for Orderly parity."
 ---
 
-## Developer artifacts
+| Status | Artifact | Purpose |
+|---|---|---|
+| Published | English Trading OpenAPI | Current Aden-compatible interactive reference |
+| Published | Chinese Trading OpenAPI | Localized current trading reference |
+| ◇ | Builder OpenAPI | Callable Builder contract after implementation and review |
+| ◇ | TypeScript SDK | Registration, signing, Vault, trading credentials, and WebSocket helpers |
+| ◇ | Request-signing vectors | Cross-language verification of canonical and EIP-712 signing |
+| ◇ | Postman collection | Manual Builder API verification after endpoints exist |
+| ◇ | React integration package | Wallet, market, account, and funding flows |
+| ◇ | Python connector | Backend and quantitative integration |
 
-| Artifact | Purpose | Integration priority |
-|---|---|---:|
-| OpenAPI 3.1 specifications | Generate typed clients and interactive reference | P0 |
-| TypeScript SDK | Request signing, Trading API, Transaction Builder, and WebSocket | P0 |
-| Postman collection | Manual exploration and integration support | P0 |
-| Request-signing conformance vectors | Verify canonicalization in any language | P0 |
-| React hooks and UI components | Wallet, market, order, account, and funding flows | P1 |
-| Python connector | Quant and backend integrations | P1 |
-
-Contact DexBuilder for the packages and versions enabled for your project.
-
-## SDK security contract
-
-An official SDK may construct and submit requests, but it must never collect, transmit, or persist a user's raw private key. Wallet-authorized actions must use the user's connected wallet.
+There is no published generic Transaction Builder SDK contract. Wallet actions should be constructed from action-specific APIs and contract definitions.

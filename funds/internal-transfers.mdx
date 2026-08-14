@@ -1,19 +1,17 @@
 ---
-title: "Internal transfers"
-description: "Plan account-to-account collateral transfers with explicit authorization and ledger evidence."
+title: "◇ Internal transfers"
+description: "Move collateral between eligible accounts with Orderly-aligned authorization."
 ---
 
-Internal transfers move collateral between eligible accounts without using a blockchain withdrawal. They are distinct from deposits, withdrawals, and PnL settlement.
+<Warning>The operations below are Orderly references, not published DexBuilder endpoints.</Warning>
 
-## Target flow
+## Target operations
 
-1. Validate source and destination accounts, asset, amount, and transfer eligibility.
-2. Request a nonce and fee quote.
-3. Build a domain-separated wallet authorization containing both account IDs, `builder_id`, asset, amount, nonce, and expiration.
-4. Submit the signed transfer with an `Idempotency-Key`.
-5. Track the transfer to a terminal state.
-6. Reconcile equal and opposite ledger entries by one `transfer_id`.
+| Orderly reference | Purpose |
+|---|---|
+| `GET /v1/transfer_nonce` | Get the transfer signing nonce |
+| `POST /v1/internal_transfer` | Submit a signed internal transfer |
+| `POST /v2/internal_transfer` | Submit the current transfer version |
+| `GET /v1/internal_transfer_history` | Query transfer history |
 
-<Warning>
-  Use the documented internal-transfer operation for the active environment. Do not simulate a transfer with withdrawal and deposit calls.
-</Warning>
+DexBuilder must select the supported transfer version and document account eligibility, direction, asset rules, signing payload, precision, statuses, and history schema before release. Do not simulate an internal transfer with a withdrawal followed by a deposit.

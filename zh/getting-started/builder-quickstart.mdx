@@ -1,62 +1,45 @@
 ---
-title: "Builder 快速开始"
-description: "从 Builder 配置到收入核对，完成项目全生命周期接入。"
+title: "◇ Builder 快速开始"
+description: "从 Builder 身份、用户交易到手续费收入查询的 Orderly 对齐路径。"
 ---
 
-本指南面向上线交易前端并注册自己用户的项目方。
+<Warning>
+  本页所有 Builder 操作都是待开发目标。所列路径是 Orderly 参考路径，不是可调用的 DexBuilder 接口。
+</Warning>
 
-<Note>
-  请使用为项目分配的 Builder 环境与凭证。接口权限取决于该环境已开通的产品、链与权限范围。
-</Note>
-
-<Frame caption="Builder 端到端接入生命周期">
-  <img src="/images/builder-lifecycle-zh.svg" alt="注册、入金、交易、结算、提现并核对 Builder 收入" />
-</Frame>
-
-## 最小生产流程
+这是 DexBuilder 应支持的最小 Builder 流程，不额外虚构 Project、Webhook、Payout 或通用交易构造 API。
 
 <Steps>
-  <Step title="创建 Builder 项目">
-    在 Builder Console 连接管理员钱包，创建项目并保存返回的 `builder_id` 与 `project_id`。
+  <Step title="◇ 建立 Builder 身份">
+    通过管理端 Onboarding 创建 Builder 资料并取得 Builder 标识，不假设存在单独的 `project_id` API 资源。
   </Step>
-  <Step title="创建服务端 Admin Key">
-    仅授予后端需要的权限，绝不能把此 Key 放入前端。
+  <Step title="◇ 注册用户">
+    按 Orderly 模式读取 `GET /v1/registration_nonce`，取得钱包签名，再通过 `POST /v1/register_account` 提交并记录 Builder 归属。
   </Step>
-  <Step title="将用户注册到 Builder">
-    构造钱包注册消息，请用户签名并提交。返回账户必须归属你的 `builder_id`。
+  <Step title="◇ 创建用户交易凭证">
+    为用户添加可撤销的交易凭证，对应 Orderly 的 `POST /v1/orderly_key` 流程；Builder 管理权限只放在服务端。
   </Step>
-  <Step title="为账户入金">
-    查询支持的链与合约，构造充值交易，让用户签名并等待确认。
+  <Step title="◇ 通过 Vault 充值">
+    使用当前环境的抵押资产和 Vault 合约：先 `approve`，读取 `getDepositFee`，再调用 `deposit`，最后通过资产历史确认入账。
   </Step>
-  <Step title="创建 Trading Key">
-    为用户应用创建有范围、有过期时间的 Key，用于私有数据和订单操作。
+  <Step title="使用现有交易 API">
+    通过已发布的交易 API 接入行情、订单、仓位、成交、账户数据和交易费率。
   </Step>
-  <Step title="交易与结算">
-    订阅公共及私有数据流，下单，核对成交与费用，并在账户模型要求时结算 PnL。
+  <Step title="◇ 结算或转移资金">
+    为提现、PnL 结算及内部划转实现与 Orderly 一致的 Nonce 加签名请求流程。
   </Step>
-  <Step title="核对 Builder 收入">
-    使用稳定账本标识核对交易费、推荐分成、Builder 收入和打款状态。
+  <Step title="◇ 配置手续费并核对收入">
+    实现 Builder 默认费率、用户级费率、每日交易量、Builder 信息和每日手续费收入查询。
   </Step>
 </Steps>
 
-## 必要标识
+## 核心标识
 
-| 标识 | 范围 | 用途 |
-|---|---|---|
-| `builder_id` | 组织 | 将用户、订单、手续费、收入和分析归属到 Builder |
-| `project_id` | 部署 | 保存环境、品牌、功能和部署配置 |
-| `account_id` | 用户账户 | 标识 Builder 租户中的一个交易账户 |
-| `key_id` | 凭证 | 标识可撤销的 Admin 或 Trading Key，不暴露 Secret |
-| `request_id` | 请求 | 用于链路追踪和支持排查 |
+| 标识 | 用途 |
+|---|---|
+| `builder_id` | DexBuilder 对 Builder 归属的产品命名；最终线上字段名仍需开发确认 |
+| `account_id` | 已注册的用户交易账户 |
+| 钱包地址 | 用户控制的身份，用于注册及钱包授权操作 |
+| 交易凭证 | 可撤销的用户认证交易凭证 |
 
-## 生产完成标准
-
-同一个测试用户必须完成：
-
-`注册 → 充值 → 交易 → 结算 → 提现`
-
-Builder 同时能够核对：
-
-`用户 → 成交 → 用户手续费 → 协议费 → Builder 收入 → 打款`
-
-继续查看[接入检查清单](/zh/getting-started/integration-checklist)。
+查看完整的 [Builder API 对齐清单](/zh/resources/builder-api-alignment)。

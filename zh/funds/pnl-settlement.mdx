@@ -1,19 +1,18 @@
 ---
-title: "PnL 结算"
-description: "将账户 PnL 结算到对应余额。"
+title: "◇ PnL 结算"
+description: "使用 Orderly 的 Nonce 加签名请求模式结算账户 PnL。"
 ---
 
-PnL 结算不同于平仓。平仓产生已实现 PnL；结算按照平台账本与链上结算模型，将其应用到账户余额。
+<Warning>所列路径是 Orderly 参考，仍需 DexBuilder 开发。</Warning>
 
-## 结算流程
+平仓产生已实现 PnL；PnL 结算是单独的钱包授权账户操作。
 
-1. 请求结算 Nonce。
-2. 请求结算报价，展示受影响的 PnL 和结算后余额。
-3. 构造可由钱包签名的消息，包含 Builder、账户、链、Nonce 与过期时间。
-4. 使用幂等 Key 提交签名请求。
-5. 追踪结算直到终态。
-6. 用账户账本核对结算记录。
+## 目标流程
 
-<Warning>
-  请使用结算报价返回的资格与余额字段，不要假设未实现 PnL 可以结算，也不要假设已结算 PnL 可以立即提现。
-</Warning>
+1. 通过 `GET /v1/settle_nonce` 获取 Nonce；
+2. 按正式契约构造准确的 EIP-712 结算消息；
+3. 获取用户钱包签名；
+4. 将请求提交到对应 `POST /v1/settle_pnl` 的能力；
+5. 查询 `GET /v1/pnl_settlement/history` 并核对结算后的账户余额。
+
+Orderly 基线不要求单独的 Settlement Quote 接口。发布前，DexBuilder 必须定义资格、消息字段、数量含义、精度、状态与错误。

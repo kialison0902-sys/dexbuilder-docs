@@ -1,54 +1,37 @@
 ---
 title: "DexBuilder 开发者文档"
-description: "面向交易用户、应用开发者与品牌 DEX 项目方的 API 和接入指南。"
+description: "现有交易 API 文档与对齐 Orderly 的 Builder 开发路线。"
 icon: "blocks"
 ---
 
-DexBuilder 为交易应用、钱包、经纪商、交易所及品牌 DEX 提供永续合约交易基础设施。
+DexBuilder 是面向交易应用及品牌交易产品项目方的永续 DEX 基础设施。
 
-你可以使用本套文档接入行情与交易、注册用户、管理资金、结算账户、配置手续费并运营自己的 DEX。
+交易 API Reference 记录当前与 Aden 对外接口一致的行情与交易能力；Builder 文档按照 Orderly 的能力模型编写，并明确标记 DexBuilder 尚未发布的部分。
 
 <img src="/images/dexbuilder-cover.svg" alt="DexBuilder" />
 
 <Note>
-  请使用 DexBuilder 为项目分配的 Base URL、凭证、链配置与合约地址，并严格隔离 Sandbox 与生产环境配置。
+  **状态说明：**没有符号表示已发布文档；`◇` 表示 Orderly 已支持、DexBuilder 仍需开发，正式 DexBuilder 接口发布前不可调用。
 </Note>
 
 <Columns cols={2}>
   <Card title="通过 API 进行交易" icon="chart-candlestick" href="/zh/getting-started/trader-quickstart">
-    接入行情、订单、仓位和账户历史，服务个人用户或交易应用。
+    使用现有交易 API 接入行情、订单、仓位、成交与认证账户数据。
   </Card>
-  <Card title="构建自己的 DEX" icon="blocks" href="/zh/getting-started/builder-quickstart">
-    创建品牌交易产品，注册用户，配置手续费并核对项目收入。
+  <Card title="◇ 构建自己的 DEX" icon="blocks" href="/zh/getting-started/builder-quickstart">
+    查看 DexBuilder 需要对齐 Orderly 开发的注册、资金、手续费、数据与收入能力。
   </Card>
 </Columns>
 
 ## 平台接口面
 
-| 接口面 | 适用对象 | 能力 |
+| 状态 | 接口面 | 能力 |
 |---|---|---|
-| 交易 API | 交易用户与应用开发者 | 市场、订单、仓位、保证金、成交及私有账户数据 |
-| 资金与结算 API | 钱包与后端开发者 | 充值、提现、PnL 结算、交易构造及账本历史 |
-| Builder API | 项目方 | 项目、用户归属、手续费配置、收入、分析及 Webhook |
-| WebSocket API | 前端与交易系统 | 公共行情流和私有执行事件 |
+| 已发布 | 交易 API | 与 Aden 一致的市场、订单、仓位、保证金、成交与账户数据 |
+| ◇ | 钱包与结算 | 注册、Vault 充值、签名提现、PnL 结算及内部划转 |
+| ◇ | Builder API | 用户归属、Builder 数据、费率配置、收入结算、推荐与订单标签 |
+| ◇ | Builder WebSocket | 按 Builder 过滤的运营及用户数据流 |
 
-## 从这里开始
-
-<Steps>
-  <Step title="选择接入路径">
-    确认是通过现有运营商进行交易，还是为自己的用户构建 DEX。
-  </Step>
-  <Step title="在 Sandbox 开发">
-    使用测试凭证和测试资产，并严格隔离 Sandbox 与生产环境凭证。
-  </Step>
-  <Step title="完成端到端流程">
-    验证注册、入金、交易、结算、提现、错误处理和账务核对。
-  </Step>
-  <Step title="通过上线检查">
-    确认安全、维护处理、监控、支持流程和生产限流。
-  </Step>
-</Steps>
-
-<Card title="选择接入方式" icon="route" href="/zh/getting-started/choose-a-path">
-  根据产品形态与技术栈选择最短接入路径。
+<Card title="查看 Builder API 对齐清单" icon="diamond" href="/zh/resources/builder-api-alignment">
+  查看 Orderly 参考路径及 DexBuilder 正式发布门槛。
 </Card>

@@ -1,30 +1,23 @@
 ---
-title: "API 能力"
-description: "查找每项交易、结算与 Builder 流程对应的 DexBuilder 接口。"
+title: "API 覆盖范围"
+description: "区分已发布的 Aden 兼容交易 API 与对齐 Orderly 的 Builder 开发工作。"
 ---
 
-DexBuilder 分别提供面向用户交易和项目级 DEX 运营的接口。
+<Note>**状态说明：**“已发布”表示已有 DexBuilder 文档；`◇` 表示 Orderly 已支持、DexBuilder 仍需开发，当前不可调用。</Note>
 
-| 能力 | 接口 | 主要指南 |
+| 状态 | 能力 | 文档 |
 |---|---|---|
-| 市场、订单、仓位、账户变动、成交与交易费率 | 交易 API | [交易接入](/zh/trading/market-data) |
-| 实时行情与私有账户事件 | WebSocket API | [WebSocket 接入](/zh/trading/websocket) |
-| 注册、链、资产、充值、提现与 PnL 结算 | Builder API | [资金与结算](/zh/funds/overview) |
-| 构造钱包可签名交易和类型化消息 | Transaction Builder | [Transaction Builder](/zh/funds/transaction-builder) |
-| 项目、用户归属、默认与用户级手续费 | Builder Admin API | [构建 DEX](/zh/builders/overview) |
-| Builder 收入、打款、分析与 Webhook | Builder Admin API | [收入与打款](/zh/builders/revenue-and-payouts) |
-| TypeScript、Python、React、Postman 与签名工具 | SDK 与工具 | [SDK 与工具](/zh/resources/sdk-and-tools) |
+| 已发布 | 市场、订单、仓位、账户数据、成交、交易费率 | 交易 API Reference |
+| ◇ | 账户注册与交易凭证管理 | [注册用户](/zh/builders/onboard-users) |
+| ◇ | 链与 Vault 查询、充值、提现 | [资金与结算](/zh/funds/overview) |
+| ◇ | PnL 结算与内部划转 | [PnL 结算](/zh/funds/pnl-settlement) |
+| ◇ | Builder 用户、账户、订单、仓位、成交、资金费与强平数据 | [Builder 数据](/zh/builders/analytics-and-webhooks) |
+| ◇ | Builder 默认与用户级手续费 | [配置手续费](/zh/builders/configure-fees) |
+| ◇ | Builder 每日交易量与手续费收入 | [收入结算](/zh/builders/revenue-and-payouts) |
+| ◇ | 订单标签、推荐、Campaign 及 Builder 过滤的数据流 | [Builder 数据](/zh/builders/analytics-and-webhooks) |
 
-## 环境契约
+Project CRUD、通用 REST Transaction Builder、Webhook 管理、Payout 创建与通用分析端点不属于 Orderly REST 对齐基线。
 
-每个接入都必须读取或获取当前环境配置：
-
-- 环境与 Base URL；
-- 认证与签名规则；
-- 请求与响应结构；
-- 限流、错误码与状态机；
-- 支持的链、资产与合约地址。
-
-<Note>
-  不同项目开通的产品与权限可能不同。请以当前环境返回的能力为准，不要从其他运营商域名推断接口支持。
-</Note>
+<Card title="详细 Builder 对齐清单" icon="diamond" href="/zh/resources/builder-api-alignment">
+  查看全部 Orderly 参考操作和发布要求。
+</Card>

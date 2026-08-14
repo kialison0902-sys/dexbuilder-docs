@@ -1,45 +1,20 @@
 ---
-title: "Transaction Builder"
-description: "Construct wallet-ready transactions without handling user private keys."
+title: "◇ Wallet action construction"
+description: "Construct Vault calls and EIP-712 messages from published contracts rather than an invented generic REST service."
 ---
 
-The Transaction Builder returns the exact EVM typed data, calldata, or Solana message required for a user-authorized action.
+<Warning>DexBuilder has not published a generic Transaction Builder REST API, and Orderly's core Builder model does not require one.</Warning>
 
-It does not sign for the user and never receives a private key.
+The aligned implementation is action-specific:
 
-<Frame caption="Wallet-authorized action flow">
-  <img src="/images/wallet-action-flow.svg" alt="Backend requests a payload, wallet reviews and signs locally, and DexBuilder verifies and tracks the action" />
-</Frame>
+| Action | Construction model |
+|---|---|
+| Account registration | Fetch a registration nonce and construct the documented registration message |
+| Deposit | Construct token approval and Vault `deposit` calls |
+| Withdrawal | Fetch a withdrawal nonce and construct the documented EIP-712 message |
+| PnL settlement | Fetch a settlement nonce and construct the documented EIP-712 message |
+| Internal transfer | Fetch a transfer nonce and construct the documented signed request |
 
-## Response contract
+The connected wallet signs locally. DexBuilder and its SDKs must never receive a raw private key.
 
-```json
-{
-  "request_id": "req_01J...",
-  "chain_type": "EVM",
-  "chain_id": 42161,
-  "from": "0xUSER",
-  "to": "0xVERIFIER_OR_VAULT",
-  "typed_data": {},
-  "calldata": "0x...",
-  "value": "0",
-  "gas_estimate": "145000",
-  "fee_quote": {
-    "asset": "ETH",
-    "amount": "0.00021"
-  },
-  "human_readable_summary": "Withdraw 100 USDC to 0xUSER on Arbitrum",
-  "expires_at": 1786596000000,
-  "request_hash": "0x..."
-}
-```
-
-## Supported builders
-
-- account registration;
-- deposit;
-- withdrawal;
-- PnL settlement;
-- internal transfer.
-
-On submission, the backend must verify the signed payload matches the original `request_hash` and is not expired.
+If DexBuilder later chooses to offer a server-side payload builder, it needs a separate reviewed contract and must remain marked `◇` until implemented. No `/v1/transactions/build/*` route is documented today.

@@ -1,26 +1,17 @@
 ---
-title: "Withdrawals"
-description: "Quote, authorize, submit, and track a withdrawal."
+title: "◇ Withdrawals"
+description: "Use a nonce and wallet-signed withdrawal request following Orderly."
 ---
 
-## Withdrawal flow
+<Warning>The paths shown are Orderly references and require DexBuilder implementation.</Warning>
 
-1. Read the withdrawable balance.
-2. Confirm the destination chain and asset are available.
-3. Request a withdrawal nonce and quote.
-4. Build a domain-separated wallet message.
-5. Ask the user to verify receiver, asset, amount, fees, and destination chain.
-6. Submit the signed request with an `Idempotency-Key`.
-7. Track internal review, source settlement, cross-chain messaging, and destination execution.
+## Target sequence
 
-## Status is not binary
+1. read the account's withdrawable balance and supported destination configuration;
+2. request a signing nonce from `GET /v1/withdraw_nonce`;
+3. construct the exact EIP-712 withdrawal message defined by the published DexBuilder contract;
+4. show the user the token, amount, fee, chain, and receiver before signing;
+5. submit the signature to the equivalent of `POST /v1/withdraw_request`;
+6. reconcile withdrawal records with asset history and destination-chain evidence.
 
-A cross-chain withdrawal may pass through:
-
-`PENDING_RISK → APPROVED → SOURCE_PROCESSING → MESSAGE_IN_FLIGHT → DESTINATION_PROCESSING → CONFIRMED`
-
-Return a machine-readable `reason_code` whenever the withdrawal is delayed, rejected, or fails.
-
-<Warning>
-  Never sign a withdrawal payload that omits `builder_id`, `chain_id`, receiver, asset, amount, nonce, and expiration.
-</Warning>
+DexBuilder must publish the typed-data domain, field order, nonce lifetime, precision, fee behavior, status values, errors, and retry rules. No guessed withdrawal state machine or quote endpoint is included.

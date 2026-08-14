@@ -1,37 +1,24 @@
 ---
-title: "Funds and settlement overview"
-description: "Move collateral safely and reconcile every balance change."
+title: "◇ Funds and settlement"
+description: "Orderly-aligned wallet, Vault, withdrawal, transfer, and PnL-settlement flows."
 ---
 
-Funds and settlement APIs connect the trading ledger to user-authorized on-chain movements.
+<Warning>The funds and settlement surface is a DexBuilder development target. Orderly reference operations are not callable on `api.dexbuilder.com` until published.</Warning>
 
-## Integration sequence
+## Target flow
 
 ```text
-Discover chain and contracts
+Register wallet and create a trading credential
         ↓
-Request quote and nonce
+Deposit collateral through the configured Vault contract
         ↓
-Build wallet transaction or typed message
+Trade with the published Trading API
         ↓
-User reviews and signs
+Submit signed withdrawal, PnL settlement, or internal transfer
         ↓
-Submit and track status
-        ↓
-Reconcile account ledger and chain evidence
+Reconcile platform history with on-chain evidence where applicable
 ```
 
-## Balance fields
+This model does not require a generic REST Transaction Builder. Vault calls and wallet-signed EIP-712 messages are constructed by the client or an approved SDK from the published contract.
 
-Clients should keep these values separate:
-
-- total balance;
-- available balance;
-- frozen or order margin;
-- position margin;
-- unsettled PnL;
-- withdrawable balance.
-
-<Warning>
-  Read chain addresses, signing domains, confirmation requirements, and asset status from the active environment. Never reuse Sandbox values in production.
-</Warning>
+See the [Builder API alignment](/resources/builder-api-alignment) for the exact Orderly references.

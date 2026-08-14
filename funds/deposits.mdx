@@ -1,28 +1,26 @@
 ---
-title: "Deposits"
-description: "Construct, submit, and track a collateral deposit."
+title: "◇ Deposits"
+description: "Deposit collateral through the configured Vault contract, following the Orderly model."
 ---
 
+<Warning>DexBuilder has not published the Vault contract and deposit environment contract. This page describes the required Orderly-aligned flow.</Warning>
+
 <Steps>
-  <Step title="Discover support">
-    Query the supported chain, collateral asset, token address, vault address, minimum amount, and deposit status.
+  <Step title="◇ Discover the active chain configuration">
+    Read the supported chain, collateral token, Vault address, decimals, limits, and deposit status from the published environment configuration.
   </Step>
-  <Step title="Request a quote">
-    Validate the amount and receive expected network fees and confirmation requirements.
+  <Step title="◇ Approve collateral">
+    Have the wallet approve the configured Vault to spend the exact collateral amount when allowance is insufficient.
   </Step>
-  <Step title="Build the transaction">
-    Use the Transaction Builder to construct approval and deposit calls for the registered account and Builder.
+  <Step title="◇ Read the deposit fee">
+    Call the Vault's `getDepositFee` method with the inputs required by the final contract.
   </Step>
-  <Step title="Request wallet signature">
-    Display chain, asset, amount, destination contract, and risk summary before signing.
+  <Step title="◇ Submit the deposit">
+    Have the user call the Vault's `deposit` method. The wallet must display the network, token, amount, contract, and fee.
   </Step>
-  <Step title="Submit and confirm">
-    Track both chain finality and internal account credit. A successful chain transaction alone does not prove the trading balance was credited.
+  <Step title="◇ Confirm account credit">
+    Wait for on-chain finality and verify the platform asset history and account balance. A successful transaction alone does not prove internal credit.
   </Step>
 </Steps>
 
-## Suggested states
-
-`CREATED → AWAITING_SIGNATURE → SUBMITTED → PROCESSING → CONFIRMED`
-
-Failures should distinguish `REJECTED`, `FAILED_RETRYABLE`, and `FAILED_FINAL`.
+Orderly does not use generic `POST /v1/deposits` or `POST /v1/deposits/quote` resources for this standard flow; DexBuilder therefore does not document them.
