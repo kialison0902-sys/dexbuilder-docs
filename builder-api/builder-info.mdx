@@ -6,21 +6,20 @@ icon: "chart-line"
 
 Builder information and fee-revenue endpoints support configuration checks and daily reconciliation.
 
-<Note>`◇` identifies an operation that is not currently available on DexBuilder.</Note>
 
 ## Builder information
 
-| Status | Method and path | Description |
-|---|---|---|
-| ◇ | `GET /v1/broker/broker_info` | Get Builder fee-tier information |
+| Method and path | Description |
+|---|---|
+| `GET /v1/broker/broker_info` | Get Builder fee-tier information |
 
-The response should identify the Broker ID, active fee tier, base maker and taker rates, and fee-revenue configuration.
+The response identifies the Broker ID, active fee tier, base maker and taker rates, and fee-revenue configuration.
 
 ## Daily fee revenue
 
-| Status | Method and path | Description |
-|---|---|---|
-| ◇ | `GET /v1/broker/daily_fee_revenue` | Get the Builder's daily fee-revenue history |
+| Method and path | Description |
+|---|---|
+| `GET /v1/broker/daily_fee_revenue` | Get the Builder's daily fee-revenue history |
 
 ## Reconciliation
 

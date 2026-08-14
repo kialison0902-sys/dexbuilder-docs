@@ -6,29 +6,28 @@ icon: "percent"
 
 Builder 设置其交易前端向用户展示的交易费率。Builder 收入为用户实际费率与适用基础费率之间的差额，具体以当前手续费等级及商务条款为准。
 
-<Note>`◇` 表示该操作当前尚未在 DexBuilder 开放。</Note>
 
 ## 手续费设置 API
 
-| 状态 | Method 与路径 | 说明 |
-|---|---|---|
-| ◇ | `GET /v1/broker/fee_rate/default` | 查询 Builder 默认手续费 |
-| ◇ | `POST /v1/broker/fee_rate/default` | 更新 Builder 默认手续费 |
-| ◇ | `POST /v1/broker/fee_rate/set` | 更新指定账户的费率 |
-| ◇ | `POST /v1/broker/fee_rate/set_default` | 将指定账户恢复为默认费率 |
-| ◇ | `GET /v1/broker/user_info` | 查询该 Builder 下的账户费率 |
+| Method 与路径 | 说明 |
+|---|---|
+| `GET /v1/broker/fee_rate/default` | 查询 Builder 默认手续费 |
+| `POST /v1/broker/fee_rate/default` | 更新 Builder 默认手续费 |
+| `POST /v1/broker/fee_rate/set` | 更新指定账户的费率 |
+| `POST /v1/broker/fee_rate/set_default` | 将指定账户恢复为默认费率 |
+| `GET /v1/broker/user_info` | 查询该 Builder 下的账户费率 |
 
 ## 费率字段
 
-正式 API 契约必须明确 Maker/Taker 费率、十进制精度、适用下限、生效时间、批量限制与授权要求。用户界面必须在提交订单前展示实际费率。
+使用当前环境返回的 Maker/Taker 费率精度、适用下限、生效时间、批量限制与授权规则。用户界面必须在提交订单前展示实际费率。
 
 ## 订单标签
 
-| 状态 | Method 与路径 | 说明 |
-|---|---|---|
-| ◇ | `POST /v1/broker/order_enum` | 创建订单标签 |
-| ◇ | `GET /v1/broker/order_enums` | 查询 Builder 的全部订单标签 |
-| ◇ | `GET /v1/broker/order_enum/{enum_id}` | 查询订单标签及其统计 |
-| ◇ | `PUT /v1/broker/order_enum/{enum_id}` | 更新订单标签 |
-| ◇ | `POST /v1/broker/order_enum/archive` | 归档订单标签 |
-| ◇ | `POST /v1/broker/order_enum/unarchive` | 恢复已归档订单标签 |
+| Method 与路径 | 说明 |
+|---|---|
+| `POST /v1/broker/order_enum` | 创建订单标签 |
+| `GET /v1/broker/order_enums` | 查询 Builder 的全部订单标签 |
+| `GET /v1/broker/order_enum/{enum_id}` | 查询订单标签及其统计 |
+| `PUT /v1/broker/order_enum/{enum_id}` | 更新订单标签 |
+| `POST /v1/broker/order_enum/archive` | 归档订单标签 |
+| `POST /v1/broker/order_enum/unarchive` | 恢复已归档订单标签 |

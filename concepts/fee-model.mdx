@@ -17,7 +17,7 @@ description: "Understand user fees, protocol fees, Builder fees, and non-trading
 
 ## Rate representation
 
-DexBuilder API schemas should use decimal rates consistently:
+DexBuilder API schemas use decimal rates consistently:
 
 `0.0005 = 0.05% = 5 bps`
 
@@ -25,8 +25,4 @@ Clients must not assume a field uses bps unless its schema explicitly says so.
 
 ## User disclosure
 
-Before trading, the user should be shown the effective rate available from the published Trading API. Withdrawal fees must follow the published withdrawal contract.
-
-<Note>
-  The existing perpetual fee endpoint answers the user's current trading rate. Builder default fees, user overrides, and daily fee revenue remain `◇` until their contracts are published.
-</Note>
+Before trading, display the effective rate returned by the Trading API. Display the withdrawal fee returned by the withdrawal request flow before the wallet owner signs.

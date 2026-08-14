@@ -6,7 +6,6 @@ icon: "user-check"
 
 账户注册用于将钱包用户与 Broker ID 所标识的 Builder 建立关联。
 
-<Note>`◇` 表示该操作当前尚未在 DexBuilder 开放。</Note>
 
 ## 注册流程
 
@@ -15,13 +14,13 @@ icon: "user-check"
     确认钱包是否已经通过所选 Builder 注册账户。
   </Step>
   <Step title="获取注册 Nonce">
-    调用 `◇ GET /v1/registration_nonce`，从响应中读取 `registration_nonce`。
+    调用 `GET /v1/registration_nonce`，从响应中读取 `registration_nonce`。
   </Step>
   <Step title="签署注册消息">
     由钱包用户签署 EIP-712 `Registration` 消息。
   </Step>
   <Step title="注册账户">
-    将消息、签名与钱包地址提交至 `◇ POST /v1/register_account`。
+    将消息、签名与钱包地址提交至 `POST /v1/register_account`。
   </Step>
   <Step title="保存 Account ID">
     保存返回的 `account_id`，用于后续账户与 Builder API 请求。
@@ -43,4 +42,4 @@ icon: "user-check"
 
 ## API 凭证
 
-注册完成后，为账户创建可撤销的 API 凭证，用于认证交易请求。DexBuilder 将单独发布凭证管理接口、权限模型、签名算法与有效期规则。
+注册完成后，为账户创建可撤销的 API 凭证，用于认证交易请求。使用前配置权限、签名算法、有效期、轮换与撤销策略。

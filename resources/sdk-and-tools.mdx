@@ -1,19 +1,14 @@
 ---
 title: "SDKs and developer tools"
-description: "Developer artifacts for Trading and Builder integrations."
+description: "OpenAPI specifications and implementation requirements for DexBuilder integrations."
 ---
 
-| Status | Artifact | Purpose |
-|---|---|---|
-| Available | English Trading OpenAPI | Interactive API reference and client generation |
-| Available | Chinese Trading OpenAPI | Localized interactive API reference |
-| ◇ | Builder OpenAPI | Typed Builder API contract |
-| ◇ | TypeScript SDK | Account registration, wallet authorization, REST, and WebSocket helpers |
-| ◇ | Signing test vectors | Verify canonical-request and EIP-712 signing |
-| ◇ | Postman collection | Test Builder API requests |
-| ◇ | React package | Wallet, account, market, and asset-flow components |
-| ◇ | Python connector | Backend and quantitative integrations |
+| Artifact | Purpose |
+|---|---|
+| English Trading OpenAPI | Interactive API reference and client generation |
+| Chinese Trading OpenAPI | Localized interactive API reference |
+| Builder API documentation | Account registration, asset flows, user data, fees, campaigns, referrals, and administration |
 
 ## Security requirements
 
-SDKs may construct requests and wallet messages but must never request, transmit, or store a user's private key. Administrative credentials belong only in secured backend systems.
+Client libraries may construct requests and wallet messages but must never request, transmit, or store a user's private key. Administrative credentials belong only in secured backend systems.

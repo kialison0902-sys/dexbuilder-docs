@@ -5,13 +5,13 @@ description: "Track an order safely from submission through a terminal state."
 
 An HTTP success response means the request was accepted for processing. It does not necessarily mean the order filled.
 
-```text
+`text
 SUBMITTED → ACCEPTED → OPEN ───────────────→ FILLED
                    ├──────────────────────→ CANCELLED
                    ├──────────────────────→ EXPIRED
                    └→ PARTIALLY_FILLED ───→ FILLED or CANCELLED
 SUBMITTED ────────────────────────────────→ REJECTED
-```
+`
 
 ## Client requirements
 

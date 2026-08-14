@@ -6,23 +6,22 @@ icon: "chart-line"
 
 Builder 收入以当前手续费等级、用户实际费率与每日结算记录为准。
 
-<Note>`◇` 表示该操作当前尚未在 DexBuilder 开放。</Note>
 
 ## Builder 信息
 
-| 状态 | Method 与路径 | 说明 |
-|---|---|---|
-| ◇ | `GET /v1/broker/broker_info` | 查询 Builder 手续费等级信息 |
+| Method 与路径 | 说明 |
+|---|---|
+| `GET /v1/broker/broker_info` | 查询 Builder 手续费等级信息 |
 
-响应应包含 Broker ID、当前手续费等级、基础 Maker/Taker 费率与收入结算配置。
+响应包含 Broker ID、当前手续费等级、基础 Maker/Taker 费率与收入结算配置。
 
 ## 每日收入结算
 
-| 状态 | Method 与路径 | 说明 |
-|---|---|---|
-| ◇ | `GET /v1/broker/daily_fee_revenue` | 查询 Builder 每日收入结算历史 |
+| Method 与路径 | 说明 |
+|---|---|
+| `GET /v1/broker/daily_fee_revenue` | 查询 Builder 每日收入结算历史 |
 
-每日记录应包含结算日期、交易量、用户手续费、适用基础费、Builder 收入、结算资产、状态与稳定记录标识。
+每日记录包含结算日期、交易量、用户手续费、适用基础费、Builder 收入、结算资产、状态与稳定记录标识。
 
 ## 对账
 

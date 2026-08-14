@@ -6,15 +6,14 @@ icon: "scale-balanced"
 
 平仓产生已实现 PnL；PnL 结算是单独的账户操作。
 
-<Note>`◇` 表示该操作当前尚未在 DexBuilder 开放。</Note>
 
 ## PnL 结算 API
 
-| 状态 | Method 与路径 | 说明 |
-|---|---|---|
-| ◇ | `GET /v1/settle_nonce` | 获取 PnL 结算 Nonce |
-| ◇ | `POST /v1/settle_pnl` | 提交已签名 PnL 结算 |
-| ◇ | `GET /v1/pnl_settlement/history` | 查询 PnL 结算历史 |
+| Method 与路径 | 说明 |
+|---|---|
+| `GET /v1/settle_nonce` | 获取 PnL 结算 Nonce |
+| `POST /v1/settle_pnl` | 提交已签名 PnL 结算 |
+| `GET /v1/pnl_settlement/history` | 查询 PnL 结算历史 |
 
 ## 结算流程
 

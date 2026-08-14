@@ -14,14 +14,14 @@ description: "Move a tested Sandbox integration into production safely."
 
 ## Required monitoring
 
-- API availability, latency, and error rate;
+- API uptime, latency, and error rate;
 - WebSocket connection, sequence gaps, and event lag;
 - order rejection and reconciliation breaks;
 - margin and liquidation anomalies;
 - deposit, withdrawal, and settlement duration;
-- Builder data-stream gaps after that surface is published;
+- Builder data-stream gaps;
 - Builder volume and daily fee-revenue discrepancies.
 
 ## Launch evidence
 
-For each published surface, retain sanitized identifiers and evidence for the first production registration, deposit, fill, fee, settlement, withdrawal, and daily revenue record. Remove secrets and full signatures.
+For each production flow, retain sanitized identifiers and evidence for the first registration, deposit, fill, fee, settlement, withdrawal, and daily revenue record. Remove secrets and full signatures.

@@ -6,20 +6,19 @@ icon: "chart-column"
 
 用户数据接口返回通过 Builder Broker ID 注册的账户汇总数据。
 
-<Note>`◇` 表示该操作当前尚未在 DexBuilder 开放。</Note>
 
 ## 交易量
 
-| 状态 | 方法与路径 | 说明 |
-|---|---|---|
-| ◇ | `GET /v1/volume/broker/daily` | 查询 Builder 用户的每日交易量 |
+| 方法与路径 | 说明 |
+|---|---|
+| `GET /v1/volume/broker/daily` | 查询 Builder 用户的每日交易量 |
 
 ## 排行榜
 
-| 状态 | 方法与路径 | 说明 |
-|---|---|---|
-| ◇ | `GET /v1/broker/leaderboard/daily` | 查询 Builder 每日用户排行榜 |
+| 方法与路径 | 说明 |
+|---|---|
+| `GET /v1/broker/leaderboard/daily` | 查询 Builder 每日用户排行榜 |
 
 ## 数据范围
 
-响应只能包含通过已鉴权 Builder Broker ID 注册的账户。请使用管理员账户鉴权，并遵守已发布的日期范围、分页与限流规则。
+响应只能包含通过已鉴权 Builder Broker ID 注册的账户。请使用管理员账户鉴权，并遵守当前环境配置的日期范围、分页与限流规则。

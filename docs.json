@@ -128,7 +128,6 @@
               {
                 "group": "Resources",
                 "pages": [
-                  "resources/api-coverage",
                   "resources/environments",
                   "resources/sdk-and-tools",
                   "resources/integration-faq",
@@ -175,8 +174,7 @@
                   "builder-api/builder-info",
                   "builder-api/admin-user-data",
                   "builder-api/fee-settings",
-                  "builder-api/order-tag-admin",
-                  "builder-api/api-availability"
+                  "builder-api/order-tag-admin"
                 ]
               }
             ]
@@ -283,7 +281,6 @@
               {
                 "group": "资源",
                 "pages": [
-                  "zh/resources/api-coverage",
                   "zh/resources/environments",
                   "zh/resources/sdk-and-tools",
                   "zh/resources/integration-faq",
@@ -330,8 +327,7 @@
                   "zh/builder-api/builder-info",
                   "zh/builder-api/admin-user-data",
                   "zh/builder-api/fee-settings",
-                  "zh/builder-api/order-tag-admin",
-                  "zh/builder-api/api-availability"
+                  "zh/builder-api/order-tag-admin"
                 ]
               }
             ]

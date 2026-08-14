@@ -6,52 +6,51 @@ icon: "users"
 
 Builder API 用于查询通过该 Builder Broker ID 注册的账户数据，并管理 Campaign 与推荐计划。
 
-<Note>`◇` 表示该操作当前尚未在 DexBuilder 开放。</Note>
 
 ## Builder 用户数据
 
-| 状态 | Method 与路径 | 说明 |
-|---|---|---|
-| ◇ | `GET /v1/volume/broker/daily` | 查询 Builder 用户每日交易量 |
-| ◇ | `GET /v1/broker/leaderboard/daily` | 查询 Builder 排行榜 |
-| ◇ | `GET /v1/admin/client/info` | 查询账户信息 |
-| ◇ | `GET /v1/admin/client/holding` | 查询当前资产持有情况 |
-| ◇ | `GET /v1/admin/internal_transfer_history` | 查询内部划转历史 |
-| ◇ | `GET /v1/admin/asset/history` | 查询充值与提现历史 |
-| ◇ | `GET /v1/admin/asset/convert_history` | 查询资产转换历史 |
-| ◇ | `GET /v1/admin/client/leverage` | 查询杠杆设置 |
-| ◇ | `GET /v1/admin/orders` | 查询订单 |
-| ◇ | `GET /v1/admin/position/{symbol}` | 查询单个仓位 |
-| ◇ | `GET /v1/admin/positions` | 查询全部仓位 |
-| ◇ | `GET /v1/admin/funding_fee/history` | 查询资金费历史 |
-| ◇ | `GET /v1/admin/volume/user/stats` | 查询账户交易量统计 |
-| ◇ | `GET /v1/admin/liquidations` | 查询强平仓位 |
-| ◇ | `GET /v1/admin/algo/orders` | 查询 Algo Order |
-| ◇ | `GET /v1/admin/trades` | 查询成交记录 |
+| Method 与路径 | 说明 |
+|---|---|
+| `GET /v1/volume/broker/daily` | 查询 Builder 用户每日交易量 |
+| `GET /v1/broker/leaderboard/daily` | 查询 Builder 排行榜 |
+| `GET /v1/admin/client/info` | 查询账户信息 |
+| `GET /v1/admin/client/holding` | 查询当前资产持有情况 |
+| `GET /v1/admin/internal_transfer_history` | 查询内部划转历史 |
+| `GET /v1/admin/asset/history` | 查询充值与提现历史 |
+| `GET /v1/admin/asset/convert_history` | 查询资产转换历史 |
+| `GET /v1/admin/client/leverage` | 查询杠杆设置 |
+| `GET /v1/admin/orders` | 查询订单 |
+| `GET /v1/admin/position/{symbol}` | 查询单个仓位 |
+| `GET /v1/admin/positions` | 查询全部仓位 |
+| `GET /v1/admin/funding_fee/history` | 查询资金费历史 |
+| `GET /v1/admin/volume/user/stats` | 查询账户交易量统计 |
+| `GET /v1/admin/liquidations` | 查询强平仓位 |
+| `GET /v1/admin/algo/orders` | 查询 Algo Order |
+| `GET /v1/admin/trades` | 查询成交记录 |
 
 ## Trading Campaign
 
-| 状态 | Method 与路径 | 说明 |
-|---|---|---|
-| ◇ | `GET /v1/public/campaigns` | 查询 Campaign 列表 |
-| ◇ | `GET /v1/public/campaign/ranking` | 查询 Campaign 排行榜 |
-| ◇ | `GET /v1/public/campaign/stats` | 查询 Campaign 统计 |
-| ◇ | `GET /v1/public/campaign/stats/details` | 查询 Campaign 详细统计 |
-| ◇ | `GET /v1/public/campaign/user` | 查询账户的 Campaign 信息 |
-| ◇ | `GET /v1/public/campaign/check` | 检查 Campaign 资格 |
-| ◇ | `POST /v1/client/campaign/sign_up` | 报名参加 Campaign |
+| Method 与路径 | 说明 |
+|---|---|
+| `GET /v1/public/campaigns` | 查询 Campaign 列表 |
+| `GET /v1/public/campaign/ranking` | 查询 Campaign 排行榜 |
+| `GET /v1/public/campaign/stats` | 查询 Campaign 统计 |
+| `GET /v1/public/campaign/stats/details` | 查询 Campaign 详细统计 |
+| `GET /v1/public/campaign/user` | 查询账户的 Campaign 信息 |
+| `GET /v1/public/campaign/check` | 检查 Campaign 资格 |
+| `POST /v1/client/campaign/sign_up` | 报名参加 Campaign |
 
 ## 推荐计划
 
-| 状态 | Method 与路径 | 说明 |
-|---|---|---|
-| ◇ | `GET /v1/public/referral/check_ref_code` | 检查推荐码 |
-| ◇ | `GET /v1/public/referral/verify_ref_code` | 验证推荐码 |
-| ◇ | `POST /v1/referral/bind` | 绑定推荐码 |
-| ◇ | `POST /v1/referral/create` | 创建推荐码 |
-| ◇ | `GET /v1/referral/admin_info` | 查询推荐码信息 |
-| ◇ | `POST /v1/referral/update` | 更新推荐码 |
-| ◇ | `POST /v1/referral/multi_level/admin` | 开启或配置多级推荐 |
-| ◇ | `GET /v1/referral/multi_level/admin` | 查询多级推荐配置 |
+| Method 与路径 | 说明 |
+|---|---|
+| `GET /v1/public/referral/check_ref_code` | 检查推荐码 |
+| `GET /v1/public/referral/verify_ref_code` | 验证推荐码 |
+| `POST /v1/referral/bind` | 绑定推荐码 |
+| `POST /v1/referral/create` | 创建推荐码 |
+| `GET /v1/referral/admin_info` | 查询推荐码信息 |
+| `POST /v1/referral/update` | 更新推荐码 |
+| `POST /v1/referral/multi_level/admin` | 开启或配置多级推荐 |
+| `GET /v1/referral/multi_level/admin` | 查询多级推荐配置 |
 
 所有 Builder 用户数据请求都必须验证 Broker ID 归属与管理员账户权限。

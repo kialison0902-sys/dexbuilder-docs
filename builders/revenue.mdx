@@ -6,23 +6,22 @@ icon: "chart-line"
 
 Builder revenue reporting is based on the Builder's active fee tier, user-facing fee rates, and daily settlement records.
 
-<Note>`◇` identifies an operation that is not currently available on DexBuilder.</Note>
 
 ## Builder information
 
-| Status | Method and path | Description |
-|---|---|---|
-| ◇ | `GET /v1/broker/broker_info` | Get Builder fee-tier information |
+| Method and path | Description |
+|---|---|
+| `GET /v1/broker/broker_info` | Get Builder fee-tier information |
 
-The response should identify the Broker ID, active fee tier, base maker and taker rates, and revenue-settlement configuration.
+The response identifies the Broker ID, active fee tier, base maker and taker rates, and revenue-settlement configuration.
 
 ## Daily revenue settlement
 
-| Status | Method and path | Description |
-|---|---|---|
-| ◇ | `GET /v1/broker/daily_fee_revenue` | Get daily Builder revenue settlement history |
+| Method and path | Description |
+|---|---|
+| `GET /v1/broker/daily_fee_revenue` | Get daily Builder revenue settlement history |
 
-Daily records should include the settlement date, trading volume, user fees, applicable base fees, Builder revenue, settlement asset, status, and stable record identifier.
+Daily records include the settlement date, trading volume, user fees, applicable base fees, Builder revenue, settlement asset, status, and a stable record identifier.
 
 ## Reconciliation
 

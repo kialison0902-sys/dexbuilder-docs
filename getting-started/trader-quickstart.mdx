@@ -14,10 +14,10 @@ This quickstart uses the DexBuilder perpetual Trading API. Keep production crede
 
 ## 1. Read available markets
 
-```bash
+`bash
 curl "https://api.dexbuilder.com/api/v1/dex_futures/usdt/contracts" \
   -H "Accept: application/json"
-```
+`
 
 Public market endpoints do not require authentication.
 
@@ -29,7 +29,7 @@ Read [Request signing](/authentication/request-signing) before sending a private
 
 ## 3. Place a limit order
 
-```bash
+`bash
 curl -X POST "https://api.dexbuilder.com/api/v1/dex_futures/usdt/orders" \
   -H "Accept: application/json" \
   -H "Content-Type: application/json" \
@@ -43,7 +43,7 @@ curl -X POST "https://api.dexbuilder.com/api/v1/dex_futures/usdt/orders" \
     "tif": "gtc",
     "reduce_only": false
   }'
-```
+`
 
 <Warning>
   The sample values are illustrative. The DexBuilder Trading API uses signed size (`size > 0` for buy and `size < 0` for sell). Use contract metadata to validate tick size, quantity step, minimum quantity, leverage, and the position exposure limit (`risk_limit`) before placing an order.
@@ -53,12 +53,12 @@ curl -X POST "https://api.dexbuilder.com/api/v1/dex_futures/usdt/orders" \
 
 Do not treat an accepted order as a fill. Query the order or consume the private execution stream until it reaches a terminal state.
 
-```bash
+`bash
 curl "https://api.dexbuilder.com/api/v1/dex_futures/usdt/orders/${ORDER_ID}" \
   -H "KEY: ${DEXBUILDER_API_KEY}" \
   -H "Timestamp: ${DEXBUILDER_TIMESTAMP}" \
   -H "SIGN: ${DEXBUILDER_SIGNATURE}"
-```
+`
 
 ## Next steps
 

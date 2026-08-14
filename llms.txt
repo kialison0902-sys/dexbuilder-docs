@@ -9,7 +9,6 @@
 - Builder overview: /builder-api/overview
 - Builder onboarding: /builder-api/onboarding
 - Builder quickstart: /getting-started/builder-quickstart
-- API availability: /resources/api-coverage
 
 ## Core integration flows
 
@@ -30,7 +29,6 @@
 - Builder info: /builder-api/builder-info
 - Fee settings: /builder-api/fee-settings
 - Order tag admin: /builder-api/order-tag-admin
-- API availability: /builder-api/api-availability
 
 ## API specifications
 
@@ -44,6 +42,3 @@
 - Builder Onboarding：/zh/builder-api/onboarding
 - 账户：/zh/concepts/accounts
 - 账户注册：/zh/builder-api/account-registration
-- API 可用性：/zh/builder-api/api-availability
-
-`◇` identifies a Builder interface that is not currently available on DexBuilder.

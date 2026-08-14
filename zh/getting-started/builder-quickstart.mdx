@@ -5,13 +5,12 @@ description: "接入账户注册、充值、交易、结算与 Builder 管理能
 
 开始用户流程开发前，请先完成 [Builder Onboarding](/zh/builder-api/onboarding)。
 
-<Note>`◇` 表示该操作当前尚未在 DexBuilder 开放。</Note>
 
 ## 接入顺序
 
 <Steps>
   <Step title="注册账户">
-    `◇ GET /v1/registration_nonce` → 签署包含 `brokerId` 的注册消息 → `◇ POST /v1/register_account`。
+    `GET /v1/registration_nonce` → 签署包含 `brokerId` 的注册消息 → `POST /v1/register_account`。
   </Step>
   <Step title="创建 API 凭证">
     为已注册账户签发可撤销凭证，签名 Secret 不得进入前端或移动端安装包。
@@ -20,13 +19,13 @@ description: "接入账户注册、充值、交易、结算与 Builder 管理能
     授权抵押资产、查询 Vault 充值费用、提交充值并确认账户余额。
   </Step>
   <Step title="交易">
-    使用已发布交易 API 接入市场、订单、仓位、成交与账户数据。
+    使用交易 API 接入市场、订单、仓位、成交与账户数据。
   </Step>
   <Step title="结算与提现">
     按 PnL 结算、内部划转或提现接口要求，获取对应 Nonce 并完成钱包签名。
   </Step>
   <Step title="管理 Builder">
-    在对应接口开放后，使用 Builder API 查询用户数据并管理手续费、收入结算、订单标签、Campaign 与推荐计划。
+    使用 Builder API 查询用户数据并管理手续费、收入结算、订单标签、Campaign 与推荐计划。
   </Step>
 </Steps>
 
@@ -39,4 +38,4 @@ description: "接入账户注册、充值、交易、结算与 Builder 管理能
 | 钱包地址 | 用户控制并用于授权账户注册及资产操作的地址 |
 | API 凭证 | 用于认证交易请求的可撤销凭证 |
 
-继续查看[账户注册](/zh/builder-api/account-registration)与[API 可用性](/zh/builder-api/api-availability)。
+继续查看[账户注册](/zh/builder-api/account-registration)与[用户数据](/zh/builder-api/user-data)。

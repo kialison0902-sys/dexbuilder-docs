@@ -6,23 +6,22 @@ icon: "percent"
 
 Builders configure the trading fee displayed by their frontend. The effective rate is subject to the active Builder fee tier and applicable commercial terms.
 
-<Note>`◇` identifies an operation that is not currently available on DexBuilder.</Note>
 
 ## Default fee
 
-| Status | Method and path | Description |
-|---|---|---|
-| ◇ | `GET /v1/broker/fee_rate/default` | Get the default Builder fee |
-| ◇ | `POST /v1/broker/fee_rate/default` | Update the default Builder fee |
+| Method and path | Description |
+|---|---|
+| `GET /v1/broker/fee_rate/default` | Get the default Builder fee |
+| `POST /v1/broker/fee_rate/default` | Update the default Builder fee |
 
 ## Account fee
 
-| Status | Method and path | Description |
-|---|---|---|
-| ◇ | `POST /v1/broker/fee_rate/set` | Update the fee rate for an account |
-| ◇ | `POST /v1/broker/fee_rate/set_default` | Reset an account to the default fee rate |
-| ◇ | `GET /v1/broker/user_info` | Get account fee rates for the Builder |
+| Method and path | Description |
+|---|---|
+| `POST /v1/broker/fee_rate/set` | Update the fee rate for an account |
+| `POST /v1/broker/fee_rate/set_default` | Reset an account to the default fee rate |
+| `GET /v1/broker/user_info` | Get account fee rates for the Builder |
 
 ## Fee disclosure
 
-The API contract must define maker and taker rates, precision, applicable minimums, effective time, batch limits, and authorization. The frontend must display the effective fee before order submission.
+Use the maker and taker rate precision, applicable minimums, effective time, batch limits, and authorization rules returned for the active environment. The frontend must display the effective fee before order submission.

@@ -6,29 +6,28 @@ icon: "percent"
 
 Builders set the trading fee shown on their frontend. The Builder's revenue is the difference between the user-facing fee and the applicable base fee, subject to the active fee tier and commercial terms.
 
-<Note>`◇` identifies an operation that is not currently available on DexBuilder.</Note>
 
 ## Fee settings API
 
-| Status | Method and path | Description |
-|---|---|---|
-| ◇ | `GET /v1/broker/fee_rate/default` | Get the default Builder fee |
-| ◇ | `POST /v1/broker/fee_rate/default` | Update the default Builder fee |
-| ◇ | `POST /v1/broker/fee_rate/set` | Update the fee rate for an account |
-| ◇ | `POST /v1/broker/fee_rate/set_default` | Reset an account to the default fee rate |
-| ◇ | `GET /v1/broker/user_info` | Get account fee rates for the Builder |
+| Method and path | Description |
+|---|---|
+| `GET /v1/broker/fee_rate/default` | Get the default Builder fee |
+| `POST /v1/broker/fee_rate/default` | Update the default Builder fee |
+| `POST /v1/broker/fee_rate/set` | Update the fee rate for an account |
+| `POST /v1/broker/fee_rate/set_default` | Reset an account to the default fee rate |
+| `GET /v1/broker/user_info` | Get account fee rates for the Builder |
 
 ## Fee fields
 
-The final API contract must define maker and taker rates, decimal precision, applicable minimums, effective time, batch limits, and authorization requirements. User interfaces must display the effective fee before order submission.
+Use the maker and taker rate precision, applicable minimums, effective time, batch limits, and authorization rules returned for the active environment. User interfaces must display the effective fee before order submission.
 
 ## Order tags
 
-| Status | Method and path | Description |
-|---|---|---|
-| ◇ | `POST /v1/broker/order_enum` | Create an order tag |
-| ◇ | `GET /v1/broker/order_enums` | List all order tags for the Builder |
-| ◇ | `GET /v1/broker/order_enum/{enum_id}` | Get an order tag and its statistics |
-| ◇ | `PUT /v1/broker/order_enum/{enum_id}` | Update an order tag |
-| ◇ | `POST /v1/broker/order_enum/archive` | Archive an order tag |
-| ◇ | `POST /v1/broker/order_enum/unarchive` | Restore an archived order tag |
+| Method and path | Description |
+|---|---|
+| `POST /v1/broker/order_enum` | Create an order tag |
+| `GET /v1/broker/order_enums` | List all order tags for the Builder |
+| `GET /v1/broker/order_enum/{enum_id}` | Get an order tag and its statistics |
+| `PUT /v1/broker/order_enum/{enum_id}` | Update an order tag |
+| `POST /v1/broker/order_enum/archive` | Archive an order tag |
+| `POST /v1/broker/order_enum/unarchive` | Restore an archived order tag |

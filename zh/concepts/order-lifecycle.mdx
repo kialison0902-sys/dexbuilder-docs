@@ -5,13 +5,13 @@ description: "从提交到终态，可靠追踪每一笔订单。"
 
 HTTP 成功响应表示请求已被接受处理，并不一定表示订单已经成交。
 
-```text
+`text
 SUBMITTED → ACCEPTED → OPEN ───────────────→ FILLED
                    ├──────────────────────→ CANCELLED
                    ├──────────────────────→ EXPIRED
                    └→ PARTIALLY_FILLED ───→ FILLED 或 CANCELLED
 SUBMITTED ────────────────────────────────→ REJECTED
-```
+`
 
 ## 客户端要求
 

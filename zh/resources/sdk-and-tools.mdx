@@ -1,19 +1,14 @@
 ---
 title: "SDK 与开发工具"
-description: "用于交易与 Builder 接入的开发者产物。"
+description: "DexBuilder 接入所需的 OpenAPI 规范与实施要求。"
 ---
 
-| 状态 | 产物 | 用途 |
-|---|---|---|
-| 已开放 | 英文交易 OpenAPI | 交互式 API Reference 与客户端生成 |
-| 已开放 | 中文交易 OpenAPI | 本地化交互式 API Reference |
-| ◇ | Builder OpenAPI | 类型化 Builder API 契约 |
-| ◇ | TypeScript SDK | 账户注册、钱包授权、REST 与 WebSocket Helper |
-| ◇ | 签名测试向量 | 验证规范化请求与 EIP-712 签名 |
-| ◇ | Postman Collection | 测试 Builder API 请求 |
-| ◇ | React Package | 钱包、账户、市场与资产流程组件 |
-| ◇ | Python Connector | 后端与量化接入 |
+| 产物 | 用途 |
+|---|---|
+| 英文交易 OpenAPI | 交互式 API Reference 与客户端生成 |
+| 中文交易 OpenAPI | 本地化交互式 API Reference |
+| Builder API 文档 | 账户注册、资产流程、用户数据、手续费、Campaign、推荐与管理 |
 
 ## 安全要求
 
-SDK 可以构造请求和钱包消息，但不得请求、传输或保存用户私钥。管理凭证只能保存在受保护的后端系统中。
+客户端库可以构造请求和钱包消息，但不得请求、传输或保存用户私钥。管理凭证只能保存在受保护的后端系统中。

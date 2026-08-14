@@ -1,19 +1,19 @@
 ---
 title: "环境"
-description: "配置交易与 Builder 接入所需的 Sandbox 和生产环境。"
+description: "配置 API Host、凭证、合约地址与签名 Domain。"
 ---
 
-## 生产交易 API
+## 生产 REST API
 
-```text
+`text
 https://api.dexbuilder.com/api/v1/
-```
+`
 
-该 Base URL 仅用于已发布的交易 API Reference。
+交易 API Reference 请求使用该 Base URL。
 
-## Builder API
+## Builder 配置
 
-Builder API Base URL 与 Sandbox 配置当前尚未发布。接口开放后，Builder 接入需要以下环境配置：
+将以下值按环境独立保存：
 
 - REST 与 WebSocket Base URL；
 - 支持的网络与抵押资产；
@@ -22,7 +22,7 @@ Builder API Base URL 与 Sandbox 配置当前尚未发布。接口开放后，Bu
 - EIP-712 Domain 与签名规则；
 - 限流与维护状态接口。
 
-<Warning>不得通过替换交易 API Host 或路径前缀构造未记录的接口。</Warning>
+<Warning>使用当前环境配置的准确 Host、路径、合约地址与签名 Domain。</Warning>
 
 ## 环境隔离
 

@@ -11,10 +11,6 @@ Builder 是在 DexBuilder 上线自有交易前端并注册自有用户的团队
 
 Broker ID 是分配给 Builder 的唯一 API 标识，用于计算 Account ID、注册账户并限定 Builder API 的访问范围。
 
-## 现在可以调用 Builder API 吗？
-
-只有没有 `◇` 标记的接口当前可用。在 DexBuilder 发布 Base URL、认证方式、请求结构与环境配置前，不得调用带 `◇` 的接口。
-
 ## 账户属于谁？
 
 账户属于对应钱包用户。Builder 管理员账户用于管理 Builder 设置，也可以查询通过自身 Broker ID 注册的账户，但不能代表用户钱包签署资产操作。
@@ -25,4 +21,4 @@ Broker ID 是分配给 Builder 的唯一 API 标识，用于计算 Account ID、
 
 ## 应以哪条手续费记录为准？
 
-账户实际交易费率以当前交易 API 为准。Builder 收入接口开放后，Builder 收入对账以每日收入结算历史为准。
+账户实际交易费率以交易 API 为准。Builder 收入对账以每日手续费收入历史为准。

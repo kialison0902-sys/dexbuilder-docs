@@ -7,25 +7,25 @@ description: "The implementation and launch checklist for Builders integrating w
 
 - [ ] Choose white-label, UI SDK, or direct API integration.
 - [ ] Confirm products, chains, collateral assets, regions, and custody model.
-- [ ] ◇ Obtain a Sandbox Broker ID and register the admin account.
+- [ ] Obtain a Sandbox Broker ID and register the admin account.
 - [ ] Document your fee model and what the end user will see.
 - [ ] Assign owners for wallet, backend, frontend, reconciliation, security, and support.
 
 ## Core development
 
-- [ ] ◇ Register the wallet owner under the correct Broker ID.
-- [ ] ◇ Create, rotate, expire, and revoke per-user trading credentials.
+- [ ] Register the wallet owner under the correct Broker ID.
+- [ ] Create, rotate, expire, and revoke per-user trading credentials.
 - [ ] Display contracts, order book, trades, Klines, index, mark price, and funding.
 - [ ] Implement order placement, modification, cancellation, and terminal-state tracking.
 - [ ] Implement balances, positions, margin, leverage, liquidation, and ADL states.
-- [ ] ◇ Implement Vault deposit, signed withdrawal, PnL settlement, and internal transfer from published contracts.
-- [ ] ◇ Reconcile daily Builder volume and fee revenue from published history resources.
+- [ ] Implement Vault deposit, signed withdrawal, PnL settlement, and internal transfer according to the API contracts.
+- [ ] Reconcile daily Builder volume and fee revenue from the history resources.
 - [ ] Verify WebSocket reconnect, sequence recovery, and REST backfill.
 - [ ] Verify idempotency and retry behavior for every write operation.
 
 ## Security and operations
 
-- [ ] ◇ Keep admin-account credentials in a secret manager and backend only.
+- [ ] Keep admin-account credentials in a secret manager and backend only.
 - [ ] Require wallet signatures for user-authorized asset movements.
 - [ ] Configure IP restrictions, scopes, expiration, and key rotation.
 - [ ] Handle maintenance and allow users to cancel eligible open orders.
@@ -38,5 +38,5 @@ description: "The implementation and launch checklist for Builders integrating w
 - [ ] Verify production contract addresses independently.
 - [ ] Confirm actual rate limits and expected traffic.
 - [ ] Verify user-facing fee disclosure.
-- [ ] ◇ Confirm Builder revenue settlement configuration and daily fee-revenue records.
+- [ ] Confirm Builder revenue settlement configuration and daily fee-revenue records.
 - [ ] Subscribe to system and maintenance announcements.

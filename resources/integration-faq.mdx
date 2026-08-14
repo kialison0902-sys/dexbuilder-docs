@@ -11,10 +11,6 @@ A Builder is a team that launches its own trading frontend on DexBuilder and reg
 
 Broker ID is the unique API identifier assigned to a Builder. It is used to derive account IDs, register accounts, and scope Builder API access.
 
-## Can we call the Builder API now?
-
-Only interfaces without the `◇` symbol are currently available. Do not send a `◇` request until DexBuilder publishes its base URL, authentication, request schema, and environment configuration.
-
 ## Who owns an account?
 
 The wallet owner owns the account. A Builder admin account manages Builder settings and may query accounts registered through its Broker ID, but it cannot sign asset operations for the wallet owner.
@@ -25,4 +21,4 @@ No. Closing a position realizes PnL. PnL settlement is a separate signed account
 
 ## Which fee record is authoritative?
 
-Use the current Trading API for an account's effective trading fee. When Builder revenue APIs become available, use daily revenue settlement history for Builder revenue reconciliation.
+Use the Trading API for an account's effective trading fee. Use daily fee-revenue history for Builder revenue reconciliation.

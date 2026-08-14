@@ -6,15 +6,14 @@ icon: "scale-balanced"
 
 Closing a position realizes PnL. PnL settlement is a separate account operation.
 
-<Note>`◇` identifies an operation that is not currently available on DexBuilder.</Note>
 
 ## PnL settlement API
 
-| Status | Method and path | Description |
-|---|---|---|
-| ◇ | `GET /v1/settle_nonce` | Get the PnL settlement nonce |
-| ◇ | `POST /v1/settle_pnl` | Submit signed PnL settlement |
-| ◇ | `GET /v1/pnl_settlement/history` | Get PnL settlement history |
+| Method and path | Description |
+|---|---|
+| `GET /v1/settle_nonce` | Get the PnL settlement nonce |
+| `POST /v1/settle_pnl` | Submit signed PnL settlement |
+| `GET /v1/pnl_settlement/history` | Get PnL settlement history |
 
 ## Settlement flow
 

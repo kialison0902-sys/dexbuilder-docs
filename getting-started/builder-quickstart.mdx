@@ -5,13 +5,12 @@ description: "Implement account registration, funding, trading, settlement, and 
 
 Complete [Builder onboarding](/builder-api/onboarding) before implementing user flows.
 
-<Note>`◇` identifies an operation that is not currently available on DexBuilder.</Note>
 
 ## Integration sequence
 
 <Steps>
   <Step title="Register the account">
-    `◇ GET /v1/registration_nonce` → sign the registration message containing `brokerId` → `◇ POST /v1/register_account`.
+    `GET /v1/registration_nonce` → sign the registration message containing `brokerId` → `POST /v1/register_account`.
   </Step>
   <Step title="Create an API credential">
     Issue a revocable credential for the registered account and keep the signing secret outside client bundles.
@@ -20,13 +19,13 @@ Complete [Builder onboarding](/builder-api/onboarding) before implementing user 
     Approve the collateral token, read the Vault deposit fee, submit the deposit, and confirm the account balance.
   </Step>
   <Step title="Trade">
-    Use the published Trading API for markets, orders, positions, fills, and account data.
+    Use the Trading API for markets, orders, positions, fills, and account data.
   </Step>
   <Step title="Settle and withdraw">
     Use the action-specific nonce and wallet signature required for PnL settlement, internal transfer, or withdrawal.
   </Step>
   <Step title="Operate the Builder">
-    Use Builder APIs for user data, fee settings, revenue settlement, order tags, campaigns, and referrals as each interface becomes available.
+    Use Builder APIs for user data, fee settings, revenue settlement, order tags, campaigns, and referrals.
   </Step>
 </Steps>
 
@@ -39,4 +38,4 @@ Complete [Builder onboarding](/builder-api/onboarding) before implementing user 
 | Wallet address | User-controlled address that authorizes registration and asset operations |
 | API credential | Revocable credential used for authenticated trading requests |
 
-Continue with [Account registration](/builder-api/account-registration) and [API availability](/builder-api/api-availability).
+Continue with [Account registration](/builder-api/account-registration) and [User data](/builder-api/user-data).

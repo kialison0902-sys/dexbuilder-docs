@@ -10,10 +10,6 @@ English is the default language. Simplified Chinese pages live under `zh/`. Loca
 - Core integration flows for accounts, wallet authorization, deposits, withdrawals, PnL settlement, and internal transfers.
 - Builder API guides for user data, fee settings, revenue settlement, order tags, campaigns, and referrals.
 
-## Availability marker
-
-An unmarked operation is available in the published Trading Reference. `◇` means the Builder interface is not currently available on DexBuilder.
-
 ## Run locally
 
 Install the Mintlify CLI with `npm i -g mint`, run `mint dev` from this directory, and open the local URL shown by the CLI.

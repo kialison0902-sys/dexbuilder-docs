@@ -23,11 +23,11 @@ The result is signed with the API secret and sent with the API key and timestamp
 - Keep the client clock synchronized.
 
 <Warning>
-  Header names and canonical formatting must match the production gateway contract. Use the published SDK or conformance vectors before going live.
+  Header names and canonical formatting must match the production gateway contract. Verify generated signatures against approved conformance vectors before going live.
 </Warning>
 
 ## Wallet-signed actions
 
-`◇` Account registration, withdrawal, PnL settlement, and internal transfer use action-specific wallet messages. Use the EIP-712 domain, fields, field order, nonce lifetime, timestamp unit, and verification rules published for the active environment.
+Account registration, withdrawal, PnL settlement, and internal transfer use action-specific wallet messages. Use the EIP-712 domain, fields, field order, nonce lifetime, timestamp unit, and verification rules configured for the active environment.
 
 See [Wallet authorization](/funds/wallet-authorization) for the authorization method used by each action.

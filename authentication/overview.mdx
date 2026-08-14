@@ -7,8 +7,8 @@ description: "Choose the right authorization method for public, user, wallet, an
 |---|---|---|
 | Public | None | Contracts, tickers, order book, trades, Klines, system status |
 | Perp API credential | Signed API requests | Private account data, orders, positions, leverage, and margin |
-| ◇ Wallet signature | EIP-712 or chain-native message | Registration, withdrawal, PnL settlement, and internal transfer after the contract is published |
-| ◇ Admin account | Builder API authorization | Builder user data, fee settings, volume, order tags, and revenue settlement |
+| Wallet signature | EIP-712 or chain-native message | Registration, withdrawal, PnL settlement, and internal transfer |
+| Admin account | Builder API authorization | Builder user data, fee settings, volume, order tags, and revenue settlement |
 
 ## Security rules
 
@@ -18,5 +18,3 @@ description: "Choose the right authorization method for public, user, wallet, an
 - Verify timestamps and nonces to prevent replay.
 - Use an allowlisted production origin and IP restrictions where available.
 - Log the request identifier defined by the applicable contract, not raw secrets or full wallet signatures.
-
-<Note>The Trading API authentication contract is available. Builder authentication and wallet-signing interfaces carry `◇` until their environment configuration is published.</Note>

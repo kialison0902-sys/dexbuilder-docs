@@ -6,23 +6,22 @@ icon: "percent"
 
 Builder 配置其前端向用户展示的交易手续费。最终费率受当前 Builder 手续费等级与适用商务条款约束。
 
-<Note>`◇` 表示该操作当前尚未在 DexBuilder 开放。</Note>
 
 ## 默认手续费
 
-| 状态 | 方法与路径 | 说明 |
-|---|---|---|
-| ◇ | `GET /v1/broker/fee_rate/default` | 查询 Builder 默认手续费 |
-| ◇ | `POST /v1/broker/fee_rate/default` | 更新 Builder 默认手续费 |
+| 方法与路径 | 说明 |
+|---|---|
+| `GET /v1/broker/fee_rate/default` | 查询 Builder 默认手续费 |
+| `POST /v1/broker/fee_rate/default` | 更新 Builder 默认手续费 |
 
 ## 账户手续费
 
-| 状态 | 方法与路径 | 说明 |
-|---|---|---|
-| ◇ | `POST /v1/broker/fee_rate/set` | 更新账户手续费率 |
-| ◇ | `POST /v1/broker/fee_rate/set_default` | 将账户恢复为默认费率 |
-| ◇ | `GET /v1/broker/user_info` | 查询 Builder 下的账户费率 |
+| 方法与路径 | 说明 |
+|---|---|
+| `POST /v1/broker/fee_rate/set` | 更新账户手续费率 |
+| `POST /v1/broker/fee_rate/set_default` | 将账户恢复为默认费率 |
+| `GET /v1/broker/user_info` | 查询 Builder 下的账户费率 |
 
 ## 手续费披露
 
-接口契约必须定义 Maker/Taker 费率、精度、最低值、生效时间、批量限制与授权规则。前端必须在提交订单前展示实际费率。
+使用当前环境返回的 Maker/Taker 费率精度、最低值、生效时间、批量限制与授权规则。前端必须在提交订单前展示实际费率。

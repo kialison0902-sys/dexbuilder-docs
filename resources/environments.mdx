@@ -1,19 +1,19 @@
 ---
 title: "Environments"
-description: "Configure Trading and Builder integrations for Sandbox and production."
+description: "Configure API hosts, credentials, contracts, and signing domains."
 ---
 
-## Production Trading API
+## Production REST API
 
-```text
+`text
 https://api.dexbuilder.com/api/v1/
-```
+`
 
-Use this base URL only with the published Trading Reference.
+Trading Reference requests use this base URL.
 
-## Builder API
+## Builder configuration
 
-The Builder API base URL and Sandbox configuration are not currently published. Builder integrations require the following environment values when access becomes available:
+Store the following values as environment-specific configuration:
 
 - REST and WebSocket base URLs;
 - supported networks and collateral assets;
@@ -22,7 +22,7 @@ The Builder API base URL and Sandbox configuration are not currently published. 
 - EIP-712 domains and signing rules;
 - rate limits and maintenance-status endpoints.
 
-<Warning>Do not construct an undocumented URL by changing the Trading API host or path prefix.</Warning>
+<Warning>Use the exact host, path, contract address, and signing domain configured for the active environment.</Warning>
 
 ## Environment isolation
 

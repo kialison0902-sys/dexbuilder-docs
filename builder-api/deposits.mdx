@@ -4,7 +4,6 @@ description: "Deposit collateral into a registered trading account through the c
 icon: "arrow-down-to-line"
 ---
 
-<Note>`◇` identifies a deposit capability that is not currently available on DexBuilder.</Note>
 
 ## Deposit flow
 
@@ -16,10 +15,10 @@ icon: "arrow-down-to-line"
     If allowance is insufficient, ask the wallet owner to approve the exact collateral amount for the configured Vault.
   </Step>
   <Step title="Read the deposit fee">
-    Call `◇ Vault.getDepositFee` with the parameters defined by the deployed contract.
+    Call `Vault.getDepositFee` with the parameters defined by the deployed contract.
   </Step>
   <Step title="Submit the deposit">
-    Ask the wallet owner to call `◇ Vault.deposit` and display the network, token, amount, Vault address, and fee before confirmation.
+    Ask the wallet owner to call `Vault.deposit` and display the network, token, amount, Vault address, and fee before confirmation.
   </Step>
   <Step title="Confirm the account credit">
     Verify the transaction finality, asset-history record, and updated account balance.

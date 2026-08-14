@@ -6,24 +6,23 @@ icon: "trophy"
 
 Trading Campaign 接口支持 Campaign 查询、绩效统计、资格校验与账户报名。
 
-<Note>`◇` 表示该操作当前尚未在 DexBuilder 开放。</Note>
 
 ## 公开 Campaign 数据
 
-| 状态 | 方法与路径 | 说明 |
-|---|---|---|
-| ◇ | `GET /v1/public/campaigns` | 查询 Campaign 列表 |
-| ◇ | `GET /v1/public/campaign/ranking` | 查询 Campaign 排行榜 |
-| ◇ | `GET /v1/public/campaign/stats` | 查询 Campaign 统计 |
-| ◇ | `GET /v1/public/campaign/stats/details` | 查询 Campaign 详细统计 |
-| ◇ | `GET /v1/public/campaign/user` | 查询账户 Campaign 信息 |
-| ◇ | `GET /v1/public/campaign/check` | 校验 Campaign 资格 |
+| 方法与路径 | 说明 |
+|---|---|
+| `GET /v1/public/campaigns` | 查询 Campaign 列表 |
+| `GET /v1/public/campaign/ranking` | 查询 Campaign 排行榜 |
+| `GET /v1/public/campaign/stats` | 查询 Campaign 统计 |
+| `GET /v1/public/campaign/stats/details` | 查询 Campaign 详细统计 |
+| `GET /v1/public/campaign/user` | 查询账户 Campaign 信息 |
+| `GET /v1/public/campaign/check` | 校验 Campaign 资格 |
 
 ## 报名
 
-| 状态 | 方法与路径 | 说明 |
-|---|---|---|
-| ◇ | `POST /v1/client/campaign/sign_up` | 为已鉴权账户报名 Campaign |
+| 方法与路径 | 说明 |
+|---|---|
+| `POST /v1/client/campaign/sign_up` | 为已鉴权账户报名 Campaign |
 
 ## Campaign 规则
 

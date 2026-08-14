@@ -4,15 +4,14 @@ description: "Authorize and submit a collateral withdrawal with an EIP-712 signa
 icon: "arrow-up-from-line"
 ---
 
-<Note>`◇` identifies an operation that is not currently available on DexBuilder.</Note>
 
 ## Withdrawal API
 
-| Status | Method and path | Description |
-|---|---|---|
-| ◇ | `GET /v1/withdraw_nonce` | Get the withdrawal nonce |
-| ◇ | `POST /v1/withdraw_request` | Submit a signed withdrawal request |
-| ◇ | `GET /v1/asset/history` | Query withdrawal history |
+| Method and path | Description |
+|---|---|
+| `GET /v1/withdraw_nonce` | Get the withdrawal nonce |
+| `POST /v1/withdraw_request` | Submit a signed withdrawal request |
+| `GET /v1/asset/history` | Query withdrawal history |
 
 ## Withdrawal flow
 
@@ -26,4 +25,4 @@ icon: "arrow-up-from-line"
 
 ## Signing requirements
 
-The API contract must define the EIP-712 domain, field order, nonce lifetime, timestamp unit, amount precision, fee behavior, status values, and retry rules. Clients must sign the exact message required by the active environment.
+Use the EIP-712 domain, field order, nonce lifetime, timestamp unit, amount precision, fee behavior, status values, and retry rules returned for the active environment. Clients must sign the exact message required by that environment.

@@ -4,7 +4,6 @@ description: "通过当前配置的 Vault 为已注册交易账户充值抵押�
 icon: "arrow-down-to-line"
 ---
 
-<Note>`◇` 表示该充值能力当前尚未在 DexBuilder 开放。</Note>
 
 ## 充值流程
 
@@ -16,10 +15,10 @@ icon: "arrow-down-to-line"
     Allowance 不足时，由钱包用户授权当前 Vault 使用准确的抵押资产数量。
   </Step>
   <Step title="查询充值费用">
-    按已部署合约规定的参数调用 `◇ Vault.getDepositFee`。
+    按已部署合约规定的参数调用 `Vault.getDepositFee`。
   </Step>
   <Step title="提交充值">
-    由钱包用户调用 `◇ Vault.deposit`；确认前必须显示网络、资产、数量、Vault 地址与费用。
+    由钱包用户调用 `Vault.deposit`；确认前必须显示网络、资产、数量、Vault 地址与费用。
   </Step>
   <Step title="确认账户入账">
     核对链上最终状态、资产历史与更新后的账户余额。

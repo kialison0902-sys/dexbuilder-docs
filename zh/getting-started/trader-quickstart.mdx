@@ -14,10 +14,10 @@ description: "读取市场并提交第一笔永续合约订单。"
 
 ## 1. 读取可交易市场
 
-```bash
+`bash
 curl "https://api.dexbuilder.com/api/v1/dex_futures/usdt/contracts" \
   -H "Accept: application/json"
-```
+`
 
 公共行情接口无需认证。
 
@@ -29,7 +29,7 @@ curl "https://api.dexbuilder.com/api/v1/dex_futures/usdt/contracts" \
 
 ## 3. 提交限价单
 
-```bash
+`bash
 curl -X POST "https://api.dexbuilder.com/api/v1/dex_futures/usdt/orders" \
   -H "Accept: application/json" \
   -H "Content-Type: application/json" \
@@ -43,7 +43,7 @@ curl -X POST "https://api.dexbuilder.com/api/v1/dex_futures/usdt/orders" \
     "tif": "gtc",
     "reduce_only": false
   }'
-```
+`
 
 <Warning>
   示例数值仅用于说明。DexBuilder 交易 API 使用带符号的 `size`（`size > 0` 为买入，`size < 0` 为卖出）。下单前必须使用合约元数据验证价格精度、数量步长、最小数量、杠杆与仓位敞口限额（`risk_limit`）。
@@ -53,12 +53,12 @@ curl -X POST "https://api.dexbuilder.com/api/v1/dex_futures/usdt/orders" \
 
 订单被接受不等于已经成交。查询订单或消费私有执行流，直到订单进入终态。
 
-```bash
+`bash
 curl "https://api.dexbuilder.com/api/v1/dex_futures/usdt/orders/${ORDER_ID}" \
   -H "KEY: ${DEXBUILDER_API_KEY}" \
   -H "Timestamp: ${DEXBUILDER_TIMESTAMP}" \
   -H "SIGN: ${DEXBUILDER_SIGNATURE}"
-```
+`
 
 ## 后续步骤
 
