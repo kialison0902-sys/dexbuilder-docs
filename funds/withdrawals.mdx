@@ -1,17 +1,29 @@
 ---
-title: "◇ Withdrawals"
-description: "Use a nonce and wallet-signed withdrawal request following Orderly."
+title: "Withdrawals"
+description: "Authorize and submit a collateral withdrawal with an EIP-712 signature."
+icon: "arrow-up-from-line"
 ---
 
-<Warning>The paths shown are Orderly references and require DexBuilder implementation.</Warning>
+<Note>`◇` identifies an operation that is not currently available on DexBuilder.</Note>
 
-## Target sequence
+## Withdrawal API
 
-1. read the account's withdrawable balance and supported destination configuration;
-2. request a signing nonce from `GET /v1/withdraw_nonce`;
-3. construct the exact EIP-712 withdrawal message defined by the published DexBuilder contract;
-4. show the user the token, amount, fee, chain, and receiver before signing;
-5. submit the signature to the equivalent of `POST /v1/withdraw_request`;
-6. reconcile withdrawal records with asset history and destination-chain evidence.
+| Status | Method and path | Description |
+|---|---|---|
+| ◇ | `GET /v1/withdraw_nonce` | Get the withdrawal nonce |
+| ◇ | `POST /v1/withdraw_request` | Submit a signed withdrawal request |
+| ◇ | `GET /v1/asset/history` | Query withdrawal history |
 
-DexBuilder must publish the typed-data domain, field order, nonce lifetime, precision, fee behavior, status values, errors, and retry rules. No guessed withdrawal state machine or quote endpoint is included.
+## Withdrawal flow
+
+1. read the withdrawable balance and supported destination network;
+2. obtain the withdrawal nonce;
+3. construct the EIP-712 message defined by the withdrawal schema;
+4. display the asset, amount, fee, network, and receiver;
+5. obtain the wallet owner's signature;
+6. submit the withdrawal request;
+7. track the asset-history record and destination transaction.
+
+## Signing requirements
+
+The API contract must define the EIP-712 domain, field order, nonce lifetime, timestamp unit, amount precision, fee behavior, status values, and retry rules. Clients must sign the exact message required by the active environment.

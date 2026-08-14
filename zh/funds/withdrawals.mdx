@@ -1,17 +1,29 @@
 ---
-title: "◇ 提现"
-description: "按照 Orderly 使用 Nonce 与钱包签名提现请求。"
+title: "提现"
+description: "使用 EIP-712 签名授权并提交抵押资产提现。"
+icon: "arrow-up-from-line"
 ---
 
-<Warning>所列路径是 Orderly 参考，仍需 DexBuilder 开发。</Warning>
+<Note>`◇` 表示该操作当前尚未在 DexBuilder 开放。</Note>
 
-## 目标流程
+## 提现 API
 
-1. 查询账户可提现余额和支持的目标网络；
-2. 通过 `GET /v1/withdraw_nonce` 获取签名 Nonce；
-3. 按 DexBuilder 正式契约构造准确的 EIP-712 提现消息；
-4. 签名前向用户显示资产、数量、费用、网络与接收地址；
-5. 将签名提交到对应 `POST /v1/withdraw_request` 的能力；
-6. 使用资产历史及目标链凭证核对提现结果。
+| 状态 | Method 与路径 | 说明 |
+|---|---|---|
+| ◇ | `GET /v1/withdraw_nonce` | 获取提现 Nonce |
+| ◇ | `POST /v1/withdraw_request` | 提交已签名提现请求 |
+| ◇ | `GET /v1/asset/history` | 查询提现历史 |
 
-发布前，DexBuilder 必须说明 Typed Data Domain、字段顺序、Nonce 有效期、精度、费用、状态、错误及重试规则。本文不虚构提现状态机或 Quote 接口。
+## 提现流程
+
+1. 查询可提现余额与支持的目标网络；
+2. 获取提现 Nonce；
+3. 按提现接口结构构造 EIP-712 消息；
+4. 向用户展示资产、数量、费用、网络与接收地址；
+5. 获取钱包用户签名；
+6. 提交提现请求；
+7. 跟踪资产历史与目标链交易。
+
+## 签名要求
+
+正式 API 契约必须明确 EIP-712 Domain、字段顺序、Nonce 有效期、时间戳单位、数量精度、费用、状态及重试规则。客户端必须签署当前环境规定的准确消息。

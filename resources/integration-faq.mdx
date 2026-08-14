@@ -1,28 +1,28 @@
 ---
 title: "Integration FAQ"
-description: "Release status and technical boundaries for Trading and Builder integrations."
+description: "Common questions about Trading and Builder integrations."
 ---
 
-## Is Aden the DexBuilder API?
+## What is a Builder?
 
-Aden is an operator built on the platform. The DexBuilder Trading Reference intentionally follows Aden's public market and trading API, using the DexBuilder production hostname.
+A Builder is a team that launches its own trading frontend on DexBuilder and registers its own users. A trading application using an existing Builder does not need Builder onboarding.
 
-## Can we call Builder endpoints now?
+## What is a Broker ID?
 
-No. Any Builder capability marked `◇` is an Orderly-aligned development requirement, not a published DexBuilder endpoint. Do not append Orderly paths to `api.dexbuilder.com`.
+Broker ID is the unique API identifier assigned to a Builder. It is used to derive account IDs, register accounts, and scope Builder API access.
 
-## Which fee endpoint should we use?
+## Can we call the Builder API now?
 
-Use the current Trading API to read the authenticated user's perpetual trading rate. Builder default fees, user overrides, and daily fee revenue remain `◇` until DexBuilder publishes their contracts.
+Only interfaces without the `◇` symbol are currently available. Do not send a `◇` request until DexBuilder publishes its base URL, authentication, request schema, and environment configuration.
+
+## Who owns an account?
+
+The wallet owner owns the account. A Builder admin account manages Builder settings and may query accounts registered through its Broker ID, but it cannot sign asset operations for the wallet owner.
 
 ## Does closing a position settle PnL?
 
-No. Closing realizes PnL. Orderly models PnL settlement as a separate nonce plus signed request, and DexBuilder still needs to implement and publish that flow.
+No. Closing a position realizes PnL. PnL settlement is a separate signed account operation.
 
-## Is there a generic Transaction Builder or webhook API?
+## Which fee record is authoritative?
 
-No published DexBuilder contract exists for either. They are not part of the core Orderly Builder REST parity baseline and are not presented as callable APIs.
-
-## What should developers implement today?
-
-Use the published Trading Reference. Use the `◇` pages to plan, estimate, and implement the Builder backlog only after the corresponding DexBuilder contracts become available.
+Use the current Trading API for an account's effective trading fee. When Builder revenue APIs become available, use daily revenue settlement history for Builder revenue reconciliation.

@@ -1,9 +1,9 @@
 ---
 title: "Platform overview"
-description: "How DexBuilder, operators, Builders, and traders fit together."
+description: "How DexBuilder, Builders, application developers, and traders fit together."
 ---
 
-DexBuilder is the underlying trading and Builder infrastructure. An operator such as Aden is one possible trading application built on top of that infrastructure.
+DexBuilder provides the trading and Builder infrastructure used by trading applications and branded DEX frontends.
 
 <Frame caption="DexBuilder platform architecture">
   <img src="/images/platform-architecture.svg" alt="User wallet and Builder DEX connected to DexBuilder execution, margin, ledger, and settlement infrastructure" />
@@ -15,10 +15,10 @@ DexBuilder is the underlying trading and Builder infrastructure. An operator suc
 |---|---|
 | Trader | Authorizes their account and assets, places orders, and manages positions |
 | Application developer | Builds market, order, account, and wallet experiences |
-| Builder | Onboards users, configures product fees, operates the DEX, and receives Builder revenue |
-| ◇ Builder administrator | Performs published Builder user-data, fee, volume, order-tag, and revenue operations |
+| Builder | Launches a trading frontend, onboards users, configures fees, and receives Builder fee revenue |
+| Admin account | Manages Builder settings and authenticates authorized Builder API operations |
 | DexBuilder | Provides shared execution, margin rules, ledger, settlement, and liquidity infrastructure |
 
 <Note>
-  The Aden-compatible trading functions are published. Builder capabilities remain `◇` until DexBuilder publishes their contracts.
+  Trading functions are available in the Trading Reference. Builder interfaces marked `◇` are not currently available.
 </Note>

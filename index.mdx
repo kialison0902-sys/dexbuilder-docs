@@ -1,37 +1,37 @@
 ---
 title: "DexBuilder Developer Docs"
-description: "Trading API documentation and the Orderly-aligned Builder development roadmap."
+description: "APIs and integration guides for perpetual trading applications and branded DEXs."
 icon: "blocks"
 ---
 
-DexBuilder is perpetual DEX infrastructure for trading applications and teams building branded trading products.
+DexBuilder provides perpetual trading infrastructure for traders, application developers, and Builders launching their own trading frontend.
 
-The Trading Reference documents the current Aden-compatible market and trading API. Builder guides follow the Orderly capability model and clearly mark work that DexBuilder has not released.
+Use the Trading API for market data, orders, positions, and account data. Use the Builder guides for account registration, wallet authentication, asset flows, fee settings, and Builder administration.
 
 <img src="/images/dexbuilder-cover.svg" alt="DexBuilder" />
 
 <Note>
-  **Status legend:** no symbol means published documentation. `◇` means the capability is supported by Orderly but still requires DexBuilder development; it is not callable until a DexBuilder contract is published.
+  **API availability:** an unmarked capability is available in the published Trading Reference. `◇` identifies a Builder capability that is not currently available on DexBuilder.
 </Note>
 
 <Columns cols={2}>
   <Card title="Trade through the API" icon="chart-candlestick" href="/getting-started/trader-quickstart">
-    Integrate markets, orders, positions, fills, and authenticated account data with the current Trading API.
+    Integrate markets, orders, positions, fills, and authenticated account data.
   </Card>
-  <Card title="◇ Build your own DEX" icon="blocks" href="/getting-started/builder-quickstart">
-    Review the Orderly-aligned registration, funds, fees, data, and revenue capabilities that DexBuilder needs to implement.
+  <Card title="Build your own DEX" icon="blocks" href="/builders/overview">
+    Create a Builder profile, register user accounts, configure fees, and operate a branded trading frontend.
   </Card>
 </Columns>
 
-## Platform surfaces
+## Documentation areas
 
-| Status | Surface | What it provides |
+| Area | Audience | Coverage |
 |---|---|---|
-| Published | Trading API | Aden-compatible markets, orders, positions, margin, fills, and account data |
-| ◇ | Wallet and settlement | Registration, Vault deposits, signed withdrawals, PnL settlement, and internal transfers |
-| ◇ | Builder API | User attribution, Builder data, fee configuration, revenue settlement, referrals, and order tags |
-| ◇ | Builder WebSocket | Builder-filtered operational and user data streams |
+| Trading API | Traders and application developers | Markets, orders, positions, margin, fills, and account data |
+| Core integration flows | Wallet and frontend developers | Accounts, authentication, deposits, withdrawals, PnL settlement, and internal transfers |
+| Builder API | Builders and backend developers | User data, fee settings, revenue settlement, order tags, referrals, and campaigns |
+| WebSocket API | Frontend and trading-system developers | Public market data and private account events |
 
-<Card title="Review the Builder API alignment" icon="diamond" href="/resources/builder-api-alignment">
-  See the exact Orderly reference paths and the DexBuilder publication gate.
+<Card title="API availability" icon="list-check" href="/resources/api-coverage">
+  Check which interfaces are currently available and which carry the `◇` marker.
 </Card>

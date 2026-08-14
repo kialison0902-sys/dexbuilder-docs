@@ -1,26 +1,31 @@
 ---
-title: "◇ Deposits"
-description: "Deposit collateral through the configured Vault contract, following the Orderly model."
+title: "Deposits"
+description: "Deposit collateral into a registered trading account through the configured Vault."
+icon: "arrow-down-to-line"
 ---
 
-<Warning>DexBuilder has not published the Vault contract and deposit environment contract. This page describes the required Orderly-aligned flow.</Warning>
+<Note>`◇` identifies a deposit capability that is not currently available on DexBuilder.</Note>
+
+## Deposit flow
 
 <Steps>
-  <Step title="◇ Discover the active chain configuration">
-    Read the supported chain, collateral token, Vault address, decimals, limits, and deposit status from the published environment configuration.
+  <Step title="Load network configuration">
+    Read the collateral token, Vault address, token decimals, minimum amount, and network status for the active environment.
   </Step>
-  <Step title="◇ Approve collateral">
-    Have the wallet approve the configured Vault to spend the exact collateral amount when allowance is insufficient.
+  <Step title="Approve collateral">
+    If allowance is insufficient, ask the wallet owner to approve the exact collateral amount for the configured Vault.
   </Step>
-  <Step title="◇ Read the deposit fee">
-    Call the Vault's `getDepositFee` method with the inputs required by the final contract.
+  <Step title="Read the deposit fee">
+    Call `◇ Vault.getDepositFee` with the parameters defined by the deployed contract.
   </Step>
-  <Step title="◇ Submit the deposit">
-    Have the user call the Vault's `deposit` method. The wallet must display the network, token, amount, contract, and fee.
+  <Step title="Submit the deposit">
+    Ask the wallet owner to call `◇ Vault.deposit` and display the network, token, amount, Vault address, and fee before confirmation.
   </Step>
-  <Step title="◇ Confirm account credit">
-    Wait for on-chain finality and verify the platform asset history and account balance. A successful transaction alone does not prove internal credit.
+  <Step title="Confirm the account credit">
+    Verify the transaction finality, asset-history record, and updated account balance.
   </Step>
 </Steps>
 
-Orderly does not use generic `POST /v1/deposits` or `POST /v1/deposits/quote` resources for this standard flow; DexBuilder therefore does not document them.
+## Confirmation requirements
+
+A successful chain transaction confirms contract execution; it does not by itself confirm that the trading account has been credited. Use the account's asset history and balance as the final integration checks.

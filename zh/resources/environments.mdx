@@ -1,6 +1,6 @@
 ---
 title: "环境"
-description: "使用已发布的交易 API 地址，不推测尚未发布的 Builder Base URL。"
+description: "配置交易与 Builder 接入所需的 Sandbox 和生产环境。"
 ---
 
 ## 生产交易 API
@@ -9,17 +9,21 @@ description: "使用已发布的交易 API 地址，不推测尚未发布的 Bui
 https://api.dexbuilder.com/api/v1/
 ```
 
-交易 API Reference 是当前与 Aden 一致的接口契约。
+该 Base URL 仅用于已发布的交易 API Reference。
 
-## ◇ Builder 环境
+## Builder API
 
-DexBuilder 尚未发布 Builder API Base URL、Sandbox、Builder 签名契约或 Vault 合约集合。本文中的 Orderly 参考路径不能直接拼接到交易 API Host 调用。
+Builder API Base URL 与 Sandbox 配置当前尚未发布。接口开放后，Builder 接入需要以下环境配置：
 
-去掉 `◇` 前，DexBuilder 必须发布：
+- REST 与 WebSocket Base URL；
+- 支持的网络与抵押资产；
+- Vault 与 Verifier 合约地址；
+- Broker ID 与管理员账户凭证；
+- EIP-712 Domain 与签名规则；
+- 限流与维护状态接口。
 
-- Sandbox 与生产 REST/WebSocket 地址；
-- 支持的链、抵押资产与合约地址；
-- 认证与签名 Domain；
-- 权限、限流及错误结构。
+<Warning>不得通过替换交易 API Host 或路径前缀构造未记录的接口。</Warning>
 
-<Warning>不得通过替换 Host 或路径前缀构造未记录的接口。</Warning>
+## 环境隔离
+
+Sandbox 与生产环境的 Broker ID、账户、API 凭证、合约地址及签名 Domain 必须相互隔离。

@@ -65,7 +65,7 @@
                 "group": "Core concepts",
                 "pages": [
                   "concepts/platform-overview",
-                  "concepts/accounts-and-tenancy",
+                  "concepts/accounts",
                   "concepts/order-lifecycle",
                   "concepts/perpetuals-and-risk",
                   "concepts/settlement-model",
@@ -101,7 +101,7 @@
                   "funds/withdrawals",
                   "funds/internal-transfers",
                   "funds/pnl-settlement",
-                  "funds/transaction-builder",
+                  "funds/wallet-authorization",
                   "funds/ledger-and-reconciliation"
                 ]
               },
@@ -109,11 +109,11 @@
                 "group": "Build a DEX",
                 "pages": [
                   "builders/overview",
-                  "builders/project-setup",
-                  "builders/onboard-users",
+                  "builders/onboarding",
+                  "builders/account-registration",
                   "builders/configure-fees",
-                  "builders/revenue-and-payouts",
-                  "builders/analytics-and-webhooks"
+                  "builders/revenue",
+                  "builders/user-data"
                 ]
               },
               {
@@ -142,11 +142,35 @@
             "openapi": "openapi/trading-v1.yaml"
           },
           {
-            "tab": "◇ Builder Alignment",
+            "tab": "Builder API",
             "groups": [
               {
-                "group": "Builder API",
-                "pages": ["resources/builder-api-alignment"]
+                "group": "Getting started",
+                "pages": [
+                  "builders/overview",
+                  "builders/onboarding",
+                  "getting-started/builder-quickstart"
+                ]
+              },
+              {
+                "group": "Core integration flows",
+                "pages": [
+                  "concepts/accounts",
+                  "builders/account-registration",
+                  "funds/deposits",
+                  "funds/withdrawals",
+                  "funds/pnl-settlement",
+                  "funds/internal-transfers"
+                ]
+              },
+              {
+                "group": "Builder operations",
+                "pages": [
+                  "builders/configure-fees",
+                  "builders/revenue",
+                  "builders/user-data",
+                  "resources/api-coverage"
+                ]
               }
             ]
           }
@@ -189,7 +213,7 @@
                 "group": "核心概念",
                 "pages": [
                   "zh/concepts/platform-overview",
-                  "zh/concepts/accounts-and-tenancy",
+                  "zh/concepts/accounts",
                   "zh/concepts/order-lifecycle",
                   "zh/concepts/perpetuals-and-risk",
                   "zh/concepts/settlement-model",
@@ -225,7 +249,7 @@
                   "zh/funds/withdrawals",
                   "zh/funds/internal-transfers",
                   "zh/funds/pnl-settlement",
-                  "zh/funds/transaction-builder",
+                  "zh/funds/wallet-authorization",
                   "zh/funds/ledger-and-reconciliation"
                 ]
               },
@@ -233,11 +257,11 @@
                 "group": "构建 DEX",
                 "pages": [
                   "zh/builders/overview",
-                  "zh/builders/project-setup",
-                  "zh/builders/onboard-users",
+                  "zh/builders/onboarding",
+                  "zh/builders/account-registration",
                   "zh/builders/configure-fees",
-                  "zh/builders/revenue-and-payouts",
-                  "zh/builders/analytics-and-webhooks"
+                  "zh/builders/revenue",
+                  "zh/builders/user-data"
                 ]
               },
               {
@@ -266,11 +290,35 @@
             "openapi": "openapi/zh/trading-v1.yaml"
           },
           {
-            "tab": "◇ Builder 对齐",
+            "tab": "Builder API",
             "groups": [
               {
-                "group": "Builder API",
-                "pages": ["zh/resources/builder-api-alignment"]
+                "group": "快速开始",
+                "pages": [
+                  "zh/builders/overview",
+                  "zh/builders/onboarding",
+                  "zh/getting-started/builder-quickstart"
+                ]
+              },
+              {
+                "group": "核心接入流程",
+                "pages": [
+                  "zh/concepts/accounts",
+                  "zh/builders/account-registration",
+                  "zh/funds/deposits",
+                  "zh/funds/withdrawals",
+                  "zh/funds/pnl-settlement",
+                  "zh/funds/internal-transfers"
+                ]
+              },
+              {
+                "group": "Builder 管理",
+                "pages": [
+                  "zh/builders/configure-fees",
+                  "zh/builders/revenue",
+                  "zh/builders/user-data",
+                  "zh/resources/api-coverage"
+                ]
               }
             ]
           }

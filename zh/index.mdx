@@ -1,37 +1,37 @@
 ---
 title: "DexBuilder 开发者文档"
-description: "现有交易 API 文档与对齐 Orderly 的 Builder 开发路线。"
+description: "面向永续合约交易应用与品牌 DEX 的 API 和接入指南。"
 icon: "blocks"
 ---
 
-DexBuilder 是面向交易应用及品牌交易产品项目方的永续 DEX 基础设施。
+DexBuilder 为交易用户、应用开发者及上线自有交易前端的 Builder 提供永续合约交易基础设施。
 
-交易 API Reference 记录当前与 Aden 对外接口一致的行情与交易能力；Builder 文档按照 Orderly 的能力模型编写，并明确标记 DexBuilder 尚未发布的部分。
+交易 API 用于接入行情、订单、仓位与账户数据；Builder 文档用于接入账户注册、钱包认证、资产流程、手续费设置和 Builder 管理能力。
 
 <img src="/images/dexbuilder-cover.svg" alt="DexBuilder" />
 
 <Note>
-  **状态说明：**没有符号表示已发布文档；`◇` 表示 Orderly 已支持、DexBuilder 仍需开发，正式 DexBuilder 接口发布前不可调用。
+  **API 可用性：**没有符号的能力已进入公开交易 API Reference；`◇` 表示该 Builder 能力当前尚未在 DexBuilder 开放。
 </Note>
 
 <Columns cols={2}>
   <Card title="通过 API 进行交易" icon="chart-candlestick" href="/zh/getting-started/trader-quickstart">
-    使用现有交易 API 接入行情、订单、仓位、成交与认证账户数据。
+    接入市场、订单、仓位、成交与认证账户数据。
   </Card>
-  <Card title="◇ 构建自己的 DEX" icon="blocks" href="/zh/getting-started/builder-quickstart">
-    查看 DexBuilder 需要对齐 Orderly 开发的注册、资金、手续费、数据与收入能力。
+  <Card title="构建自己的 DEX" icon="blocks" href="/zh/builders/overview">
+    创建 Builder 资料、注册用户账户、配置手续费并运营品牌交易前端。
   </Card>
 </Columns>
 
-## 平台接口面
+## 文档范围
 
-| 状态 | 接口面 | 能力 |
+| 范围 | 适用对象 | 内容 |
 |---|---|---|
-| 已发布 | 交易 API | 与 Aden 一致的市场、订单、仓位、保证金、成交与账户数据 |
-| ◇ | 钱包与结算 | 注册、Vault 充值、签名提现、PnL 结算及内部划转 |
-| ◇ | Builder API | 用户归属、Builder 数据、费率配置、收入结算、推荐与订单标签 |
-| ◇ | Builder WebSocket | 按 Builder 过滤的运营及用户数据流 |
+| 交易 API | 交易用户与应用开发者 | 市场、订单、仓位、保证金、成交与账户数据 |
+| 核心接入流程 | 钱包与前端开发者 | 账户、认证、充值、提现、PnL 结算与内部划转 |
+| Builder API | Builder 与后端开发者 | 用户数据、手续费设置、收入结算、订单标签、推荐与 Campaign |
+| WebSocket API | 前端与交易系统开发者 | 公共市场数据与私有账户事件 |
 
-<Card title="查看 Builder API 对齐清单" icon="diamond" href="/zh/resources/builder-api-alignment">
-  查看 Orderly 参考路径及 DexBuilder 正式发布门槛。
+<Card title="API 可用性" icon="list-check" href="/zh/resources/api-coverage">
+  查看当前已开放接口以及带有 `◇` 标记的能力。
 </Card>

@@ -1,17 +1,27 @@
 ---
-title: "◇ Internal transfers"
-description: "Move collateral between eligible accounts with Orderly-aligned authorization."
+title: "Internal transfers"
+description: "Transfer collateral between eligible accounts without an on-chain withdrawal."
+icon: "right-left"
 ---
 
-<Warning>The operations below are Orderly references, not published DexBuilder endpoints.</Warning>
+Internal transfers move collateral between eligible accounts on the platform. They are separate from deposits, withdrawals, and PnL settlement.
 
-## Target operations
+<Note>`◇` identifies an operation that is not currently available on DexBuilder.</Note>
 
-| Orderly reference | Purpose |
-|---|---|
-| `GET /v1/transfer_nonce` | Get the transfer signing nonce |
-| `POST /v1/internal_transfer` | Submit a signed internal transfer |
-| `POST /v2/internal_transfer` | Submit the current transfer version |
-| `GET /v1/internal_transfer_history` | Query transfer history |
+## Internal transfer API
 
-DexBuilder must select the supported transfer version and document account eligibility, direction, asset rules, signing payload, precision, statuses, and history schema before release. Do not simulate an internal transfer with a withdrawal followed by a deposit.
+| Status | Method and path | Description |
+|---|---|---|
+| ◇ | `GET /v1/transfer_nonce` | Get the internal-transfer nonce |
+| ◇ | `POST /v2/internal_transfer` | Submit an internal transfer |
+| ◇ | `GET /v1/internal_transfer_history` | Get internal-transfer history |
+
+## Transfer flow
+
+1. validate source account, destination account, asset, amount, and eligibility;
+2. obtain the transfer nonce;
+3. construct the signed request defined by the transfer API;
+4. submit the transfer;
+5. confirm the result in internal-transfer history for the affected accounts.
+
+Use the documented internal-transfer API. Do not implement an internal transfer as a withdrawal followed by a deposit.

@@ -1,28 +1,28 @@
 ---
 title: "接入常见问题"
-description: "交易与 Builder 接入的发布状态及技术边界。"
+description: "交易与 Builder 接入中的常见问题。"
 ---
 
-## Aden 就是 DexBuilder API 吗？
+## 什么是 Builder？
 
-Aden 是基于该平台的运营商。DexBuilder 交易 API Reference 有意沿用 Aden 对外的行情与交易接口，但示例使用 DexBuilder 生产 Host。
+Builder 是在 DexBuilder 上线自有交易前端并注册自有用户的团队。通过现有 Builder 接入交易的应用不需要完成 Builder Onboarding。
 
-## 现在能调用 Builder 接口吗？
+## 什么是 Broker ID？
 
-不能。所有标记 `◇` 的 Builder 能力都是对齐 Orderly 的开发要求，不是已发布的 DexBuilder 端点。不要把 Orderly 路径直接拼接到 `api.dexbuilder.com`。
+Broker ID 是分配给 Builder 的唯一 API 标识，用于计算 Account ID、注册账户并限定 Builder API 的访问范围。
 
-## 应该使用哪个手续费接口？
+## 现在可以调用 Builder API 吗？
 
-使用当前交易 API 查询已认证用户的永续交易费率。Builder 默认费率、用户级费率及每日手续费收入仍为 `◇`，需要等待 DexBuilder 正式发布。
+只有没有 `◇` 标记的接口当前可用。在 DexBuilder 发布 Base URL、认证方式、请求结构与环境配置前，不得调用带 `◇` 的接口。
+
+## 账户属于谁？
+
+账户属于对应钱包用户。Builder 管理员账户用于管理 Builder 设置，也可以查询通过自身 Broker ID 注册的账户，但不能代表用户钱包签署资产操作。
 
 ## 平仓是否等于结算 PnL？
 
-不等于。平仓产生已实现 PnL；Orderly 将 PnL 结算定义为单独的 Nonce 加签名请求，DexBuilder 仍需实现并发布。
+不等于。平仓产生已实现 PnL；PnL 结算是单独的签名账户操作。
 
-## 是否有通用 Transaction Builder 或 Webhook API？
+## 应以哪条手续费记录为准？
 
-目前都没有已发布的 DexBuilder 契约；它们也不属于 Orderly Builder 核心 REST 对齐基线，因此不会写成可调用接口。
-
-## 开发者现在应该接什么？
-
-现在接入已发布的交易 API。`◇` 页面用于规划、评估 Builder 开发工作，只有对应 DexBuilder 契约发布后才能开始真实联调。
+账户实际交易费率以当前交易 API 为准。Builder 收入接口开放后，Builder 收入对账以每日收入结算历史为准。

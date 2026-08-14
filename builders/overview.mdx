@@ -1,24 +1,37 @@
 ---
-title: "◇ Build a DEX on DexBuilder"
-description: "The Orderly-aligned Builder capability boundary for teams serving their own users."
+title: "Build on DexBuilder"
+description: "Launch a trading frontend, onboard users, and operate as a Builder."
 ---
 
-<Warning>`◇` means DexBuilder development is required. These capabilities are not yet published as callable DexBuilder APIs.</Warning>
+A **Builder** is a team that launches its own trading frontend on DexBuilder and onboards its own users. API traders using an existing integration do not need Builder onboarding.
 
-A Builder operates a branded perpetual DEX experience while attributing users and activity to its Builder identity.
+## Builder lifecycle
 
-## Orderly-aligned scope
+<Steps>
+  <Step title="Create a Builder profile">
+    Provide the Builder name and choose a low-code or custom SDK/API launch path.
+  </Step>
+  <Step title="Obtain a Broker ID">
+    Complete Builder activation and record the unique Broker ID used by account registration and Builder APIs.
+  </Step>
+  <Step title="Register an admin account">
+    Link the wallet that manages Builder settings, fee configuration, and Builder API access.
+  </Step>
+  <Step title="Implement core user flows">
+    Register accounts, create API credentials, fund accounts, trade, settle PnL, and support withdrawals.
+  </Step>
+  <Step title="Prepare for launch">
+    Validate fees, account isolation, signing, reconciliation, monitoring, and production configuration.
+  </Step>
+</Steps>
 
-- user registration and Builder attribution;
-- per-user trading credentials;
-- Builder-scoped user, account, order, trade, position, funding, transfer, and liquidation data;
-- default and user-specific fee rates;
-- public and authenticated volume statistics;
-- daily fee-revenue settlement data;
-- order attribution tags, referrals, campaigns, and Builder-filtered data streams.
+## Builder API areas
 
-Project CRUD, generic transaction construction, webhook management, and payout creation are not included in this parity baseline.
+| Area | Purpose |
+|---|---|
+| User data | Query accounts, holdings, orders, positions, trades, funding, volume, and liquidations |
+| Trading campaigns | Publish campaigns, rankings, statistics, eligibility, and enrollment |
+| Referral program | Manage referral codes, rebate rates, affiliates, and multilevel referrals |
+| Builder admin | Manage Builder information, fee settings, fee revenue, and order tags |
 
-<Card title="Builder API alignment" icon="diamond" href="/resources/builder-api-alignment">
-  Review the exact Orderly reference operations and DexBuilder development gate.
-</Card>
+<Note>`◇` identifies a Builder operation that is not currently available on DexBuilder. The symbol appears in the relevant API tables, not in navigation titles.</Note>

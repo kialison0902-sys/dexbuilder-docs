@@ -1,23 +1,30 @@
 ---
-title: "权限与 Scope"
-description: "对 Trading Key 与 Builder Admin 凭证执行最小权限原则。"
+title: "访问控制"
+description: "区分公共访问、Perp API 凭证、钱包授权与管理员账户权限。"
 ---
 
-## Trading Key Scope
+## 公共访问
 
-- `account:read`
-- `orders:read`
-- `orders:write`
-- `positions:read`
-- `positions:write`
-- `funds:read`
+公共市场数据接口不需要 API 凭证。
 
-资产提现和结算提交仍应要求对应的钱包授权载荷。
+## Perp API 凭证
 
-## ◇ Builder 管理权限
+私有交易 API 请求使用签发的 Perp API Key 与 Secret。凭证权限在签发时确定；Secret 必须保存在受保护的后端，并且只申请应用所需权限。
 
-DexBuilder 尚未发布 Builder 权限名称。最终模型必须分别授权用户数据读取、费率管理、收入读取、订单标签、推荐、Campaign 与 Builder 过滤的数据流。不要实现旧草稿中的 Scope 名称。
+Perp API 凭证用于授权交易 API 请求，不能替代账户注册、提现、PnL 结算或内部划转所需的钱包授权。
 
-<Note>
-  只使用已发布 DexBuilder 凭证服务返回的权限名称，拒绝未知权限，并只申请最小必要访问范围。
-</Note>
+## 钱包授权
+
+涉及账户注册或资产的操作，由钱包用户签署对应消息或交易。后端凭证不能代替钱包产生签名。
+
+## 管理员账户
+
+`◇` 管理员账户用于管理 Builder 信息、账户数据、手续费、收入结算、订单标签、Campaign 与推荐计划。Builder API 权限模型将与 Builder 认证契约一并发布。
+
+## 最小权限规则
+
+- API Secret 与管理员账户凭证不得进入浏览器或移动端安装包；
+- Sandbox 与生产凭证必须分离；
+- 未使用或已暴露的凭证必须撤销；
+- 在支持时启用 IP 限制与有效期；
+- 日志不得记录 Secret 或完整钱包签名。

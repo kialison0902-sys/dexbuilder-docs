@@ -1,24 +1,29 @@
 ---
-title: "◇ 资金与结算"
-description: "对齐 Orderly 的钱包、Vault、提现、划转与 PnL 结算流程。"
+title: "资产流程"
+description: "为账户充值、提取抵押资产、结算 PnL 并在账户间划转资产。"
+icon: "coins"
 ---
 
-<Warning>资金与结算是 DexBuilder 待开发能力。在正式发布前，Orderly 参考操作不能在 `api.dexbuilder.com` 调用。</Warning>
+资产流程用于连接交易账户、钱包授权操作与当前环境配置的结算合约。
 
-## 目标流程
+<Note>`◇` 表示该操作当前尚未在 DexBuilder 开放。</Note>
 
-```text
-注册钱包并创建交易凭证
-        ↓
-通过当前配置的 Vault 合约充值
-        ↓
-使用已发布的交易 API 交易
-        ↓
-提交已签名的提现、PnL 结算或内部划转
-        ↓
-核对平台历史与相应链上凭证
-```
+## 核心流程
 
-该模型不需要通用 REST Transaction Builder。Vault 调用及钱包签名的 EIP-712 消息应由客户端或已批准 SDK 根据正式契约构造。
+| 流程 | 授权方式 | 确认依据 |
+|---|---|---|
+| 充值 | 钱包向当前 Vault 发起链上交易 | 资产历史与账户余额 |
+| 提现 | Nonce 与 EIP-712 钱包签名 | 资产历史与目标链交易 |
+| PnL 结算 | Nonce 与 EIP-712 钱包签名 | PnL 结算历史与账户余额 |
+| 内部划转 | 按划转 API 定义完成账户授权 | 内部划转历史 |
 
-精确 Orderly 参考见 [Builder API 对齐清单](/zh/resources/builder-api-alignment)。
+## 接入顺序
+
+1. 使用 Builder 的 Broker ID 注册账户；
+2. 读取支持的网络、抵押资产与合约配置；
+3. 构造对应操作的交易或 Typed Data；
+4. 获取钱包用户授权；
+5. 提交操作；
+6. 使用对应历史接口确认最终账户状态。
+
+每种资产操作都有独立请求结构。签名负载不得跨操作、网络、账户或环境复用。

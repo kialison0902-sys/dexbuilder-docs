@@ -1,37 +1,44 @@
 # DexBuilder Developer Docs
 
-> DexBuilder provides perpetual trading and Builder infrastructure for traders, applications, wallets, brokers, exchanges, and branded DEX projects.
+> APIs and integration guides for perpetual trading applications and Builders launching their own trading frontend.
 
 ## Start here
 
 - Overview: /index
-- Choose an integration path: /getting-started/choose-a-path
 - Trader quickstart: /getting-started/trader-quickstart
+- Builder overview: /builders/overview
+- Builder onboarding: /builders/onboarding
 - Builder quickstart: /getting-started/builder-quickstart
-- Integration checklist: /getting-started/integration-checklist
+- API availability: /resources/api-coverage
 
-## Core flows
+## Core integration flows
 
-- Authentication: /authentication/overview
-- Place an order: /trading/place-first-order
-- Funds overview: /funds/overview
-- Wallet action construction (◇ requires development): /funds/transaction-builder
-- Configure Builder fees: /builders/configure-fees
-- Builder revenue settlement (◇ requires development): /builders/revenue-and-payouts
+- Accounts: /concepts/accounts
+- Account registration: /builders/account-registration
+- Wallet authorization: /funds/wallet-authorization
+- Deposits: /funds/deposits
+- Withdrawals: /funds/withdrawals
+- PnL settlement: /funds/pnl-settlement
+- Internal transfers: /funds/internal-transfers
+
+## Builder operations
+
+- Fee settings and order tags: /builders/configure-fees
+- Builder information and revenue: /builders/revenue
+- User data, campaigns, and referrals: /builders/user-data
 
 ## API specifications
 
 - DexBuilder Trading API: /openapi/trading-v1.yaml
-- Builder API alignment (◇ requires development): /resources/builder-api-alignment
+- Chinese Trading API: /openapi/zh/trading-v1.yaml
 
 ## 中文文档
 
-- 文档首页：/zh/index
-- 选择接入路径：/zh/getting-started/choose-a-path
-- 交易 API 快速开始：/zh/getting-started/trader-quickstart
-- Builder 快速开始：/zh/getting-started/builder-quickstart
-- API 覆盖范围与发布状态：/zh/resources/api-coverage
-- 中文交易 API：/openapi/zh/trading-v1.yaml
-- 中文 Builder API 对齐清单（◇ 表示待开发）：/zh/resources/builder-api-alignment
+- 首页：/zh/index
+- Builder 概览：/zh/builders/overview
+- Builder Onboarding：/zh/builders/onboarding
+- 账户：/zh/concepts/accounts
+- 账户注册：/zh/builders/account-registration
+- API 可用性：/zh/resources/api-coverage
 
-Use `https://api.dexbuilder.com/api/v1/` only for the published Trading API. Builder URLs, signing contracts, chains, and contract addresses remain unavailable until DexBuilder publishes them.
+`◇` identifies a Builder interface that is not currently available on DexBuilder.

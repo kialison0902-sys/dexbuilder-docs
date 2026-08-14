@@ -1,0 +1,57 @@
+---
+title: "User data, campaigns, and referrals"
+description: "Builder APIs for account data, trading campaigns, and referral programs."
+icon: "users"
+---
+
+Builder APIs provide data for accounts registered through the Builder's Broker ID and tools for operating campaigns and referral programs.
+
+<Note>`◇` identifies an operation that is not currently available on DexBuilder.</Note>
+
+## Builder user data
+
+| Status | Method and path | Description |
+|---|---|---|
+| ◇ | `GET /v1/volume/broker/daily` | Get the Builder's users' daily volume |
+| ◇ | `GET /v1/broker/leaderboard/daily` | Get the Builder leaderboard |
+| ◇ | `GET /v1/admin/client/info` | Get account information |
+| ◇ | `GET /v1/admin/client/holding` | Get current holdings |
+| ◇ | `GET /v1/admin/internal_transfer_history` | Get internal-transfer history |
+| ◇ | `GET /v1/admin/asset/history` | Get deposit and withdrawal history |
+| ◇ | `GET /v1/admin/asset/convert_history` | Get asset-conversion history |
+| ◇ | `GET /v1/admin/client/leverage` | Get leverage settings |
+| ◇ | `GET /v1/admin/orders` | Get orders |
+| ◇ | `GET /v1/admin/position/{symbol}` | Get one position |
+| ◇ | `GET /v1/admin/positions` | Get all positions |
+| ◇ | `GET /v1/admin/funding_fee/history` | Get funding-fee history |
+| ◇ | `GET /v1/admin/volume/user/stats` | Get account volume statistics |
+| ◇ | `GET /v1/admin/liquidations` | Get liquidated positions |
+| ◇ | `GET /v1/admin/algo/orders` | Get algo orders |
+| ◇ | `GET /v1/admin/trades` | Get trades |
+
+## Trading campaigns
+
+| Status | Method and path | Description |
+|---|---|---|
+| ◇ | `GET /v1/public/campaigns` | List campaigns |
+| ◇ | `GET /v1/public/campaign/ranking` | Get campaign ranking |
+| ◇ | `GET /v1/public/campaign/stats` | Get campaign statistics |
+| ◇ | `GET /v1/public/campaign/stats/details` | Get detailed campaign statistics |
+| ◇ | `GET /v1/public/campaign/user` | Get campaign account information |
+| ◇ | `GET /v1/public/campaign/check` | Check campaign eligibility |
+| ◇ | `POST /v1/client/campaign/sign_up` | Enroll an account in a campaign |
+
+## Referral program
+
+| Status | Method and path | Description |
+|---|---|---|
+| ◇ | `GET /v1/public/referral/check_ref_code` | Check a referral code |
+| ◇ | `GET /v1/public/referral/verify_ref_code` | Verify a referral code |
+| ◇ | `POST /v1/referral/bind` | Bind a referral code |
+| ◇ | `POST /v1/referral/create` | Create a referral code |
+| ◇ | `GET /v1/referral/admin_info` | Get referral-code information |
+| ◇ | `POST /v1/referral/update` | Update a referral code |
+| ◇ | `POST /v1/referral/multi_level/admin` | Enable or configure multilevel referrals |
+| ◇ | `GET /v1/referral/multi_level/admin` | Get the multilevel-referral configuration |
+
+All Builder user-data requests must enforce Broker ID ownership and admin-account authorization.

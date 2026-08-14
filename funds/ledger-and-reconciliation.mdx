@@ -1,18 +1,28 @@
 ---
-title: "◇ Reconciliation"
-description: "Reconcile Orderly-aligned platform histories with trading and on-chain evidence."
+title: "Reconciliation"
+description: "Reconcile trading records, asset history, settlements, transfers, and Builder revenue."
+icon: "list-check"
 ---
 
-<Warning>DexBuilder has not published a generic ledger-entry API. Use only the history resources included in the final contract.</Warning>
+Reconciliation uses the authoritative history for each workflow rather than a single generic record type.
 
-## Target evidence
+## Evidence by workflow
 
-| Workflow | Evidence to reconcile |
+| Workflow | Authoritative records |
 |---|---|
-| Trading | Orders, fills, positions, funding, and balances from the current Trading API |
-| Deposits and withdrawals | Asset history plus the relevant chain transaction |
-| PnL settlement | `GET /v1/pnl_settlement/history` equivalent plus the account balance |
-| Internal transfer | `GET /v1/internal_transfer_history` equivalent on both affected accounts |
-| Builder fees | Effective user fee, daily Builder volume, and `GET /v1/broker/daily_fee_revenue` equivalent |
+| Trading | Orders, fills, positions, funding, account balance, and account book |
+| Deposits and withdrawals | Asset history and the corresponding chain transaction |
+| PnL settlement | PnL settlement history and the resulting account balance |
+| Internal transfer | Internal-transfer history for the affected accounts |
+| Builder fees | Account fee settings, Builder volume, and daily revenue settlement history |
 
-DexBuilder must document stable identifiers, pagination, status values, timestamp meaning, correction behavior, and retention for each source. An invented universal ledger schema or payout ledger is not part of the Orderly parity baseline.
+## Daily controls
+
+1. reconcile executed order quantity against fills;
+2. reconcile position changes against fills;
+3. reconcile balance changes against account-book records;
+4. reconcile asset history against chain transactions;
+5. reconcile account fee rates against charged trading fees;
+6. reconcile Builder volume against daily revenue settlement records.
+
+Store stable identifiers, timestamps, statuses, and source references for every reconciliation result.

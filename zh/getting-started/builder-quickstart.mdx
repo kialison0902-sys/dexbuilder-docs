@@ -1,45 +1,42 @@
 ---
-title: "◇ Builder 快速开始"
-description: "从 Builder 身份、用户交易到手续费收入查询的 Orderly 对齐路径。"
+title: "Builder 快速开始"
+description: "接入账户注册、充值、交易、结算与 Builder 管理能力。"
 ---
 
-<Warning>
-  本页所有 Builder 操作都是待开发目标。所列路径是 Orderly 参考路径，不是可调用的 DexBuilder 接口。
-</Warning>
+开始用户流程开发前，请先完成 [Builder Onboarding](/zh/builders/onboarding)。
 
-这是 DexBuilder 应支持的最小 Builder 流程，不额外虚构 Project、Webhook、Payout 或通用交易构造 API。
+<Note>`◇` 表示该操作当前尚未在 DexBuilder 开放。</Note>
+
+## 接入顺序
 
 <Steps>
-  <Step title="◇ 建立 Builder 身份">
-    通过管理端 Onboarding 创建 Builder 资料并取得 Builder 标识，不假设存在单独的 `project_id` API 资源。
+  <Step title="注册账户">
+    `◇ GET /v1/registration_nonce` → 签署包含 `brokerId` 的注册消息 → `◇ POST /v1/register_account`。
   </Step>
-  <Step title="◇ 注册用户">
-    按 Orderly 模式读取 `GET /v1/registration_nonce`，取得钱包签名，再通过 `POST /v1/register_account` 提交并记录 Builder 归属。
+  <Step title="创建 API 凭证">
+    为已注册账户签发可撤销凭证，签名 Secret 不得进入前端或移动端安装包。
   </Step>
-  <Step title="◇ 创建用户交易凭证">
-    为用户添加可撤销的交易凭证，对应 Orderly 的 `POST /v1/orderly_key` 流程；Builder 管理权限只放在服务端。
+  <Step title="为账户充值">
+    授权抵押资产、查询 Vault 充值费用、提交充值并确认账户余额。
   </Step>
-  <Step title="◇ 通过 Vault 充值">
-    使用当前环境的抵押资产和 Vault 合约：先 `approve`，读取 `getDepositFee`，再调用 `deposit`，最后通过资产历史确认入账。
+  <Step title="交易">
+    使用已发布交易 API 接入市场、订单、仓位、成交与账户数据。
   </Step>
-  <Step title="使用现有交易 API">
-    通过已发布的交易 API 接入行情、订单、仓位、成交、账户数据和交易费率。
+  <Step title="结算与提现">
+    按 PnL 结算、内部划转或提现接口要求，获取对应 Nonce 并完成钱包签名。
   </Step>
-  <Step title="◇ 结算或转移资金">
-    为提现、PnL 结算及内部划转实现与 Orderly 一致的 Nonce 加签名请求流程。
-  </Step>
-  <Step title="◇ 配置手续费并核对收入">
-    实现 Builder 默认费率、用户级费率、每日交易量、Builder 信息和每日手续费收入查询。
+  <Step title="管理 Builder">
+    在对应接口开放后，使用 Builder API 查询用户数据并管理手续费、收入结算、订单标签、Campaign 与推荐计划。
   </Step>
 </Steps>
 
-## 核心标识
+## 必要标识
 
-| 标识 | 用途 |
+| 标识 | 说明 |
 |---|---|
-| `builder_id` | DexBuilder 对 Builder 归属的产品命名；最终线上字段名仍需开发确认 |
-| `account_id` | 已注册的用户交易账户 |
-| 钱包地址 | 用户控制的身份，用于注册及钱包授权操作 |
-| 交易凭证 | 可撤销的用户认证交易凭证 |
+| Broker ID | 分配给 Builder 的唯一标识 |
+| `account_id` | 由钱包地址与 Broker ID 共同确定的交易账户标识 |
+| 钱包地址 | 用户控制并用于授权账户注册及资产操作的地址 |
+| API 凭证 | 用于认证交易请求的可撤销凭证 |
 
-查看完整的 [Builder API 对齐清单](/zh/resources/builder-api-alignment)。
+继续查看[账户](/zh/concepts/accounts)与[账户注册](/zh/builders/account-registration)。

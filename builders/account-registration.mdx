@@ -1,0 +1,46 @@
+---
+title: "Account registration"
+description: "Register a wallet account with a Broker ID and EIP-712 signature."
+icon: "user-check"
+---
+
+Account registration associates a wallet owner with a Builder identified by its Broker ID.
+
+<Note>`◇` identifies an operation that is not currently available on DexBuilder.</Note>
+
+## Registration flow
+
+<Steps>
+  <Step title="Check the account">
+    Confirm whether the wallet is already registered for the selected Builder.
+  </Step>
+  <Step title="Get a registration nonce">
+    Call `◇ GET /v1/registration_nonce` and read `registration_nonce` from the response.
+  </Step>
+  <Step title="Sign the registration message">
+    Ask the wallet owner to sign the EIP-712 `Registration` message.
+  </Step>
+  <Step title="Register the account">
+    Submit the message, signature, and wallet address to `◇ POST /v1/register_account`.
+  </Step>
+  <Step title="Store the account ID">
+    Persist the returned `account_id` and use it for subsequent account and Builder API requests.
+  </Step>
+</Steps>
+
+## Registration message
+
+| Field | Type | Description |
+|---|---|---|
+| `brokerId` | string | Unique Broker ID assigned to the Builder |
+| `chainId` | integer | Supported registration chain |
+| `timestamp` | integer | Unix time in milliseconds |
+| `registrationNonce` | string | Nonce returned by the registration-nonce endpoint |
+
+## Account ownership
+
+The wallet owner owns the registered account. Builder administration can query only the accounts registered through its Broker ID and cannot sign asset operations on behalf of the wallet owner.
+
+## API credentials
+
+After registration, create a revocable account-level API credential for authenticated trading. DexBuilder will publish the credential-management endpoints, permission model, signing algorithm, and expiration rules separately.

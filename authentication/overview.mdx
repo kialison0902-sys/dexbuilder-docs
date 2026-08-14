@@ -6,17 +6,17 @@ description: "Choose the right authorization method for public, user, wallet, an
 | Context | Authorization | Typical operations |
 |---|---|---|
 | Public | None | Contracts, tickers, order book, trades, Klines, system status |
-| Trading Key | Signed API requests | Private account data, orders, positions, leverage, and margin |
+| Perp API credential | Signed API requests | Private account data, orders, positions, leverage, and margin |
 | ◇ Wallet signature | EIP-712 or chain-native message | Registration, withdrawal, PnL settlement, and internal transfer after the contract is published |
-| ◇ Builder administrator | Server-side authorization | Builder users, fee configuration, volume, order tags, and daily fee revenue after publication |
+| ◇ Admin account | Builder API authorization | Builder user data, fee settings, volume, order tags, and revenue settlement |
 
 ## Security rules
 
-- Never expose a trading secret or future Builder administrator credential in client-side code.
+- Never expose a Perp API secret or admin-account credential in client-side code.
 - Give each key the minimum scopes and shortest practical expiration.
 - Rotate and revoke keys without changing the user's wallet.
 - Verify timestamps and nonces to prevent replay.
 - Use an allowlisted production origin and IP restrictions where available.
 - Log the request identifier defined by the applicable contract, not raw secrets or full wallet signatures.
 
-<Note>The current Trading API authentication is published. Builder authentication and wallet-signing contracts remain `◇`; do not infer them from Orderly paths.</Note>
+<Note>The Trading API authentication contract is available. Builder authentication and wallet-signing interfaces carry `◇` until their environment configuration is published.</Note>

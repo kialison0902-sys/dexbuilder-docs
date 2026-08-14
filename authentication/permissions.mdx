@@ -1,23 +1,30 @@
 ---
-title: "Permissions and scopes"
-description: "Apply least privilege to Trading Keys and Builder Admin credentials."
+title: "Access control"
+description: "Separate public access, Perp API credentials, wallet authorization, and admin-account access."
 ---
 
-## Trading Key scopes
+## Public access
 
-- `account:read`
-- `orders:read`
-- `orders:write`
-- `positions:read`
-- `positions:write`
-- `funds:read`
+Public market-data endpoints do not require an API credential.
 
-Asset withdrawal and settlement submission should still require the applicable wallet-authorized payload.
+## Perp API credentials
 
-## ◇ Builder administrator permissions
+Private Trading API requests use the issued Perp API key and secret. Permissions are defined when the credential is issued. Store the secret on a secured backend and use only the permissions required by the application.
 
-DexBuilder has not published Builder permission names. The final model must separately authorize user-data reads, fee administration, revenue reads, order-tag management, referrals, campaigns, and Builder-filtered streams. Do not implement the scope names from an earlier draft.
+Perp API credentials authorize Trading API requests; they do not replace wallet authorization for registration, withdrawal, PnL settlement, or internal transfer.
 
-<Note>
-  Use only the permission names returned by a published DexBuilder credential service. Reject unknown permissions and request the minimum required access.
-</Note>
+## Wallet authorization
+
+The wallet owner signs the action-specific message or transaction for operations that affect account registration or assets. A backend credential cannot create this signature.
+
+## Admin account
+
+`◇` The admin account manages Builder information, account data, fee settings, revenue settlement, order tags, campaigns, and referrals. The Builder API permission model will be published with the Builder authentication contract.
+
+## Minimum-access rules
+
+- keep API secrets and admin-account credentials outside browser and mobile bundles;
+- separate Sandbox and production credentials;
+- revoke credentials that are unused or exposed;
+- enable IP restrictions and expiration when supported;
+- never log secrets or complete wallet signatures.

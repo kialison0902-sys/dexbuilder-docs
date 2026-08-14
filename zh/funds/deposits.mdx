@@ -1,26 +1,31 @@
 ---
-title: "◇ 充值"
-description: "按照 Orderly 模式，通过当前配置的 Vault 合约充值保证金。"
+title: "充值"
+description: "通过当前配置的 Vault 为已注册交易账户充值抵押资产。"
+icon: "arrow-down-to-line"
 ---
 
-<Warning>DexBuilder 尚未发布 Vault 合约及充值环境契约；本页描述需要开发的对齐流程。</Warning>
+<Note>`◇` 表示该充值能力当前尚未在 DexBuilder 开放。</Note>
+
+## 充值流程
 
 <Steps>
-  <Step title="◇ 查询当前链配置">
-    从已发布环境配置中读取支持的链、抵押资产、Vault 地址、精度、限额与充值状态。
+  <Step title="读取网络配置">
+    查询当前环境的抵押资产、Vault 地址、Token 精度、最小数量与网络状态。
   </Step>
-  <Step title="◇ 授权抵押资产">
-    Allowance 不足时，由钱包授权当前 Vault 使用准确的充值数量。
+  <Step title="授权抵押资产">
+    Allowance 不足时，由钱包用户授权当前 Vault 使用准确的抵押资产数量。
   </Step>
-  <Step title="◇ 查询充值费用">
-    按最终合约要求的参数调用 Vault 的 `getDepositFee`。
+  <Step title="查询充值费用">
+    按已部署合约规定的参数调用 `◇ Vault.getDepositFee`。
   </Step>
-  <Step title="◇ 提交充值">
-    由用户调用 Vault 的 `deposit`；钱包必须显示网络、资产、数量、合约与费用。
+  <Step title="提交充值">
+    由钱包用户调用 `◇ Vault.deposit`；确认前必须显示网络、资产、数量、Vault 地址与费用。
   </Step>
-  <Step title="◇ 确认账户入账">
-    等待链上确认，并核对平台资产历史与账户余额。链上成功不等于内部余额一定已入账。
+  <Step title="确认账户入账">
+    核对链上最终状态、资产历史与更新后的账户余额。
   </Step>
 </Steps>
 
-Orderly 的标准流程不使用通用 `POST /v1/deposits` 或 `POST /v1/deposits/quote`，因此 DexBuilder 文档也不定义这些接口。
+## 确认要求
+
+链上交易成功只能证明合约执行成功，不能单独证明交易账户已经入账。接入方必须同时检查账户资产历史与余额。

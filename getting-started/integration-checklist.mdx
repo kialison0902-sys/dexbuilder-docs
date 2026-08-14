@@ -1,19 +1,19 @@
 ---
 title: "Integration checklist"
-description: "The implementation and launch checklist for DexBuilder projects."
+description: "The implementation and launch checklist for Builders integrating with DexBuilder."
 ---
 
 ## Before development
 
 - [ ] Choose white-label, UI SDK, or direct API integration.
 - [ ] Confirm products, chains, collateral assets, regions, and custody model.
-- [ ] ◇ Obtain a Sandbox Builder identifier and server-side authorization after DexBuilder publishes them.
+- [ ] ◇ Obtain a Sandbox Broker ID and register the admin account.
 - [ ] Document your fee model and what the end user will see.
 - [ ] Assign owners for wallet, backend, frontend, reconciliation, security, and support.
 
 ## Core development
 
-- [ ] ◇ Register a wallet under the correct Builder.
+- [ ] ◇ Register the wallet owner under the correct Broker ID.
 - [ ] ◇ Create, rotate, expire, and revoke per-user trading credentials.
 - [ ] Display contracts, order book, trades, Klines, index, mark price, and funding.
 - [ ] Implement order placement, modification, cancellation, and terminal-state tracking.
@@ -25,7 +25,7 @@ description: "The implementation and launch checklist for DexBuilder projects."
 
 ## Security and operations
 
-- [ ] ◇ Keep future Builder administrator credentials in a secret manager and backend only.
+- [ ] ◇ Keep admin-account credentials in a secret manager and backend only.
 - [ ] Require wallet signatures for user-authorized asset movements.
 - [ ] Configure IP restrictions, scopes, expiration, and key rotation.
 - [ ] Handle maintenance and allow users to cancel eligible open orders.

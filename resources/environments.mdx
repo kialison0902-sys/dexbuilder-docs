@@ -1,6 +1,6 @@
 ---
 title: "Environments"
-description: "Use the published Trading API URL and do not infer an unreleased Builder base URL."
+description: "Configure Trading and Builder integrations for Sandbox and production."
 ---
 
 ## Production Trading API
@@ -9,17 +9,21 @@ description: "Use the published Trading API URL and do not infer an unreleased B
 https://api.dexbuilder.com/api/v1/
 ```
 
-The Trading Reference is the current Aden-compatible contract.
+Use this base URL only with the published Trading Reference.
 
-## ◇ Builder environment
+## Builder API
 
-DexBuilder has not published a Builder API base URL, Sandbox environment, Builder signing contract, or Vault contract set. Orderly reference paths in these docs cannot be called by appending them to the Trading API host.
+The Builder API base URL and Sandbox configuration are not currently published. Builder integrations require the following environment values when access becomes available:
 
-Before removing `◇`, DexBuilder must publish:
+- REST and WebSocket base URLs;
+- supported networks and collateral assets;
+- Vault and verifier contract addresses;
+- Broker ID and admin-account credentials;
+- EIP-712 domains and signing rules;
+- rate limits and maintenance-status endpoints.
 
-- Sandbox and production REST/WebSocket URLs;
-- supported chains, collateral assets, and contract addresses;
-- authentication and signing domains;
-- permissions, limits, and error schemas.
+<Warning>Do not construct an undocumented URL by changing the Trading API host or path prefix.</Warning>
 
-<Warning>Never construct an undocumented URL by replacing a hostname or prefix.</Warning>
+## Environment isolation
+
+Keep Sandbox and production Broker IDs, accounts, API credentials, contract addresses, and signing domains separate.

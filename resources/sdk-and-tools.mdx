@@ -1,17 +1,19 @@
 ---
-title: "SDKs and tools"
-description: "Published artifacts and the Builder tooling still required for Orderly parity."
+title: "SDKs and developer tools"
+description: "Developer artifacts for Trading and Builder integrations."
 ---
 
 | Status | Artifact | Purpose |
 |---|---|---|
-| Published | English Trading OpenAPI | Current Aden-compatible interactive reference |
-| Published | Chinese Trading OpenAPI | Localized current trading reference |
-| ◇ | Builder OpenAPI | Callable Builder contract after implementation and review |
-| ◇ | TypeScript SDK | Registration, signing, Vault, trading credentials, and WebSocket helpers |
-| ◇ | Request-signing vectors | Cross-language verification of canonical and EIP-712 signing |
-| ◇ | Postman collection | Manual Builder API verification after endpoints exist |
-| ◇ | React integration package | Wallet, market, account, and funding flows |
-| ◇ | Python connector | Backend and quantitative integration |
+| Available | English Trading OpenAPI | Interactive API reference and client generation |
+| Available | Chinese Trading OpenAPI | Localized interactive API reference |
+| ◇ | Builder OpenAPI | Typed Builder API contract |
+| ◇ | TypeScript SDK | Account registration, wallet authorization, REST, and WebSocket helpers |
+| ◇ | Signing test vectors | Verify canonical-request and EIP-712 signing |
+| ◇ | Postman collection | Test Builder API requests |
+| ◇ | React package | Wallet, account, market, and asset-flow components |
+| ◇ | Python connector | Backend and quantitative integrations |
 
-There is no published generic Transaction Builder SDK contract. Wallet actions should be constructed from action-specific APIs and contract definitions.
+## Security requirements
+
+SDKs may construct requests and wallet messages but must never request, transmit, or store a user's private key. Administrative credentials belong only in secured backend systems.

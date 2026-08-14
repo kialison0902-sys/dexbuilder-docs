@@ -1,20 +1,34 @@
 ---
-title: "◇ Configure Builder fees"
-description: "Align default and user-specific fee controls with Orderly."
+title: "Fee settings"
+description: "Manage default Builder fees and account-level fee rates."
+icon: "percent"
 ---
 
-<Warning>The paths on this page are Orderly references and require a DexBuilder implementation.</Warning>
+Builders set the trading fee shown on their frontend. The Builder's revenue is the difference between the user-facing fee and the applicable base fee, subject to the active fee tier and commercial terms.
 
-## Target operations
+<Note>`◇` identifies an operation that is not currently available on DexBuilder.</Note>
 
-| Orderly reference | Purpose |
-|---|---|
-| `GET /v1/broker/fee_rate/default` | Read default maker and taker fee rates |
-| `POST /v1/broker/fee_rate/default` | Create default fee rates |
-| `POST /v1/broker/fee_rate/set_default` | Update default fee rates |
-| `POST /v1/broker/fee_rate/set` | Set user-specific fee rates |
-| `GET /v1/broker/user_info` | Read attributed-user and fee information |
+## Fee settings API
 
-The current Trading API fee endpoint remains the source for an authenticated user's effective perpetual trading rate. Builder fee administration is a separate `◇` surface.
+| Status | Method and path | Description |
+|---|---|---|
+| ◇ | `GET /v1/broker/fee_rate/default` | Get the default Builder fee |
+| ◇ | `POST /v1/broker/fee_rate/default` | Update the default Builder fee |
+| ◇ | `POST /v1/broker/fee_rate/set` | Update the fee rate for an account |
+| ◇ | `POST /v1/broker/fee_rate/set_default` | Reset an account to the default fee rate |
+| ◇ | `GET /v1/broker/user_info` | Get account fee rates for the Builder |
 
-DexBuilder must document rate units, precision, minimums, authorization, batch behavior, effective time, and read-after-write behavior before publication.
+## Fee fields
+
+The final API contract must define maker and taker rates, decimal precision, applicable minimums, effective time, batch limits, and authorization requirements. User interfaces must display the effective fee before order submission.
+
+## Order tags
+
+| Status | Method and path | Description |
+|---|---|---|
+| ◇ | `POST /v1/broker/order_enum` | Create an order tag |
+| ◇ | `GET /v1/broker/order_enums` | List all order tags for the Builder |
+| ◇ | `GET /v1/broker/order_enum/{enum_id}` | Get an order tag and its statistics |
+| ◇ | `PUT /v1/broker/order_enum/{enum_id}` | Update an order tag |
+| ◇ | `POST /v1/broker/order_enum/archive` | Archive an order tag |
+| ◇ | `POST /v1/broker/order_enum/unarchive` | Restore an archived order tag |

@@ -28,4 +28,6 @@ The result is signed with the API secret and sent with the API key and timestamp
 
 ## Wallet-signed actions
 
-`◇` Registration, withdrawal, PnL settlement, and internal transfer require action-specific wallet messages in the Orderly model. DexBuilder must publish the exact EIP-712 domain, fields, order, nonce lifetime, and verification rules before use. There is no published generic Transaction Builder endpoint.
+`◇` Account registration, withdrawal, PnL settlement, and internal transfer use action-specific wallet messages. Use the EIP-712 domain, fields, field order, nonce lifetime, timestamp unit, and verification rules published for the active environment.
+
+See [Wallet authorization](/funds/wallet-authorization) for the authorization method used by each action.

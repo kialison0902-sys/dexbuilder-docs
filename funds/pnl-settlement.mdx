@@ -1,18 +1,27 @@
 ---
-title: "◇ PnL settlement"
-description: "Settle account PnL using Orderly's nonce and signed-request model."
+title: "PnL settlement"
+description: "Settle realized PnL with a nonce and wallet signature."
+icon: "scale-balanced"
 ---
 
-<Warning>The paths shown are Orderly references and require DexBuilder implementation.</Warning>
+Closing a position realizes PnL. PnL settlement is a separate account operation.
 
-Closing a position realizes PnL. PnL settlement is a separate wallet-authorized account operation.
+<Note>`◇` identifies an operation that is not currently available on DexBuilder.</Note>
 
-## Target sequence
+## PnL settlement API
 
-1. request the nonce from `GET /v1/settle_nonce`;
-2. construct the exact EIP-712 settlement message from the published contract;
-3. obtain the user's wallet signature;
-4. submit the request to the equivalent of `POST /v1/settle_pnl`;
-5. query `GET /v1/pnl_settlement/history` and reconcile the resulting account balance.
+| Status | Method and path | Description |
+|---|---|---|
+| ◇ | `GET /v1/settle_nonce` | Get the PnL settlement nonce |
+| ◇ | `POST /v1/settle_pnl` | Submit signed PnL settlement |
+| ◇ | `GET /v1/pnl_settlement/history` | Get PnL settlement history |
 
-Orderly's baseline does not require a separate settlement-quote endpoint. DexBuilder must publish eligibility, message fields, amount semantics, precision, statuses, and errors before release.
+## Settlement flow
+
+1. read the account's settlement eligibility and realized PnL;
+2. obtain the settlement nonce;
+3. construct and sign the EIP-712 settlement message;
+4. submit the settlement request;
+5. confirm the settlement record and resulting account balance.
+
+Do not infer settlement completion from position state. Use the PnL settlement history returned for the account.

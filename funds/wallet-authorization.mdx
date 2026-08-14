@@ -1,0 +1,27 @@
+---
+title: "Wallet authorization"
+description: "Construct and sign action-specific Vault transactions and EIP-712 messages."
+icon: "signature"
+---
+
+Wallet-authorized actions are constructed from the schema for the selected operation. The connected wallet signs locally and DexBuilder never receives the user's private key.
+
+## Authorization methods
+
+| Action | Method |
+|---|---|
+| Account registration | EIP-712 `Registration` message containing `brokerId` |
+| Deposit | Token approval and Vault deposit transaction |
+| Withdrawal | EIP-712 withdrawal message using a withdrawal nonce |
+| PnL settlement | EIP-712 settlement message using a settlement nonce |
+| Internal transfer | Signed request using a transfer nonce |
+
+## Security requirements
+
+- use the domain, chain ID, verifying contract, field order, and timestamp unit defined for the active environment;
+- display the asset, amount, network, receiver, contract, and fee before signing;
+- reject expired or previously used nonces;
+- never change a signed payload before submission;
+- never request, transmit, or store the wallet owner's private key.
+
+Each operation has its own schema; there is no universal wallet payload format.

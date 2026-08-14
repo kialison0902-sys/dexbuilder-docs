@@ -1,0 +1,46 @@
+---
+title: "账户注册"
+description: "使用 Broker ID 与 EIP-712 签名注册钱包账户。"
+icon: "user-check"
+---
+
+账户注册用于将钱包用户与 Broker ID 所标识的 Builder 建立关联。
+
+<Note>`◇` 表示该操作当前尚未在 DexBuilder 开放。</Note>
+
+## 注册流程
+
+<Steps>
+  <Step title="检查账户">
+    确认钱包是否已经通过所选 Builder 注册账户。
+  </Step>
+  <Step title="获取注册 Nonce">
+    调用 `◇ GET /v1/registration_nonce`，从响应中读取 `registration_nonce`。
+  </Step>
+  <Step title="签署注册消息">
+    由钱包用户签署 EIP-712 `Registration` 消息。
+  </Step>
+  <Step title="注册账户">
+    将消息、签名与钱包地址提交至 `◇ POST /v1/register_account`。
+  </Step>
+  <Step title="保存 Account ID">
+    保存返回的 `account_id`，用于后续账户与 Builder API 请求。
+  </Step>
+</Steps>
+
+## 注册消息
+
+| 字段 | 类型 | 说明 |
+|---|---|---|
+| `brokerId` | string | 分配给 Builder 的唯一 Broker ID |
+| `chainId` | integer | 支持的注册网络 Chain ID |
+| `timestamp` | integer | Unix 毫秒时间戳 |
+| `registrationNonce` | string | 注册 Nonce 接口返回的 Nonce |
+
+## 账户所有权
+
+注册账户属于对应钱包用户。Builder 管理权限只能查询通过自身 Broker ID 注册的账户，不能代表用户钱包签署资产操作。
+
+## API 凭证
+
+注册完成后，为账户创建可撤销的 API 凭证，用于认证交易请求。DexBuilder 将单独发布凭证管理接口、权限模型、签名算法与有效期规则。

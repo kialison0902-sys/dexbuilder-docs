@@ -1,17 +1,19 @@
 ---
-title: "SDK 与工具"
-description: "已发布产物，以及对齐 Orderly 仍需开发的 Builder 工具。"
+title: "SDK 与开发工具"
+description: "用于交易与 Builder 接入的开发者产物。"
 ---
 
 | 状态 | 产物 | 用途 |
 |---|---|---|
-| 已发布 | 英文交易 OpenAPI | 当前 Aden 兼容的交互式 Reference |
-| 已发布 | 中文交易 OpenAPI | 本地化现有交易接口 |
-| ◇ | Builder OpenAPI | 实现并评审后的可调用 Builder 契约 |
-| ◇ | TypeScript SDK | 注册、签名、Vault、交易凭证与 WebSocket Helper |
-| ◇ | 签名测试向量 | 跨语言验证规范化签名与 EIP-712 |
-| ◇ | Postman Collection | 端点实现后的 Builder API 手工验证 |
-| ◇ | React 接入包 | 钱包、市场、账户与资金流程 |
+| 已开放 | 英文交易 OpenAPI | 交互式 API Reference 与客户端生成 |
+| 已开放 | 中文交易 OpenAPI | 本地化交互式 API Reference |
+| ◇ | Builder OpenAPI | 类型化 Builder API 契约 |
+| ◇ | TypeScript SDK | 账户注册、钱包授权、REST 与 WebSocket Helper |
+| ◇ | 签名测试向量 | 验证规范化请求与 EIP-712 签名 |
+| ◇ | Postman Collection | 测试 Builder API 请求 |
+| ◇ | React Package | 钱包、账户、市场与资产流程组件 |
 | ◇ | Python Connector | 后端与量化接入 |
 
-目前没有已发布的通用 Transaction Builder SDK 契约。钱包操作应按具体操作的 API 与合约定义构造。
+## 安全要求
+
+SDK 可以构造请求和钱包消息，但不得请求、传输或保存用户私钥。管理凭证只能保存在受保护的后端系统中。

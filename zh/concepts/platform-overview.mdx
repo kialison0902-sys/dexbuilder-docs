@@ -1,9 +1,9 @@
 ---
 title: "平台概览"
-description: "理解 DexBuilder、运营商、Builder 与交易用户之间的关系。"
+description: "理解 DexBuilder、Builder、应用开发者与交易用户之间的关系。"
 ---
 
-DexBuilder 是底层交易与 Builder 基础设施。Aden 这类运营商，是构建在该基础设施之上的一种交易应用。
+DexBuilder 为交易应用与品牌 DEX 前端提供交易和 Builder 基础设施。
 
 <Frame caption="DexBuilder 平台架构">
   <img src="/images/platform-architecture-zh.svg" alt="用户钱包与 Builder DEX 连接到 DexBuilder 交易执行、保证金、账本与结算基础设施" />
@@ -15,10 +15,10 @@ DexBuilder 是底层交易与 Builder 基础设施。Aden 这类运营商，是�
 |---|---|
 | 交易用户 | 授权账户与资产、下单并管理仓位 |
 | 应用开发者 | 构建市场、订单、账户与钱包体验 |
-| Builder | 注册用户、配置产品手续费、运营 DEX 并获得 Builder 收入 |
-| ◇ Builder 管理员 | 执行已发布的 Builder 用户数据、费率、交易量、订单标签与收入操作 |
+| Builder | 上线交易前端、注册用户、配置手续费并获得 Builder 手续费收入 |
+| 管理员账户 | 管理 Builder 设置，并鉴权已授权的 Builder API 操作 |
 | DexBuilder | 提供共享交易执行、保证金规则、账本、结算与流动性基础设施 |
 
 <Note>
-  与 Aden 一致的交易能力已经发布；Builder 能力在 DexBuilder 正式发布契约前仍为 `◇`。
+  交易能力已进入交易 API Reference；带有 `◇` 标记的 Builder 接口当前尚未开放。
 </Note>

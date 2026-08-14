@@ -1,45 +1,42 @@
 ---
-title: "◇ Builder quickstart"
-description: "The Orderly-aligned path from Builder identity to user trading and fee-revenue reporting."
+title: "Builder quickstart"
+description: "Implement account registration, funding, trading, settlement, and Builder administration."
 ---
 
-<Warning>
-  Every Builder operation on this page is a development target. The paths shown are Orderly references, not callable DexBuilder endpoints.
-</Warning>
+Complete [Builder onboarding](/builders/onboarding) before implementing user flows.
 
-This is the minimum Builder flow DexBuilder should support without inventing a separate project, webhook, payout, or generic transaction-construction API.
+<Note>`◇` identifies an operation that is not currently available on DexBuilder.</Note>
+
+## Integration sequence
 
 <Steps>
-  <Step title="◇ Establish the Builder identity">
-    Create the Builder profile and obtain the Builder identifier through the administrative onboarding process. Do not assume a separate `project_id` API resource.
+  <Step title="Register the account">
+    `◇ GET /v1/registration_nonce` → sign the registration message containing `brokerId` → `◇ POST /v1/register_account`.
   </Step>
-  <Step title="◇ Register the user">
-    Follow the Orderly pattern: read `GET /v1/registration_nonce`, obtain the wallet signature, and submit `POST /v1/register_account` with Builder attribution.
+  <Step title="Create an API credential">
+    Issue a revocable credential for the registered account and keep the signing secret outside client bundles.
   </Step>
-  <Step title="◇ Create the user's trading credential">
-    Add a revocable per-user trading credential, corresponding to Orderly's `POST /v1/orderly_key` flow. Keep Builder administration on the server.
+  <Step title="Fund the account">
+    Approve the collateral token, read the Vault deposit fee, submit the deposit, and confirm the account balance.
   </Step>
-  <Step title="◇ Deposit through the Vault">
-    Use the configured collateral token and Vault contract: `approve`, read `getDepositFee`, then call `deposit`. Confirm the account credit through asset history.
+  <Step title="Trade">
+    Use the published Trading API for markets, orders, positions, fills, and account data.
   </Step>
-  <Step title="Trade with the current API">
-    Use the published Trading Reference for markets, orders, positions, fills, account data, and trading fees.
+  <Step title="Settle and withdraw">
+    Use the action-specific nonce and wallet signature required for PnL settlement, internal transfer, or withdrawal.
   </Step>
-  <Step title="◇ Settle or move funds">
-    Implement Orderly-aligned nonce plus signed-request flows for withdrawal, PnL settlement, and internal transfer.
-  </Step>
-  <Step title="◇ Configure fees and reconcile revenue">
-    Implement Builder default and user-level fees, daily volume, Builder information, and daily fee-revenue reporting.
+  <Step title="Operate the Builder">
+    Use Builder APIs for user data, fee settings, revenue settlement, order tags, campaigns, and referrals as each interface becomes available.
   </Step>
 </Steps>
 
-## Core identifiers
+## Required identifiers
 
-| Identifier | Purpose |
+| Identifier | Description |
 |---|---|
-| `builder_id` | DexBuilder product name for Builder attribution; final wire naming still requires confirmation |
-| `account_id` | Registered user trading account |
-| wallet address | User-controlled identity used for registration and wallet-authorized actions |
-| trading credential | Revocable credential for authenticated user trading |
+| Broker ID | Unique identifier assigned to a Builder |
+| `account_id` | Unique trading account derived from the wallet address and Broker ID |
+| Wallet address | User-controlled address that authorizes registration and asset operations |
+| API credential | Revocable credential used for authenticated trading requests |
 
-See the complete [Builder API alignment](/resources/builder-api-alignment).
+Continue with [Accounts](/concepts/accounts) and [Account registration](/builders/account-registration).

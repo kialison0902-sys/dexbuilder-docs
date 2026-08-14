@@ -28,4 +28,6 @@ DexBuilder 私有交易 API 使用以下内容组成规范请求：
 
 ## 钱包签名操作
 
-`◇` 在 Orderly 模式中，注册、提现、PnL 结算与内部划转使用各自的钱包签名消息。使用前，DexBuilder 必须发布准确的 EIP-712 Domain、字段、顺序、Nonce 有效期与验证规则。目前没有已发布的通用 Transaction Builder 端点。
+`◇` 账户注册、提现、PnL 结算与内部划转分别使用对应的钱包签名消息。必须使用当前环境发布的 EIP-712 Domain、字段、字段顺序、Nonce 有效期、时间戳单位与验证规则。
+
+各操作的授权方式见[钱包授权](/zh/funds/wallet-authorization)。

@@ -25,7 +25,7 @@ Clients must not assume a field uses bps unless its schema explicitly says so.
 
 ## User disclosure
 
-Before trading, the user should be shown the effective rate available from the published Trading API. Any future withdrawal fee must follow its published contract; no generic fee-quote API is assumed.
+Before trading, the user should be shown the effective rate available from the published Trading API. Withdrawal fees must follow the published withdrawal contract.
 
 <Note>
   The existing perpetual fee endpoint answers the user's current trading rate. Builder default fees, user overrides, and daily fee revenue remain `◇` until their contracts are published.

@@ -1,0 +1,31 @@
+---
+title: "Accounts"
+description: "Understand the relationship between wallet owners, accounts, Builder profiles, and admin accounts."
+icon: "wallet"
+---
+
+## Account structure
+
+A wallet owner can register one independent account for each supported Builder. Accounts registered through different Builders are not linked to one another.
+
+| Object | Owner | Contains or controls |
+|---|---|---|
+| Wallet | Wallet owner | Signing authority for account registration and asset operations |
+| Account | Wallet owner | Balances, orders, positions, trades, and API credentials |
+| Builder profile | Builder | Builder name, launch path, Broker ID, and fee tier |
+| Admin account | Builder | Builder settings, fee configuration, and Builder API access |
+
+## Account ID
+
+Each account is identified by `account_id`. The account identifier is derived from the wallet address and the Builder's `brokerId`, so the same wallet can have a different account for each Builder.
+
+## Broker ID
+
+`broker_id` is the API identifier for a Builder. Signed messages use the field name defined by their schema, such as `brokerId` in EIP-712 typed data. Use the exact casing required by each request.
+
+## Isolation rules
+
+- account balances, orders, positions, and credentials belong to the wallet owner's account;
+- Builder API access is limited to accounts registered through that Builder;
+- an admin account cannot replace a wallet owner's signature for asset operations;
+- Sandbox and production accounts and credentials remain separate.

@@ -1,24 +1,29 @@
 ---
-title: "◇ Funds and settlement"
-description: "Orderly-aligned wallet, Vault, withdrawal, transfer, and PnL-settlement flows."
+title: "Asset flows"
+description: "Fund accounts, withdraw collateral, settle PnL, and transfer assets between accounts."
+icon: "coins"
 ---
 
-<Warning>The funds and settlement surface is a DexBuilder development target. Orderly reference operations are not callable on `api.dexbuilder.com` until published.</Warning>
+Asset flows connect the trading account with wallet-authorized operations and the configured settlement contracts.
 
-## Target flow
+<Note>`◇` identifies an operation that is not currently available on DexBuilder.</Note>
 
-```text
-Register wallet and create a trading credential
-        ↓
-Deposit collateral through the configured Vault contract
-        ↓
-Trade with the published Trading API
-        ↓
-Submit signed withdrawal, PnL settlement, or internal transfer
-        ↓
-Reconcile platform history with on-chain evidence where applicable
-```
+## Core flows
 
-This model does not require a generic REST Transaction Builder. Vault calls and wallet-signed EIP-712 messages are constructed by the client or an approved SDK from the published contract.
+| Flow | Authorization | Confirmation |
+|---|---|---|
+| Deposit | Wallet transaction to the configured Vault | Asset history and account balance |
+| Withdrawal | Nonce and EIP-712 wallet signature | Asset history and destination-chain transaction |
+| PnL settlement | Nonce and EIP-712 wallet signature | PnL settlement history and account balance |
+| Internal transfer | Account authorization defined by the transfer API | Internal-transfer history |
 
-See the [Builder API alignment](/resources/builder-api-alignment) for the exact Orderly references.
+## Integration order
+
+1. register the account with the Builder's Broker ID;
+2. load the supported network, collateral, and contract configuration;
+3. construct the action-specific transaction or typed message;
+4. obtain the wallet owner's authorization;
+5. submit the operation;
+6. confirm the final account state from the corresponding history API.
+
+Each flow has its own request schema. Do not reuse a signed payload across actions, networks, accounts, or environments.

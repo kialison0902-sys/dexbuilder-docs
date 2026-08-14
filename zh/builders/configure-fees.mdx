@@ -1,20 +1,34 @@
 ---
-title: "◇ 配置 Builder 手续费"
-description: "将默认与用户级手续费控制对齐 Orderly。"
+title: "手续费设置"
+description: "管理 Builder 默认手续费与账户级费率。"
+icon: "percent"
 ---
 
-<Warning>本页路径是 Orderly 参考，需要 DexBuilder 开发。</Warning>
+Builder 设置其交易前端向用户展示的交易费率。Builder 收入为用户实际费率与适用基础费率之间的差额，具体以当前手续费等级及商务条款为准。
 
-## 目标操作
+<Note>`◇` 表示该操作当前尚未在 DexBuilder 开放。</Note>
 
-| Orderly 参考路径 | 用途 |
-|---|---|
-| `GET /v1/broker/fee_rate/default` | 查询默认 Maker 与 Taker 费率 |
-| `POST /v1/broker/fee_rate/default` | 创建默认费率 |
-| `POST /v1/broker/fee_rate/set_default` | 更新默认费率 |
-| `POST /v1/broker/fee_rate/set` | 设置用户级费率 |
-| `GET /v1/broker/user_info` | 查询归属用户及费率信息 |
+## 手续费设置 API
 
-当前交易 API 的费率接口继续用于查询已认证用户的实际永续交易费率；Builder 费率管理是单独的 `◇` 能力。
+| 状态 | Method 与路径 | 说明 |
+|---|---|---|
+| ◇ | `GET /v1/broker/fee_rate/default` | 查询 Builder 默认手续费 |
+| ◇ | `POST /v1/broker/fee_rate/default` | 更新 Builder 默认手续费 |
+| ◇ | `POST /v1/broker/fee_rate/set` | 更新指定账户的费率 |
+| ◇ | `POST /v1/broker/fee_rate/set_default` | 将指定账户恢复为默认费率 |
+| ◇ | `GET /v1/broker/user_info` | 查询该 Builder 下的账户费率 |
 
-发布前，DexBuilder 必须明确费率单位、精度、下限、权限、批量行为、生效时间及写后读取行为。
+## 费率字段
+
+正式 API 契约必须明确 Maker/Taker 费率、十进制精度、适用下限、生效时间、批量限制与授权要求。用户界面必须在提交订单前展示实际费率。
+
+## 订单标签
+
+| 状态 | Method 与路径 | 说明 |
+|---|---|---|
+| ◇ | `POST /v1/broker/order_enum` | 创建订单标签 |
+| ◇ | `GET /v1/broker/order_enums` | 查询 Builder 的全部订单标签 |
+| ◇ | `GET /v1/broker/order_enum/{enum_id}` | 查询订单标签及其统计 |
+| ◇ | `PUT /v1/broker/order_enum/{enum_id}` | 更新订单标签 |
+| ◇ | `POST /v1/broker/order_enum/archive` | 归档订单标签 |
+| ◇ | `POST /v1/broker/order_enum/unarchive` | 恢复已归档订单标签 |
